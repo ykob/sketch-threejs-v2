@@ -49,6 +49,17 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extend(config) {
+      config.module.rules.push({
+        test: /\.(glsl|fs|vs)$/,
+        exclude: /(node_modules)/,
+        use: [
+          'glslify-import-loader',
+          'raw-loader',
+          'glslify-loader',
+        ],
+      })
+    },
   },
 
   generate: {

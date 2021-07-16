@@ -27,6 +27,9 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-nuxt": "^2.0.0",
     "eslint-plugin-vue": "^7.12.1",
-    "prettier": "^2.3.2"
+    "glslify-import-loader": "^0.1.2",
+    "glslify-loader": "^2.0.0",
+    "prettier": "^2.3.2",
+    "raw-loader": "^4.0.2"
   }
 }
