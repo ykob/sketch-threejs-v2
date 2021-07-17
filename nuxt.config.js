@@ -20,6 +20,10 @@ export default {
   css: [
   ],
 
+  styleResources: {
+    scss: [],
+  },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
   ],
@@ -32,6 +36,7 @@ export default {
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     '@nuxtjs/composition-api/module',
+    '@nuxtjs/style-resources',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -49,6 +54,11 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    loaders: {
+      scss: {
+        implementation: sass,
+      },
+    },
     extend(config) {
       config.module.rules.push({
         test: /\.(glsl|fs|vs)$/,
