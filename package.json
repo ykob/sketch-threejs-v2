@@ -23,6 +23,7 @@
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/eslint-config-typescript": "^6.0.1",
     "@nuxtjs/eslint-module": "^3.0.2",
+    "@nuxtjs/style-resources": "^1.2.0",
     "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-nuxt": "^2.0.0",
@@ -30,6 +31,10 @@
     "glslify-import-loader": "^0.1.2",
     "glslify-loader": "^2.0.0",
     "prettier": "^2.3.2",
-    "raw-loader": "^4.0.2"
+    "pug": "^3.0.2",
+    "pug-plain-loader": "^1.1.0",
+    "raw-loader": "^4.0.2",
+    "sass": "^1.35.2",
+    "sass-loader": "10.1.1"
   }
 }
