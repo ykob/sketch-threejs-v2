@@ -4,6 +4,11 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
+  server: {
+    port: 8000, // default: 3000
+    host: '0.0.0.0', // defaultyarn: localhost,
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'sketch-threejs-v2',
