@@ -37,7 +37,20 @@ export default {
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: [
+    {
+      path: '@/components/',
+      pathPrefix: true,
+    },
+    {
+      path: '@/components/_common',
+      pathPrefix: false,
+    },
+    {
+      path: '@/components/_template',
+      pathPrefix: false,
+    },
+  ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
