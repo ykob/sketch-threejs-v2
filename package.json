@@ -38,6 +38,6 @@
     "pug-plain-loader": "^1.1.0",
     "raw-loader": "^4.0.2",
     "sass": "^1.35.2",
-    "sass-loader": "12.1.0"
+    "sass-loader": "10.2.0"
   }
 }
