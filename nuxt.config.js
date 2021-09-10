@@ -84,6 +84,7 @@ export default {
     loaders: {
       scss: {
         implementation: sass,
+        additionalData: '@use "sass:math";',
       },
     },
     extend(config) {
