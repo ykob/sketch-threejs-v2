@@ -1,0 +1,31 @@
+@mixin generate-utility-body($class, $infix, $modifier, $property, $value) {
+  .#{$class + $infix + '-' + $modifier} {
+    @if type-of($property) == 'list' {
+      @each $item in $property {
+        #{$item}: #{$value};
+      }
+    }
+    @else {
+      #{$property}: #{$value};
+    }
+  }
+}
+
+@mixin generate-utility($utilities, $infix) {
+  @each $key, $props in $utilities {
+    $values: map-get($props, values);
+    $class: map-get($props, class);
+    $property: map-get($props, property);
+  
+    @if type-of($values) == 'map' {
+      @each $modifier, $value in $values {
+        @include generate-utility-body($class, $infix, $modifier, $property, $value);
+      }
+    }
+    @else if type-of($values) == 'list' {
+      @each $value in $values {
+        @include generate-utility-body($class, $infix, $value, $property, $value);
+      }
+    }
+  }
+}

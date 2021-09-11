@@ -27,10 +27,16 @@ export default {
   css: [
     'normalize.css',
     '@/assets/css/global.scss',
+    '@/assets/css/utilities.scss',
   ],
 
   styleResources: {
-    scss: [],
+    scss: [
+      '@/assets/css/variables.scss',
+      '@/assets/css/variables-colors.scss',
+      '@/assets/css/variables-utilities.scss',
+      '@/assets/css/mixins.scss',
+    ],
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

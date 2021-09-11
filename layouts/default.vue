@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+.ov-h
   Nuxt
   canvas#canvas-webgl
 </template>
