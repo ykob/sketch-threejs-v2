@@ -1,0 +1,15 @@
+$z-map: (
+  canvas,
+  console,
+);
+
+$breakpoints: (
+  sm: 0,
+  md: 600px,
+  lg: 960px
+);
+
+:export {
+  breakPointMd: map-get($breakpoints, md);
+  breakPointLg: map-get($breakpoints, lg);
+}
