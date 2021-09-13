@@ -1,5 +1,5 @@
 <template lang="pug">
-.ov-h
+div
   Nuxt
   canvas#canvas-webgl
 </template>
@@ -39,3 +39,13 @@ export default Vue.extend({
   },
 })
 </script>
+
+<style lang="scss" scoped>
+canvas {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: z(canvas);
+}
+</style>
