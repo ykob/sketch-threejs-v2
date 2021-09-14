@@ -79,11 +79,8 @@ export default Vue.extend({
   }
   &.common {
     box-shadow: 0 1px 1px rgba(#000, 0.3);
-    border: 1px solid map-get($colors, 'grayD8');
-    color: map-get($colors, 'textPrimary');
     font-weight: 600;
     text-decoration: none;
-    background-color: map-get($colors, 'white');
     transition-property: background-color;
   }
   &:disabled,
