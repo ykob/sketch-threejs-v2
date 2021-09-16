@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 
-export default class Camera extends THREE.PerspectiveCamera {
+export default class PerspectiveCamera extends THREE.PerspectiveCamera {
   constructor(width: number, height: number) {
     const fov = 50
     const aspect = width / height
