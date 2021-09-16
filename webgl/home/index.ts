@@ -9,18 +9,18 @@ export default class Home {
   target = new THREE.WebGLRenderTarget(0, 0)
   scene = new THREE.Scene()
 
-  constructor(width: number, height: number) {
-    this.cameraPE = new Camera(width, height)
-    this.camera = new PerspectiveCamera(width, height)
+  constructor() {
+    this.cameraPE = new Camera()
+    this.camera = new PerspectiveCamera()
   }
 
   update(_time: number, renderer: THREE.WebGLRenderer): void {
     renderer.setRenderTarget(this.target)
   }
 
-  resize(width: number, height: number): void {
-    this.cameraPE.resize(width, height)
-    this.camera.resize(width, height)
-    this.target.setSize(width, height)
+  resize(resolution: THREE.Vector2): void {
+    this.cameraPE.resize(resolution)
+    this.camera.resize(resolution)
+    this.target.setSize(resolution.x, resolution.y)
   }
 }

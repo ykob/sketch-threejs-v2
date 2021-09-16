@@ -43,6 +43,6 @@ export default class WebGLContent {
     this.resolution.set(width, height)
     this.camera.resize(this.resolution.x, this.resolution.y)
     this.renderer.setSize(this.resolution.x, this.resolution.y)
-    this.home.resize(width, height)
+    this.home.resize(this.resolution)
   }
 }
