@@ -27,6 +27,7 @@ export default class WebGLContent {
     })
     this.renderer.setClearColor(0x000000, 1.0)
     this.clock.start()
+    this.update()
   }
 
   update(): void {
@@ -36,6 +37,9 @@ export default class WebGLContent {
     this.home.update(time, this.renderer)
     this.renderer.setRenderTarget(null)
     this.renderer.render(this.scene, this.camera)
+    requestAnimationFrame(() => {
+      this.update()
+    })
   }
 
   resize(width: number, height: number): void {
