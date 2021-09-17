@@ -24,6 +24,5 @@ export default class Home {
     this.cameraPE.resize(resolution)
     this.camera.resize(resolution)
     this.target.setSize(resolution.x, resolution.y)
-    console.log(this.camera)
   }
 }
