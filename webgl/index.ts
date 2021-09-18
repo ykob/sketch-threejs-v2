@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import Camera from './Camera'
+import Plane from './Plane'
 import Home from './home'
 
 export default class WebGLContent {
@@ -8,11 +9,15 @@ export default class WebGLContent {
   resolution = new THREE.Vector2()
   clock = new THREE.Clock(false)
   scene = new THREE.Scene()
+  camera = new Camera()
+  plane = new Plane()
+
   home = new Home()
-  camera = new Camera(1, 1)
 
   constructor() {
     this.renderer = null
+    this.scene.add(this.plane)
+    this.plane.setTexture(this.home.target.texture)
   }
 
   start(): void {
@@ -45,8 +50,10 @@ export default class WebGLContent {
   resize(width: number, height: number): void {
     if (this.renderer === null) return
     this.resolution.set(width, height)
-    this.camera.resize(this.resolution.x, this.resolution.y)
     this.renderer.setSize(this.resolution.x, this.resolution.y)
+    this.camera.resize(this.resolution)
+    this.plane.resize(this.resolution)
     this.home.resize(this.resolution)
+    console.log(this.plane)
   }
 }

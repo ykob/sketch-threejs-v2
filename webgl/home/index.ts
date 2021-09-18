@@ -4,7 +4,7 @@ import PerspectiveCamera from './PerspectiveCamera'
 import Mesh from './Mesh'
 
 export default class Home {
-  target = new THREE.WebGLRenderTarget(0, 0)
+  target = new THREE.WebGLRenderTarget(1, 1)
   scene = new THREE.Scene()
   cameraPE = new Camera()
   camera = new PerspectiveCamera()
@@ -15,7 +15,7 @@ export default class Home {
   }
 
   update(time: number, renderer: THREE.WebGLRenderer): void {
-    // renderer.setRenderTarget(this.target)
+    renderer.setRenderTarget(this.target)
     this.mesh.update(time)
     renderer.render(this.scene, this.camera)
   }
