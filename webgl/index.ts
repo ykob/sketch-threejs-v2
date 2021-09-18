@@ -1,6 +1,6 @@
 import * as THREE from 'three'
-import Camera from './Camera'
-import Plane from './Plane'
+import Camera from './common/Camera'
+import Plane from './common/Plane'
 import Home from './home'
 
 export default class WebGLContent {
@@ -54,6 +54,5 @@ export default class WebGLContent {
     this.camera.resize(this.resolution)
     this.plane.resize(this.resolution)
     this.home.resize(this.resolution)
-    console.log(this.plane)
   }
 }
