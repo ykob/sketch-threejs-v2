@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import Camera from './common/Camera'
 import Plane from './common/Plane'
 import Home from './home'
+import Dummy01 from './sketch/dummy01'
 
 export default class WebGLContent {
   renderer: THREE.WebGLRenderer | null
@@ -13,11 +14,13 @@ export default class WebGLContent {
   plane = new Plane()
 
   home = new Home()
+  dummy01 = new Dummy01()
 
   constructor() {
     this.renderer = null
     this.scene.add(this.plane)
     this.plane.setTexture(this.home.target.texture)
+    this.plane.setTexture(this.dummy01.target.texture)
   }
 
   start(): void {
@@ -40,6 +43,7 @@ export default class WebGLContent {
     const time = this.clock.running === true ? this.clock.getDelta() : 0
 
     this.home.update(time, this.renderer)
+    this.dummy01.update(time, this.renderer)
     this.renderer.setRenderTarget(null)
     this.renderer.render(this.scene, this.camera)
     requestAnimationFrame(() => {
@@ -54,5 +58,6 @@ export default class WebGLContent {
     this.camera.resize(this.resolution)
     this.plane.resize(this.resolution)
     this.home.resize(this.resolution)
+    this.dummy01.resize(this.resolution)
   }
 }
