@@ -1,8 +1,11 @@
 import * as THREE from 'three'
 import Camera from './common/Camera'
 import Plane from './common/Plane'
+
 import Home from './home'
 import Dummy01 from './sketch/dummy01'
+import Dummy02 from './sketch/dummy02'
+import Dummy03 from './sketch/dummy03'
 
 export default class WebGLContent {
   renderer: THREE.WebGLRenderer | null
@@ -15,12 +18,17 @@ export default class WebGLContent {
 
   home = new Home()
   dummy01 = new Dummy01()
+  dummy02 = new Dummy02()
+  dummy03 = new Dummy03()
 
   constructor() {
     this.renderer = null
     this.scene.add(this.plane)
+
     this.plane.setTexture(this.home.target.texture)
     this.plane.setTexture(this.dummy01.target.texture)
+    this.plane.setTexture(this.dummy02.target.texture)
+    this.plane.setTexture(this.dummy03.target.texture)
   }
 
   start(): void {
@@ -44,6 +52,9 @@ export default class WebGLContent {
 
     this.home.update(time, this.renderer)
     this.dummy01.update(time, this.renderer)
+    this.dummy02.update(time, this.renderer)
+    this.dummy03.update(time, this.renderer)
+
     this.renderer.setRenderTarget(null)
     this.renderer.render(this.scene, this.camera)
     requestAnimationFrame(() => {
@@ -57,7 +68,10 @@ export default class WebGLContent {
     this.renderer.setSize(this.resolution.x, this.resolution.y)
     this.camera.resize(this.resolution)
     this.plane.resize(this.resolution)
+
     this.home.resize(this.resolution)
     this.dummy01.resize(this.resolution)
+    this.dummy02.resize(this.resolution)
+    this.dummy03.resize(this.resolution)
   }
 }
