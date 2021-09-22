@@ -15,20 +15,20 @@ export default class WebGLContent {
   scene = new THREE.Scene()
   camera = new Camera()
   plane = new Plane()
-
-  home = new Home()
-  dummy01 = new Dummy01()
-  dummy02 = new Dummy02()
-  dummy03 = new Dummy03()
+  sketches = [
+    new Home(),
+    new Dummy01(),
+    new Dummy02(),
+    new Dummy03(),
+  ]
 
   constructor() {
     this.renderer = null
     this.scene.add(this.plane)
-
-    this.plane.setTexture(this.home.target.texture)
-    this.plane.setTexture(this.dummy01.target.texture)
-    this.plane.setTexture(this.dummy02.target.texture)
-    this.plane.setTexture(this.dummy03.target.texture)
+    for (let i = 0; i < this.sketches.length; i++) {
+      const sketch = this.sketches[i]
+      this.plane.setTexture(sketch.target.texture)
+    }
   }
 
   start(): void {
@@ -50,11 +50,10 @@ export default class WebGLContent {
     if (this.renderer === null) return
     const time = this.clock.running === true ? this.clock.getDelta() : 0
 
-    this.home.update(time, this.renderer)
-    this.dummy01.update(time, this.renderer)
-    this.dummy02.update(time, this.renderer)
-    this.dummy03.update(time, this.renderer)
-
+    for (let i = 0; i < this.sketches.length; i++) {
+      const sketch = this.sketches[i]
+      sketch.update(time, this.renderer)
+    }
     this.renderer.setRenderTarget(null)
     this.renderer.render(this.scene, this.camera)
     requestAnimationFrame(() => {
@@ -69,9 +68,9 @@ export default class WebGLContent {
     this.camera.resize(this.resolution)
     this.plane.resize(this.resolution)
 
-    this.home.resize(this.resolution)
-    this.dummy01.resize(this.resolution)
-    this.dummy02.resize(this.resolution)
-    this.dummy03.resize(this.resolution)
+    for (let i = 0; i < this.sketches.length; i++) {
+      const sketch = this.sketches[i]
+      sketch.resize(this.resolution)
+    }
   }
 }
