@@ -1,0 +1,18 @@
+{
+  "home": {
+    "title": "Home",
+    "webgl": "@/webgl/home/"
+  },
+  "dummy01": {
+    "title": "Dummy01",
+    "webgl": "@/webgl/sketch/dummy01/"
+  },
+  "dummy02": {
+    "title": "Dummy02",
+    "webgl": "@/webgl/sketch/dummy02/"
+  },
+  "dummy03": {
+    "title": "Dummy03",
+    "webgl": "@/webgl/sketch/dummy03/"
+  }
+}

@@ -11,6 +11,10 @@ div
 import Vue from 'vue'
 
 export default Vue.extend({
+  async created() {
+    const response = await this.$content('pages').fetch()
+    console.log(response)
+  },
   methods: {
     changeSketch() {
       this.$webgl.changeSketch()
