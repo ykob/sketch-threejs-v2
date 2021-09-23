@@ -10,6 +10,8 @@ import Dummy03 from './sketch/dummy03'
 export default class WebGLContent {
   renderer: THREE.WebGLRenderer | null
 
+  current = 0
+
   resolution = new THREE.Vector2()
   clock = new THREE.Clock(false)
   scene = new THREE.Scene()
@@ -25,10 +27,7 @@ export default class WebGLContent {
   constructor() {
     this.renderer = null
     this.scene.add(this.plane)
-    for (let i = 0; i < this.sketches.length; i++) {
-      const sketch = this.sketches[i]
-      this.plane.setTexture(sketch.target.texture)
-    }
+    this.plane.setTexture(this.sketches[0].target.texture)
   }
 
   start(): void {
@@ -72,5 +71,10 @@ export default class WebGLContent {
       const sketch = this.sketches[i]
       sketch.resize(this.resolution)
     }
+  }
+
+  changeSketch() {
+    this.current = (this.current + 1) % 4
+    this.plane.setTexture(this.sketches[this.current].target.texture)
   }
 }
