@@ -2,11 +2,6 @@ import * as THREE from 'three'
 import Camera from './common/Camera'
 import Plane from './common/Plane'
 
-import Home from './home'
-import Dummy01 from './sketch/dummy01'
-import Dummy02 from './sketch/dummy02'
-import Dummy03 from './sketch/dummy03'
-
 export default class WebGLContent {
   renderer: THREE.WebGLRenderer | null
 
@@ -17,12 +12,7 @@ export default class WebGLContent {
   scene = new THREE.Scene()
   camera = new Camera()
   plane = new Plane()
-  sketches = [
-    new Home(),
-    new Dummy01(),
-    new Dummy02(),
-    new Dummy03(),
-  ]
+  sketches:any[] = []
 
   constructor() {
     this.renderer = null
@@ -50,6 +40,7 @@ export default class WebGLContent {
 
     for (let i = 0; i < this.sketches.length; i++) {
       const sketch = this.sketches[i]
+      if (sketch === undefined) continue
       sketch.update(time, this.renderer)
     }
     this.renderer.setRenderTarget(null)
@@ -68,12 +59,16 @@ export default class WebGLContent {
 
     for (let i = 0; i < this.sketches.length; i++) {
       const sketch = this.sketches[i]
+      if (sketch === undefined) continue
       sketch.resize(this.resolution)
     }
   }
 
-  changeSketch() {
+  async changeSketch(path: string) {
+    const { Sketch } = await import(`./${path}`)
+    const sketch = new Sketch()
     this.current = (this.current + 1) % 4
-    this.plane.setTexture(this.sketches[this.current].target.texture)
+    this.sketches[this.current] = sketch
+    this.plane.setTexture(sketch.target.texture)
   }
 }

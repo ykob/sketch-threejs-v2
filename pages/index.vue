@@ -13,14 +13,23 @@ import Vue from 'vue'
 export default Vue.extend({
   async asyncData({ $content }) {
     const response = await $content('pages').fetch()
-    console.log(response)
+    return {
+      page: response,
+    }
   },
+  data: (): {
+    page: any
+  } => ({
+    page: null,
+  }),
   created() {
-    this.$webgl.changeSketch()
+    if (this.page === null) return 
+    this.$webgl.changeSketch(this.page.home.webgl)
   },
   methods: {
     changeSketch() {
-      this.$webgl.changeSketch()
+      if (this.page === null) return 
+      this.$webgl.changeSketch(this.page.home.webgl)
     },
   },
 })

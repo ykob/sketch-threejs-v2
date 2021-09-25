@@ -3,7 +3,7 @@ import Camera from './Camera'
 import PerspectiveCamera from './PerspectiveCamera'
 import Mesh from './Mesh'
 
-export default class Home {
+export class Sketch {
   target = new THREE.WebGLRenderTarget(1, 1)
   scene = new THREE.Scene()
   cameraPE = new Camera()
