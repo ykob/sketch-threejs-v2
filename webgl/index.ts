@@ -27,7 +27,6 @@ export default class WebGLContent {
   constructor() {
     this.renderer = null
     this.scene.add(this.plane)
-    this.plane.setTexture(this.sketches[0].target.texture)
   }
 
   start(): void {
