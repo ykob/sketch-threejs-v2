@@ -2,9 +2,21 @@
 div
   .navi
     .navi__item(
-      @click = 'changeSketch'
+      @click = 'changeSketch1'
       )
-      |change sketch
+      |home
+    .navi__item(
+      @click = 'changeSketch2'
+      )
+      |dummy01
+    .navi__item(
+      @click = 'changeSketch3'
+      )
+      |dummy02
+    .navi__item(
+      @click = 'changeSketch4'
+      )
+      |dummy03
 </template>
 
 <script lang="ts">
@@ -24,12 +36,24 @@ export default Vue.extend({
   }),
   created() {
     if (this.page === null) return 
-    this.$webgl.changeSketch(this.page.home.webgl)
+    this.$webgl.changeSketch(this.page.dummy01.webgl)
   },
   methods: {
-    changeSketch() {
+    changeSketch1() {
       if (this.page === null) return 
       this.$webgl.changeSketch(this.page.home.webgl)
+    },
+    changeSketch2() {
+      if (this.page === null) return 
+      this.$webgl.changeSketch(this.page.dummy01.webgl)
+    },
+    changeSketch3() {
+      if (this.page === null) return 
+      this.$webgl.changeSketch(this.page.dummy02.webgl)
+    },
+    changeSketch4() {
+      if (this.page === null) return 
+      this.$webgl.changeSketch(this.page.dummy03.webgl)
     },
   },
 })
