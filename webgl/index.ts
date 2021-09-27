@@ -67,6 +67,7 @@ export default class WebGLContent {
   async changeSketch(path: string) {
     const { Sketch } = await import(`./${path}`)
     const sketch = new Sketch()
+    sketch.resize(this.resolution)
     this.current = (this.current + 1) % 4
     this.sketches[this.current] = sketch
     this.plane.setTexture(sketch.target.texture)
