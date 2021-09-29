@@ -2,6 +2,27 @@
 div
   Nuxt
   canvas#canvas-webgl
+  .navi
+    div
+      nuxt-link(
+        to = '/'
+        )
+        |Home
+    div
+      nuxt-link(
+        to = '/sketch/dummy01'
+        )
+        |dummy01
+    div
+      nuxt-link(
+        to = '/sketch/dummy02'
+        )
+        |dummy02
+    div
+      nuxt-link(
+        to = '/sketch/dummy03'
+        )
+        |dummy03
 </template>
 
 <script lang="ts">
@@ -47,5 +68,11 @@ canvas {
   top: 0;
   left: 0;
   z-index: z(canvas);
+}
+.navi {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  z-index: z(console);
 }
 </style>
