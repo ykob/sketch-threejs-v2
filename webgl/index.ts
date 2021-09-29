@@ -65,7 +65,7 @@ export default class WebGLContent {
   }
 
   async changeSketch(path: string) {
-    const { Sketch } = await import(`./${path}`)
+    const { Sketch } = await import(`.${path}`)
     const sketch = new Sketch()
 
     sketch.resize(this.resolution)
