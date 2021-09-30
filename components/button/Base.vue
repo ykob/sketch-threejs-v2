@@ -31,7 +31,7 @@ export default Vue.extend({
       type: String,
       default: '44px',
     },
-    role: {
+    buttonType: {
       type: String,
       default: 'common',
     },
@@ -53,7 +53,7 @@ export default Vue.extend({
       }
     },
     classnames(): string[] {
-      const classnames = [`${this.role}`]
+      const classnames = [`${this.buttonType}`]
       if (this.disabled) {
         classnames.push('disabled')
       }
