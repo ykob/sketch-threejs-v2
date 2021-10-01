@@ -1,0 +1,5 @@
+:export {
+  @each $key, $value in $colors {
+    #{$key}: #{$value};
+  }
+}
