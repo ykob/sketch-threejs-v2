@@ -64,7 +64,7 @@ export default class Plane extends THREE.Mesh {
     this.scale.set(resolution.x, resolution.y, 1)
   }
 
-  setTexture(t: THREE.Texture) {
+  changeScene(t: THREE.Texture) {
     if (!(this.material instanceof THREE.RawShaderMaterial)) return
 
     const { uniforms } = this.material

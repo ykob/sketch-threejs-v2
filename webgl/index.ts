@@ -71,6 +71,6 @@ export default class WebGLContent {
     sketch.resize(this.resolution)
     this.current = (this.current + 1) % 4
     this.sketches[this.current] = sketch
-    this.plane.setTexture(sketch.target.texture)
+    this.plane.changeScene(sketch.target.texture)
   }
 }
