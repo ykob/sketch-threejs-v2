@@ -40,9 +40,10 @@ export default class WebGLContent {
 
     for (let i = 0; i < this.sketches.length; i++) {
       const sketch = this.sketches[i]
-      if (sketch === undefined) continue
+      if (sketch === undefined || this.plane.isDestroyed[i] === true) continue
       sketch.update(time, this.renderer)
     }
+    this.plane.update(time)
     this.renderer.setRenderTarget(null)
     this.renderer.render(this.scene, this.camera)
     requestAnimationFrame(() => {
@@ -69,8 +70,8 @@ export default class WebGLContent {
     const sketch = new Sketch()
 
     sketch.resize(this.resolution)
-    this.current = (this.current + 1) % 4
     this.sketches[this.current] = sketch
+    this.current = (this.current + 1) % 4
     this.plane.changeScene(sketch.target.texture)
   }
 }
