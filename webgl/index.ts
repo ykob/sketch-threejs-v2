@@ -12,7 +12,7 @@ export default class WebGLContent {
   scene = new THREE.Scene()
   camera = new Camera()
   plane = new Plane()
-  sketches:any[] = []
+  sketches: any[] = []
 
   constructor() {
     this.renderer = null
@@ -40,7 +40,10 @@ export default class WebGLContent {
 
     for (let i = 0; i < this.sketches.length; i++) {
       const sketch = this.sketches[i]
-      if (sketch === undefined || this.plane.isDestroyed[i] === true) continue
+      if (
+        sketch === undefined
+        || this.plane.sketchStatus[i].isDestroyed === true
+      ) continue
       sketch.update(time, this.renderer)
     }
     this.plane.update(time)

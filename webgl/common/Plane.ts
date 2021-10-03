@@ -2,13 +2,20 @@ import * as THREE from 'three'
 import vs from './glsl/Plane.vs'
 import fs from './glsl/Plane.fs'
 
+interface SketchStatus {
+  timeShow: number
+  timeHide: number
+  isShown: boolean
+  isHidden: boolean
+  isDestroyed: boolean
+}
+
+const MAX = 4
 const DURATION = 1
 
 export default class Plane extends THREE.Mesh {
   current: number
-  isShown: boolean[]
-  isHidden: boolean[]
-  isDestroyed: boolean[]
+  sketchStatus: SketchStatus[]
 
   constructor() {
     const geometry = new THREE.PlaneGeometry(1, 1)
@@ -28,28 +35,28 @@ export default class Plane extends THREE.Mesh {
           texture4: {
             value: null,
           },
-          timeShow1: {
+          stepShow1: {
             value: 0,
           },
-          timeShow2: {
+          stepShow2: {
             value: 0,
           },
-          timeShow3: {
+          stepShow3: {
             value: 0,
           },
-          timeShow4: {
+          stepShow4: {
             value: 0,
           },
-          timeHide1: {
+          stepHide1: {
             value: 0,
           },
-          timeHide2: {
+          stepHide2: {
             value: 0,
           },
-          timeHide3: {
+          stepHide3: {
             value: 0,
           },
-          timeHide4: {
+          stepHide4: {
             value: 0,
           },
         },
@@ -59,9 +66,15 @@ export default class Plane extends THREE.Mesh {
     })
     super(geometry, material)
     this.current = 0
-    this.isShown = [false, false, false, false]
-    this.isHidden = [false, false, false, false]
-    this.isDestroyed = [false, false, false, false]
+    this.sketchStatus = [...new Array(MAX)].map(() => {
+      return {
+        timeShow: 0,
+        timeHide: 0,
+        isShown: false,
+        isHidden: false,
+        isDestroyed: false,
+      }
+    })
   }
 
   resize(resolution: THREE.Vector2) {
@@ -72,42 +85,25 @@ export default class Plane extends THREE.Mesh {
     if (!(this.material instanceof THREE.RawShaderMaterial)) return
 
     const { uniforms } = this.material
-    
+
+    this.sketchStatus[this.current].timeShow = 0
+    this.sketchStatus[this.current].timeHide = 0
+    this.sketchStatus[this.current].isShown = true
+    this.sketchStatus[this.current].isHidden = false
+    this.sketchStatus[this.current].isDestroyed = false
+    this.sketchStatus[(this.current + MAX - 1) % MAX].isHidden = true
+
     if (this.current === 0) {
       uniforms.texture1.value = t
-      uniforms.timeShow1.value = 0
-      uniforms.timeHide1.value = 0
-      this.isShown[0] = true
-      this.isHidden[0] = false
-      this.isDestroyed[0] = false
-      this.isHidden[3] = true
       this.current = 1
     } else if (this.current === 1) {
       uniforms.texture2.value = t
-      uniforms.timeShow2.value = 0
-      uniforms.timeHide2.value = 0
-      this.isShown[1] = true
-      this.isHidden[1] = false
-      this.isDestroyed[1] = false
-      this.isHidden[0] = true
       this.current = 2
     } else if (this.current === 2) {
       uniforms.texture3.value = t
-      uniforms.timeShow3.value = 0
-      uniforms.timeHide3.value = 0
-      this.isShown[2] = true
-      this.isHidden[2] = false
-      this.isDestroyed[2] = false
-      this.isHidden[1] = true
       this.current = 3
     } else if (this.current === 3) {
       uniforms.texture4.value = t
-      uniforms.timeShow4.value = 0
-      uniforms.timeHide4.value = 0
-      this.isShown[3] = true
-      this.isHidden[3] = false
-      this.isDestroyed[3] = false
-      this.isHidden[2] = true
       this.current = 0
     }
   }
@@ -115,42 +111,19 @@ export default class Plane extends THREE.Mesh {
   update(time: number) {
     if (!(this.material instanceof THREE.RawShaderMaterial)) return
 
-    const { uniforms } = this.material
+    // const { uniforms } = this.material
 
-    if (this.isShown[0] === true) {
-      uniforms.timeShow1.value += time
-    }
-    if (this.isShown[1] === true) {
-      uniforms.timeShow2.value += time
-    }
-    if (this.isShown[2] === true) {
-      uniforms.timeShow3.value += time
-    }
-    if (this.isShown[3] === true) {
-      uniforms.timeShow4.value += time
-    }
-    if (this.isHidden[0] === true) {
-      uniforms.timeHide1.value += time
-      if (uniforms.timeHide1.value >= DURATION) {
-        this.isDestroyed[0] = true
+    for (let i = 0; i < this.sketchStatus.length; i++) {
+      const status = this.sketchStatus[i]
+
+      if (status.isShown === true) {
+        status.timeShow += time
       }
-    }
-    if (this.isHidden[1] === true) {
-      uniforms.timeHide2.value += time
-      if (uniforms.timeHide2.value >= DURATION) {
-        this.isDestroyed[1] = true
-      }
-    }
-    if (this.isHidden[2] === true) {
-      uniforms.timeHide3.value += time
-      if (uniforms.timeHide3.value >= DURATION) {
-        this.isDestroyed[2] = true
-      }
-    }
-    if (this.isHidden[3] === true) {
-      uniforms.timeHide4.value += time
-      if (uniforms.timeHide4.value >= DURATION) {
-        this.isDestroyed[3] = true
+      if (status.isHidden === true) {
+        status.timeHide += time
+        if (status.timeHide >= DURATION) {
+          status.isDestroyed = true
+        }
       }
     }
   }

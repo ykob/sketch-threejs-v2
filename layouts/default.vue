@@ -27,7 +27,6 @@ div
 
 <script lang="ts">
 import Vue from 'vue'
-import Colors from '@/assets/css/exports-colors.scss'
 
 export default Vue.extend({
   data: () => ({
@@ -37,7 +36,6 @@ export default Vue.extend({
     },
   }),
   mounted() {
-    console.log(Colors)
     let timer: number = 0
 
     const debounceResize = () => {
