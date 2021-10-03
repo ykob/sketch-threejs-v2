@@ -29,7 +29,7 @@ export default class WebGLContent {
       alpha: true,
       antialias: true,
     })
-    this.renderer.setClearColor(0x000000, 1.0)
+    this.renderer.setClearColor(0x000000, 0.0)
     this.clock.start()
     this.update()
   }

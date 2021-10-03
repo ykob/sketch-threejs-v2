@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { easing } from 'ts-easing'
 import vs from './glsl/Plane.vs'
 import fs from './glsl/Plane.fs'
 
@@ -63,6 +64,7 @@ export default class Plane extends THREE.Mesh {
       ]),
       vertexShader: vs,
       fragmentShader: fs,
+      transparent: true,
     })
     super(geometry, material)
     this.current = 0
@@ -85,13 +87,15 @@ export default class Plane extends THREE.Mesh {
     if (!(this.material instanceof THREE.RawShaderMaterial)) return
 
     const { uniforms } = this.material
+    const current = this.sketchStatus[this.current]
+    const prev = this.sketchStatus[(this.current + MAX - 1) % MAX]
 
-    this.sketchStatus[this.current].timeShow = 0
-    this.sketchStatus[this.current].timeHide = 0
-    this.sketchStatus[this.current].isShown = true
-    this.sketchStatus[this.current].isHidden = false
-    this.sketchStatus[this.current].isDestroyed = false
-    this.sketchStatus[(this.current + MAX - 1) % MAX].isHidden = true
+    current.timeShow = 0
+    current.timeHide = 0
+    current.isShown = true
+    current.isHidden = false
+    current.isDestroyed = false
+    prev.isHidden = true
 
     if (this.current === 0) {
       uniforms.texture1.value = t
@@ -111,11 +115,32 @@ export default class Plane extends THREE.Mesh {
   update(time: number) {
     if (!(this.material instanceof THREE.RawShaderMaterial)) return
 
-    // const { uniforms } = this.material
+    const { uniforms } = this.material
 
     for (let i = 0; i < this.sketchStatus.length; i++) {
       const status = this.sketchStatus[i]
+      let stepShow
+      let stepHide
 
+      switch (i) {
+        case 0:
+          stepShow = uniforms.stepShow1
+          stepHide = uniforms.stepHide1
+          break
+        case 1:
+          stepShow = uniforms.stepShow2
+          stepHide = uniforms.stepHide2
+          break
+        case 2:
+          stepShow = uniforms.stepShow3
+          stepHide = uniforms.stepHide3
+          break
+        case 3:
+        default:
+          stepShow = uniforms.stepShow4
+          stepHide = uniforms.stepHide4
+          break
+      }
       if (status.isShown === true) {
         status.timeShow += time
       }
@@ -125,6 +150,8 @@ export default class Plane extends THREE.Mesh {
           status.isDestroyed = true
         }
       }
+      stepShow.value = easing.outQuad(Math.max(Math.min(status.timeShow, DURATION), 0) / DURATION)
+      stepHide.value = easing.outQuad(Math.max(Math.min(status.timeHide, DURATION), 0) / DURATION)
     }
   }
 }
