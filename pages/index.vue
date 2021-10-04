@@ -28,8 +28,8 @@ export default Vue.extend({
       webgl: '',
     },
   }),
-  created() {
-    this.$webgl.changeSketch(this.page.webgl)
+  async mounted() {
+    await this.$webgl.changeSketch(this.page.webgl)
   },
 })
 </script>

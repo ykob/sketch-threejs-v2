@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import Camera from './Camera'
 import PerspectiveCamera from './PerspectiveCamera'
 import Mesh from './Mesh'
+import { sleep } from '@/assets/js/utils'
 
 export class Sketch {
   target = new THREE.WebGLRenderTarget(1, 1)
@@ -12,6 +13,10 @@ export class Sketch {
 
   constructor() {
     this.scene.add(this.mesh)
+  }
+
+  async start() {
+    await sleep(1000)
   }
 
   update(time: number, renderer: THREE.WebGLRenderer): void {

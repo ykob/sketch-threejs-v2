@@ -6,6 +6,7 @@ export default class WebGLContent {
   renderer: THREE.WebGLRenderer | null
 
   current = 0
+  timer = 0
 
   resolution = new THREE.Vector2()
   clock = new THREE.Clock(false)
@@ -68,13 +69,20 @@ export default class WebGLContent {
     }
   }
 
-  async changeSketch(path: string) {
-    const { Sketch } = await import(`.${path}`)
-    const sketch = new Sketch()
-
-    sketch.resize(this.resolution)
-    this.sketches[this.current] = sketch
-    this.current = (this.current + 1) % 4
-    this.plane.changeScene(sketch.target.texture)
+  changeSketch(path: string): Promise<void> {
+    return new Promise((resolve) => {
+      clearTimeout(this.timer)
+      this.timer = window.setTimeout(async () => {
+        const { Sketch } = await import(`.${path}`)
+        const sketch = new Sketch()
+  
+        sketch.resize(this.resolution)
+        this.sketches[this.current] = sketch
+        this.current = (this.current + 1) % 4
+        await sketch.start()
+        this.plane.changeScene(sketch.target.texture)
+        resolve()
+      }, 500)
+    })
   }
 }
