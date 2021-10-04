@@ -7,11 +7,17 @@ import Vue from 'vue'
 import { Page } from '@/@types/frontend'
 
 export default Vue.extend({
-  async asyncData({ params, $content }) {
-    const response = await $content(params.id).fetch()
+  async asyncData({ error, params, $content }) {
+    let page
+
+    try {
+      page = await $content(params.id).fetch()
+    } catch(result) {
+      error(result.response)
+    }
 
     return {
-      page: response,
+      page,
     }
   },
   data: (): {

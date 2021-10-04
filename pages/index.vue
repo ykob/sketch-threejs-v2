@@ -4,15 +4,20 @@ div
 
 <script lang="ts">
 import Vue from 'vue'
-// import { IContentDocument } from '@nuxt/content/types/content'
 import { Page } from '@/@types/frontend'
 
 export default Vue.extend({
-  async asyncData({ $content }) {
-    const response = await $content('home').fetch()
+  async asyncData({ error, $content }) {
+    let page
+
+    try {
+      page = await $content('home').fetch()
+    } catch(result) {
+      error(result.response)
+    }
 
     return {
-      page: response,
+      page,
     }
   },
   data: (): {
