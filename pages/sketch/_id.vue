@@ -7,11 +7,18 @@ import Vue from 'vue'
 import { Page } from '@/@types/frontend'
 
 export default Vue.extend({
-  async asyncData({ params, $content }) {
-    const response = await $content(params.id).fetch()
+  async asyncData({ app, params, $content }) {
+    let page
+  
+    if (process.browser) {
+      app.$webgl.hideSketch()
+    }
+    try {
+      page = await $content(params.id).fetch()
+    } catch {}  
 
     return {
-      page: response,
+      page,
     }
   },
   data: (): {
@@ -22,7 +29,7 @@ export default Vue.extend({
       webgl: '',
     },
   }),
-  created() {
+  mounted() {
     this.$webgl.changeSketch(this.page.webgl)
   },
 })

@@ -68,6 +68,10 @@ export default class WebGLContent {
     }
   }
 
+  hideSketch() {
+    this.plane.hideScene()
+  }
+
   async changeSketch(path: string) {
     const { Sketch } = await import(`.${path}`)
     const sketch = new Sketch()
