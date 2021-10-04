@@ -83,23 +83,19 @@ export default class Plane extends THREE.Mesh {
     this.scale.set(resolution.x, resolution.y, 1)
   }
 
-  hideScene() {
-    const prev = this.sketchStatus[(this.current + MAX - 1) % MAX]
-
-    prev.isHidden = true
-  }
-
   changeScene(t: THREE.Texture) {
     if (!(this.material instanceof THREE.RawShaderMaterial)) return
 
     const { uniforms } = this.material
     const current = this.sketchStatus[this.current]
+    const prev = this.sketchStatus[(this.current + MAX - 1) % MAX]
 
     current.timeShow = 0
     current.timeHide = 0
     current.isShown = true
     current.isHidden = false
     current.isDestroyed = false
+    prev.isHidden = true
 
     if (this.current === 0) {
       uniforms.texture1.value = t
