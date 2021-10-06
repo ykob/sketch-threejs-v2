@@ -112,6 +112,14 @@ export default class Plane extends THREE.Mesh {
     }
   }
 
+  hideScene() {
+    for (let i = 0; i < this.sketchStatus.length; i++) {
+      const sketchStatus = this.sketchStatus[i]
+
+      sketchStatus.isHidden = true
+    }
+  }
+
   update(time: number) {
     if (!(this.material instanceof THREE.RawShaderMaterial)) return
 

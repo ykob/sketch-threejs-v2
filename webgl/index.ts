@@ -72,6 +72,7 @@ export default class WebGLContent {
   changeSketch(path: string): Promise<void> {
     return new Promise((resolve) => {
       clearTimeout(this.timer)
+      this.plane.hideScene()
       this.timer = window.setTimeout(async () => {
         const { Sketch } = await import(`.${path}`)
         const sketch = new Sketch()
