@@ -7,10 +7,11 @@ import Vue from 'vue'
 import { IContentDocument } from '@nuxt/content/types/content'
 
 export default Vue.extend({
-  async asyncData({ error, params, $content }) {
+  async asyncData({ error, params, store, $content }) {
     let page
 
     try {
+      await store.dispatch('getPages')
       page = await $content(`sketch/${params.id}`).fetch()
     } catch(result) {
       error(result.response)
