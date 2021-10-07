@@ -4,7 +4,7 @@ div
 
 <script lang="ts">
 import Vue from 'vue'
-import { Page } from '@/@types/frontend'
+import { IContentDocument } from '@nuxt/content/types/content'
 
 export default Vue.extend({
   async asyncData({ error, $content }) {
@@ -21,14 +21,12 @@ export default Vue.extend({
     }
   },
   data: (): {
-    page: Page
+    page: IContentDocument | null
   } => ({
-    page: {
-      title: '',
-      webgl: '',
-    },
+    page: null,
   }),
   async mounted() {
+    if (this.page === null) return
     await this.$webgl.changeSketch(this.page.webgl)
   },
 })
