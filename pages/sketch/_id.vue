@@ -11,7 +11,7 @@ export default Vue.extend({
     let page
 
     try {
-      page = await $content(params.id).fetch()
+      page = await $content(`sketch/${params.id}`).fetch()
     } catch(result) {
       error(result.response)
     }
