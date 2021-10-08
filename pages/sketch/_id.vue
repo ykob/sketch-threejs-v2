@@ -1,5 +1,8 @@
 <template lang="pug">
 div
+  SketchTitle(
+    :title = 'page.title'
+    )
 </template>
 
 <script lang="ts">
