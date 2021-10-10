@@ -35,6 +35,7 @@ export default {
       '@/assets/css/variables.scss',
       '@/assets/css/variables-colors.scss',
       '@/assets/css/variables-utilities.scss',
+      '@/assets/css/functions.scss',
       '@/assets/css/mixins.scss',
     ],
   },
