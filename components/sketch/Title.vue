@@ -26,5 +26,19 @@ export default Vue.extend({
   display: flex;
   justify-content: center;
   font-size: 32px;
+  .page-enter & {
+    opacity: 0;
+  }
+  .page-enter-to & {
+    opacity: 1;
+    transition-duration: 1s;
+  }
+  .page-leave & {
+    opacity: 1;
+  }
+  .page-leave-to & {
+    opacity: 0;
+    transition-duration: 1s;
+  }
 }
 </style>

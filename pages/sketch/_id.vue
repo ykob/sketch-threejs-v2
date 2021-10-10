@@ -10,6 +10,11 @@ import Vue from 'vue'
 import { IContentDocument } from '@nuxt/content/types/content'
 
 export default Vue.extend({
+  transition: {
+    name: 'page',
+    duration: 1000,
+    mode: '',
+  },
   async asyncData({ error, params, store, $content }) {
     let page
 
