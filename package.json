@@ -11,7 +11,7 @@
     "lint": "yarn lint:js"
   },
   "dependencies": {
-    "@mdi/js": "^6.1.95",
+    "@mdi/js": "^6.2.95",
     "@nuxt/content": "^1.14.0",
     "@nuxtjs/composition-api": "^0.29.0",
     "@nuxtjs/pwa": "^3.3.5",
