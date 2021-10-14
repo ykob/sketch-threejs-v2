@@ -1,5 +1,7 @@
 <template lang="pug">
-.sketch-title
+.sketch-title(
+  :style = 'stylesTitle'
+  )
   |{{ title }}
 </template>
 
@@ -13,19 +15,26 @@ export default Vue.extend({
       default: '',
     },
   },
+  computed: {
+    stylesTitle(): { [key: string]: string } {
+      const { state } = this.$store
+      const x = Math.max(Math.min(state.resolution.x / 12, 90), 48)
+      return {
+        fontSize: `${x}px`,
+      }
+    },
+  },
 })
 </script>
 
 <style lang="scss" scoped>
 .sketch-title {
   position: absolute;
-  right: 0;
-  left: 0;
+  left: 24px;
   bottom: 24px;
   z-index: z(console);
   display: flex;
   justify-content: center;
-  font-size: 32px;
   .page-enter & {
     opacity: 0;
   }
