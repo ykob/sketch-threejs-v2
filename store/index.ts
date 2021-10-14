@@ -3,8 +3,16 @@ import { IContentDocument } from '@nuxt/content/types/content'
 
 export const state = (): {
   pages: IContentDocument[]
+  resolution: {
+    x: number,
+    y: number,
+  },
 } => ({
   pages: [],
+  resolution: {
+    x: 0,
+    y: 0,
+  },
 })
 
 export type RootState = ReturnType<typeof state>
@@ -16,6 +24,10 @@ export const getters: GetterTree<RootState, RootState> = {
 export const mutations: MutationTree<RootState> = {
   setPages: (state, pages: IContentDocument[]) => {
     state.pages = pages
+  },
+  setSize: (state, { x, y }: { x: number, y: number }) => {
+    state.resolution.x = x
+    state.resolution.y = y
   },
 }
 
