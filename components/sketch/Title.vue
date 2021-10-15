@@ -30,11 +30,23 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .sketch-title {
   position: absolute;
-  left: 24px;
-  bottom: 24px;
+  left: 0;
+  bottom: 0;
   z-index: z(console);
   display: flex;
   justify-content: center;
+  @include l-lg {
+    margin-bottom: 2.5%;
+    margin-left: 2.5%;
+  }
+  @include l-md {
+    margin-bottom: 24px;
+    margin-left: 24px;
+  }
+  @include l-sm {
+    margin-bottom: 24px;
+    margin-left: 24px;
+  }
   .page-enter & {
     opacity: 0;
   }
