@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  SiteTItle
+  Header
   Nuxt
   canvas#canvas-webgl
   Navi

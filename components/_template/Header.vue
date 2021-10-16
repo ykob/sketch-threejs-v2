@@ -1,14 +1,17 @@
 <template lang="pug">
 transition(
-  name = 'site-title'
+  name = 'header'
+  duration = '1000'
+  appear
   )
-  .site-title(
+  .header(
     v-show = 'isShown'
     )
-    nuxt-link(
-      to = '/'
-      )
-      |sketch of three.js v2
+    .site-title
+      nuxt-link(
+        to = '/'
+        )
+        |sketch of three.js v2
 </template>
 
 <script lang="ts">
@@ -44,14 +47,14 @@ export default Vue.extend({
     margin-left: 24px;
     font-size: 14px;
   }
-  &.site-title-enter {
+  .header-enter & {
     opacity: 0;
   }
-  &.site-title-enter-to {
+  .header-enter-to & {
     opacity: 1;
     transition-duration: 1s;
   }
-  &.site-title-leave-to {
+  .header-leave-to & {
     opacity: 0;
     transition-duration: 1s;
   }
