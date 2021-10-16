@@ -15,14 +15,13 @@ export default Vue.extend({
     duration: 1000,
     mode: '',
   },
-  async asyncData({ error, params, store, $content }) {
+  async asyncData({ params, store, $content }) {
     let page
 
     try {
       await store.dispatch('getPages')
       page = await $content(`sketch/${params.id}`).fetch()
-    } catch(result) {
-      error(result.response)
+    } catch {
     }
 
     return {
