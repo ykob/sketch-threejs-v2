@@ -1,8 +1,13 @@
 <template lang="pug">
-.sketch-title(
-  :style = 'stylesTitle'
-  )
-  |{{ title }}
+.sketch-outline
+  .sketch-outline__title(
+    :style = 'stylesTitle'
+    )
+    |{{ title }}
+  .sketch-outline__description
+    |{{ description }}
+  .sketch-outline__created-at
+    |Created at : {{ createdAt }}
 </template>
 
 <script lang="ts">
@@ -11,6 +16,14 @@ import Vue from 'vue'
 export default Vue.extend({
   props: {
     title: {
+      type: String,
+      default: '',
+    },
+    description: {
+      type: String,
+      default: '',
+    },
+    createdAt: {
       type: String,
       default: '',
     },
@@ -28,13 +41,11 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.sketch-title {
+.sketch-outline {
   position: absolute;
   left: 0;
   bottom: 0;
   z-index: z(console);
-  display: flex;
-  justify-content: center;
   @include l-lg {
     margin-bottom: 2.5%;
     margin-left: 2.5%;

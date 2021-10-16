@@ -2,6 +2,8 @@
 div
   SketchTitle(
     :title = 'page.title'
+    :description = 'page.description'
+    :createdAt = 'page.createdAt'
     )
 </template>
 
