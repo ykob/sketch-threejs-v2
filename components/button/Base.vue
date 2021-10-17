@@ -83,6 +83,11 @@ export default Vue.extend({
     text-decoration: none;
     transition-property: background-color;
   }
+  &.transparent {
+    font-weight: 600;
+    text-decoration: none;
+    transition-property: background-color;
+  }
   &:disabled,
   &.disabled {
     filter: none;
