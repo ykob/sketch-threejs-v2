@@ -12,6 +12,17 @@ transition(
         to = '/'
         )
         |sketch of three.js v2
+    .buttons
+      ButtonRound(
+        href = 'https://github.com/ykob/sketch-threejs-v2'
+        target = '_blank'
+        )
+        IconGithub
+      ButtonRound(
+        href = 'https://twitter.com/ykob0123'
+        target = '_blank'
+        )
+        IconTwitter
 </template>
 
 <script lang="ts">
@@ -27,7 +38,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.site-title {
+.header {
   position: absolute;
   top: 0;
   left: 0;
@@ -35,17 +46,14 @@ export default Vue.extend({
   @include l-lg {
     margin-top: 2.5%;
     margin-left: 2.5%;
-    font-size: 18px;
   }
   @include l-md {
     margin-top: 24px;
     margin-left: 24px;
-    font-size: 16px;
   }
   @include l-sm {
     margin-top: 24px;
     margin-left: 24px;
-    font-size: 14px;
   }
   .header-enter & {
     opacity: 0;
@@ -58,5 +66,14 @@ export default Vue.extend({
     opacity: 0;
     transition-duration: 1s;
   }
+}
+.site-title {
+  font-size: 18px;
+  a {
+    text-decoration: none;
+  }
+}
+.buttons {
+  display: flex;
 }
 </style>
