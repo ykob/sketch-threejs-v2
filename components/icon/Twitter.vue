@@ -9,10 +9,11 @@ IconBase(
     )
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
 import { mdiTwitter } from '@mdi/js'
 
-export default {
+export default Vue.extend({
   props: {
     size: {
       type: [Number, String],
@@ -28,5 +29,5 @@ export default {
       return mdiTwitter
     },
   },
-}
+})
 </script>

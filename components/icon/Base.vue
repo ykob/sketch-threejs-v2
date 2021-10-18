@@ -18,8 +18,10 @@ svg(
     slot
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+
+export default Vue.extend({
   props: {
     iconName: {
       type: String,
@@ -34,5 +36,5 @@ export default {
       default: 'currentColor',
     },
   },
-}
+})
 </script>
