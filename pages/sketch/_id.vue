@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  SketchTitle(
+  SketchOutline(
     :title = 'page.title'
     :description = 'page.description'
     :createdAt = 'page.createdAt'
