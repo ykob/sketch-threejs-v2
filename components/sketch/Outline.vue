@@ -46,6 +46,7 @@ export default Vue.extend({
   left: 0;
   bottom: 0;
   z-index: z(console);
+  line-height: 1;
   @include l-lg {
     margin-bottom: 2.5%;
     margin-left: 2.5%;
@@ -71,6 +72,34 @@ export default Vue.extend({
   .page-leave-to & {
     opacity: 0;
     transition-duration: 1s;
+  }
+  &__title {
+    margin-bottom: 8px;
+  }
+  &__description {
+    @include l-lg {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+    @include l-md {
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+    @include l-sm {
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+  }
+  &__created-at {
+    @include l-lg {
+      font-size: 16px;
+    }
+    @include l-md {
+      font-size: 14px;
+    }
+    @include l-sm {
+      font-size: 12px;
+    }
   }
 }
 </style>

@@ -68,7 +68,16 @@ export default Vue.extend({
   }
 }
 .site-title {
-  font-size: 18px;
+  margin-bottom: 4px;
+  @include l-lg {
+    font-size: 20px;
+  }
+  @include l-md {
+    font-size: 18px;
+  }
+  @include l-sm {
+    font-size: 16px;
+  }
   a {
     text-decoration: none;
   }
