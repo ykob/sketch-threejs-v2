@@ -8,7 +8,7 @@ transition(
     v-show = 'isShown'
     )
     .site-title
-      nuxt-link(
+      LinkUnderline(
         to = '/'
         )
         |sketch of three.js v2
