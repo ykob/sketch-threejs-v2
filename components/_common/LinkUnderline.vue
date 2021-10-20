@@ -69,6 +69,7 @@ export default Vue.extend({
     &.v-enter-to {
       transform: translate3d(0, 0, 0);
       transition-duration: 0.4s;
+      transition-timing-function: $easeOutCirc;
     }
     &.v-leave {
       transform: translate3d(0, 0, 0);
@@ -76,6 +77,7 @@ export default Vue.extend({
     &.v-leave-to {
       transform: translate3d(101%, 0, 0);
       transition-duration: 0.4s;
+      transition-timing-function: $easeOutCirc;
     }
   }
 }
