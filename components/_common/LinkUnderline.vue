@@ -29,7 +29,7 @@ export default Vue.extend({
     },
   },
   data: () => ({
-    current: -1,
+    current: 0,
     isOvered: false,
     lines: Array(MAX),
   }),
