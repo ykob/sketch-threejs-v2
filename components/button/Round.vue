@@ -1,6 +1,6 @@
 <template lang="pug">
 ButtonBase(
-  :attr = '$attrs'
+  v-bind = '$attrs'
   tag = 'a'
   buttonType = 'transparent'
   width = '32px'
