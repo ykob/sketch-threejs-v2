@@ -12,17 +12,19 @@ transition(
         to = '/'
         )
         |sketch of three.js v2
-    .buttons
-      ButtonRound(
-        href = 'https://github.com/ykob/sketch-threejs-v2'
-        target = '_blank'
-        )
-        IconGithub
-      ButtonRound(
-        href = 'https://twitter.com/ykob0123'
-        target = '_blank'
-        )
-        IconTwitter
+    .links
+      .links__item
+        ButtonRound(
+          href = 'https://github.com/ykob/sketch-threejs-v2'
+          target = '_blank'
+          )
+          IconGithub
+      .links__item
+        ButtonRound(
+          href = 'https://twitter.com/ykob0123'
+          target = '_blank'
+          )
+          IconTwitter
 </template>
 
 <script lang="ts">
@@ -55,17 +57,6 @@ export default Vue.extend({
     margin-top: 24px;
     margin-left: 24px;
   }
-  .header-enter & {
-    opacity: 0;
-  }
-  .header-enter-to & {
-    opacity: 1;
-    transition-duration: 1s;
-  }
-  .header-leave-to & {
-    opacity: 0;
-    transition-duration: 1s;
-  }
 }
 .site-title {
   margin-bottom: 4px;
@@ -78,11 +69,42 @@ export default Vue.extend({
   @include l-sm {
     font-size: 16px;
   }
+  .header-enter & {
+    opacity: 0;
+  }
+  .header-enter-to & {
+    opacity: 1;
+    transition-duration: 0.4s;
+    transition-timing-function: $easeOutCirc;
+  }
+  .header-leave-to & {
+    opacity: 0;
+    transition-duration: 0.4s;
+    transition-timing-function: $easeOutCirc;
+  }
   a {
     text-decoration: none;
   }
 }
-.buttons {
+.links {
   display: flex;
+}
+.links__item {
+  .header-enter & {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  .header-enter-to & {
+    opacity: 1;
+    transform: scale(1);
+    transition-duration: 0.4s;
+    transition-timing-function: $easeOutCirc;
+  }
+  .header-leave-to & {
+    opacity: 0;
+    transform: scale(0.7);
+    transition-duration: 0.4s;
+    transition-timing-function: $easeOutCirc;
+  }
 }
 </style>
