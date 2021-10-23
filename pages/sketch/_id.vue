@@ -14,7 +14,7 @@ import { IContentDocument } from '@nuxt/content/types/content'
 export default Vue.extend({
   transition: {
     name: 'page',
-    duration: 1000,
+    duration: 2000,
     mode: '',
   },
   async asyncData({ params, store, $content }) {
