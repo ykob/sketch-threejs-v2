@@ -103,7 +103,6 @@ export default Vue.extend({
       opacity: 1;
       transform: translate3d(0, 0, 0);
       transition-delay: 0.5s;
-      
     }
     .page-leave & {
       opacity: 1;
