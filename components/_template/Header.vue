@@ -72,15 +72,16 @@ export default Vue.extend({
   .header-enter & {
     opacity: 0;
   }
+  .header-enter-to &,
+  .header-leave-to & {
+    transition-duration: 0.8s;
+    transition-timing-function: $easeOutCubic;
+  }
   .header-enter-to & {
     opacity: 1;
-    transition-duration: 0.4s;
-    transition-timing-function: $easeOutCirc;
   }
   .header-leave-to & {
     opacity: 0;
-    transition-duration: 0.4s;
-    transition-timing-function: $easeOutCirc;
   }
   a {
     text-decoration: none;
@@ -94,17 +95,19 @@ export default Vue.extend({
     opacity: 0;
     transform: scale(0.7);
   }
+  .header-enter-to &,
+  .header-leave-to & {
+    transition-duration: 0.8s;
+    transition-timing-function: $easeOutCubic;
+  }
   .header-enter-to & {
     opacity: 1;
     transform: scale(1);
-    transition-duration: 0.4s;
-    transition-timing-function: $easeOutCirc;
   }
   .header-leave-to & {
     opacity: 0;
     transform: scale(0.7);
-    transition-duration: 0.4s;
-    transition-timing-function: $easeOutCirc;
+
   }
 }
 </style>
