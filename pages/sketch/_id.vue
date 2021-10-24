@@ -1,10 +1,14 @@
 <template lang="pug">
 div
-  SketchOutline(
-    :title = 'page.title'
-    :description = 'page.description'
-    :createdAt = 'page.createdAt'
+  transition(
+    duration = '2000'
     )
+    SketchOutline(
+      v-if = 'isLoaded'
+      :title = 'page.title'
+      :description = 'page.description'
+      :createdAt = 'page.createdAt'
+      )
 </template>
 
 <script lang="ts">
@@ -32,12 +36,15 @@ export default Vue.extend({
   },
   data: (): {
     page: IContentDocument | null
+    isLoaded: boolean
   } => ({
     page: null,
+    isLoaded: false,
   }),
   async mounted() {
     if (this.page === null) return
     await this.$webgl.changeSketch(this.page.webgl)
+    this.isLoaded = true
   },
 })
 </script>

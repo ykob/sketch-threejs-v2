@@ -61,10 +61,10 @@ export default Vue.extend({
   }
   &__title {
     margin-bottom: 8px;
-    .page-enter & {
+    .v-enter & {
       opacity: 0;
     }
-    .page-enter-to & {
+    .v-enter-to & {
       opacity: 1;
       transition-duration: 1s;
     }
@@ -89,20 +89,20 @@ export default Vue.extend({
       margin-bottom: 4px;
       font-size: 14px;
     }
-    .page-enter & {
+    .v-enter & {
       opacity: 0;
       transform: translate3d(0, 8px, 0);
     }
-    .page-enter-to &,
+    .v-enter-to &,
     .page-leave-to & {
       transition-duration: 0.8s;
       transition-timing-function: $easeOutCubic;
       transition-property: opacity, transform;
     }
-    .page-enter-to & {
+    .v-enter-to & {
       opacity: 1;
       transform: translate3d(0, 0, 0);
-      transition-delay: 0.5s;
+      transition-delay: 0.3s;
     }
     .page-leave & {
       opacity: 1;
@@ -123,20 +123,20 @@ export default Vue.extend({
     @include l-sm {
       font-size: 12px;
     }
-    .page-enter & {
+    .v-enter & {
       opacity: 0;
       transform: translate3d(0, 8px, 0);
     }
-    .page-enter-to &,
+    .v-enter-to &,
     .page-leave-to & {
       transition-duration: 0.8s;
       transition-timing-function: $easeOutCubic;
       transition-property: opacity, transform;
     }
-    .page-enter-to & {
+    .v-enter-to & {
       opacity: 1;
       transform: translate3d(0, 0, 0);
-      transition-delay: 0.6s;
+      transition-delay: 0.4s;
     }
     .page-leave & {
       opacity: 1;
