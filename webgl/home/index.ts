@@ -22,6 +22,7 @@ export class Sketch {
   update(time: number, renderer: THREE.WebGLRenderer): void {
     renderer.setRenderTarget(this.target)
     this.mesh.update(time)
+    renderer.setClearColor(0xffffff, 1.0)
     renderer.render(this.scene, this.camera)
   }
 
