@@ -3,7 +3,9 @@
   .sketch-outline__title(
     :style = 'stylesTitle'
     )
-    |{{ title }}
+    SplitStringContainer(
+      :value = 'title'
+      )
   .sketch-outline__description
     |{{ description }}
   .sketch-outline__created-at
@@ -61,20 +63,6 @@ export default Vue.extend({
   }
   &__title {
     margin-bottom: 8px;
-    .v-enter & {
-      opacity: 0;
-    }
-    .v-enter-to & {
-      opacity: 1;
-      transition-duration: 1s;
-    }
-    .page-leave & {
-      opacity: 1;
-    }
-    .page-leave-to & {
-      opacity: 0;
-      transition-duration: 1s;
-    }
   }
   &__description {
     @include l-lg {
@@ -102,7 +90,7 @@ export default Vue.extend({
     .v-enter-to & {
       opacity: 1;
       transform: translate3d(0, 0, 0);
-      transition-delay: 0.3s;
+      transition-delay: 0.5s;
     }
     .page-leave & {
       opacity: 1;
@@ -136,7 +124,7 @@ export default Vue.extend({
     .v-enter-to & {
       opacity: 1;
       transform: translate3d(0, 0, 0);
-      transition-delay: 0.4s;
+      transition-delay: 0.6s;
     }
     .page-leave & {
       opacity: 1;
