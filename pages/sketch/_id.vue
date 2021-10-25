@@ -1,7 +1,7 @@
 <template lang="pug">
 div
   transition(
-    duration = '2000'
+    duration = '3000'
     )
     SketchOutline(
       v-if = 'isLoaded'
