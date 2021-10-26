@@ -98,6 +98,7 @@ export default Vue.extend({
   .header-enter-to &,
   .header-leave-to & {
     transition-duration: 0.8s;
+    transition-delay: 0.3s;
     transition-timing-function: $easeOutCubic;
   }
   .header-enter-to & {
