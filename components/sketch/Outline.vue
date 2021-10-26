@@ -33,7 +33,7 @@ export default Vue.extend({
   computed: {
     stylesTitle(): { [key: string]: string } {
       const { state } = this.$store
-      const x = Math.max(Math.min(state.resolution.x / 12, 90), 48)
+      const x = Math.max(Math.min(state.resolution.x / 12, 104), 48)
       return {
         fontSize: `${x}px`,
       }
