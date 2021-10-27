@@ -48,7 +48,7 @@ export default class WebGLContent {
     }
     this.plane.update(time)
     this.renderer.setRenderTarget(null)
-    this.renderer.setClearColor(0x000000, 0.0)
+    this.renderer.setClearColor(0x000000, 1.0)
     this.renderer.render(this.scene, this.camera)
     requestAnimationFrame(() => {
       this.update()
