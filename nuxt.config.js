@@ -1,5 +1,7 @@
 import sass from 'sass'
 
+const TITLE = 'sketch-threejs-v2'
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -11,7 +13,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'sketch-threejs-v2',
+    title: TITLE,
+    titleTemplate: `%s - ${TITLE}`,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },

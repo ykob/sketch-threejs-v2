@@ -41,6 +41,18 @@ export default Vue.extend({
     page: null,
     isLoaded: false,
   }),
+  head() {
+    return {
+      title: this.page ? this.page.title : '',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.page ? this.page.description : '',
+        },
+      ],
+    }
+  },
   async mounted() {
     if (this.page === null) return
     await this.$webgl.changeSketch(this.page.webgl)

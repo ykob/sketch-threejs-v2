@@ -30,6 +30,11 @@ export default Vue.extend({
   } => ({
     page: null,
   }),
+  head() {
+    return {
+      titleTemplate: '',
+    }
+  },
   async mounted() {
     if (this.page === null) return
     await this.$webgl.changeSketch(this.page.webgl)
