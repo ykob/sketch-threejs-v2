@@ -28,8 +28,8 @@ export default Vue.extend({
     },
     classnames(): string[] {
       return [
-        `rotate-enter-${Math.ceil(Math.random() * 7)}`,
-        `rotate-leave-${Math.ceil(Math.random() * 7)}`,
+        `rotate-enter-${Math.ceil(Math.random() * 20)}`,
+        `rotate-leave-${Math.ceil(Math.random() * 20)}`,
       ]
     },
   },
@@ -45,10 +45,11 @@ export default Vue.extend({
   transition-property: none;
   .v-enter & {
     opacity: 0;
-    @for $i from 1 through 7 {
+    @for $i from 1 through 20 {
       &.rotate-enter-#{$i} {
-        $x: math.div($i, 7) * 1.6 - 0.8;
-        transform: translate3d(0, 0.3em, 0) rotate3d(#{$x}, 1, 0, 45deg);
+        $x: (random() * 0.2 + 0.2) * ((random(3) - 1) * 2 - 1);
+        $y: (random() * 0.3 + 0.7) * ((random(3) - 1) * 2 - 1);
+        transform: translate3d(0, 0.3em, 0) rotate3d(#{$x}, #{$y}, 0, 45deg);
       }
     }
   }
@@ -68,10 +69,11 @@ export default Vue.extend({
   .page-leave-to & {
     opacity: 0;
     transition-timing-function: $easeInCubic;
-    @for $i from 1 through 7 {
+    @for $i from 1 through 20 {
       &.rotate-leave-#{$i} {
-        $x: math.div($i, 7) * 1.6 - 0.8;
-        transform: translate3d(0, -0.7em, 0) rotate3d(#{$x}, 1, 0, -75deg);
+        $x: (random() * 0.2 + 0.2) * ((random(3) - 1) * 2 - 1);
+        $y: (random() * 0.3 + 0.7) * ((random(3) - 1) * 2 - 1);
+        transform: translate3d(0, -0.7em, 0) rotate3d(#{$x}, #{$y}, 0, -75deg);
       }
     }
   }
