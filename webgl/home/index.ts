@@ -1,27 +1,38 @@
 import * as THREE from 'three'
 import Camera from './Camera'
 import PerspectiveCamera from './PerspectiveCamera'
-import Mesh from './Mesh'
-import { sleep } from '@/assets/js/utils'
+import Title from './Title'
 
 export class Sketch {
   target = new THREE.WebGLRenderTarget(1, 1)
   scene = new THREE.Scene()
   cameraPE = new Camera()
   camera = new PerspectiveCamera()
-  mesh = new Mesh()
+  texLoader = new THREE.TextureLoader()
+  title = new Title()
 
   constructor() {
-    this.scene.add(this.mesh)
+    this.scene.add(this.title)
   }
 
   async start() {
-    await sleep(1000)
+    await Promise.all([
+      this.texLoader.loadAsync(require('@/assets/img/common/noise.png')),
+      this.texLoader.loadAsync(require('@/assets/img/home/title_fill.png')),
+      this.texLoader.loadAsync(require('@/assets/img/home/title_border.png')),
+    ])
+    .then((response: THREE.Texture[]) => {
+      this.title.start({
+        tNoise: response[0],
+        tTitleFill: response[1],
+        tTitleBorder: response[2],
+      })
+    })
   }
 
-  update(time: number, renderer: THREE.WebGLRenderer): void {
+  update(_time: number, renderer: THREE.WebGLRenderer): void {
     renderer.setRenderTarget(this.target)
-    this.mesh.update(time)
+    this.title.update()
     renderer.setClearColor(0x000000, 1.0)
     renderer.render(this.scene, this.camera)
   }
