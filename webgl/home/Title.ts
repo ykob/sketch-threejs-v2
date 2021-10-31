@@ -31,6 +31,11 @@ export default class Title extends THREE.Group {
     }
   }
 
-  update() {
+  update(time: number) {
+    for (let index = 0; index < this.children.length; index++) {
+      const obj = this.children[index]
+      
+      obj.update(time)
+    }
   }
 }

@@ -4,11 +4,14 @@ import fs from './glsl/TitlePlane.fs'
 
 export default class TitlePlane extends THREE.Mesh {
   constructor() {
-    const geometry = new THREE.PlaneGeometry(50, 25, 100, 100)
+    const geometry = new THREE.PlaneGeometry(60, 30, 400, 200)
     const material = new THREE.RawShaderMaterial({
       uniforms: THREE.UniformsUtils.merge([
         THREE.UniformsLib.common,
         {
+          time: {
+            value: 0,
+          },
           alphaIndex: {
             value: 0,
           },
@@ -43,13 +46,16 @@ export default class TitlePlane extends THREE.Mesh {
     if (!(this.material instanceof THREE.RawShaderMaterial)) return
     const { uniforms } = this.material
 
-    console.log(index)
     uniforms.alphaIndex.value = index
     uniforms.tNoise.value = tNoise
     uniforms.tTitleFill.value = tTitleFill
     uniforms.tTitleBorder.value = tTitleBorder
   }
 
-  update() {
+  update(time: number) {
+    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    const { uniforms } = this.material
+
+    uniforms.time.value += time
   }
 }

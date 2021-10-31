@@ -22,6 +22,7 @@ export class Sketch {
       this.texLoader.loadAsync(require('@/assets/img/home/title_border.png')),
     ])
     .then((response: THREE.Texture[]) => {
+      response[0].wrapT = response[0].wrapS = THREE.RepeatWrapping
       this.title.start({
         tNoise: response[0],
         tTitleFill: response[1],
@@ -30,9 +31,9 @@ export class Sketch {
     })
   }
 
-  update(_time: number, renderer: THREE.WebGLRenderer): void {
+  update(time: number, renderer: THREE.WebGLRenderer): void {
     renderer.setRenderTarget(this.target)
-    this.title.update()
+    this.title.update(time)
     renderer.setClearColor(0x000000, 1.0)
     renderer.render(this.scene, this.camera)
   }
