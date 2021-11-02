@@ -30,7 +30,7 @@ export default class Water extends THREE.Mesh {
             value: 120,
           },
           reflectivity: {
-            value: 0.05,
+            value: 0.01,
           },
           textureMatrix: {
             value: new THREE.Matrix4(),
@@ -69,7 +69,7 @@ export default class Water extends THREE.Mesh {
     // Create Object3D
     super(geometry, material)
     this.name = 'MeshRipple'
-    this.position.y = -25
+    this.position.y = -15
     this.rotation.x = (Math.PI / 180) * -90
 
     const textureWidth = 1024
@@ -123,6 +123,8 @@ export default class Water extends THREE.Mesh {
       this.visible = false
       this.reflector.matrixWorld.copy(this.matrixWorld)
       this.refractor.matrixWorld.copy(this.matrixWorld)
+      this.reflector.onBeforeRender(renderer, scene, camera, null, null, null)
+      this.refractor.onBeforeRender(renderer, scene, camera, null, null, null)
       this.visible = true
     }
   }
@@ -143,13 +145,13 @@ export default class Water extends THREE.Mesh {
     uniforms.time.value += time
   }
 
-  renderTarget1(renderer: THREE.WebGLRenderer, scene: THREE.Scene, camera: THREE.Camera) {
+  render1(renderer: THREE.WebGLRenderer, scene: THREE.Scene, camera: THREE.Camera) {
     this.visible = false
     renderer.setRenderTarget(this.target1)
     renderer.render(scene, camera)
   }
 
-  renderTarget2(renderer: THREE.WebGLRenderer, scene: THREE.Scene, camera: THREE.Camera) {
+  render2(renderer: THREE.WebGLRenderer, scene: THREE.Scene, camera: THREE.Camera) {
     if (!(this.material instanceof THREE.RawShaderMaterial)) return
 
     this.visible = true

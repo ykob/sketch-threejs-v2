@@ -21,7 +21,7 @@ void main(void) {
     cos(noise.r * radians(360.0)) * 2.0,
     sin(noise.g * radians(360.0)) * 2.0,
     (noise.b * 2.0 - 1.0) * 12.0
-  ) * sin(time * 0.5) * sin(time * 0.5);
+  );
   vec4 mvPosition = viewMatrix * modelMatrix * vec4(transformed, 1.0);
 
   vUv = uv;
