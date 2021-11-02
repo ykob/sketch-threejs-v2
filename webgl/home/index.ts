@@ -3,7 +3,6 @@ import Camera from './Camera'
 import PerspectiveCamera from './PerspectiveCamera'
 import Title from './Title'
 import Water from './Water'
-import DirectionalLight from './DirectionalLight'
 import PointLight from './PointLight'
 
 export class Sketch {
@@ -14,20 +13,15 @@ export class Sketch {
   texLoader = new THREE.TextureLoader()
   title = new Title()
   water = new Water()
-  dirLight1 = new DirectionalLight(0xff0000, 0.4)
-  dirLight2 = new DirectionalLight(0x0000ff, 0.4)
-  pointLight1 = new PointLight(0xff3333, 0.6, 600)
-  pointLight2 = new PointLight(0x3333ff, 0.6, 600)
+  pointLight1 = new PointLight(0x33ff33, 0.25, 300)
+  pointLight2 = new PointLight(0x3333ff, 0.25, 300)
 
   constructor() {
-    this.dirLight1.position.set(-20, 10, -20)
-    this.dirLight2.position.set(-20, 10, -20)
-    this.pointLight1.position.set(-5, 200, -400)
-    this.pointLight2.position.set(5, 200, -400)
+    this.pointLight1.position.set(-20, 100, 20)
+    this.pointLight2.position.set(20, 100, -20)
+    this.scene.fog = new THREE.Fog(0x000000, 100, 400)
     this.scene.add(this.title)
     this.scene.add(this.water)
-    this.scene.add(this.dirLight1)
-    this.scene.add(this.dirLight2)
     this.scene.add(this.pointLight1)
     this.scene.add(this.pointLight2)
   }
