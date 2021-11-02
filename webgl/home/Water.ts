@@ -6,6 +6,11 @@ import vs from './glsl/Water.vs'
 import fs from './glsl/Water.fs'
 
 export default class Water extends THREE.Mesh {
+  reflector: Reflector
+  refractor: Refractor
+  target1: THREE.WebGLRenderTarget
+  target2: THREE.WebGLRenderTarget
+
   constructor() {
     // Define Geometry
     const geometry = new THREE.PlaneGeometry(1000, 1000)
@@ -72,6 +77,17 @@ export default class Water extends THREE.Mesh {
     const clipBias = 0
     const encoding = THREE.LinearEncoding
 
+    // render targets
+    this.target1 = new THREE.WebGLRenderTarget(0, 0)
+    this.target2 = new THREE.WebGLRenderTarget(0, 0)
+    this.target1.depthBuffer = this.target2.depthBuffer = true
+    this.target1.depthTexture = new THREE.DepthTexture(0, 0)
+    this.target2.depthTexture = new THREE.DepthTexture(0, 0)
+    this.target1.depthTexture.format = this.target2.depthTexture.format =
+      THREE.DepthFormat
+    this.target1.depthTexture.type = this.target2.depthTexture.type =
+      THREE.UnsignedIntType
+
     // Define Reflector and Refractor
     this.reflector = new Reflector(geometry, {
       textureWidth,
@@ -89,46 +105,66 @@ export default class Water extends THREE.Mesh {
     this.refractor.matrixAutoUpdate = false
     material.uniforms.tReflectionMap.value = this.reflector.getRenderTarget().texture
     material.uniforms.tRefractionMap.value = this.refractor.getRenderTarget().texture
+
+    this.onBeforeRender = (renderer: THREE.WebGLRenderer, scene: THREE.Scene, camera: THREE.Camera) => {
+      if (!(this.material instanceof THREE.RawShaderMaterial)) return
+      const { uniforms } = this.material
+  
+      // prettier-ignore
+      uniforms.textureMatrix.value.set(
+        0.5, 0.0, 0.0, 0.5,
+        0.0, 0.5, 0.0, 0.5,
+        0.0, 0.0, 0.5, 0.5,
+        0.0, 0.0, 0.0, 1.0
+      )
+      uniforms.textureMatrix.value.multiply(camera.projectionMatrix)
+      uniforms.textureMatrix.value.multiply(camera.matrixWorldInverse)
+      uniforms.textureMatrix.value.multiply(this.matrixWorld)
+      this.visible = false
+      this.reflector.matrixWorld.copy(this.matrixWorld)
+      this.refractor.matrixWorld.copy(this.matrixWorld)
+      this.visible = true
+    }
   }
 
-  start(normalMap, tDepth1, tDepth2) {
+  start(normalMap: THREE.Texture) {
+    if (!(this.material instanceof THREE.RawShaderMaterial)) return
     const { uniforms } = this.material
 
     uniforms.normalMap.value = normalMap
-    uniforms.tDepth1.value = tDepth1
-    uniforms.tDepth2.value = tDepth2
+    uniforms.tDepth1.value = this.target1.depthTexture
+    uniforms.tDepth2.value = this.target2.depthTexture
   }
 
-  onBeforeRender(renderer, scene, camera) {
-    const { uniforms } = this.material
-
-    // prettier-ignore
-    uniforms.textureMatrix.value.set(
-      0.5, 0.0, 0.0, 0.5,
-      0.0, 0.5, 0.0, 0.5,
-      0.0, 0.0, 0.5, 0.5,
-      0.0, 0.0, 0.0, 1.0
-    )
-    uniforms.textureMatrix.value.multiply(camera.projectionMatrix)
-    uniforms.textureMatrix.value.multiply(camera.matrixWorldInverse)
-    uniforms.textureMatrix.value.multiply(this.matrixWorld)
-    this.visible = false
-    this.reflector.matrixWorld.copy(this.matrixWorld)
-    this.refractor.matrixWorld.copy(this.matrixWorld)
-    this.reflector.onBeforeRender(renderer, scene, camera)
-    this.refractor.onBeforeRender(renderer, scene, camera)
-    this.visible = true
-  }
-
-  update(time) {
+  update(time: number) {
+    if (!(this.material instanceof THREE.RawShaderMaterial)) return
     const { uniforms } = this.material
 
     uniforms.time.value += time
   }
 
-  resize(resolution) {
+  renderTarget1(renderer: THREE.WebGLRenderer, scene: THREE.Scene, camera: THREE.Camera) {
+    this.visible = false
+    renderer.setRenderTarget(this.target1)
+    renderer.render(scene, camera)
+  }
+
+  renderTarget2(renderer: THREE.WebGLRenderer, scene: THREE.Scene, camera: THREE.Camera) {
+    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+
+    this.visible = true
+    this.material.uniforms.tDepth2.value = null
+    renderer.setRenderTarget(this.target2)
+    renderer.render(scene, camera)
+    this.material.uniforms.tDepth2.value = this.target2.depthTexture
+  }
+
+  resize(resolution: THREE.Vector2) {
+    if (!(this.material instanceof THREE.RawShaderMaterial)) return
     const { uniforms } = this.material
 
     uniforms.resolution.value.copy(resolution)
+    this.target1.setSize(resolution.x, resolution.y)
+    this.target2.setSize(resolution.x, resolution.y)
   }
 }
