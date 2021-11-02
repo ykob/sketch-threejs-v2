@@ -106,6 +106,9 @@ export default class Water extends THREE.Mesh {
     material.uniforms.tReflectionMap.value = this.reflector.getRenderTarget().texture
     material.uniforms.tRefractionMap.value = this.refractor.getRenderTarget().texture
 
+    const dummyGeometry = new THREE.BufferGeometry()
+    const dummyMaterial = new THREE.Material()
+    const dummyGroup = new THREE.Group()
     this.onBeforeRender = (renderer: THREE.WebGLRenderer, scene: THREE.Scene, camera: THREE.Camera) => {
       if (!(this.material instanceof THREE.RawShaderMaterial)) return
       const { uniforms } = this.material
@@ -123,8 +126,8 @@ export default class Water extends THREE.Mesh {
       this.visible = false
       this.reflector.matrixWorld.copy(this.matrixWorld)
       this.refractor.matrixWorld.copy(this.matrixWorld)
-      this.reflector.onBeforeRender(renderer, scene, camera, null, null, null)
-      this.refractor.onBeforeRender(renderer, scene, camera, null, null, null)
+      this.reflector.onBeforeRender(renderer, scene, camera, dummyGeometry, dummyMaterial, dummyGroup)
+      this.refractor.onBeforeRender(renderer, scene, camera, dummyGeometry, dummyMaterial, dummyGroup)
       this.visible = true
     }
   }
