@@ -30,8 +30,8 @@ export class Sketch {
     const imgs = [
       require('@/assets/img/common/noise.png'),
       require('@/assets/img/common/water.jpg'),
-      require('@/assets/img/home/title_fill.png'),
-      require('@/assets/img/home/title_border.png'),
+      require('@/assets/img/home/title_fill.jpg'),
+      require('@/assets/img/home/title_border.jpg'),
     ]
     await Promise.all([
       ...imgs.map((o) => {
