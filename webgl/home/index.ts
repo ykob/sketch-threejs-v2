@@ -13,13 +13,13 @@ export class Sketch {
   texLoader = new THREE.TextureLoader()
   title = new Title()
   water = new Water()
-  pointLight1 = new PointLight(0x33ff33, 0.25, 300)
-  pointLight2 = new PointLight(0x3333ff, 0.25, 300)
+  pointLight1 = new PointLight(0x33ff33, 0.5, 200)
+  pointLight2 = new PointLight(0x3333ff, 0.2, 400)
 
   constructor() {
-    this.pointLight1.position.set(-20, 100, 20)
-    this.pointLight2.position.set(20, 100, -20)
-    this.scene.fog = new THREE.Fog(0x000000, 100, 400)
+    this.pointLight1.position.set(0, 100, -15)
+    this.pointLight2.position.set(0, 100, -15)
+    this.scene.fog = new THREE.Fog(0x000000, 10, 500)
     this.scene.add(this.title)
     this.scene.add(this.water)
     this.scene.add(this.pointLight1)

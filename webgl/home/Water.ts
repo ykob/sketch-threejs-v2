@@ -30,7 +30,7 @@ export default class Water extends THREE.Mesh {
             value: 8,
           },
           reflectivity: {
-            value: 0.01,
+            value: 0.001,
           },
           textureMatrix: {
             value: new THREE.Matrix4(),
@@ -63,13 +63,15 @@ export default class Water extends THREE.Mesh {
       lights: true,
       fog: true,
     })
-    material.uniforms.uvTransform.value.scale(5, 5)
+    console.log(material.uniforms.uvTransform.value)
+    material.uniforms.uvTransform.value.scale(8, 8)
+    material.uniforms.uvTransform.value.rotate((Math.PI / 180) * -45)
     material.uniforms.diffuse.value.set(0x440044)
 
     // Create Object3D
     super(geometry, material)
     this.name = 'MeshRipple'
-    this.position.y = -15
+    this.position.y = -16
     this.rotation.x = (Math.PI / 180) * -90
 
     const textureWidth = 1024

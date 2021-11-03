@@ -197,7 +197,7 @@ void main() {
   float reflectance = reflectivity + (1.0 - reflectivity) * pow((1.0 - theta), 5.0);
   vec3 coord = vCoord.xyz / vCoord.w;
   vec2 uv = coord.xy + coord.z * normalR.xz * 0.15;
-  vec4 reflectColor = texture2D(tReflectionMap, vec2(1.0 - uv.x, uv.y));
+  vec4 reflectColor = texture2D(tReflectionMap, vec2(1.0 - uv.x, uv.y)) * 0.8;
   vec4 refractColor = texture2D(tRefractionMap, uv) * 0.2;
 
   // Depth for water's edge
