@@ -7,6 +7,7 @@ export default class WebGLContent {
 
   current = 0
   timer = 0
+  path = ''
 
   resolution = new THREE.Vector2()
   clock = new THREE.Clock(false)
@@ -74,14 +75,17 @@ export default class WebGLContent {
       clearTimeout(this.timer)
       this.plane.hideScene()
       this.timer = window.setTimeout(async () => {
+        this.path = path
         const { Sketch } = await import(`.${path}`)
         const sketch = new Sketch()
   
-        sketch.resize(this.resolution)
-        this.sketches[this.current] = sketch
-        this.current = (this.current + 1) % 4
         await sketch.start()
-        this.plane.changeScene(sketch.target.texture)
+        if (this.path === path) {
+          sketch.resize(this.resolution)
+          this.sketches[this.current] = sketch
+          this.current = (this.current + 1) % 4
+          this.plane.changeScene(sketch.target.texture)
+        }
         resolve()
       }, 500)
     })

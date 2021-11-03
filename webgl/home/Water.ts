@@ -63,7 +63,6 @@ export default class Water extends THREE.Mesh {
       lights: true,
       fog: true,
     })
-    console.log(material.uniforms.uvTransform.value)
     material.uniforms.uvTransform.value.scale(8, 8)
     material.uniforms.uvTransform.value.rotate((Math.PI / 180) * -45)
     material.uniforms.diffuse.value.set(0x440044)
