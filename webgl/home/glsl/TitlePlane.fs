@@ -16,7 +16,7 @@ void main() {
   float alpha6 = texture2D(tTitleBorder, vUv).b * step(5.0, alphaIndex);
   float alpha = alpha1 + alpha2 + alpha3 + alpha4 + alpha5 + alpha6;
 
-  vec3 color = vec3(1.0);
+  vec3 color = vec3(0.4, 0.95, 0.95);
 
   if (alpha < 0.01) discard;
 

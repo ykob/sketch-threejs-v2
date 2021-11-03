@@ -51,6 +51,7 @@ export class Sketch {
   }
 
   update(time: number, renderer: THREE.WebGLRenderer): void {
+    renderer.setClearColor(0x000000, 1.0)
     this.title.update(time)
     this.water.update(time)
     this.water.render1(renderer, this.scene, this.camera)
@@ -58,7 +59,6 @@ export class Sketch {
     this.water.render2(renderer, this.scene, this.camera)
     this.title.visible = true
     renderer.setRenderTarget(this.target)
-    renderer.setClearColor(0x000000, 1.0)
     renderer.render(this.scene, this.camera)
   }
 
