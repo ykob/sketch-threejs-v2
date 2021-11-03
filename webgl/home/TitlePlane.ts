@@ -30,6 +30,7 @@ export default class TitlePlane extends THREE.Mesh {
       fragmentShader: fs,
       transparent: true,
       blending: THREE.AdditiveBlending,
+      depthTest: false,
     })
     super(geometry, material)
   }
