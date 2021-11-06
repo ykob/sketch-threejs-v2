@@ -32,10 +32,12 @@ export default class Title extends THREE.Group {
   }
 
   update(time: number) {
+    const noiseStrength = Math.random() * Math.random() * Math.random()
+
     for (let index = 0; index < this.children.length; index++) {
       const obj = this.children[index]
       
-      obj.update(time)
+      obj.update(time, noiseStrength)
     }
   }
 }

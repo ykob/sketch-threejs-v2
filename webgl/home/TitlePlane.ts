@@ -12,6 +12,9 @@ export default class TitlePlane extends THREE.Mesh {
           time: {
             value: 0,
           },
+          noiseStrength: {
+            value: 0,
+          },
           alphaIndex: {
             value: 0,
           },
@@ -52,10 +55,11 @@ export default class TitlePlane extends THREE.Mesh {
     uniforms.tTitleBorder.value = tTitleBorder
   }
 
-  update(time: number) {
+  update(time: number, noiseStrength: number) {
     if (!(this.material instanceof THREE.RawShaderMaterial)) return
     const { uniforms } = this.material
 
     uniforms.time.value += time
+    uniforms.noiseStrength.value = noiseStrength
   }
 }
