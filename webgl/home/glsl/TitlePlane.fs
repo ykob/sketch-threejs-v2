@@ -9,10 +9,12 @@ uniform sampler2D tTitleBorder;
 
 varying vec2 vUv;
 
+#pragma glslify: randomNoise = require(../../modules/randomNoise)
+
 void main() {
-  vec2 uvNoise = texture2D(tNoise, vUv * vec2(1.0, 0.5) * 1.2 + vec2(alphaIndex, time * 2.01)).rg * 2.0 - 1.0;
-  float uvNoise2 = pow(texture2D(tNoise, vUv * vec2(1.0, 0.5) * 0.6 + vec2(0.0, time * 3.01)).b, 4.0);
-  vec2 uv = vUv + uvNoise * uvNoise2 * noiseStrength * 0.5;
+  vec2 uvNoise = texture2D(tNoise, vUv * vec2(1.0, 0.5) * 1.1 + vec2(alphaIndex, time * 0.1)).rg * 2.0 - 1.0;
+  float uvNoise2 = pow(texture2D(tNoise, vUv * vec2(1.0, 0.5) * 0.6 + vec2(0.0, time * 0.8)).b, 4.0);
+  vec2 uv = vUv + uvNoise * uvNoise2 * noiseStrength * 0.4;
 
   float alpha1 = texture2D(tTitleFill, uv).r * (1.0 - step(1.0, alphaIndex));
   float alpha2 = texture2D(tTitleFill, uv).g * step(1.0, alphaIndex) * (1.0 - step(2.0, alphaIndex));
@@ -22,7 +24,10 @@ void main() {
   float alpha6 = texture2D(tTitleBorder, uv).b * step(5.0, alphaIndex);
   float alpha = alpha1 + alpha2 + alpha3 + alpha4 + alpha5 + alpha6;
 
-  vec3 color = vec3(0.55, 0.85, 0.88);
+  float whiteNoise = randomNoise(vUv, sin(time)) * 0.2;
+  float whiteNoise2 = randomNoise(vec2(0.0, vUv.y * 0.1 + sin(time)), 1.0) * 0.2;
+
+  vec3 color = vec3(0.35, 0.85, 0.88) + whiteNoise + whiteNoise2;
 
   if (alpha < 0.01) discard;
 

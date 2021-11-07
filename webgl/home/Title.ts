@@ -40,7 +40,7 @@ export default class Title extends THREE.Group {
     const dateNow = Date.now()
 
     if (dateNow - this.datePrev > 1 / 10 * 1000) {
-      this.noiseStrength = MathEx.smoothstep(0.4, 1.0, Math.random() * Math.random()) * 0.97 + 0.03
+      this.noiseStrength = MathEx.smoothstep(0.4, 1.0, Math.random() * Math.random()) * 0.98 + 0.02
       this.datePrev = dateNow
     }
 

@@ -19,8 +19,8 @@ void main(void) {
   vec3 transformed = position;
   vec4 noise = texture2D(tNoise, transformedUV);
   transformed += vec3(
-    cos(noise.r * radians(360.0)) * 4.0,
-    sin(noise.g * radians(360.0)) * 4.0,
+    cos(noise.r * radians(360.0)) * 5.0,
+    sin(noise.g * radians(360.0)) * 5.0,
     (noise.b * 2.0 - 1.0) * 12.0 + floor(alphaIndex / 2.0) * (mod(alphaIndex, 2.0) * 2.0 - 1.0) * 10.0
   ) * smoothstep(0.75, 1.0, sin(radians((uv.x + (noise.r * 2.0 - 1.0) * 0.2) * 240.0 + 180.0 - time * 30.0))) + alphaIndex * 0.01;
   vec4 mvPosition = viewMatrix * modelMatrix * vec4(transformed, 1.0);
