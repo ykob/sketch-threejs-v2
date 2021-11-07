@@ -11,7 +11,7 @@ declare module 'vue/types/vue' {
         clamp(value: number, min: number, max: number): number
         mix(x1: number, x2: number, a: number): number
         step(e: number, x: number): number
-        smoothstep(e0: number, e1: number, x: number): number | undefined
+        smoothstep(e0: number, e1: number, x: number): number
         spherical(radian1: number, radian2: number, radius: number): number[]
         randomArbitrary(min: number, max: number): number
         randomInt(min: number, max: number): number
