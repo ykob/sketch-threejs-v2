@@ -10,9 +10,9 @@ uniform sampler2D tTitleBorder;
 varying vec2 vUv;
 
 void main() {
-  vec2 uvNoise = texture2D(tNoise, vUv * vec2(1.0, 0.5) * 1.2 + vec2(alphaIndex, time * 2.14)).rg * 2.0 - 1.0;
-  float uvNoise2 = pow(texture2D(tNoise, vUv * vec2(1.0, 0.5) * 0.6 + vec2(0.0, time * 3.13)).b, 4.0);
-  vec2 uv = vUv + uvNoise * uvNoise2 * noiseStrength * 0.4;
+  vec2 uvNoise = texture2D(tNoise, vUv * vec2(1.0, 0.5) * 1.2 + vec2(alphaIndex, time * 2.01)).rg * 2.0 - 1.0;
+  float uvNoise2 = pow(texture2D(tNoise, vUv * vec2(1.0, 0.5) * 0.6 + vec2(0.0, time * 3.01)).b, 4.0);
+  vec2 uv = vUv + uvNoise * uvNoise2 * noiseStrength * 0.5;
 
   float alpha1 = texture2D(tTitleFill, uv).r * (1.0 - step(1.0, alphaIndex));
   float alpha2 = texture2D(tTitleFill, uv).g * step(1.0, alphaIndex) * (1.0 - step(2.0, alphaIndex));
