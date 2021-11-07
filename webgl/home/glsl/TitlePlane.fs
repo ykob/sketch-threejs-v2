@@ -8,6 +8,7 @@ uniform sampler2D tTitleFill;
 uniform sampler2D tTitleBorder;
 
 varying vec2 vUv;
+varying float vDistortStrength;
 
 #pragma glslify: convertHsvToRgb = require(../../modules/convertHsvToRgb)
 #pragma glslify: randomNoise = require(../../modules/randomNoise)
@@ -32,9 +33,9 @@ void main() {
   float colorNoise3 = texture2D(tNoise, vUv * vec2(1.0, 0.5) + vec2(0.0, time * 0.024)).b;
 
   vec3 hsv = vec3(
-    0.42 + (colorNoise1 + colorNoise2) * 0.2,
-    0.9 - colorNoise3 * 0.6,
-    0.8 + colorNoise3 * 0.2 + (whiteNoise + whiteNoise2) * 0.12
+    0.42 + (colorNoise1 + colorNoise2) * 0.2 - vDistortStrength * 0.34,
+    0.9 - colorNoise3 * 0.6 - vDistortStrength * 0.24,
+    0.8 + colorNoise3 * 0.2 + (whiteNoise + whiteNoise2) * 0.12 + vDistortStrength * 0.24
   );
   vec3 color = convertHsvToRgb(hsv);
 
