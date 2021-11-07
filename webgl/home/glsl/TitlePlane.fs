@@ -9,6 +9,7 @@ uniform sampler2D tTitleBorder;
 
 varying vec2 vUv;
 
+#pragma glslify: convertHsvToRgb = require(../../modules/convertHsvToRgb)
 #pragma glslify: randomNoise = require(../../modules/randomNoise)
 
 void main() {
@@ -24,10 +25,18 @@ void main() {
   float alpha6 = texture2D(tTitleBorder, uv).b * step(5.0, alphaIndex);
   float alpha = alpha1 + alpha2 + alpha3 + alpha4 + alpha5 + alpha6;
 
-  float whiteNoise = randomNoise(vUv, sin(time)) * 0.2;
-  float whiteNoise2 = randomNoise(vec2(0.0, vUv.y * 0.1 + sin(time)), 1.0) * 0.2;
+  float whiteNoise = randomNoise(vUv, sin(time));
+  float whiteNoise2 = randomNoise(vec2(0.0, vUv.y * 0.1 + sin(time)), 1.0);
+  float colorNoise1 = texture2D(tNoise, vUv * vec2(1.0, 0.5) * 0.5 + vec2(0.0, time * 0.02)).r;
+  float colorNoise2 = texture2D(tNoise, vUv * vec2(1.0, 0.5) * 0.5 + vec2(0.0, time * -0.024)).g;
+  float colorNoise3 = texture2D(tNoise, vUv * vec2(1.0, 0.5) + vec2(0.0, time * 0.024)).b;
 
-  vec3 color = vec3(0.35, 0.85, 0.88) + whiteNoise + whiteNoise2;
+  vec3 hsv = vec3(
+    0.42 + (colorNoise1 + colorNoise2) * 0.2,
+    0.9 - colorNoise3 * 0.6,
+    0.8 + colorNoise3 * 0.2 + (whiteNoise + whiteNoise2) * 0.12
+  );
+  vec3 color = convertHsvToRgb(hsv);
 
   if (alpha < 0.01) discard;
 
