@@ -59,8 +59,10 @@ export class Sketch {
     this.water.update(time)
     this.water.render1(renderer, this.scene, this.camera)
     this.title.visible = false
+    this.points.visible = false
     this.water.render2(renderer, this.scene, this.camera)
     this.title.visible = true
+    this.points.visible = true
     renderer.setRenderTarget(this.target)
     renderer.render(this.scene, this.camera)
   }
