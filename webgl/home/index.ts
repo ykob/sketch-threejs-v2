@@ -3,6 +3,7 @@ import Camera from './Camera'
 import PerspectiveCamera from './PerspectiveCamera'
 import Title from './Title'
 import Water from './Water'
+import Points from './Points'
 import PointLight from './PointLight'
 
 export class Sketch {
@@ -13,6 +14,7 @@ export class Sketch {
   texLoader = new THREE.TextureLoader()
   title = new Title()
   water = new Water()
+  points = new Points()
   pointLight1 = new PointLight(0x33ff33, 0.5, 200)
   pointLight2 = new PointLight(0x3333ff, 0.2, 400)
 
@@ -22,6 +24,7 @@ export class Sketch {
     this.scene.fog = new THREE.Fog(0x000000, 10, 500)
     this.scene.add(this.title)
     this.scene.add(this.water)
+    this.scene.add(this.points)
     this.scene.add(this.pointLight1)
     this.scene.add(this.pointLight2)
   }
