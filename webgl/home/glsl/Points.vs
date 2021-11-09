@@ -1,4 +1,5 @@
 attribute vec3 position;
+attribute float size;
 
 uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
@@ -16,7 +17,7 @@ varying float fogDepth;
 #pragma glslify: convertHsvToRgb = require(../../modules/convertHsvToRgb)
 
 void main() {
-  vec2 transformedUV = position.xz / 100.0 + vec2(0.0, time * 0.04);
+  vec2 transformedUV = position.xz / 100.0 + vec2(time * -0.02);
   vec4 noise = texture2D(tNoise, transformedUV);
 
   vec3 transformed = position;
@@ -24,15 +25,15 @@ void main() {
   vec4 mvPosition = viewMatrix * modelMatrix * vec4(transformed, 1.0);
 
   float distanceFromCamera = length(mvPosition.xyz);
-  float pointSize = pixelRatio * 150.0 / distanceFromCamera;
+  float pointSize = size * pixelRatio * 100.0 / distanceFromCamera;
 
   // Fog
   fogDepth = -mvPosition.z;
 
   vec3 hsv = vec3(
-    0.26 + noise.r * 0.6,
-    0.9 - noise.g * 0.6,
-    0.9 - noise.b * 0.8
+    0.16 + noise.r * 0.6,
+    0.9 - noise.g * 0.7,
+    1.0 - noise.b * 1.8
   );
   vColor = convertHsvToRgb(hsv);
 

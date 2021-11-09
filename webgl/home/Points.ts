@@ -5,17 +5,21 @@ import fs from './glsl/Points.fs'
 export default class Points extends THREE.Points {
   constructor() {
     const geometry = new THREE.BufferGeometry()
-    const num = 3000
+    const num = 5000
     const baPositions = new THREE.BufferAttribute(new Float32Array(num * 3), 3)
+    const baSizes = new THREE.BufferAttribute(new Float32Array(num), 1)
+
     for (let i = 0, ul = num; i < ul; i++) {
-      baPositions.setXYZ(
-        i,
-        (Math.random() * 2 - 1) * 120,
-        Math.random() * Math.random() * 16 - 12,
-        Math.random() * -500 + 100
-      )
+      const x = (Math.random() * 2 - 1) * 100
+      const y = Math.random() * Math.random() * 13 - 12
+      const z = Math.random() * -500 + 150
+      const size = Math.random() * 1.5 + 0.5
+
+      baPositions.setXYZ(i, x, y, z)
+      baSizes.setX(i, size)
     }
     geometry.setAttribute('position', baPositions)
+    geometry.setAttribute('size', baSizes)
 
     const material = new THREE.RawShaderMaterial({
       uniforms: THREE.UniformsUtils.merge([
