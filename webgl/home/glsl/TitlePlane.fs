@@ -28,14 +28,14 @@ void main() {
 
   float whiteNoise = randomNoise(vUv, sin(time));
   float whiteNoise2 = randomNoise(vec2(0.0, vUv.y * 0.1 + sin(time)), 1.0);
-  float colorNoise1 = texture2D(tNoise, vUv * vec2(1.0, 0.5) * 0.5 + vec2(0.0, time * 0.02)).r;
-  float colorNoise2 = texture2D(tNoise, vUv * vec2(1.0, 0.5) * 0.5 + vec2(0.0, time * -0.024)).g;
+  float colorNoise1 = texture2D(tNoise, vUv * vec2(1.0, 0.5) * 0.25 + vec2(0.0, time * 0.02)).r;
+  float colorNoise2 = texture2D(tNoise, vUv * vec2(1.0, 0.5) * 0.25 + vec2(0.0, time * -0.024)).g;
   float colorNoise3 = texture2D(tNoise, vUv * vec2(1.0, 0.5) + vec2(0.0, time * 0.024)).b;
 
   vec3 hsv = vec3(
     0.42 + (colorNoise1 + colorNoise2) * 0.2 - vDistortStrength * 0.34,
     0.9 - colorNoise3 * 0.6 - vDistortStrength * 0.24,
-    0.8 + colorNoise3 * 0.2 + (whiteNoise + whiteNoise2) * 0.12 + vDistortStrength * 0.24
+    0.8 + colorNoise3 * 0.2 + (whiteNoise * 0.12 + whiteNoise2 * 0.3) + vDistortStrength * 0.24
   );
   vec3 color = convertHsvToRgb(hsv);
 
