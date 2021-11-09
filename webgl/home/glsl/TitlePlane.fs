@@ -35,7 +35,7 @@ void main() {
   vec3 hsv = vec3(
     0.42 + (colorNoise1 + colorNoise2) * 0.2 - vDistortStrength * 0.34,
     0.9 - colorNoise3 * 0.6 - vDistortStrength * 0.24,
-    0.8 + colorNoise3 * 0.2 + (whiteNoise * 0.12 + whiteNoise2 * 0.3) + vDistortStrength * 0.24
+    0.6 + colorNoise3 * 0.3 + (whiteNoise * 0.12 + whiteNoise2 * 0.3) + vDistortStrength * 0.5
   );
   vec3 color = convertHsvToRgb(hsv);
 
