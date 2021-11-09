@@ -31,6 +31,7 @@ export default class WebGLContent {
       alpha: true,
       antialias: true,
     })
+    this.renderer.setPixelRatio(2)
     this.clock.start()
     this.update()
   }
