@@ -50,6 +50,7 @@ export class Sketch {
       })
       response[1].wrapT = response[1].wrapS = THREE.RepeatWrapping
       this.water.start(response[1])
+      this.points.start(response[0])
     })
   }
 
@@ -57,9 +58,10 @@ export class Sketch {
     renderer.setClearColor(0x000000, 1.0)
     this.title.update(time)
     this.water.update(time)
-    this.water.render1(renderer, this.scene, this.camera)
+    this.points.update(time)
     this.title.visible = false
     this.points.visible = false
+    this.water.render1(renderer, this.scene, this.camera)
     this.water.render2(renderer, this.scene, this.camera)
     this.title.visible = true
     this.points.visible = true

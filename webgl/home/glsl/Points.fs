@@ -1,5 +1,7 @@
 precision highp float;
 
+varying vec3 vColor;
+
 // Fog
 uniform vec3 fogColor;
 uniform float fogNear;
@@ -12,12 +14,9 @@ void main() {
 
   // Draw circle
   float radius = length(p);
-  float opacity = (1.0 - smoothstep(0.5, 1.0, radius));
+  float opacity = (1.0 - smoothstep(0.2, 1.0, radius));
 
-  // Define Colors
-  vec3 color = vec3(1.0);
-
-  gl_FragColor = vec4(color, opacity);
+  gl_FragColor = vec4(vColor, opacity);
 
   // Fog
   float fogFactor = smoothstep(fogNear, fogFar, fogDepth);
