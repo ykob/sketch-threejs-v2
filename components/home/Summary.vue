@@ -7,8 +7,21 @@
         )
     .home-summary__text-row
       SplitStringContainer(
-        value = 'Created by yoichi kobayashi.'
+        value = 'Created by Yoichi Kobayashi.'
         )
+    .home-summary__links
+      .home-summary__link
+        ButtonRound(
+          href = 'https://github.com/ykob/sketch-threejs-v2'
+          target = '_blank'
+          )
+          IconGithub
+      .home-summary__link
+        ButtonRound(
+          href = 'https://twitter.com/ykob0123'
+          target = '_blank'
+          )
+          IconTwitter
 </template>
 
 <script lang="ts">
@@ -20,27 +33,51 @@ export default Vue.extend({})
 <style lang="scss" scoped>
 .home-summary {
   position: absolute;
-  bottom: 0;
   right: 0;
   left: 0;
   z-index: z(console);
   @include l-lg {
-    margin-bottom: 2.5%;
+    bottom: 7.5%;
   }
   @include l-md {
-    margin-bottom: 24px;
+    bottom: 7.5%;
   }
   @include l-sm {
-    margin-bottom: 24px;
+    bottom: 40px;
   }
   &__text {
-    font-size: 16px;
     letter-spacing: 0.15em;
+    @include l-lg {
+      font-size: 15px;
+    }
+    @include l-md {
+      font-size: 14px;
+    }
+    @include l-sm {
+      font-size: 13px;
+    }
   }
   &__text-row {
     display: flex;
     justify-content: center;
     margin-bottom: 8px;
+  }
+  &__links {
+    display: flex;
+    justify-content: center;
+    @include l-lg {
+      margin-top: 16px;
+    }
+    @include l-md {
+      margin-top: 12px;
+    }
+    @include l-sm {
+      margin-top: 12px;
+    }
+  }
+  &__link {
+    margin-right: 4px;
+    margin-left: 4px;
   }
 }
 </style>
