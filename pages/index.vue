@@ -1,5 +1,6 @@
 <template lang="pug">
 div
+  HomeSummary
 </template>
 
 <script lang="ts">

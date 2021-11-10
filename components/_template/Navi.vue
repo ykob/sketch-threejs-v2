@@ -31,7 +31,7 @@ export default Vue.extend({})
 <style lang="scss" scoped>
 .navi {
   position: absolute;
-  bottom: 24px;
+  top: 24px;
   right: 24px;
   z-index: z(console);
 }
