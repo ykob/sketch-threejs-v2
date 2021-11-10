@@ -3,8 +3,8 @@
   SplitStringItem(
     v-for = 'item, index in splittedValue'
     :key = 'keyPrefix + "-" + index'
+    :typo = 'item'
     )
-    |{{ item }}
 </template>
 
 <script lang="ts">

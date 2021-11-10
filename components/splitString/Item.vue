@@ -4,7 +4,7 @@ transition
     :style = 'styles'
     :class = 'classnames'
     )
-    slot
+    |{{ typo }}
 </template>
 
 <script lang="ts">
@@ -12,6 +12,10 @@ import Vue from 'vue'
 
 export default Vue.extend({
   props: {
+    typo: {
+      type: String,
+      default: '',
+    },
     delayMax: {
       type: Number,
       default: 0.32,
@@ -23,6 +27,7 @@ export default Vue.extend({
   computed: {
     styles(): { [key: string]: string } {
       return {
+        width: this.typo === ' ' ? '0.5em' : 'auto',
         transitionDelay: `${this.delay}s`,
       }
     },
