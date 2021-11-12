@@ -78,6 +78,24 @@ export default Vue.extend({})
   &__link {
     margin-right: 4px;
     margin-left: 4px;
+    .v-enter & {
+      opacity: 0;
+      transform: scale(0.7);
+    }
+    .v-enter-to &,
+    .page-leave-to & {
+      transition-duration: 0.8s;
+      transition-delay: 0.3s;
+      transition-timing-function: $easeOutCubic;
+    }
+    .page-enter-to & {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .page-leave-to & {
+      opacity: 0;
+      transform: scale(0.7);
+    }
   }
 }
 </style>
