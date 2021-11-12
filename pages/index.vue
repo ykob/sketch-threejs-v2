@@ -1,11 +1,17 @@
 <template lang="pug">
 div
-  HomeSummary
+  transition(
+    duration = '3000'
+    )
+    HomeSummary(
+      v-if = 'isLoaded'
+      )
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { IContentDocument } from '@nuxt/content/types/content'
+import { sleep } from '@/assets/js/utils'
 
 export default Vue.extend({
   transition: {
@@ -28,8 +34,10 @@ export default Vue.extend({
   },
   data: (): {
     page: IContentDocument | null
+    isLoaded: boolean
   } => ({
     page: null,
+    isLoaded: false,
   }),
   head() {
     return {
@@ -39,6 +47,8 @@ export default Vue.extend({
   async mounted() {
     if (this.page === null) return
     await this.$webgl.changeSketch(this.page.webgl)
+    await sleep(1000)
+    this.isLoaded = true
   },
 })
 </script>
