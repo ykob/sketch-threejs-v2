@@ -1,7 +1,7 @@
 <template lang="pug">
 transition(
   name = 'header'
-  duration = '1000'
+  duration = '2000'
   appear
   )
   .header(
@@ -74,11 +74,12 @@ export default Vue.extend({
   }
   .header-enter-to &,
   .header-leave-to & {
-    transition-duration: 0.8s;
+    transition-duration: 1s;
     transition-timing-function: $easeOutCubic;
   }
   .header-enter-to & {
     opacity: 1;
+    transition-delay: 1s;
   }
   .header-leave-to & {
     opacity: 0;
@@ -98,17 +99,17 @@ export default Vue.extend({
   .header-enter-to &,
   .header-leave-to & {
     transition-duration: 0.8s;
-    transition-delay: 0.3s;
     transition-timing-function: $easeOutCubic;
   }
   .header-enter-to & {
     opacity: 1;
     transform: scale(1);
+    transition-delay: 1.1s;
   }
   .header-leave-to & {
     opacity: 0;
     transform: scale(0.7);
-
+    transition-delay: 0.1s;
   }
 }
 </style>
