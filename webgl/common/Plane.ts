@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import { easing } from 'ts-easing'
 import vs from './glsl/Plane.vs'
 import fs from './glsl/Plane.fs'
 
@@ -12,7 +11,7 @@ interface SketchStatus {
 }
 
 const MAX = 4
-const DURATION = 1
+const DURATION = 2
 
 export default class Plane extends THREE.Mesh {
   current: number
@@ -24,6 +23,9 @@ export default class Plane extends THREE.Mesh {
       uniforms: THREE.UniformsUtils.merge([
         THREE.UniformsLib.common,
         {
+          durationAll: {
+            value: DURATION,
+          },
           texture1: {
             value: null,
           },
@@ -36,28 +38,28 @@ export default class Plane extends THREE.Mesh {
           texture4: {
             value: null,
           },
-          stepShow1: {
+          timeShow1: {
             value: 0,
           },
-          stepShow2: {
+          timeShow2: {
             value: 0,
           },
-          stepShow3: {
+          timeShow3: {
             value: 0,
           },
-          stepShow4: {
+          timeShow4: {
             value: 0,
           },
-          stepHide1: {
+          timeHide1: {
             value: 0,
           },
-          stepHide2: {
+          timeHide2: {
             value: 0,
           },
-          stepHide3: {
+          timeHide3: {
             value: 0,
           },
-          stepHide4: {
+          timeHide4: {
             value: 0,
           },
         },
@@ -127,26 +129,26 @@ export default class Plane extends THREE.Mesh {
 
     for (let i = 0; i < this.sketchStatus.length; i++) {
       const status = this.sketchStatus[i]
-      let stepShow
-      let stepHide
+      let timeShow
+      let timeHide
 
       switch (i) {
         case 0:
-          stepShow = uniforms.stepShow1
-          stepHide = uniforms.stepHide1
+          timeShow = uniforms.timeShow1
+          timeHide = uniforms.timeHide1
           break
         case 1:
-          stepShow = uniforms.stepShow2
-          stepHide = uniforms.stepHide2
+          timeShow = uniforms.timeShow2
+          timeHide = uniforms.timeHide2
           break
         case 2:
-          stepShow = uniforms.stepShow3
-          stepHide = uniforms.stepHide3
+          timeShow = uniforms.timeShow3
+          timeHide = uniforms.timeHide3
           break
         case 3:
         default:
-          stepShow = uniforms.stepShow4
-          stepHide = uniforms.stepHide4
+          timeShow = uniforms.timeShow4
+          timeHide = uniforms.timeHide4
           break
       }
       if (status.isShown === true) {
@@ -158,8 +160,8 @@ export default class Plane extends THREE.Mesh {
           status.isDestroyed = true
         }
       }
-      stepShow.value = easing.outQuad(Math.max(Math.min(status.timeShow, DURATION), 0) / DURATION)
-      stepHide.value = easing.outQuad(Math.max(Math.min(status.timeHide, DURATION), 0) / DURATION)
+      timeShow.value = Math.max(Math.min(status.timeShow, DURATION), 0)
+      timeHide.value = Math.max(Math.min(status.timeHide, DURATION), 0)
     }
   }
 }
