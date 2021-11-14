@@ -12,8 +12,7 @@ interface SketchStatus {
 }
 
 const MAX = 4
-const DURATION_SHOW = 2
-const DURATION_HIDE = 1
+const DURATION = 1.5
 
 export default class Plane extends THREE.Mesh {
   current: number
@@ -62,6 +61,9 @@ export default class Plane extends THREE.Mesh {
             value: 0,
           },
           stepHide4: {
+            value: 0,
+          },
+          time: {
             value: 0,
           },
         },
@@ -140,6 +142,7 @@ export default class Plane extends THREE.Mesh {
 
     const { uniforms } = this.material
 
+    uniforms.time.value += time
     for (let i = 0; i < this.sketchStatus.length; i++) {
       const status = this.sketchStatus[i]
       let stepShow
@@ -169,12 +172,12 @@ export default class Plane extends THREE.Mesh {
       }
       if (status.isHidden === true) {
         status.timeHide += time
-        if (status.timeHide >= DURATION_HIDE) {
+        if (status.timeHide >= DURATION) {
           status.isDestroyed = true
         }
       }
-      stepShow.value = easing.outCirc(Math.max(Math.min(status.timeShow, DURATION_SHOW), 0) / DURATION_SHOW)
-      stepHide.value = easing.inCubic(Math.max(Math.min(status.timeHide, DURATION_HIDE), 0) / DURATION_HIDE)
+      stepShow.value = easing.outCirc(Math.max(Math.min(status.timeShow, DURATION), 0) / DURATION)
+      stepHide.value = easing.outCirc(Math.max(Math.min(status.timeHide, DURATION), 0) / DURATION)
     }
   }
 }
