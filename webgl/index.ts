@@ -15,25 +15,39 @@ export default class WebGLContent {
   camera = new Camera()
   plane = new Plane()
   sketches: any[] = []
+  texLoader = new THREE.TextureLoader()
 
   constructor() {
     this.renderer = null
     this.scene.add(this.plane)
   }
 
-  start(): void {
+  async start(): Promise<void> {
     const canvas = document.getElementById('canvas-webgl')
     if (!(canvas instanceof HTMLCanvasElement)) {
       throw new TypeError('#canvas-webgl is not HTMLCanvasElement.')
     }
-    this.renderer = new THREE.WebGLRenderer({
-      canvas,
-      alpha: true,
-      antialias: true,
+    const imgs = [
+      require('@/assets/img/common/water.jpg'),
+    ]
+
+    await Promise.all([
+      ...imgs.map((o) => {
+        return this.texLoader.loadAsync(o)
+      }),
+    ])
+    .then((response: THREE.Texture[]) => {
+      response[0].wrapT = response[0].wrapS = THREE.RepeatWrapping
+      this.plane.start(response[0])
+      this.renderer = new THREE.WebGLRenderer({
+        canvas,
+        alpha: true,
+        antialias: true,
+      })
+      this.renderer.setPixelRatio(2)
+      this.clock.start()
+      this.update()
     })
-    this.renderer.setPixelRatio(2)
-    this.clock.start()
-    this.update()
   }
 
   update(): void {

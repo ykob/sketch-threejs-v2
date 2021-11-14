@@ -25,6 +25,9 @@ export default class Plane extends THREE.Mesh {
       uniforms: THREE.UniformsUtils.merge([
         THREE.UniformsLib.common,
         {
+          normalMap: {
+            value: null,
+          },
           texture1: {
             value: null,
           },
@@ -80,7 +83,18 @@ export default class Plane extends THREE.Mesh {
     })
   }
 
+  start(normalMap: THREE.Texture) {
+    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    const { uniforms } = this.material
+
+    uniforms.normalMap.value = normalMap
+  }
+
   resize(resolution: THREE.Vector2) {
+    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    const { uniforms } = this.material
+
+    uniforms.uvTransform.value.scale(16, 16)
     this.scale.set(resolution.x, resolution.y, 1)
   }
 
