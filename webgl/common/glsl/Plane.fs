@@ -24,29 +24,25 @@ varying vec2 vUvMask4;
 
 const float duration = 0.13;
 
+#pragma glslify: convertHsvToRgb = require(../../modules/convertHsvToRgb)
+
 float calcStep(float s, float a) {
   return clamp((s - a * (1.0 - duration)) / duration, 0.0, 1.0);
 }
 
-#pragma glslify: convertHsvToRgb = require(../../modules/convertHsvToRgb)
+vec4 calcColor(vec2 uv, float stepShow, float stepHide, sampler2D texture) {
+  vec4 mapM = texture2D(normalMap, uv);
+  float trasStep = calcStep(stepShow, mapM.r) - calcStep(stepHide, mapM.r);
+  vec3 rgb = convertHsvToRgb(vec3(mapM.g * 0.6 + time * 0.3, 0.8, 0.9));
+  vec4 texColor = texture2D(texture, vUv) * trasStep + vec4(rgb, 1.0) * smoothstep(0.0, 0.1, trasStep) * (1.0 - smoothstep(0.1, 1.0, trasStep));
+  return texColor;
+}
 
 void main() {
-  vec4 mapM1 = texture2D(normalMap, vUvMask1);
-  vec4 mapM2 = texture2D(normalMap, vUvMask2);
-  vec4 mapM3 = texture2D(normalMap, vUvMask3);
-  vec4 mapM4 = texture2D(normalMap, vUvMask4);
-  float step1 = calcStep(stepShow1, mapM1.r) - calcStep(stepHide1, mapM1.r);
-  float step2 = calcStep(stepShow2, mapM2.r) - calcStep(stepHide2, mapM2.r);
-  float step3 = calcStep(stepShow3, mapM3.r) - calcStep(stepHide3, mapM3.r);
-  float step4 = calcStep(stepShow4, mapM4.r) - calcStep(stepHide4, mapM4.r);
-  vec3 rgb1 = convertHsvToRgb(vec3(mapM1.g * 0.6 + time * 0.3, 0.8, 0.9));
-  vec3 rgb2 = convertHsvToRgb(vec3(mapM2.g * 0.6 + 0.25 + time * 0.3, 0.8, 0.9));
-  vec3 rgb3 = convertHsvToRgb(vec3(mapM3.g * 0.6 + 0.5 + time * 0.3, 0.8, 0.9));
-  vec3 rgb4 = convertHsvToRgb(vec3(mapM4.g * 0.6 + 0.75 + time * 0.3, 0.8, 0.9));
-  vec4 texColor1 = texture2D(texture1, vUv) * step1 + vec4(rgb1, 1.0) * smoothstep(0.0, 0.1, step1) * (1.0 - smoothstep(0.1, 1.0, step1));
-  vec4 texColor2 = texture2D(texture2, vUv) * step2 + vec4(rgb2, 1.0) * smoothstep(0.0, 0.1, step2) * (1.0 - smoothstep(0.1, 1.0, step2));
-  vec4 texColor3 = texture2D(texture3, vUv) * step3 + vec4(rgb3, 1.0) * smoothstep(0.0, 0.1, step3) * (1.0 - smoothstep(0.1, 1.0, step3));
-  vec4 texColor4 = texture2D(texture4, vUv) * step4 + vec4(rgb4, 1.0) * smoothstep(0.0, 0.1, step4) * (1.0 - smoothstep(0.1, 1.0, step4));
+  vec4 texColor1 = calcColor(vUvMask1, stepShow1, stepHide1, texture1);
+  vec4 texColor2 = calcColor(vUvMask2, stepShow2, stepHide2, texture2);
+  vec4 texColor3 = calcColor(vUvMask3, stepShow3, stepHide3, texture3);
+  vec4 texColor4 = calcColor(vUvMask4, stepShow4, stepHide4, texture4);
 
   gl_FragColor = texColor1 + texColor2 + texColor3 + texColor4;
 }
