@@ -37,7 +37,7 @@ export default class WebGLContent {
       }),
     ])
     .then((response: THREE.Texture[]) => {
-      response[0].wrapT = response[0].wrapS = THREE.RepeatWrapping
+      // response[0].wrapT = response[0].wrapS = THREE.RepeatWrapping
       this.plane.start(response[0])
       this.renderer = new THREE.WebGLRenderer({
         canvas,

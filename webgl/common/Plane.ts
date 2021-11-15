@@ -13,11 +13,13 @@ interface SketchStatus {
 }
 
 const MAX = 4
-const DURATION = 5
+const DURATION = 3
 
 export default class Plane extends THREE.Mesh {
   current: number
   sketchStatus: SketchStatus[]
+  sx: number
+  sy: number
 
   constructor() {
     const geometry = new THREE.PlaneGeometry(1, 1)
@@ -96,6 +98,8 @@ export default class Plane extends THREE.Mesh {
         isDestroyed: false,
       }
     })
+    this.sx = 0
+    this.sy = 0
   }
 
   start(normalMap: THREE.Texture) {
@@ -108,13 +112,13 @@ export default class Plane extends THREE.Mesh {
   resize(resolution: THREE.Vector2) {
     if (!(this.material instanceof THREE.RawShaderMaterial)) return
     const { uniforms } = this.material
-    const sx = Math.min(resolution.x / resolution.y, 1) / 2
-    const sy = Math.min(resolution.y / resolution.x, 1) / 2
 
-    uniforms.uvTransform1.value.setUvTransform(0, 0, sx, sy, 0, 0.5, 0.5)
-    uniforms.uvTransform2.value.setUvTransform(0, 0, sx, sy, 0, 0.5, 0.5)
-    uniforms.uvTransform3.value.setUvTransform(0, 0, sx, sy, 0, 0.5, 0.5)
-    uniforms.uvTransform4.value.setUvTransform(0, 0, sx, sy, 0, 0.5, 0.5)
+    this.sx = Math.min(resolution.x / resolution.y, 1) / 2
+    this.sy = Math.min(resolution.y / resolution.x, 1) / 2
+    uniforms.uvTransform1.value.setUvTransform(0, 0, this.sx, this.sy, 0, 0.5, 0.5)
+    uniforms.uvTransform2.value.setUvTransform(0, 0, this.sx, this.sy, 0, 0.5, 0.5)
+    uniforms.uvTransform3.value.setUvTransform(0, 0, this.sx, this.sy, 0, 0.5, 0.5)
+    uniforms.uvTransform4.value.setUvTransform(0, 0, this.sx, this.sy, 0, 0.5, 0.5)
     this.scale.set(resolution.x, resolution.y, 1)
   }
 
@@ -124,6 +128,8 @@ export default class Plane extends THREE.Mesh {
     const { uniforms } = this.material
     const current = this.sketchStatus[this.current]
     const prev = this.sketchStatus[(this.current + MAX - 1) % MAX]
+    const theta = MathEx.radians(Math.floor(Math.random() * 2) * 180)
+    let uvTransform: THREE.Matrix3 | undefined
 
     current.timeShow = 0
     current.timeHide = 0
@@ -134,36 +140,31 @@ export default class Plane extends THREE.Mesh {
 
     if (this.current === 0) {
       uniforms.texture1.value = t
-      uniforms.uvTransform1.value.translate(
-        Math.random() * 0.25,
-        Math.random() * 0.25
-      )
-      uniforms.uvTransform1.value.rotate(MathEx.radians(90))
+      uvTransform = uniforms.uvTransform1.value
       this.current = 1
     } else if (this.current === 1) {
       uniforms.texture2.value = t
-      uniforms.uvTransform2.value.translate(
-        Math.random() * 0.25,
-        Math.random() * 0.25
-      )
-      uniforms.uvTransform2.value.rotate(MathEx.radians(90))
+      uvTransform = uniforms.uvTransform2.value
       this.current = 2
     } else if (this.current === 2) {
       uniforms.texture3.value = t
-      uniforms.uvTransform3.value.translate(
-        Math.random() * 0.25,
-        Math.random() * 0.25
-      )
-      uniforms.uvTransform3.value.rotate(MathEx.radians(90))
+      uvTransform = uniforms.uvTransform3.value
       this.current = 3
     } else if (this.current === 3) {
       uniforms.texture4.value = t
-      uniforms.uvTransform4.value.translate(
-        Math.random() * 0.25,
-        Math.random() * 0.25
-      )
-      uniforms.uvTransform4.value.rotate(MathEx.radians(90))
+      uvTransform = uniforms.uvTransform4.value
       this.current = 0
+    }
+    if (uvTransform !== undefined) {
+      uvTransform.setUvTransform(
+        Math.random() * 0.25,
+        Math.random() * 0.25,
+        this.sx,
+        this.sy,
+        theta,
+        0.5,
+        0.5
+      )
     }
   }
 
