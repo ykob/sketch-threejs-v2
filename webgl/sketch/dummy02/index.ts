@@ -16,7 +16,7 @@ export class Sketch {
   }
 
   async start() {
-    await sleep(1000)
+    await sleep(100)
   }
 
   update(time: number, renderer: THREE.WebGLRenderer): void {

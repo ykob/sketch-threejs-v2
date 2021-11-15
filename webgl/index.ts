@@ -28,7 +28,7 @@ export default class WebGLContent {
       throw new TypeError('#canvas-webgl is not HTMLCanvasElement.')
     }
     const imgs = [
-      require('@/assets/img/common/mozaic.jpg'),
+      require('@/assets/img/common/mosaic.jpg'),
     ]
 
     await Promise.all([

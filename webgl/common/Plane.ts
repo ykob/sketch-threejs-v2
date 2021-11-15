@@ -12,7 +12,7 @@ interface SketchStatus {
 }
 
 const MAX = 4
-const DURATION = 1.5
+const DURATION = 3
 
 export default class Plane extends THREE.Mesh {
   current: number
@@ -24,9 +24,6 @@ export default class Plane extends THREE.Mesh {
       uniforms: THREE.UniformsUtils.merge([
         THREE.UniformsLib.common,
         {
-          normalMap: {
-            value: null,
-          },
           texture1: {
             value: null,
           },
@@ -66,6 +63,21 @@ export default class Plane extends THREE.Mesh {
           time: {
             value: 0,
           },
+          normalMap: {
+            value: null,
+          },
+          uvTransform1: {
+            value: new THREE.Matrix3(),
+          },
+          uvTransform2: {
+            value: new THREE.Matrix3(),
+          },
+          uvTransform3: {
+            value: new THREE.Matrix3(),
+          },
+          uvTransform4: {
+            value: new THREE.Matrix3(),
+          },
         },
       ]),
       vertexShader: vs,
@@ -95,8 +107,13 @@ export default class Plane extends THREE.Mesh {
   resize(resolution: THREE.Vector2) {
     if (!(this.material instanceof THREE.RawShaderMaterial)) return
     const { uniforms } = this.material
+    const sx = Math.min(resolution.x / resolution.y, 1) / 2
+    const sy = Math.min(resolution.y / resolution.x, 1) / 2
 
-    uniforms.uvTransform.value.scale(16, 16)
+    uniforms.uvTransform1.value.setUvTransform(0, 0, sx, sy, 0, 0.5, 0.5)
+    uniforms.uvTransform2.value.setUvTransform(0, 0, sx, sy, 0, 0.5, 0.5)
+    uniforms.uvTransform3.value.setUvTransform(0, 0, sx, sy, 0, 0.5, 0.5)
+    uniforms.uvTransform4.value.setUvTransform(0, 0, sx, sy, 0, 0.5, 0.5)
     this.scale.set(resolution.x, resolution.y, 1)
   }
 
@@ -116,15 +133,31 @@ export default class Plane extends THREE.Mesh {
 
     if (this.current === 0) {
       uniforms.texture1.value = t
+      uniforms.uvTransform1.value.translate(
+        Math.random() * 0.25,
+        Math.random() * 0.25
+      )
       this.current = 1
     } else if (this.current === 1) {
       uniforms.texture2.value = t
+      uniforms.uvTransform2.value.translate(
+        Math.random() * 0.25,
+        Math.random() * 0.25
+      )
       this.current = 2
     } else if (this.current === 2) {
       uniforms.texture3.value = t
+      uniforms.uvTransform3.value.translate(
+        Math.random() * 0.25,
+        Math.random() * 0.25
+      )
       this.current = 3
     } else if (this.current === 3) {
       uniforms.texture4.value = t
+      uniforms.uvTransform4.value.translate(
+        Math.random() * 0.25,
+        Math.random() * 0.25
+      )
       this.current = 0
     }
   }
