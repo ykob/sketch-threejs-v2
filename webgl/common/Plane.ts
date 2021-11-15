@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import { easing } from 'ts-easing'
 import vs from './glsl/Plane.vs'
 import fs from './glsl/Plane.fs'
+import { MathEx } from '@/assets/js/utils'
 
 interface SketchStatus {
   timeShow: number
@@ -12,7 +13,7 @@ interface SketchStatus {
 }
 
 const MAX = 4
-const DURATION = 3
+const DURATION = 5
 
 export default class Plane extends THREE.Mesh {
   current: number
@@ -137,6 +138,7 @@ export default class Plane extends THREE.Mesh {
         Math.random() * 0.25,
         Math.random() * 0.25
       )
+      uniforms.uvTransform1.value.rotate(MathEx.radians(90))
       this.current = 1
     } else if (this.current === 1) {
       uniforms.texture2.value = t
@@ -144,6 +146,7 @@ export default class Plane extends THREE.Mesh {
         Math.random() * 0.25,
         Math.random() * 0.25
       )
+      uniforms.uvTransform2.value.rotate(MathEx.radians(90))
       this.current = 2
     } else if (this.current === 2) {
       uniforms.texture3.value = t
@@ -151,6 +154,7 @@ export default class Plane extends THREE.Mesh {
         Math.random() * 0.25,
         Math.random() * 0.25
       )
+      uniforms.uvTransform3.value.rotate(MathEx.radians(90))
       this.current = 3
     } else if (this.current === 3) {
       uniforms.texture4.value = t
@@ -158,6 +162,7 @@ export default class Plane extends THREE.Mesh {
         Math.random() * 0.25,
         Math.random() * 0.25
       )
+      uniforms.uvTransform4.value.rotate(MathEx.radians(90))
       this.current = 0
     }
   }
