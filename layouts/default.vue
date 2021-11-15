@@ -10,7 +10,7 @@ div
 import Vue from 'vue'
 
 export default Vue.extend({
-  mounted() {
+  async mounted() {
     let timer: number = 0
 
     const debounceSetSize = () => {
@@ -20,7 +20,7 @@ export default Vue.extend({
       }, 200)
     }
   
-    this.$webgl.start()
+    await this.$webgl.start()
     this.setSize()
 
     window.addEventListener('resize', debounceSetSize)
