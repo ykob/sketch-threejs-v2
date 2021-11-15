@@ -22,20 +22,25 @@ varying vec2 vUvMask2;
 varying vec2 vUvMask3;
 varying vec2 vUvMask4;
 
-const float duration = 0.13;
+const float duration1 = 0.13;
+const float duration2 = 0.26;
 
 #pragma glslify: convertHsvToRgb = require(../../modules/convertHsvToRgb)
 
-float calcStep(float s, float a) {
-  return clamp((s - a * (1.0 - duration)) / duration, 0.0, 1.0);
+float calcStep(float s, float a, float d) {
+  return clamp((s - a * (1.0 - d)) / d, 0.0, 1.0);
 }
 
 vec4 calcColor(vec2 uv, float stepShow, float stepHide, sampler2D texture) {
+  vec2 p = vUv * 2.0 - 1.0;
   vec4 mapM = texture2D(normalMap, uv);
-  float trasStep = calcStep(stepShow, mapM.r) - calcStep(stepHide, mapM.r);
+  float trasStep1 = calcStep(stepShow, mapM.r, duration1) - calcStep(stepHide, mapM.r, duration1);
+  float trasStep2 = calcStep(stepShow, mapM.r, duration2) - calcStep(stepHide, mapM.r, duration2);
   vec3 rgb = convertHsvToRgb(vec3(mapM.g * 0.6 + time * 0.3, 0.8, 0.9));
-  vec4 texColor = texture2D(texture, vUv) * trasStep + vec4(rgb, 1.0) * smoothstep(0.0, 0.1, trasStep) * (1.0 - smoothstep(0.1, 1.0, trasStep));
-  return texColor;
+  vec2 uvDiff = vec2(cos(radians(mapM.r * 720.0)), sin(radians(mapM.r * 720.0))) * (1.0 - trasStep2) * 0.5 + p * (stepShow - 1.0 + stepHide) * 0.1;
+  vec4 texColor = texture2D(texture, vUv + uvDiff) * trasStep1;
+  vec4 dissolveEdge = vec4(rgb, 1.0) * smoothstep(0.0, 0.1, trasStep1) * (1.0 - smoothstep(0.1, 1.0, trasStep1));
+  return texColor + dissolveEdge;
 }
 
 void main() {
