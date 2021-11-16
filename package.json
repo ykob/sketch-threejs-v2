@@ -34,6 +34,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-nuxt": "^2.0.0",
     "eslint-plugin-vue": "^7.12.1",
+    "glsl-easings": "^1.0.0",
     "glslify-import-loader": "^0.1.2",
     "glslify-loader": "^2.0.0",
     "prettier": "^2.3.2",
