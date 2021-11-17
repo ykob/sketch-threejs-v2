@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import Camera from './common/Camera'
 import Plane from './common/Plane'
+import Background from './common/Background'
 
 export default class WebGLContent {
   renderer: THREE.WebGLRenderer | null
@@ -14,12 +15,14 @@ export default class WebGLContent {
   scene = new THREE.Scene()
   camera = new Camera()
   plane = new Plane()
+  background = new Background()
   sketches: any[] = []
   texLoader = new THREE.TextureLoader()
 
   constructor() {
     this.renderer = null
     this.scene.add(this.plane)
+    this.scene.add(this.background)
   }
 
   async start(): Promise<void> {
@@ -29,6 +32,7 @@ export default class WebGLContent {
     }
     const imgs = [
       require('@/assets/img/common/mosaic.jpg'),
+      require('@/assets/img/common/nebula.jpg'),
     ]
 
     await Promise.all([
@@ -37,8 +41,8 @@ export default class WebGLContent {
       }),
     ])
     .then((response: THREE.Texture[]) => {
-      // response[0].wrapT = response[0].wrapS = THREE.RepeatWrapping
       this.plane.start(response[0])
+      this.background.start(response[1])
       this.renderer = new THREE.WebGLRenderer({
         canvas,
         alpha: true,
@@ -63,6 +67,7 @@ export default class WebGLContent {
       sketch.update(time, this.renderer)
     }
     this.plane.update(time)
+    this.background.update(time)
     this.renderer.setRenderTarget(null)
     this.renderer.setClearColor(0x000000, 1.0)
     this.renderer.render(this.scene, this.camera)
