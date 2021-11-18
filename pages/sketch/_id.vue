@@ -4,7 +4,7 @@ div
     duration = '3000'
     )
     SketchOutline(
-      v-if = 'isLoaded'
+      v-show = 'isLoaded'
       :title = 'page.title'
       :description = 'page.description'
       :createdAt = 'page.createdAt'
@@ -53,10 +53,26 @@ export default Vue.extend({
       ],
     }
   },
+  computed: {
+    isReady(): boolean {
+      return this.$store.getters.isReady
+    },
+  },
+  watch: {
+    async isReady(v: boolean) {
+      if (this.page === null) return
+      if (v === true) {
+        await this.$webgl.changeSketch(this.page.webgl)
+        this.isLoaded = true
+      }
+    },
+  },
   async mounted() {
     if (this.page === null) return
-    await this.$webgl.changeSketch(this.page.webgl)
-    this.isLoaded = true
+    if (this.isReady) {
+      await this.$webgl.changeSketch(this.page.webgl)
+      this.isLoaded = true
+    }
   },
 })
 </script>

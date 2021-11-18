@@ -4,14 +4,13 @@ div
     duration = '3000'
     )
     HomeSummary(
-      v-if = 'isLoaded'
+      v-show = 'isLoaded'
       )
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { IContentDocument } from '@nuxt/content/types/content'
-import { sleep } from '@/assets/js/utils'
 
 export default Vue.extend({
   transition: {
@@ -44,11 +43,26 @@ export default Vue.extend({
       titleTemplate: '',
     }
   },
+  computed: {
+    isReady(): boolean {
+      return this.$store.getters.isReady
+    },
+  },
+  watch: {
+    async isReady(v: boolean) {
+      if (this.page === null) return
+      if (v === true) {
+        await this.$webgl.changeSketch(this.page.webgl)
+        this.isLoaded = true
+      }
+    },
+  },
   async mounted() {
     if (this.page === null) return
-    await this.$webgl.changeSketch(this.page.webgl)
-    await sleep(1000)
-    this.isLoaded = true
+    if (this.isReady === true) {
+      await this.$webgl.changeSketch(this.page.webgl)
+      this.isLoaded = true
+    }
   },
 })
 </script>

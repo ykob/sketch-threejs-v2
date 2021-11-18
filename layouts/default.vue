@@ -8,9 +8,11 @@ div
 
 <script lang="ts">
 import Vue from 'vue'
+import { sleep } from '@/assets/js/utils'
 
 export default Vue.extend({
   async mounted() {
+    const { commit } = this.$store
     let timer: number = 0
 
     const debounceSetSize = () => {
@@ -25,6 +27,9 @@ export default Vue.extend({
 
     window.addEventListener('resize', debounceSetSize)
     window.addEventListener('deviceorientation', debounceSetSize)
+
+    await sleep(2000)
+    commit('ready')
   },
   methods: {
     setSize() {

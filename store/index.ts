@@ -7,18 +7,21 @@ export const state = (): {
     x: number,
     y: number,
   },
+  isReady: boolean
 } => ({
   pages: [],
   resolution: {
     x: 0,
     y: 0,
   },
+  isReady: false,
 })
 
 export type RootState = ReturnType<typeof state>
 
 export const getters: GetterTree<RootState, RootState> = {
   pages: state => state.pages,
+  isReady: state => state.isReady,
 }
 
 export const mutations: MutationTree<RootState> = {
@@ -28,6 +31,9 @@ export const mutations: MutationTree<RootState> = {
   setSize: (state, { x, y }: { x: number, y: number }) => {
     state.resolution.x = x
     state.resolution.y = y
+  },
+  ready: (state) => {
+    state.isReady = true
   },
 }
 
