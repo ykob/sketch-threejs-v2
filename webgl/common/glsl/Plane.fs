@@ -22,7 +22,7 @@ varying vec2 vUvMask2;
 varying vec2 vUvMask3;
 varying vec2 vUvMask4;
 
-const float duration1 = 0.13;
+const float duration1 = 0.14;
 const float duration2 = duration1 * 3.0;
 
 #pragma glslify: ease = require(glsl-easings/quadratic-out)

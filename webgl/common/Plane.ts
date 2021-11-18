@@ -13,7 +13,7 @@ interface SketchStatus {
 }
 
 const MAX = 4
-const DURATION = 3
+const DURATION = 4
 
 export default class Plane extends THREE.Mesh {
   current: number
@@ -113,8 +113,8 @@ export default class Plane extends THREE.Mesh {
     if (!(this.material instanceof THREE.RawShaderMaterial)) return
     const { uniforms } = this.material
 
-    this.sx = Math.min(resolution.x / resolution.y, 1) / 2
-    this.sy = Math.min(resolution.y / resolution.x, 1) / 2
+    this.sx = Math.min(resolution.x / resolution.y, 1)
+    this.sy = Math.min(resolution.y / resolution.x, 1)
     uniforms.uvTransform1.value.setUvTransform(0, 0, this.sx, this.sy, 0, 0.5, 0.5)
     uniforms.uvTransform2.value.setUvTransform(0, 0, this.sx, this.sy, 0, 0.5, 0.5)
     uniforms.uvTransform3.value.setUvTransform(0, 0, this.sx, this.sy, 0, 0.5, 0.5)
@@ -128,7 +128,7 @@ export default class Plane extends THREE.Mesh {
     const { uniforms } = this.material
     const current = this.sketchStatus[this.current]
     const prev = this.sketchStatus[(this.current + MAX - 1) % MAX]
-    const theta = MathEx.radians(Math.floor(Math.random() * 2) * 180)
+    const randomIndex = Math.floor(Math.random() * 4)
     let uvTransform: THREE.Matrix3 | undefined
 
     current.timeShow = 0
@@ -157,11 +157,11 @@ export default class Plane extends THREE.Mesh {
     }
     if (uvTransform !== undefined) {
       uvTransform.setUvTransform(
-        Math.random() * 0.25,
-        Math.random() * 0.25,
-        this.sx,
-        this.sy,
-        theta,
+        0,
+        0,
+        (randomIndex % 2 === 0) ? this.sx : this.sy,
+        (randomIndex % 2 === 0) ? this.sy : this.sx,
+        MathEx.radians(randomIndex * 90),
         0.5,
         0.5
       )
@@ -215,8 +215,8 @@ export default class Plane extends THREE.Mesh {
           status.isDestroyed = true
         }
       }
-      stepShow.value = easing.outCirc(Math.max(Math.min(status.timeShow, DURATION), 0) / DURATION)
-      stepHide.value = easing.outCirc(Math.max(Math.min(status.timeHide, DURATION), 0) / DURATION)
+      stepShow.value = easing.outCubic(Math.max(Math.min(status.timeShow, DURATION), 0) / DURATION)
+      stepHide.value = easing.outCubic(Math.max(Math.min(status.timeHide, DURATION), 0) / DURATION)
     }
   }
 }
