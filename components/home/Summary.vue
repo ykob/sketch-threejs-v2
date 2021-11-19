@@ -88,7 +88,7 @@ export default Vue.extend({})
       transition-delay: 0.3s;
       transition-timing-function: $easeOutCubic;
     }
-    .page-enter-to & {
+    .v-enter-to & {
       opacity: 1;
       transform: scale(1);
     }
