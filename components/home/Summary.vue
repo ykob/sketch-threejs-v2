@@ -1,27 +1,26 @@
 <template lang="pug">
 .home-summary
-  .home-summary__text
-    .home-summary__text-row
-      SplitStringContainer(
-        value = 'Interactive sketches made with three.js.'
+  .home-summary__text-row
+    SplitStringContainer(
+      value = 'Interactive sketches made with three.js.'
+      )
+  .home-summary__text-row
+    SplitStringContainer(
+      value = 'Created by Yoichi Kobayashi.'
+      )
+  .home-summary__links
+    .home-summary__link
+      ButtonRound(
+        href = 'https://github.com/ykob/sketch-threejs-v2'
+        target = '_blank'
         )
-    .home-summary__text-row
-      SplitStringContainer(
-        value = 'Created by Yoichi Kobayashi.'
+        IconGithub
+    .home-summary__link
+      ButtonRound(
+        href = 'https://twitter.com/ykob0123'
+        target = '_blank'
         )
-    .home-summary__links
-      .home-summary__link
-        ButtonRound(
-          href = 'https://github.com/ykob/sketch-threejs-v2'
-          target = '_blank'
-          )
-          IconGithub
-      .home-summary__link
-        ButtonRound(
-          href = 'https://twitter.com/ykob0123'
-          target = '_blank'
-          )
-          IconTwitter
+        IconTwitter
 </template>
 
 <script lang="ts">
@@ -45,7 +44,10 @@ export default Vue.extend({})
   @include l-sm {
     bottom: 40px;
   }
-  &__text {
+  &__text-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
     letter-spacing: 0.15em;
     @include l-lg {
       font-size: 15px;
@@ -56,11 +58,6 @@ export default Vue.extend({})
     @include l-sm {
       font-size: 13px;
     }
-  }
-  &__text-row {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 8px;
   }
   &__links {
     display: flex;

@@ -1,6 +1,7 @@
 <template lang="pug">
 .split-string-container
-  SplitStringItem(
+  div(
+    :is = 'is'
     v-for = 'item, index in splittedValue'
     :key = 'keyPrefix + "-" + index'
     :typo = 'item'
@@ -20,8 +21,21 @@ export default Vue.extend({
       type: String,
       default: '',
     },
+    itemType: {
+      type: String,
+      default: 's',
+    },
   },
   computed: {
+    is(): string {
+      switch (this.itemType) {
+        case 'l':
+          return 'SplitStringItemL'
+        case 's':
+        default:
+          return 'SplitStringItemS'
+      }
+    },
     splittedValue(): string[] {
       return this.value.split('')
     },

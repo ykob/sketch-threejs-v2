@@ -16,10 +16,6 @@ export default Vue.extend({
       type: String,
       default: '',
     },
-    delayMax: {
-      type: Number,
-      default: 0.32,
-    },
   },
   data: () => ({
     delay: 0,
@@ -39,7 +35,7 @@ export default Vue.extend({
     },
   },
   mounted() {
-    this.delay = Math.random() * this.delayMax
+    this.delay = Math.random() * 0.32
   },
 })
 </script>

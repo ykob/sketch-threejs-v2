@@ -5,6 +5,7 @@
     )
     SplitStringContainer(
       :value = 'title'
+      itemType = 'l'
       )
   .sketch-outline__description
     |{{ description }}

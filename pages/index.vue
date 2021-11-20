@@ -11,6 +11,7 @@ div
 <script lang="ts">
 import Vue from 'vue'
 import { IContentDocument } from '@nuxt/content/types/content'
+import { sleep } from '@/assets/js/utils'
 
 export default Vue.extend({
   transition: {
@@ -61,6 +62,7 @@ export default Vue.extend({
     if (this.page === null) return
     if (this.isReady === true) {
       await this.$webgl.changeSketch(this.page.webgl)
+      await sleep(1000)
       this.isLoaded = true
     }
   },
