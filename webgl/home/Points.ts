@@ -48,11 +48,12 @@ export default class Points extends THREE.Points {
     super(geometry, material)
   }
 
-  start(tNoise: THREE.Texture) {
+  start({ tNoise, pixelRatio }: { tNoise: THREE.Texture, pixelRatio: number }) {
     if (!(this.material instanceof THREE.RawShaderMaterial)) return
     const { uniforms } = this.material
 
     uniforms.tNoise.value = tNoise
+    uniforms.pixelRatio.value = pixelRatio
   }
 
   update(time: number) {

@@ -1,7 +1,11 @@
+import { UAParser } from 'ua-parser-js'
 import * as THREE from 'three'
 import Camera from './common/Camera'
 import Plane from './common/Plane'
 import Background from './common/Background'
+
+const parser = new UAParser()
+const os = parser.getOS().name
 
 export default class WebGLContent {
   renderer: THREE.WebGLRenderer | null
@@ -99,7 +103,9 @@ export default class WebGLContent {
         const { Sketch } = await import(`.${path}`)
         const sketch = new Sketch()
   
-        await sketch.start()
+        await sketch.start({
+          os,
+        })
         if (this.path === path) {
           sketch.resize(this.resolution)
           this.sketches[this.current] = sketch
