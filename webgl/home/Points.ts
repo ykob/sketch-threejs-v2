@@ -13,7 +13,7 @@ export default class Points extends THREE.Points {
       const x = (Math.random() * 2 - 1) * 100
       const y = Math.random() * Math.random() * 13 - 12
       const z = Math.random() * -500 + 150
-      const size = Math.random() * 3 + 1
+      const size = Math.random() * 4 + 2
 
       baPositions.setXYZ(i, x, y, z)
       baSizes.setX(i, size)
