@@ -52,7 +52,7 @@ export default class WebGLContent {
         alpha: true,
         antialias: true,
       })
-      this.renderer.setPixelRatio(2)
+      this.renderer.setPixelRatio((os === 'iOS' || os === 'Android') ? 2 : 1)
       this.clock.start()
       this.update()
     })

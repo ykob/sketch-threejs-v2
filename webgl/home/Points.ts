@@ -32,9 +32,8 @@ export default class Points extends THREE.Points {
           tNoise: {
             value: null,
           },
-          pixelRatio: {
-            type: 'f',
-            value: 2,
+          resolution: {
+            value: new THREE.Vector2(),
           },
         },
       ]),
@@ -48,12 +47,11 @@ export default class Points extends THREE.Points {
     super(geometry, material)
   }
 
-  start({ tNoise, pixelRatio }: { tNoise: THREE.Texture, pixelRatio: number }) {
+  start(tNoise: THREE.Texture) {
     if (!(this.material instanceof THREE.RawShaderMaterial)) return
     const { uniforms } = this.material
 
     uniforms.tNoise.value = tNoise
-    uniforms.pixelRatio.value = pixelRatio
   }
 
   update(time: number) {
@@ -61,5 +59,12 @@ export default class Points extends THREE.Points {
     const { uniforms } = this.material
 
     uniforms.time.value += time
+  }
+
+  resize(resolution: THREE.Vector2) {
+    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    const { uniforms } = this.material
+
+    uniforms.resolution.value.copy(resolution)
   }
 }

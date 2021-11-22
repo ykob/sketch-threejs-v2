@@ -40,7 +40,7 @@ export class Sketch {
     this.scene.add(this.pointLight2)
   }
 
-  async start({ os }: { os: string }) {
+  async start() {
     const imgs = [
       require('@/assets/img/common/noise.png'),
       require('@/assets/img/common/water.jpg'),
@@ -61,10 +61,7 @@ export class Sketch {
       })
       response[1].wrapT = response[1].wrapS = THREE.RepeatWrapping
       this.water.start(response[1])
-      this.points.start({
-        tNoise: response[0],
-        pixelRatio: (os === 'iOS' || os === 'Android') ? 2 : 1,
-      })
+      this.points.start(response[0])
       this.postEffectBright.start(this.target1.texture)
       this.postEffectBlurX.start({
         texture: this.target2.texture,
@@ -119,6 +116,7 @@ export class Sketch {
     this.cameraPE.resize(resolution)
     this.camera.resize(resolution)
     this.water.resize(resolution)
+    this.points.resize(resolution)
     this.postEffectBright.resize(resolution)
     this.postEffectBlurX.resize(resolution)
     this.postEffectBlurY.resize(resolution)

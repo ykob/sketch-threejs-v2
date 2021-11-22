@@ -6,8 +6,8 @@ uniform mat4 viewMatrix;
 uniform mat4 modelMatrix;
 
 uniform float time;
-uniform float pixelRatio;
 uniform sampler2D tNoise;
+uniform vec2 resolution;
 
 varying vec3 vColor;
 
@@ -25,7 +25,7 @@ void main() {
   vec4 mvPosition = viewMatrix * modelMatrix * vec4(transformed, 1.0);
 
   float distanceFromCamera = length(mvPosition.xyz);
-  float pointSize = size * pixelRatio * 100.0 / distanceFromCamera;
+  float pointSize = size * 100.0 / distanceFromCamera * resolution.y / 1024.0;
 
   // Fog
   fogDepth = -mvPosition.z;
