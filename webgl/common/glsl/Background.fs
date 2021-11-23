@@ -5,8 +5,11 @@ uniform sampler2D texture;
 
 varying vec2 vUv;
 
+#pragma glslify: ease = require(glsl-easings/quadratic-out)
+
 void main() {
+  float showStep = ease(clamp(time / 1.5, 0.0, 1.0));
   vec4 texColor = texture2D(texture, vUv);
 
-  gl_FragColor = texColor - texColor * sin(radians(time * 360.0 * 0.5)) * 0.1;
+  gl_FragColor = texColor * vec4(vec3(showStep), 1.0);
 }

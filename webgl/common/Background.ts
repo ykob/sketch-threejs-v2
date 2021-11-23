@@ -35,6 +35,6 @@ export default class Background extends THREE.Mesh {
     const { uniforms } = this.material
 
     uniforms.time.value += time
-    this.rotation.y = uniforms.time.value * 0.05
+    this.rotation.y = uniforms.time.value * 0.01
   }
 }
