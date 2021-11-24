@@ -8,6 +8,7 @@ import Title from './Title'
 import Water from './Water'
 import Points from './Points'
 import PointLight from './PointLight'
+import { sleep } from '~/assets/js/utils'
 
 export class Sketch {
   target = new THREE.WebGLRenderTarget(1, 1)
@@ -18,7 +19,7 @@ export class Sketch {
   scene = new THREE.Scene()
   cameraPE = new Camera()
   camera = new PerspectiveCamera()
-  texLoader = new THREE.TextureLoader()
+  imgLoader = new THREE.ImageLoader()
   title = new Title()
   water = new Water()
   points = new Points()
@@ -41,42 +42,54 @@ export class Sketch {
   }
 
   async start() {
-    const imgs = [
+    const pathArr = [
       require('@/assets/img/common/noise.png'),
       require('@/assets/img/common/water.jpg'),
       require('@/assets/img/home/title_fill.jpg'),
       require('@/assets/img/home/title_border.jpg'),
     ]
+    const textures: THREE.Texture[] = []
+    let imgs: HTMLImageElement[] = []
+
     await Promise.all([
-      ...imgs.map((o) => {
-        return this.texLoader.loadAsync(o)
+      ...pathArr.map((o) => {
+        return this.imgLoader.loadAsync(o)
       }),
     ])
-    .then((response: THREE.Texture[]) => {
-      response[0].wrapT = response[0].wrapS = THREE.RepeatWrapping
-      this.title.start({
-        tNoise: response[0],
-        tTitleFill: response[2],
-        tTitleBorder: response[3],
-      })
-      response[1].wrapT = response[1].wrapS = THREE.RepeatWrapping
-      this.water.start(response[1])
-      this.points.start(response[0])
-      this.postEffectBright.start(this.target1.texture)
-      this.postEffectBlurX.start({
-        texture: this.target2.texture,
-        x: 1,
-        y: 0,
-      })
-      this.postEffectBlurY.start({
-        texture: this.target3.texture,
-        x: 0,
-        y: 1,
-      })
-      this.postEffectBloom.start({
-        texture1: this.target1.texture,
-        texture2: this.target2.texture,
-      })
+    .then((response: HTMLImageElement[]) => {
+      imgs = response
+    })
+    for (let i = 0; i < imgs.length; i++) {
+      const img = imgs[i]
+      const texture = new THREE.Texture(img)
+
+      texture.needsUpdate = true
+      textures.push(texture)
+      await sleep(50)
+    }
+    textures[0].wrapT = textures[0].wrapS = THREE.RepeatWrapping
+    this.title.start({
+      tNoise: textures[0],
+      tTitleFill: textures[2],
+      tTitleBorder: textures[3],
+    })
+    textures[1].wrapT = textures[1].wrapS = THREE.RepeatWrapping
+    this.water.start(textures[1])
+    this.points.start(textures[0])
+    this.postEffectBright.start(this.target1.texture)
+    this.postEffectBlurX.start({
+      texture: this.target2.texture,
+      x: 1,
+      y: 0,
+    })
+    this.postEffectBlurY.start({
+      texture: this.target3.texture,
+      x: 0,
+      y: 1,
+    })
+    this.postEffectBloom.start({
+      texture1: this.target1.texture,
+      texture2: this.target2.texture,
     })
   }
 
