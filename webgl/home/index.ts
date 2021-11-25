@@ -7,6 +7,7 @@ import PerspectiveCamera from './PerspectiveCamera'
 import Title from './Title'
 import Water from './Water'
 import Points from './Points'
+import Sphere from './Sphere'
 import PointLight from './PointLight'
 import { sleep } from '~/assets/js/utils'
 
@@ -23,6 +24,7 @@ export class Sketch {
   title = new Title()
   water = new Water()
   points = new Points()
+  sphere = new Sphere()
   pointLight1 = new PointLight(0x22ff22, 0.65, 200)
   pointLight2 = new PointLight(0x2222dd, 0.25, 400)
   postEffectBright = new PostEffectBright()
@@ -37,6 +39,7 @@ export class Sketch {
     this.scene.add(this.title)
     this.scene.add(this.water)
     this.scene.add(this.points)
+    this.scene.add(this.sphere)
     this.scene.add(this.pointLight1)
     this.scene.add(this.pointLight2)
   }
@@ -98,12 +101,15 @@ export class Sketch {
     this.title.update(time)
     this.water.update(time)
     this.points.update(time)
+    this.sphere.update(time)
     this.title.visible = false
     this.points.visible = false
+    this.sphere.visible = false
     this.water.render1(renderer, this.scene, this.camera)
     this.water.render2(renderer, this.scene, this.camera)
     this.title.visible = true
     this.points.visible = true
+    this.sphere.visible = true
     renderer.setRenderTarget(this.target1)
     renderer.render(this.scene, this.camera)
 
