@@ -21,6 +21,12 @@
         target = '_blank'
         )
         IconTwitter
+    .home-summary__link
+      ButtonRound(
+        href = 'https://www.tplh.net/'
+        target = '_blank'
+        )
+        IconFaceManProfile
 </template>
 
 <script lang="ts">
