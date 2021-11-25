@@ -63,8 +63,8 @@ export default class Water extends THREE.Mesh {
       lights: true,
       fog: true,
     })
-    material.uniforms.uvTransform.value.scale(8, 8)
-    material.uniforms.uvTransform.value.rotate((Math.PI / 180) * -45)
+    material.uniforms.uvTransform.value.scale(6, 6)
+    material.uniforms.uvTransform.value.rotate((Math.PI / 180) * -30)
     material.uniforms.diffuse.value.set(0x440044)
 
     // Create Object3D
