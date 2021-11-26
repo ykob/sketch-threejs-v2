@@ -22,10 +22,10 @@ varying vec2 vUvMask2;
 varying vec2 vUvMask3;
 varying vec2 vUvMask4;
 
-const float duration1 = 0.14;
+const float duration1 = 0.18;
 const float duration2 = duration1 * 3.0;
 
-#pragma glslify: ease = require(glsl-easings/quadratic-out)
+#pragma glslify: ease = require(glsl-easings/quadratic-in-out)
 #pragma glslify: convertHsvToRgb = require(../../modules/convertHsvToRgb)
 
 float calcStep(float s, float a, float d) {
@@ -37,7 +37,7 @@ vec4 calcColor(vec2 uv, float stepShow, float stepHide, sampler2D texture) {
   vec4 mapM = texture2D(normalMap, uv);
   float trasStep1 = calcStep(stepShow, mapM.r, duration1) - calcStep(stepHide, mapM.r, duration1);
   float trasStep2 = calcStep(stepShow, mapM.r, duration2) - calcStep(stepHide, mapM.r, duration2);
-  vec3 rgb = convertHsvToRgb(vec3(mapM.g * 0.42 + 0.35, 0.9, 0.5 + smoothstep(0.0, 0.1, trasStep1) * 0.5));
+  vec3 rgb = convertHsvToRgb(vec3(mapM.g * 0.4 + 0.35, 0.9, 0.2 + smoothstep(0.0, 0.05, trasStep1) * 0.7));
   vec2 uvDiff =
     vec2(cos(radians(mapM.r * 360.0 * 6.0)), sin(radians(mapM.r * 360.0 * 6.0))) * (1.0 - trasStep2) * 0.2
     + p * (stepShow - 1.0 + stepHide) * 0.1;

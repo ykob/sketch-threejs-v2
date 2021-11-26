@@ -215,8 +215,8 @@ export default class Plane extends THREE.Mesh {
           status.isDestroyed = true
         }
       }
-      stepShow.value = easing.outCubic(Math.max(Math.min(status.timeShow, DURATION), 0) / DURATION)
-      stepHide.value = easing.outCubic(Math.max(Math.min(status.timeHide, DURATION), 0) / DURATION)
+      stepShow.value = easing.outQuad(Math.max(Math.min(status.timeShow, DURATION), 0) / DURATION)
+      stepHide.value = easing.outQuad(Math.max(Math.min(status.timeHide, DURATION), 0) / DURATION)
     }
   }
 }
