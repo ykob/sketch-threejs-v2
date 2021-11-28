@@ -4,8 +4,7 @@ import vs from './glsl/Sphere.vs'
 import fs from './glsl/Sphere.fs'
 
 export default class Sphere extends THREE.Mesh {
-  constructor() {
-    const geometry = new THREE.SphereGeometry(240, 32, 32)
+  constructor(geometry: THREE.BufferGeometry) {
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
@@ -20,8 +19,9 @@ export default class Sphere extends THREE.Mesh {
     })
 
     super(geometry, material)
-    this.position.y = 440
+    this.position.y = 500
     this.position.z = -800
+    this.scale.set(90, 90, 90)
   }
 
   start(texture: THREE.Texture) {
@@ -36,6 +36,6 @@ export default class Sphere extends THREE.Mesh {
     const { uniforms } = this.material
 
     uniforms.time.value += time
-    this.rotation.y = uniforms.time.value * 0.01
+    this.rotation.y = uniforms.time.value * 0.1
   }
 }

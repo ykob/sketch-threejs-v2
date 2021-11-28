@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'
 import PostEffectBright from '../common/PostEffectBright'
 import PostEffectBlur from '../common/PostEffectBlur'
 import PostEffectBloom from '../common/PostEffectBloom'
@@ -12,6 +13,8 @@ import PointLight from './PointLight'
 import { sleep } from '~/assets/js/utils'
 
 export class Sketch {
+  sphere: Sphere | null
+
   target = new THREE.WebGLRenderTarget(1, 1)
   target1 = new THREE.WebGLRenderTarget(1, 1)
   target2 = new THREE.WebGLRenderTarget(1, 1)
@@ -21,10 +24,10 @@ export class Sketch {
   cameraPE = new Camera()
   camera = new PerspectiveCamera()
   imgLoader = new THREE.ImageLoader()
+  objLoader = new OBJLoader()
   title = new Title()
   water = new Water()
   points = new Points()
-  sphere = new Sphere()
   pointLight1 = new PointLight(0x22ff22, 0.65, 200)
   pointLight2 = new PointLight(0x2222dd, 0.25, 400)
   postEffectBright = new PostEffectBright()
@@ -33,34 +36,49 @@ export class Sketch {
   postEffectBloom = new PostEffectBloom()
 
   constructor() {
+    this.sphere = null
     this.pointLight1.position.set(0, 100, -15)
     this.pointLight2.position.set(0, 100, -15)
     this.scene.fog = new THREE.Fog(0x000000, 10, 500)
     this.scene.add(this.title)
     this.scene.add(this.water)
     this.scene.add(this.points)
-    this.scene.add(this.sphere)
     this.scene.add(this.pointLight1)
     this.scene.add(this.pointLight2)
   }
 
   async start() {
-    const pathArr = [
+    const imgPath = [
       require('@/assets/img/common/noise.png'),
       require('@/assets/img/common/water.jpg'),
       require('@/assets/img/home/title_fill.jpg'),
       require('@/assets/img/home/title_border.jpg'),
     ]
+    const objPath = [
+      '/obj/home/Polyhedron.obj',
+    ]
     const textures: THREE.Texture[] = []
     let imgs: HTMLImageElement[] = []
 
     await Promise.all([
-      ...pathArr.map((o) => {
+      ...imgPath.map((o) => {
         return this.imgLoader.loadAsync(o)
       }),
     ])
     .then((response: HTMLImageElement[]) => {
       imgs = response
+    })
+    await Promise.all([
+      ...objPath.map((o) => {
+        return this.objLoader.loadAsync(o)
+      }),
+    ])
+    .then((response: THREE.Group[]) => {
+      const child1 = response[0].children[0]
+      if (child1 instanceof THREE.Mesh) {
+        this.sphere = new Sphere(child1.geometry)
+      }
+      if (this.sphere !== null) this.scene.add(this.sphere)
     })
     for (let i = 0; i < imgs.length; i++) {
       const img = imgs[i]
@@ -101,15 +119,15 @@ export class Sketch {
     this.title.update(time)
     this.water.update(time)
     this.points.update(time)
-    this.sphere.update(time)
+    if (this.sphere !== null) this.sphere.update(time)
     this.title.visible = false
     this.points.visible = false
-    this.sphere.visible = false
+    if (this.sphere !== null) this.sphere.visible = false
     this.water.render1(renderer, this.scene, this.camera)
     this.water.render2(renderer, this.scene, this.camera)
     this.title.visible = true
     this.points.visible = true
-    this.sphere.visible = true
+    if (this.sphere !== null) this.sphere.visible = true
     renderer.setRenderTarget(this.target1)
     renderer.render(this.scene, this.camera)
 
