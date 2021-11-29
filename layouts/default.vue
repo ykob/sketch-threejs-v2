@@ -26,7 +26,7 @@ export default Vue.extend({
     this.setSize()
 
     window.addEventListener('resize', debounceSetSize)
-    window.addEventListener('deviceorientation', debounceSetSize)
+    window.addEventListener('orientationchange', debounceSetSize)
 
     await sleep(2000)
     commit('ready')
