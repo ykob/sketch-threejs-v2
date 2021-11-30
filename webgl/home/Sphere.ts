@@ -6,16 +6,24 @@ import fs from './glsl/Sphere.fs'
 export default class Sphere extends THREE.Mesh {
   constructor(geometry: THREE.BufferGeometry) {
     const material = new THREE.RawShaderMaterial({
-      uniforms: {
-        time: {
-          value: 0,
+      uniforms: THREE.UniformsUtils.merge([
+        THREE.UniformsLib.common,
+        THREE.UniformsLib.normalmap,
+        THREE.UniformsLib.lights,
+        THREE.UniformsLib.fog,
+        {
+          time: {
+            value: 0,
+          },
+          shininess: {
+            value: 1000,
+          },
         },
-        texture: {
-          value: null,
-        },
-      },
+      ]),
       vertexShader: vs,
       fragmentShader: fs,
+      lights: true,
+      fog: false,
     })
 
     super(geometry, material)
@@ -37,5 +45,6 @@ export default class Sphere extends THREE.Mesh {
 
     uniforms.time.value += time
     this.rotation.y = uniforms.time.value * 0.1
+    this.rotation.z = uniforms.time.value * 0.05
   }
 }
