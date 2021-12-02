@@ -1,5 +1,9 @@
 # sketch-threejs-v2
 
+## Requirements
+
+- Node >= 14.16.0
+
 ## Build Setup
 
 ```bash
