@@ -22,13 +22,14 @@ export default Vue.extend({
     duration: 2000,
     mode: '',
   },
-  async asyncData({ params, store, $content }) {
+  async asyncData({ error, params, store, $content }) {
     let page
 
     try {
       await store.dispatch('getPages')
       page = await $content(`sketch/${params.id}`).fetch()
     } catch {
+      return error({ message: 'Article not found' })
     }
 
     return {
