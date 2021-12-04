@@ -24,8 +24,8 @@ export default Vue.extend({
 
     try {
       page = await $content('home').fetch()
-    } catch(result) {
-      error(result.response)
+    } catch {
+      return error({ message: 'Article not found' })
     }
 
     return {
