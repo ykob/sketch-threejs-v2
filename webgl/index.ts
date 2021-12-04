@@ -85,7 +85,7 @@ export default class WebGLContent {
     this.resolution.set(width, height)
     this.renderer.setSize(this.resolution.x, this.resolution.y)
     this.camera.resize(this.resolution)
-    this.plane.resize(this.resolution)
+    this.plane.resize(this.resolution, this.camera)
 
     for (let i = 0; i < this.sketches.length; i++) {
       const sketch = this.sketches[i]

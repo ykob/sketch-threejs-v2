@@ -1,17 +1,20 @@
 import * as THREE from 'three'
 
-export default class Camera extends THREE.OrthographicCamera {
+export default class Camera extends THREE.PerspectiveCamera {
   constructor() {
-    super(0, 0, 0, 0, 0.1, 2000)
-    this.position.z = 1
+    const fov = 50
+    const aspect = 1
+    const near = 1
+    const far = 3000
+
+    super(fov, aspect, near, far)
+
+    this.position.z = 100
     this.lookAt(0, 0, 0)
   }
 
   resize(resolution: THREE.Vector2) {
-    this.left = resolution.x / -2
-    this.right = resolution.x / 2
-    this.top = resolution.y / 2
-    this.bottom = resolution.y / -2
+    this.aspect = resolution.x / resolution.y
     this.updateProjectionMatrix()
   }
 }

@@ -109,9 +109,13 @@ export default class Plane extends THREE.Mesh {
     uniforms.normalMap.value = normalMap
   }
 
-  resize(resolution: THREE.Vector2) {
+  resize(resolution: THREE.Vector2, camera: THREE.PerspectiveCamera) {
     if (!(this.material instanceof THREE.RawShaderMaterial)) return
     const { uniforms } = this.material
+    const height = Math.abs(
+      (camera.position.z - this.position.z) * Math.tan(MathEx.radians(camera.fov) / 2) * 2
+    )
+    const width = height * camera.aspect
 
     this.sx = Math.min(resolution.x / resolution.y, 1)
     this.sy = Math.min(resolution.y / resolution.x, 1)
@@ -119,7 +123,7 @@ export default class Plane extends THREE.Mesh {
     uniforms.uvTransform2.value.setUvTransform(0, 0, this.sx, this.sy, 0, 0.5, 0.5)
     uniforms.uvTransform3.value.setUvTransform(0, 0, this.sx, this.sy, 0, 0.5, 0.5)
     uniforms.uvTransform4.value.setUvTransform(0, 0, this.sx, this.sy, 0, 0.5, 0.5)
-    this.scale.set(resolution.x, resolution.y, 1)
+    this.scale.set(width, height, 1)
   }
 
   changeScene(t: THREE.Texture) {

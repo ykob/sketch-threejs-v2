@@ -5,7 +5,7 @@ import fs from './glsl/Background.fs'
 
 export default class Background extends THREE.Mesh {
   constructor() {
-    const geometry = new THREE.SphereGeometry(1400, 32, 32)
+    const geometry = new THREE.SphereGeometry(2000, 32, 32)
     const material = new THREE.RawShaderMaterial({
       uniforms: {
         time: {
