@@ -2,7 +2,7 @@ import * as THREE from 'three'
 
 export default class Camera extends THREE.PerspectiveCamera {
   constructor() {
-    const fov = 50
+    const fov = 80
     const aspect = 1
     const near = 1
     const far = 3000
