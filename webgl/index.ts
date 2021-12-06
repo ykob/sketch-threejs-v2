@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import Camera from './common/Camera'
 import Plane from './common/Plane'
 import Background from './common/Background'
+import LoadingCore from './common/LoadingCore'
 
 const parser = new UAParser()
 const os = parser.getOS().name
@@ -20,6 +21,7 @@ export default class WebGLContent {
   camera = new Camera()
   plane = new Plane()
   background = new Background()
+  loadingCore = new LoadingCore()
   sketches: any[] = []
   texLoader = new THREE.TextureLoader()
 
@@ -27,6 +29,10 @@ export default class WebGLContent {
     this.renderer = null
     this.scene.add(this.plane)
     this.scene.add(this.background)
+    this.scene.add(this.loadingCore)
+
+    const light = new THREE.AmbientLight(0x777777)
+    this.scene.add(light)
   }
 
   async start(): Promise<void> {
@@ -47,6 +53,7 @@ export default class WebGLContent {
     .then((response: THREE.Texture[]) => {
       this.plane.start(response[0])
       this.background.start(response[1])
+      this.loadingCore.start(response[1])
       this.renderer = new THREE.WebGL1Renderer({
         canvas,
         alpha: true,
@@ -72,6 +79,7 @@ export default class WebGLContent {
     }
     this.plane.update(time)
     this.background.update(time)
+    this.loadingCore.update(time)
     this.renderer.setRenderTarget(null)
     this.renderer.setClearColor(0x000000, 1.0)
     this.renderer.render(this.scene, this.camera)
