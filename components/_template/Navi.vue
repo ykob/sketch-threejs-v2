@@ -7,19 +7,9 @@
       |Home
   div
     nuxt-link(
-      to = '/sketch/dummy01'
+      to = '/sketch/newyear2022'
       )
-      |dummy01
-  div
-    nuxt-link(
-      to = '/sketch/dummy02'
-      )
-      |dummy02
-  div
-    nuxt-link(
-      to = '/sketch/dummy03'
-      )
-      |dummy03
+      |New Year 2022
 </template>
 
 <script lang="ts">
