@@ -2,7 +2,7 @@ import * as THREE from 'three'
 
 export default class Camera extends THREE.OrthographicCamera {
   constructor() {
-    super(0, 0, 0, 0, 0.1, 1000)
+    super(0, 0, 0, 0, 0.1, 1500)
     this.position.z = 1
     this.lookAt(0, 0, 0)
   }

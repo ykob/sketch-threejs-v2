@@ -11,3 +11,6 @@ body {
 a {
   color: currentColor;
 }
+::selection {
+  background-color: rgba(#000, 0);
+}

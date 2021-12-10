@@ -23,7 +23,7 @@ export default Vue.extend({
   computed: {
     styles(): { [key: string]: string } {
       return {
-        width: this.typo === ' ' ? '0.5em' : 'auto',
+        width: this.typo === ' ' ? '0.1em' : 'auto',
         transitionDelay: `${this.delay}s`,
       }
     },
