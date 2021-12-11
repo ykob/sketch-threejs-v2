@@ -1,5 +1,5 @@
 <template lang="pug">
-ButtonBase(
+ButtonBase.button(
   v-bind = '$attrs'
   tag = 'a'
   buttonType = 'transparent'

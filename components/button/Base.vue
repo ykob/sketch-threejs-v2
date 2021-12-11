@@ -81,12 +81,10 @@ export default Vue.extend({
     box-shadow: 0 1px 1px rgba(#000, 0.3);
     font-weight: 600;
     text-decoration: none;
-    transition-property: background-color;
   }
   &.transparent {
     font-weight: 600;
     text-decoration: none;
-    transition-property: background-color;
   }
   &:disabled,
   &.disabled {

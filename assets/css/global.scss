@@ -10,6 +10,11 @@ body {
 }
 a {
   color: currentColor;
+  transition-duration: 0.4s;
+  transition-property: color;
+  &:hover {
+    color: #6dc;
+  }
 }
 ::selection {
   background-color: rgba(#000, 0);
