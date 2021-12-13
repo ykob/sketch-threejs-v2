@@ -25,6 +25,12 @@ transition(
           target = '_blank'
           )
           IconTwitter
+      .links__item
+        ButtonRound(
+          href = 'https://www.tplh.net/'
+          target = '_blank'
+          )
+          IconFaceManProfile
 </template>
 
 <script lang="ts">
