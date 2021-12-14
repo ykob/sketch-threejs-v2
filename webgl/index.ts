@@ -124,4 +124,11 @@ export default class WebGLContent {
       }, 500)
     })
   }
+
+  hideSketch(): Promise<void> {
+    return new Promise(() => {
+      clearTimeout(this.timer)
+      this.plane.hideScene()
+    })
+  }
 }
