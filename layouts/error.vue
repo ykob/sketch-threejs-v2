@@ -1,6 +1,5 @@
 <template lang="pug">
 div
-  |Error
 </template>
 
 <script lang="ts">
