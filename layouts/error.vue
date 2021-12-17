@@ -8,7 +8,7 @@ import Vue from 'vue'
 export default Vue.extend({
   mounted() {
     this.$webgl.hideSketch()
-  }
+  },
 })
 </script>
 
