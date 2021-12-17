@@ -6,7 +6,6 @@ export default class LoadingCore extends THREE.Mesh {
   constructor() {
     const geometry = new THREE.OctahedronGeometry(20, 0)
     const material = new THREE.MeshPhongMaterial({
-      reflectivity: 0.1,
       flatShading: true,
     })
 
@@ -18,7 +17,7 @@ export default class LoadingCore extends THREE.Mesh {
 
   start(map: THREE.Texture) {
     if (!(this.material instanceof THREE.MeshPhongMaterial)) return
-    this.material.map = map
+    this.material.envMap = map
   }
 
   update(time: number) {

@@ -24,12 +24,15 @@ export default class WebGLContent {
   loadingCore = new LoadingCore()
   sketches: any[] = []
   texLoader = new THREE.TextureLoader()
+  cubeRenderTarget = new THREE.WebGLCubeRenderTarget(512)
+  cubeCamera = new THREE.CubeCamera(1, 2000, this.cubeRenderTarget)
 
   constructor() {
     this.renderer = null
     this.scene.add(this.plane)
     this.scene.add(this.background)
     this.scene.add(this.loadingCore)
+    this.scene.add(this.cubeCamera)
 
     const light = new THREE.AmbientLight(0x777777)
     this.scene.add(light)
@@ -53,7 +56,7 @@ export default class WebGLContent {
     .then((response: THREE.Texture[]) => {
       this.plane.start(response[0])
       this.background.start(response[1])
-      this.loadingCore.start(response[1])
+      this.loadingCore.start(this.cubeRenderTarget.texture)
       this.renderer = new THREE.WebGL1Renderer({
         canvas,
         alpha: true,
@@ -80,6 +83,10 @@ export default class WebGLContent {
     this.plane.update(time)
     this.background.update(time)
     this.loadingCore.update(time)
+    this.loadingCore.visible = false
+    this.cubeCamera.position.copy(this.loadingCore.position)
+    this.cubeCamera.update(this.renderer, this.scene)
+    this.loadingCore.visible = true
     this.renderer.setRenderTarget(null)
     this.renderer.setClearColor(0x000000, 1.0)
     this.renderer.render(this.scene, this.camera)
