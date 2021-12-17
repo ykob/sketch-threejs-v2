@@ -2,10 +2,10 @@ import * as THREE from 'three'
 import { Reflector } from 'three/examples/jsm/objects/Reflector.js'
 import { Refractor } from 'three/examples/jsm/objects/Refractor.js'
 
-import vs from './glsl/Water.vs'
-import fs from './glsl/Water.fs'
+import vs from './glsl/Floor.vs'
+import fs from './glsl/Floor.fs'
 
-export default class Water extends THREE.Mesh {
+export default class Floor extends THREE.Mesh {
   reflector: Reflector
   refractor: Refractor
   target1: THREE.WebGLRenderTarget
