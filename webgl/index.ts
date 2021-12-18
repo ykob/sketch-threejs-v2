@@ -1,6 +1,7 @@
 import { UAParser } from 'ua-parser-js'
 import * as THREE from 'three'
 import Camera from './common/Camera'
+import DirectionalLight from './common/DirectionalLight'
 import Plane from './common/Plane'
 import Background from './common/Background'
 import LoadingCore from './common/LoadingCore'
@@ -19,6 +20,8 @@ export default class WebGLContent {
   clock = new THREE.Clock(false)
   scene = new THREE.Scene()
   camera = new Camera()
+  directionalLight1 = new DirectionalLight(0x66ffaa)
+  directionalLight2 = new DirectionalLight(0x66aaff)
   plane = new Plane()
   background = new Background()
   loadingCore = new LoadingCore()
@@ -29,13 +32,14 @@ export default class WebGLContent {
 
   constructor() {
     this.renderer = null
+    this.directionalLight1.position.set(10, 10, 10)
+    this.directionalLight2.position.set(-10, -10, 10)
+    this.scene.add(this.directionalLight1)
+    this.scene.add(this.directionalLight2)
     this.scene.add(this.plane)
     this.scene.add(this.background)
     this.scene.add(this.loadingCore)
     this.scene.add(this.cubeCamera)
-
-    const light = new THREE.AmbientLight(0x777777)
-    this.scene.add(light)
   }
 
   async start(): Promise<void> {

@@ -7,6 +7,7 @@ export default class LoadingCore extends THREE.Mesh {
     const geometry = new THREE.OctahedronGeometry(20, 0)
     const material = new THREE.MeshPhongMaterial({
       flatShading: true,
+      color: 0xffffff,
     })
 
     super(geometry, material)
