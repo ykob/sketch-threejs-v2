@@ -1,4 +1,8 @@
 import * as THREE from 'three'
+import { MathEx } from '@/assets/js/utils'
+
+const DURATION = 1
+const DELAY = 0.5
 
 export default class LoadingCore extends THREE.Mesh {
   time: number
@@ -26,5 +30,9 @@ export default class LoadingCore extends THREE.Mesh {
     this.time += time
     this.rotation.x = this.time
     this.rotation.y = this.time
+
+    const scale = MathEx.clamp((this.time - DELAY) / DURATION, 0, 1)
+
+    this.scale.set(scale, scale, scale)
   }
 }
