@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { easing } from 'ts-easing'
 import { MathEx } from '@/assets/js/utils'
 
 const DURATION = 1
@@ -31,7 +32,7 @@ export default class LoadingCore extends THREE.Mesh {
     this.rotation.x = this.time
     this.rotation.y = this.time
 
-    const scale = MathEx.clamp((this.time - DELAY) / DURATION, 0, 1)
+    const scale = easing.elastic(MathEx.clamp((this.time - DELAY) / DURATION, 0, 1))
 
     this.scale.set(scale, scale, scale)
   }
