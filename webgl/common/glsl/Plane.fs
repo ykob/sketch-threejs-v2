@@ -39,8 +39,8 @@ vec4 calcColor(vec2 uv, float stepShow, float stepHide, sampler2D texture) {
   float trasStep2 = calcStep(stepShow, mapM.r, duration2) - calcStep(stepHide, mapM.r, duration2);
   vec3 rgb = convertHsvToRgb(vec3(mapM.g * 0.4 + 0.35, 0.9, 0.2 + smoothstep(0.0, 0.05, trasStep1) * 0.7));
   vec2 uvDiff =
-    vec2(cos(radians(mapM.r * 360.0 * 6.0)), sin(radians(mapM.r * 360.0 * 6.0))) * (1.0 - trasStep2) * 0.2
-    + p * (stepShow - 1.0 + stepHide) * 0.1;
+    vec2(cos(radians(mapM.r * 360.0 * 6.0)), sin(radians(mapM.r * 360.0 * 6.0))) * (1.0 - trasStep2) * 0.06
+    + p * (stepShow - 1.0 + stepHide) * 0.14;
   vec4 texColor = texture2D(texture, vUv + uvDiff) * trasStep1;
   vec4 dissolveEdge = vec4(rgb, 1.0) * smoothstep(0.0, 0.02, trasStep1) * (1.0 - smoothstep(0.02, 1.0, trasStep1));
   return texColor + dissolveEdge;
