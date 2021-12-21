@@ -17,7 +17,7 @@ export default class LoadingCore extends THREE.Mesh {
 
     super(geometry, material)
 
-    this.position.z = -20
+    this.position.z = -25
     this.time = 0
   }
 
@@ -32,7 +32,9 @@ export default class LoadingCore extends THREE.Mesh {
     this.rotation.x = this.time
     this.rotation.y = this.time
 
-    const scale = easing.elastic(MathEx.clamp((this.time - DELAY) / DURATION, 0, 1))
+    const scale =
+      easing.elastic(MathEx.clamp((this.time - DELAY) / DURATION, 0, 1))
+      + Math.pow(Math.sin(this.time * 4), 3) * Math.sin(this.time * 24) * 0.15
 
     this.scale.set(scale, scale, scale)
   }
