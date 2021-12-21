@@ -54,9 +54,9 @@ export class Sketch {
       require('@/assets/img/home/title_fill.jpg'),
       require('@/assets/img/home/title_border.jpg'),
     ]
-    const objPath = [
-      '/obj/home/Polyhedron.obj',
-    ]
+    // const objPath = [
+    //   '/obj/home/Polyhedron.obj',
+    // ]
     const textures: THREE.Texture[] = []
     let imgs: HTMLImageElement[] = []
 
@@ -68,18 +68,18 @@ export class Sketch {
     .then((response: HTMLImageElement[]) => {
       imgs = response
     })
-    await Promise.all([
-      ...objPath.map((o) => {
-        return this.objLoader.loadAsync(o)
-      }),
-    ])
-    .then((response: THREE.Group[]) => {
-      const child1 = response[0].children[0]
-      if (child1 instanceof THREE.Mesh) {
-        this.sphere = new Sphere(child1.geometry)
-      }
-      if (this.sphere !== null) this.scene.add(this.sphere)
-    })
+    // await Promise.all([
+    //   ...objPath.map((o) => {
+    //     return this.objLoader.loadAsync(o)
+    //   }),
+    // ])
+    // .then((response: THREE.Group[]) => {
+    //   const child1 = response[0].children[0]
+    //   if (child1 instanceof THREE.Mesh) {
+    //     this.sphere = new Sphere(child1.geometry)
+    //   }
+    //   if (this.sphere !== null) this.scene.add(this.sphere)
+    // })
     for (let i = 0; i < imgs.length; i++) {
       const img = imgs[i]
       const texture = new THREE.Texture(img)
