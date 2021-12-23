@@ -1,5 +1,9 @@
 # sketch-threejs-v2
 
+## License
+
+Copyright (c) 2021 Yoichi Kobayashi  
+
 ## Requirements
 
 - Node >= 14.16.0
@@ -71,3 +75,7 @@ More information about the usage of this directory in [the documentation](https:
 This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+
+## Misc
+
+Follow Yoichi Kobayashi: [Web](http://www.tplh.net/), [Twitter](https://twitter.com/ykob0123)
