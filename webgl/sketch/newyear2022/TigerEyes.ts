@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 
-export default class TigerHead extends THREE.Mesh {
+export default class TigerEyes extends THREE.Mesh {
   constructor(geometry: THREE.BufferGeometry) {
     const material = new THREE.MeshStandardMaterial({
       color: 0x111109,

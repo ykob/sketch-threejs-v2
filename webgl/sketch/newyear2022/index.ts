@@ -2,30 +2,26 @@ import * as THREE from 'three'
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'
 import PerspectiveCamera from './PerspectiveCamera'
 import DirectionalLight from './DirectionalLight'
-import TigerHead from './TigerHead'
-import TigerEyes from './TigerEyes'
+import Tiger from './Tiger'
 import { sleep } from '~/assets/js/utils'
 
 export class Sketch {
-  tigerHead: TigerHead | null
-  tigerEyes: TigerEyes | null
-
   target = new THREE.WebGLRenderTarget(1, 1)
   imgLoader = new THREE.ImageLoader()
   objLoader = new OBJLoader()
   scene = new THREE.Scene()
   camera = new PerspectiveCamera()
+  tiger = new Tiger()
   ambientLight = new THREE.AmbientLight(0xff9999)
-  directionalLight1 = new DirectionalLight(0xffffff, 1)
+  directionalLight1 = new DirectionalLight(0xffffff, 0.8)
   directionalLight2 = new DirectionalLight(0xffffff, 0.5)
   directionalLight3 = new DirectionalLight(0xffffff, 0.5)
 
   constructor() {
-    this.tigerHead = null
-    this.tigerEyes = null
     this.directionalLight1.position.set(5, 10, 5)
     this.directionalLight2.position.set(-10, 2, 5)
     this.directionalLight3.position.set(10, -2, 5)
+    this.scene.add(this.tiger)
     this.scene.add(this.ambientLight)
     this.scene.add(this.directionalLight1)
     this.scene.add(this.directionalLight2)
@@ -57,18 +53,7 @@ export class Sketch {
       }),
     ])
     .then((response: THREE.Group[]) => {
-      const tigerHeadMesh = response[0].children.find(o => o.name === 'TigerHead_Mesh01')
-      const tigerEyesMesh = response[0].children.find(o => o.name === 'TigerEyes_Mesh02')
-      console.log(response)
-
-      if (tigerHeadMesh instanceof THREE.Mesh) {
-        this.tigerHead = new TigerHead(tigerHeadMesh.geometry)
-      }
-      if (this.tigerHead !== null) this.scene.add(this.tigerHead)
-      if (tigerEyesMesh instanceof THREE.Mesh) {
-        this.tigerEyes = new TigerEyes(tigerEyesMesh.geometry)
-      }
-      if (this.tigerEyes !== null) this.scene.add(this.tigerEyes)
+      this.tiger.start(response[0])
     })
     for (let i = 0; i < imgs.length; i++) {
       const img = imgs[i]
@@ -78,7 +63,7 @@ export class Sketch {
       textures.push(texture)
       await sleep(50)
     }
-    if (this.tigerHead !== null) this.tigerHead.start(textures[0])
+    this.tiger.setTexture(textures[0])
   }
 
   update(_time: number, renderer: THREE.WebGLRenderer): void {
