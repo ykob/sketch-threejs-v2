@@ -3,10 +3,12 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'
 import PerspectiveCamera from './PerspectiveCamera'
 import DirectionalLight from './DirectionalLight'
 import TigerHead from './TigerHead'
+import TigerEyes from './TigerEyes'
 import { sleep } from '~/assets/js/utils'
 
 export class Sketch {
   tigerHead: TigerHead | null
+  tigerEyes: TigerEyes | null
 
   target = new THREE.WebGLRenderTarget(1, 1)
   imgLoader = new THREE.ImageLoader()
@@ -19,6 +21,7 @@ export class Sketch {
   constructor() {
     this.tigerHead = null
     this.directionalLight1.position.set(14, 10, 10)
+    this.tigerEyes = null
     this.scene.add(this.ambientLight)
     this.scene.add(this.directionalLight1)
     this.scene.fog = new THREE.Fog(0x000000, 10, 500)
@@ -48,12 +51,18 @@ export class Sketch {
       }),
     ])
     .then((response: THREE.Group[]) => {
-      const child1 = response[0].children.find(o => o.name === 'TigerHead_Mesh')
+      const tigerHeadMesh = response[0].children.find(o => o.name === 'TigerHead_Mesh01')
+      const tigerEyesMesh = response[0].children.find(o => o.name === 'TigerEyes_Mesh02')
+      console.log(response)
 
-      if (child1 instanceof THREE.Mesh) {
-        this.tigerHead = new TigerHead(child1.geometry)
+      if (tigerHeadMesh instanceof THREE.Mesh) {
+        this.tigerHead = new TigerHead(tigerHeadMesh.geometry)
       }
       if (this.tigerHead !== null) this.scene.add(this.tigerHead)
+      if (tigerEyesMesh instanceof THREE.Mesh) {
+        this.tigerEyes = new TigerEyes(tigerEyesMesh.geometry)
+      }
+      if (this.tigerEyes !== null) this.scene.add(this.tigerEyes)
     })
     for (let i = 0; i < imgs.length; i++) {
       const img = imgs[i]
