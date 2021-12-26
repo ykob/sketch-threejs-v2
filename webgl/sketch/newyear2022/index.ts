@@ -13,11 +13,13 @@ export class Sketch {
   objLoader = new OBJLoader()
   scene = new THREE.Scene()
   camera = new PerspectiveCamera()
+  ambientLight = new THREE.AmbientLight(0xff0000)
   directionalLight1 = new DirectionalLight(0xffffff, 1)
 
   constructor() {
     this.tigerHead = null
     this.directionalLight1.position.set(14, 10, 10)
+    this.scene.add(this.ambientLight)
     this.scene.add(this.directionalLight1)
     this.scene.fog = new THREE.Fog(0x000000, 10, 500)
   }
@@ -65,7 +67,7 @@ export class Sketch {
   }
 
   update(_time: number, renderer: THREE.WebGLRenderer): void {
-    renderer.setClearColor(0x000000, 1.0)
+    renderer.setClearColor(0x550000, 1.0)
     renderer.setRenderTarget(this.target)
     renderer.render(this.scene, this.camera)
   }
