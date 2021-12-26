@@ -3,7 +3,7 @@ import * as THREE from 'three'
 export default class TigerHead extends THREE.Mesh {
   constructor(geometry: THREE.BufferGeometry) {
     const material = new THREE.MeshStandardMaterial({
-      metalness: 0.9,
+      metalness: 0.7,
       roughness: 0.62,
     })
 

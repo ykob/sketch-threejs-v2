@@ -15,15 +15,21 @@ export class Sketch {
   objLoader = new OBJLoader()
   scene = new THREE.Scene()
   camera = new PerspectiveCamera()
-  ambientLight = new THREE.AmbientLight(0xff0000)
+  ambientLight = new THREE.AmbientLight(0xff9999)
   directionalLight1 = new DirectionalLight(0xffffff, 1)
+  directionalLight2 = new DirectionalLight(0xffffff, 0.5)
+  directionalLight3 = new DirectionalLight(0xffffff, 0.5)
 
   constructor() {
     this.tigerHead = null
-    this.directionalLight1.position.set(14, 10, 10)
     this.tigerEyes = null
+    this.directionalLight1.position.set(5, 10, 5)
+    this.directionalLight2.position.set(-10, 2, 5)
+    this.directionalLight3.position.set(10, -2, 5)
     this.scene.add(this.ambientLight)
     this.scene.add(this.directionalLight1)
+    this.scene.add(this.directionalLight2)
+    this.scene.add(this.directionalLight3)
     this.scene.fog = new THREE.Fog(0x000000, 10, 500)
   }
 
