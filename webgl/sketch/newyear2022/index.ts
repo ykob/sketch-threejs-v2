@@ -1,79 +1,77 @@
 import * as THREE from 'three'
-import PostEffectBright from '../../common/PostEffectBright'
-import PostEffectBlur from '../../common/PostEffectBlur'
-import PostEffectBloom from '../../common/PostEffectBloom'
-import Camera from './Camera'
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'
 import PerspectiveCamera from './PerspectiveCamera'
+import DirectionalLight from './DirectionalLight'
+import TigerHead from './TigerHead'
+import { sleep } from '~/assets/js/utils'
 
 export class Sketch {
+  tigerHead: TigerHead | null
+
   target = new THREE.WebGLRenderTarget(1, 1)
-  target1 = new THREE.WebGLRenderTarget(1, 1)
-  target2 = new THREE.WebGLRenderTarget(1, 1)
-  target3 = new THREE.WebGLRenderTarget(1, 1)
-  scenePE = new THREE.Scene()
+  imgLoader = new THREE.ImageLoader()
+  objLoader = new OBJLoader()
   scene = new THREE.Scene()
-  cameraPE = new Camera()
   camera = new PerspectiveCamera()
-  postEffectBright = new PostEffectBright()
-  postEffectBlurX = new PostEffectBlur()
-  postEffectBlurY = new PostEffectBlur()
-  postEffectBloom = new PostEffectBloom()
+  directionalLight1 = new DirectionalLight(0xffffff, 1)
 
   constructor() {
+    this.tigerHead = null
+    this.directionalLight1.position.set(14, 10, 10)
+    this.scene.add(this.directionalLight1)
     this.scene.fog = new THREE.Fog(0x000000, 10, 500)
   }
 
-  start() {
-    this.postEffectBright.start(this.target1.texture)
-    this.postEffectBlurX.start({
-      texture: this.target2.texture,
-      x: 1,
-      y: 0,
+  async start() {
+    const imgPath = [
+      require('@/assets/img/sketch/newyear2022/TigerHead.png'),
+    ]
+    const objPath = [
+      '/obj/sketch/newyear2022/Tiger.obj',
+    ]
+    const textures: THREE.Texture[] = []
+    let imgs: HTMLImageElement[] = []
+
+    await Promise.all([
+      ...imgPath.map((o) => {
+        return this.imgLoader.loadAsync(o)
+      }),
+    ])
+    .then((response: HTMLImageElement[]) => {
+      imgs = response
     })
-    this.postEffectBlurY.start({
-      texture: this.target3.texture,
-      x: 0,
-      y: 1,
+    await Promise.all([
+      ...objPath.map((o) => {
+        return this.objLoader.loadAsync(o)
+      }),
+    ])
+    .then((response: THREE.Group[]) => {
+      const child1 = response[0].children.find(o => o.name === 'TigerHead_Mesh')
+
+      if (child1 instanceof THREE.Mesh) {
+        this.tigerHead = new TigerHead(child1.geometry)
+      }
+      if (this.tigerHead !== null) this.scene.add(this.tigerHead)
     })
-    this.postEffectBloom.start({
-      texture1: this.target1.texture,
-      texture2: this.target2.texture,
-    })
+    for (let i = 0; i < imgs.length; i++) {
+      const img = imgs[i]
+      const texture = new THREE.Texture(img)
+
+      texture.needsUpdate = true
+      textures.push(texture)
+      await sleep(50)
+    }
+    if (this.tigerHead !== null) this.tigerHead.start(textures[0])
   }
 
   update(_time: number, renderer: THREE.WebGLRenderer): void {
     renderer.setClearColor(0x000000, 1.0)
-    renderer.setRenderTarget(this.target1)
-    renderer.render(this.scene, this.camera)
-
-    this.scenePE.add(this.postEffectBright)
-    renderer.setRenderTarget(this.target2)
-    renderer.render(this.scenePE, this.cameraPE)
-    this.scenePE.remove(this.postEffectBright)
-    this.scenePE.add(this.postEffectBlurX)
-    renderer.setRenderTarget(this.target3)
-    renderer.render(this.scenePE, this.cameraPE)
-    this.scenePE.remove(this.postEffectBlurX)
-    this.scenePE.add(this.postEffectBlurY)
-    renderer.setRenderTarget(this.target2)
-    renderer.render(this.scenePE, this.cameraPE)
-    this.scenePE.remove(this.postEffectBlurY)
-    this.scenePE.add(this.postEffectBloom)
     renderer.setRenderTarget(this.target)
-    renderer.render(this.scenePE, this.cameraPE)
-    this.scenePE.remove(this.postEffectBloom)
+    renderer.render(this.scene, this.camera)
   }
 
   resize(resolution: THREE.Vector2): void {
-    this.cameraPE.resize(resolution)
     this.camera.resize(resolution)
-    this.postEffectBright.resize(resolution)
-    this.postEffectBlurX.resize(resolution)
-    this.postEffectBlurY.resize(resolution)
-    this.postEffectBloom.resize(resolution)
     this.target.setSize(resolution.x, resolution.y)
-    this.target1.setSize(resolution.x, resolution.y)
-    this.target2.setSize(resolution.x / 4, resolution.y / 4)
-    this.target3.setSize(resolution.x / 4, resolution.y / 4)
   }
 }

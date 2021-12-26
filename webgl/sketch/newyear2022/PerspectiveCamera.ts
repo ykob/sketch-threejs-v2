@@ -9,13 +9,14 @@ export default class PerspectiveCamera extends THREE.PerspectiveCamera {
 
     super(fov, aspect, near, far)
 
-    this.position.z = 100
-    this.lookAt(0, 0, 0)
+    this.position.z = 4
+    this.position.y = 2.4
+    this.lookAt(0, 2.4, 0)
   }
 
   resize(resolution: THREE.Vector2) {
     this.aspect = resolution.x / resolution.y
     this.updateProjectionMatrix()
-    this.position.z = resolution.x / resolution.y > 1 ? 110 : 180
+    this.position.z = resolution.x / resolution.y > 1 ? 4 : 4
   }
 }
