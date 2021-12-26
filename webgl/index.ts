@@ -10,7 +10,7 @@ const parser = new UAParser()
 const os = parser.getOS().name
 
 export default class WebGLContent {
-  renderer: THREE.WebGL1Renderer | null
+  renderer: THREE.WebGLRenderer | null
 
   current = 0
   timer = 0
@@ -61,7 +61,7 @@ export default class WebGLContent {
       this.plane.start(response[0])
       this.background.start(response[1])
       this.loadingCore.start(this.cubeRenderTarget.texture)
-      this.renderer = new THREE.WebGL1Renderer({
+      this.renderer = new THREE.WebGLRenderer({
         canvas,
         alpha: true,
         antialias: true,
