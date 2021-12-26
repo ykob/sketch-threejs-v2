@@ -2,15 +2,16 @@ import * as THREE from 'three'
 
 export default class TigerHead extends THREE.Mesh {
   constructor(geometry: THREE.BufferGeometry) {
-    const material = new THREE.MeshPhongMaterial({
-      shininess: 50,
+    const material = new THREE.MeshStandardMaterial({
+      metalness: 0.9,
+      roughness: 0.62,
     })
 
     super(geometry, material)
   }
 
   start(texture: THREE.Texture) {
-    if (!(this.material instanceof THREE.MeshPhongMaterial)) return
+    if (!(this.material instanceof THREE.MeshStandardMaterial)) return
     this.material.map = texture
   }
 
