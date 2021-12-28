@@ -23,6 +23,10 @@ export default class TigerHead extends THREE.Mesh {
 
     this.time += time
 
-    this.rotation.y = this.time
+    const sin1 = Math.sin(this.time * 3)
+    const sin2 = Math.sin(this.time * 0.8)
+
+    this.position.y = sin1 * 0.07 + 0.07
+    this.rotation.y = sin2 * 0.5
   }
 }
