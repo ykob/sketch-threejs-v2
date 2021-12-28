@@ -50,9 +50,11 @@ export default class Tiger extends THREE.Group {
     }
   }
 
-  setTexture({ textureHead, textureBody }: { [key: string]: THREE.Texture }) {
+  setTexture({ textureHead, textureBody, textureHand }: { [key: string]: THREE.Texture }) {
     this.head?.start(textureHead)
     this.body?.start(textureBody)
+    this.handRight?.start(textureHand)
+    this.handLeft?.start(textureHand)
   }
 
   update(time: number) {

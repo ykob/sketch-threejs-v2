@@ -33,6 +33,7 @@ export class Sketch {
     const imgPath = [
       require('@/assets/img/sketch/newyear2022/TigerHead.png'),
       require('@/assets/img/sketch/newyear2022/TigerBody.png'),
+      require('@/assets/img/sketch/newyear2022/TigerHand.png'),
     ]
     const objPath = [
       '/obj/sketch/newyear2022/Tiger.obj',
@@ -67,6 +68,7 @@ export class Sketch {
     this.tiger.setTexture({
       textureHead: textures[0],
       textureBody: textures[1],
+      textureHand: textures[2],
     })
   }
 
