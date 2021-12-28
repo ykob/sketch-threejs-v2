@@ -9,8 +9,8 @@ export default class PerspectiveCamera extends THREE.PerspectiveCamera {
 
     super(fov, aspect, near, far)
 
-    this.position.z = 7
-    this.position.y = 1.7
+    this.position.z = 6.5
+    this.position.y = 0.7
     this.lookAt(0, 1.7, 0)
   }
 
