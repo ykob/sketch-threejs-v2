@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 
-export default class TigerHead extends THREE.Mesh {
+export default class TigerHandLeft extends THREE.Mesh {
   time: number
 
   constructor(geometry: THREE.BufferGeometry) {

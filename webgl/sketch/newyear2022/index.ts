@@ -14,8 +14,8 @@ export class Sketch {
   tiger = new Tiger()
   ambientLight = new THREE.AmbientLight(0xff9999)
   directionalLight1 = new DirectionalLight(0xffffff, 0.8)
-  directionalLight2 = new DirectionalLight(0xffffff, 0.5)
-  directionalLight3 = new DirectionalLight(0xffffff, 0.5)
+  directionalLight2 = new DirectionalLight(0xffffff, 0.3)
+  directionalLight3 = new DirectionalLight(0xffffff, 0.3)
 
   constructor() {
     this.directionalLight1.position.set(5, 10, 5)
@@ -32,6 +32,7 @@ export class Sketch {
   async start() {
     const imgPath = [
       require('@/assets/img/sketch/newyear2022/TigerHead.png'),
+      require('@/assets/img/sketch/newyear2022/TigerBody.png'),
     ]
     const objPath = [
       '/obj/sketch/newyear2022/Tiger.obj',
@@ -63,11 +64,14 @@ export class Sketch {
       textures.push(texture)
       await sleep(50)
     }
-    this.tiger.setTexture(textures[0])
+    this.tiger.setTexture({
+      textureHead: textures[0],
+      textureBody: textures[1],
+    })
   }
 
   update(_time: number, renderer: THREE.WebGLRenderer): void {
-    renderer.setClearColor(0x550000, 1.0)
+    renderer.setClearColor(0x770000, 1.0)
     renderer.setRenderTarget(this.target)
     renderer.render(this.scene, this.camera)
   }
