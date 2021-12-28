@@ -70,7 +70,8 @@ export class Sketch {
     })
   }
 
-  update(_time: number, renderer: THREE.WebGLRenderer): void {
+  update(time: number, renderer: THREE.WebGLRenderer): void {
+    this.tiger.update(time)
     renderer.setClearColor(0x770000, 1.0)
     renderer.setRenderTarget(this.target)
     renderer.render(this.scene, this.camera)

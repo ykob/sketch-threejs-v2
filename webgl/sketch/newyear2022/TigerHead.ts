@@ -22,5 +22,7 @@ export default class TigerHead extends THREE.Mesh {
     if (!(this.material instanceof THREE.MeshStandardMaterial)) return
 
     this.time += time
+
+    this.rotation.y = this.time
   }
 }

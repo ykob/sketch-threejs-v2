@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { MathEx } from '~/assets/js/utils'
 
 export default class TigerHandLeft extends THREE.Mesh {
   time: number
@@ -11,6 +12,7 @@ export default class TigerHandLeft extends THREE.Mesh {
 
     super(geometry, material)
     this.time = 0
+    this.position.set(0.95, 1.3, 0.44)
   }
 
   start(texture: THREE.Texture) {
@@ -22,5 +24,12 @@ export default class TigerHandLeft extends THREE.Mesh {
     if (!(this.material instanceof THREE.MeshStandardMaterial)) return
 
     this.time += time
+
+    const sin = Math.sin(this.time) * 0.5 + 0.5
+
+    this.position.x = sin * 0.1 + 0.95
+    this.rotation.x = MathEx.radians(sin * -33.3)
+    this.rotation.y = MathEx.radians(sin * 45)
+    this.rotation.z = MathEx.radians(sin * -33.3)
   }
 }
