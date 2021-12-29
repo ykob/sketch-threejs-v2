@@ -45,6 +45,7 @@ export class Sketch {
       require('@/assets/img/sketch/newyear2022/TigerHand.png'),
       require('@/assets/img/sketch/newyear2022/BackCircleIn.png'),
       require('@/assets/img/sketch/newyear2022/BackCircleOut.png'),
+      require('@/assets/img/common/noise.png'),
       require('@/assets/img/sketch/newyear2022/nebula.jpg'),
     ]
     const objPath = [
@@ -87,7 +88,9 @@ export class Sketch {
       textureIn: textures[3],
       textureOut: textures[4],
     })
-    this.background.start(textures[5])
+    textures[5].wrapT = textures[5].wrapS = THREE.RepeatWrapping
+    this.points.start(textures[5])
+    this.background.start(textures[6])
   }
 
   update(time: number, renderer: THREE.WebGLRenderer): void {

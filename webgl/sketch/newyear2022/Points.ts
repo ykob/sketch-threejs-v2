@@ -6,7 +6,7 @@ import { MathEx } from '~/assets/js/utils'
 export default class Points extends THREE.Points {
   constructor() {
     const geometry = new THREE.BufferGeometry()
-    const num = 3000
+    const num = 6000
     const baPositions = new THREE.BufferAttribute(new Float32Array(num * 3), 3)
     const baSizes = new THREE.BufferAttribute(new Float32Array(num), 1)
 
