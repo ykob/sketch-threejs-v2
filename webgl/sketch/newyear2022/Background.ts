@@ -7,6 +7,7 @@ export default class Background extends THREE.Mesh {
     const geometry = new THREE.SphereGeometry(100, 32, 32)
     const material = new THREE.MeshBasicMaterial({
       side: THREE.BackSide,
+      fog: false,
     })
 
     super(geometry, material)

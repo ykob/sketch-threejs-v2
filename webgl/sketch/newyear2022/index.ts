@@ -4,6 +4,7 @@ import PerspectiveCamera from './PerspectiveCamera'
 import DirectionalLight from './DirectionalLight'
 import Tiger from './Tiger'
 import BackCircle from './BackCircle'
+import Points from './Points'
 import Background from './Background'
 import { sleep } from '~/assets/js/utils'
 
@@ -15,6 +16,7 @@ export class Sketch {
   camera = new PerspectiveCamera()
   tiger = new Tiger()
   backCircle = new BackCircle()
+  points = new Points()
   background = new Background()
   ambientLight = new THREE.AmbientLight(0xff9999)
   directionalLight1 = new DirectionalLight(0xffffff, 0.8)
@@ -25,8 +27,10 @@ export class Sketch {
     this.directionalLight1.position.set(5, 10, 5)
     this.directionalLight2.position.set(-10, 2, 5)
     this.directionalLight3.position.set(10, -2, 5)
+    this.scene.fog = new THREE.Fog(0x000000, 10, 30)
     this.scene.add(this.tiger)
     this.scene.add(this.backCircle)
+    this.scene.add(this.points)
     this.scene.add(this.background)
     this.scene.add(this.ambientLight)
     this.scene.add(this.directionalLight1)
@@ -89,6 +93,7 @@ export class Sketch {
   update(time: number, renderer: THREE.WebGLRenderer): void {
     this.tiger.update(time)
     this.backCircle.update(time)
+    this.points.update(time)
     this.background.update(time)
     renderer.setClearColor(0x770000, 1.0)
     renderer.setRenderTarget(this.target)
@@ -97,6 +102,7 @@ export class Sketch {
 
   resize(resolution: THREE.Vector2): void {
     this.camera.resize(resolution)
+    this.points.resize(resolution)
     this.target.setSize(resolution.x, resolution.y)
   }
 }
