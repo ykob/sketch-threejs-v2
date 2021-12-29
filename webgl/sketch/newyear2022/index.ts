@@ -3,6 +3,7 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'
 import PerspectiveCamera from './PerspectiveCamera'
 import DirectionalLight from './DirectionalLight'
 import Tiger from './Tiger'
+import BackCircle from './BackCircle'
 import { sleep } from '~/assets/js/utils'
 
 export class Sketch {
@@ -12,6 +13,7 @@ export class Sketch {
   scene = new THREE.Scene()
   camera = new PerspectiveCamera()
   tiger = new Tiger()
+  backCircle = new BackCircle()
   ambientLight = new THREE.AmbientLight(0xff9999)
   directionalLight1 = new DirectionalLight(0xffffff, 0.8)
   directionalLight2 = new DirectionalLight(0xffffff, 0.3)
@@ -22,11 +24,11 @@ export class Sketch {
     this.directionalLight2.position.set(-10, 2, 5)
     this.directionalLight3.position.set(10, -2, 5)
     this.scene.add(this.tiger)
+    this.scene.add(this.backCircle)
     this.scene.add(this.ambientLight)
     this.scene.add(this.directionalLight1)
     this.scene.add(this.directionalLight2)
     this.scene.add(this.directionalLight3)
-    this.scene.fog = new THREE.Fog(0x000000, 10, 500)
   }
 
   async start() {
@@ -56,6 +58,7 @@ export class Sketch {
     ])
     .then((response: THREE.Group[]) => {
       this.tiger.start(response[0])
+      this.backCircle.start(response[0])
     })
     for (let i = 0; i < imgs.length; i++) {
       const img = imgs[i]
@@ -74,6 +77,7 @@ export class Sketch {
 
   update(time: number, renderer: THREE.WebGLRenderer): void {
     this.tiger.update(time)
+    this.backCircle.update(time)
     renderer.setClearColor(0x770000, 1.0)
     renderer.setRenderTarget(this.target)
     renderer.render(this.scene, this.camera)
