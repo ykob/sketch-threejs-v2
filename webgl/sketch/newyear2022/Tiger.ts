@@ -11,6 +11,7 @@ export default class Tiger extends THREE.Group {
   body: TigerBody | null
   handRight: TigerHandRight | null
   handLeft: TigerHandLeft | null
+  time: number
 
   constructor() {
     super()
@@ -19,6 +20,7 @@ export default class Tiger extends THREE.Group {
     this.body = null
     this.handRight = null
     this.handLeft = null
+    this.time = 0
   }
 
   start(group: THREE.Group) {
@@ -58,6 +60,11 @@ export default class Tiger extends THREE.Group {
   }
 
   update(time: number) {
+    this.time += time
+
+    const sin = Math.sin(this.time * 2)
+
+    this.position.y = sin * 0.2
     this.head?.update(time)
     this.eyes?.update(time)
     this.body?.update(time)

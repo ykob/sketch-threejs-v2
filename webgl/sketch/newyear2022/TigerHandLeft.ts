@@ -12,7 +12,7 @@ export default class TigerHandLeft extends THREE.Mesh {
 
     super(geometry, material)
     this.time = 0
-    this.position.set(0.95, 1.3, 0.44)
+    this.position.set(0.85, 1.3, 0.44)
   }
 
   start(texture: THREE.Texture) {
@@ -27,7 +27,7 @@ export default class TigerHandLeft extends THREE.Mesh {
 
     const sin = Math.sin(this.time) * 0.5 + 0.5
 
-    this.position.x = sin * 0.1 + 0.95
+    this.position.x = sin * 0.2 + 0.85
     this.rotation.x = MathEx.radians(sin * -33.3)
     this.rotation.y = MathEx.radians(sin * 45)
     this.rotation.z = MathEx.radians(sin * -33.3)
