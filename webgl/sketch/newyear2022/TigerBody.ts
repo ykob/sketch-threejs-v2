@@ -15,6 +15,7 @@ export default class TigerBody extends THREE.Mesh {
 
   start(texture: THREE.Texture) {
     if (!(this.material instanceof THREE.MeshStandardMaterial)) return
+
     this.material.map = texture
   }
 

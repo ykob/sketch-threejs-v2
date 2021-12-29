@@ -4,6 +4,7 @@ import PerspectiveCamera from './PerspectiveCamera'
 import DirectionalLight from './DirectionalLight'
 import Tiger from './Tiger'
 import BackCircle from './BackCircle'
+import Background from './Background'
 import { sleep } from '~/assets/js/utils'
 
 export class Sketch {
@@ -14,6 +15,7 @@ export class Sketch {
   camera = new PerspectiveCamera()
   tiger = new Tiger()
   backCircle = new BackCircle()
+  background = new Background()
   ambientLight = new THREE.AmbientLight(0xff9999)
   directionalLight1 = new DirectionalLight(0xffffff, 0.8)
   directionalLight2 = new DirectionalLight(0xffffff, 0.3)
@@ -25,6 +27,7 @@ export class Sketch {
     this.directionalLight3.position.set(10, -2, 5)
     this.scene.add(this.tiger)
     this.scene.add(this.backCircle)
+    this.scene.add(this.background)
     this.scene.add(this.ambientLight)
     this.scene.add(this.directionalLight1)
     this.scene.add(this.directionalLight2)
@@ -38,6 +41,7 @@ export class Sketch {
       require('@/assets/img/sketch/newyear2022/TigerHand.png'),
       require('@/assets/img/sketch/newyear2022/BackCircleIn.png'),
       require('@/assets/img/sketch/newyear2022/BackCircleOut.png'),
+      require('@/assets/img/sketch/newyear2022/nebula.jpg'),
     ]
     const objPath = [
       '/obj/sketch/newyear2022/Tiger.obj',
@@ -68,7 +72,7 @@ export class Sketch {
 
       texture.needsUpdate = true
       textures.push(texture)
-      await sleep(50)
+      await sleep(100)
     }
     this.tiger.setTexture({
       textureHead: textures[0],
@@ -79,11 +83,13 @@ export class Sketch {
       textureIn: textures[3],
       textureOut: textures[4],
     })
+    this.background.start(textures[5])
   }
 
   update(time: number, renderer: THREE.WebGLRenderer): void {
     this.tiger.update(time)
     this.backCircle.update(time)
+    this.background.update(time)
     renderer.setClearColor(0x770000, 1.0)
     renderer.setRenderTarget(this.target)
     renderer.render(this.scene, this.camera)
