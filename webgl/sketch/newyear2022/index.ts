@@ -36,6 +36,8 @@ export class Sketch {
       require('@/assets/img/sketch/newyear2022/TigerHead.png'),
       require('@/assets/img/sketch/newyear2022/TigerBody.png'),
       require('@/assets/img/sketch/newyear2022/TigerHand.png'),
+      require('@/assets/img/sketch/newyear2022/BackCircleIn.png'),
+      require('@/assets/img/sketch/newyear2022/BackCircleOut.png'),
     ]
     const objPath = [
       '/obj/sketch/newyear2022/Tiger.obj',
@@ -72,6 +74,10 @@ export class Sketch {
       textureHead: textures[0],
       textureBody: textures[1],
       textureHand: textures[2],
+    })
+    this.backCircle.setTexture({
+      textureIn: textures[3],
+      textureOut: textures[4],
     })
   }
 
