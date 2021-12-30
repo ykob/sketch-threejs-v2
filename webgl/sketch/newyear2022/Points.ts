@@ -6,9 +6,10 @@ import { MathEx } from '~/assets/js/utils'
 export default class Points extends THREE.Points {
   constructor() {
     const geometry = new THREE.BufferGeometry()
-    const num = 9000
+    const num = 6000
     const baPositions = new THREE.BufferAttribute(new Float32Array(num * 3), 3)
     const baSizes = new THREE.BufferAttribute(new Float32Array(num), 1)
+    const baDelays = new THREE.BufferAttribute(new Float32Array(num), 1)
 
     for (let i = 0, ul = num; i < ul; i++) {
       const radian = MathEx.radians(Math.random() * 360)
@@ -17,12 +18,15 @@ export default class Points extends THREE.Points {
       const y = Math.sin(radian) * radius
       const z = Math.random() * -30 + 10
       const size = Math.random() * 0.5 + 0.5
+      const delay = Math.random() * 6 + 4
 
       baPositions.setXYZ(i, x, y, z)
       baSizes.setX(i, size)
+      baDelays.setX(i, delay)
     }
     geometry.setAttribute('position', baPositions)
     geometry.setAttribute('size', baSizes)
+    geometry.setAttribute('delay', baDelays)
 
     const material = new THREE.RawShaderMaterial({
       uniforms: THREE.UniformsUtils.merge([

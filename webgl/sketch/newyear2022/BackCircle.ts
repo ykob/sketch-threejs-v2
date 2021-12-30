@@ -37,5 +37,6 @@ export default class Tiger extends THREE.Group {
     this.time += time
     this.backCircleIn?.update(time)
     this.backCircleOut?.update(time)
+    
   }
 }

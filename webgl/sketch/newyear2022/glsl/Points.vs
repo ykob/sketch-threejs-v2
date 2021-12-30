@@ -1,5 +1,6 @@
 attribute vec3 position;
 attribute float size;
+attribute float delay;
 
 uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
@@ -33,7 +34,7 @@ void main() {
   vec3 hsv = vec3(
     0.0 + noise.r * 0.24,
     0.9 - noise.g * 0.7,
-    1.0 - noise.b * 1.8
+    clamp(time - delay, 0.0, 1.0) - noise.b * 1.8
   );
   vColor = convertHsvToRgb(hsv);
 
