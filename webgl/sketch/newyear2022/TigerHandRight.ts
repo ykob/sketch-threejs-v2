@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { easing } from 'ts-easing'
 import { MathEx } from '~/assets/js/utils'
 
-const DURATION = 1.5
+const DURATION = 0.8
 const DELAY = 3.25
 
 export default class TigerHandRight extends THREE.Mesh {

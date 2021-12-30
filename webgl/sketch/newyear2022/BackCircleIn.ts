@@ -35,7 +35,7 @@ export default class BackCircleIn extends THREE.Mesh {
 
     const stepShow = easing.outExpo(MathEx.clamp((this.timeShow - DELAY) / DURATION, 0, 1))
 
-    this.rotation.z = this.time * 0.1
+    this.rotation.z = this.time * 0.1 + stepShow * 2
     this.scale.set(stepShow, stepShow, stepShow)
   }
 }
