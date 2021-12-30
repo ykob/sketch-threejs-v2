@@ -24,6 +24,7 @@ export default class Background extends THREE.Mesh {
     if (!(this.material instanceof THREE.MeshBasicMaterial)) return
 
     this.time += time
-    this.rotation.y = this.time * -0.01
+    this.rotation.x = Math.sin(this.time * 0.4) * 0.04
+    this.rotation.y = Math.cos(this.time * 0.2) * 0.16 + 1.5
   }
 }

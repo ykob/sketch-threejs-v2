@@ -6,13 +6,13 @@ import { MathEx } from '~/assets/js/utils'
 export default class Points extends THREE.Points {
   constructor() {
     const geometry = new THREE.BufferGeometry()
-    const num = 6000
+    const num = 9000
     const baPositions = new THREE.BufferAttribute(new Float32Array(num * 3), 3)
     const baSizes = new THREE.BufferAttribute(new Float32Array(num), 1)
 
     for (let i = 0, ul = num; i < ul; i++) {
       const radian = MathEx.radians(Math.random() * 360)
-      const radius = ((Math.random() + Math.random() + Math.random()) / 3 * 8 + 3)
+      const radius = ((Math.random() + Math.random() + Math.random()) / 3 * 8 + 0.7)
       const x = Math.cos(radian) * radius
       const y = Math.sin(radian) * radius
       const z = Math.random() * -30 + 10

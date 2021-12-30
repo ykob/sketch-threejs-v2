@@ -17,7 +17,7 @@ varying float fogDepth;
 #pragma glslify: convertHsvToRgb = require(../../../modules/convertHsvToRgb)
 
 void main() {
-  vec2 transformedUV = position.xy / 10.0 + vec2(time * -0.02);
+  vec2 transformedUV = position.xy / 10.0 + vec2(time * -0.08);
   vec4 noise = texture2D(tNoise, transformedUV);
 
   vec3 transformed = position;
@@ -33,7 +33,7 @@ void main() {
   vec3 hsv = vec3(
     0.0 + noise.r * 0.24,
     0.9 - noise.g * 0.7,
-    1.0 - noise.b * 1.4
+    1.0 - noise.b * 1.8
   );
   vColor = convertHsvToRgb(hsv);
 
