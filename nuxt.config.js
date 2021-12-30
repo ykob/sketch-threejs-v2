@@ -1,6 +1,8 @@
 import sass from 'sass'
 
 const TITLE = 'sketch of threejs v2'
+const DOMAIN = 'https://ykob.github.io'
+const ROUTER_BASE = '/sketch-threejs-v2'
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -8,7 +10,8 @@ export default {
 
   // https://nuxtjs.org/docs/configuration-glossary/configuration-env/
   env: {
-    sitename: TITLE
+    domain: DOMAIN,
+    sitename: TITLE,
   },
 
   server: {
@@ -117,9 +120,19 @@ export default {
         ],
       })
     },
+
   },
 
   generate: {
     interval: 2000,
+    async routes() {
+      const { $content } = require('@nuxt/content')
+      const files = await $content('sketch').fetch()
+      return files.map(file => file.path === '/index' ? '/' : file.path)
+    },
+  },
+
+  router: {
+    base: ROUTER_BASE,
   },
 }

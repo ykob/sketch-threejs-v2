@@ -12,6 +12,7 @@ const os = parser.getOS().name
 export default class WebGLContent {
   renderer: THREE.WebGLRenderer | null
 
+  base = ''
   current = 0
   timer = 0
   path = ''
@@ -30,7 +31,8 @@ export default class WebGLContent {
   cubeRenderTarget = new THREE.WebGLCubeRenderTarget(512)
   cubeCamera = new THREE.CubeCamera(1, 2000, this.cubeRenderTarget)
 
-  constructor() {
+  constructor({ base }: { base: string }) {
+    this.base = base
     this.renderer = null
     this.directionalLight1.position.set(10, 10, 10)
     this.directionalLight2.position.set(-10, -10, 10)
@@ -124,6 +126,7 @@ export default class WebGLContent {
   
         await sketch.start({
           os,
+          base: this.base,
         })
         if (this.path === path) {
           sketch.resize(this.resolution)

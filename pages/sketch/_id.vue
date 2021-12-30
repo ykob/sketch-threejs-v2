@@ -46,7 +46,7 @@ export default Vue.extend({
   head() {
     const title = this.page ? `${this.page.title} - ${process.env.sitename}` : ''
     const description = this.page ? this.page.description : ''
-    const ogImage = this.page ? this.page.ogImage : ''
+    const ogImage = this.page ? `${process.env.DOMAIN}${this.$router.options.base}/${this.page.ogImage}` : ''
 
     return {
       title,

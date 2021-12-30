@@ -38,7 +38,7 @@ export class Sketch {
     this.scene.add(this.directionalLight3)
   }
 
-  async start() {
+  async start({ base }: { base: string }) {
     const imgPath = [
       require('@/assets/img/sketch/newyear2022/TigerHead.png'),
       require('@/assets/img/sketch/newyear2022/TigerBody.png'),
@@ -49,7 +49,7 @@ export class Sketch {
       require('@/assets/img/sketch/newyear2022/nebula.jpg'),
     ]
     const objPath = [
-      '/obj/sketch/newyear2022/Tiger.obj',
+      `${base}/obj/sketch/newyear2022/Tiger.obj`,
     ]
     const textures: THREE.Texture[] = []
     let imgs: HTMLImageElement[] = []
