@@ -4,8 +4,8 @@ import PerspectiveCamera from './PerspectiveCamera'
 import DirectionalLight from './DirectionalLight'
 import Tiger from './Tiger'
 import BackCircle from './BackCircle'
+import Luminous from './Luminous'
 import Points from './Points'
-import Background from './Background'
 import { sleep } from '~/assets/js/utils'
 
 export class Sketch {
@@ -16,8 +16,8 @@ export class Sketch {
   camera = new PerspectiveCamera()
   tiger = new Tiger()
   backCircle = new BackCircle()
+  luminous = new Luminous()
   points = new Points()
-  background = new Background()
   ambientLight = new THREE.AmbientLight(0xff9999)
   directionalLight1 = new DirectionalLight(0xffffff, 0.8)
   directionalLight2 = new DirectionalLight(0xffffff, 0.3)
@@ -30,8 +30,8 @@ export class Sketch {
     this.scene.fog = new THREE.Fog(0x000000, 10, 30)
     this.scene.add(this.tiger)
     this.scene.add(this.backCircle)
+    this.scene.add(this.luminous)
     this.scene.add(this.points)
-    this.scene.add(this.background)
     this.scene.add(this.ambientLight)
     this.scene.add(this.directionalLight1)
     this.scene.add(this.directionalLight2)
@@ -46,7 +46,6 @@ export class Sketch {
       require('@/assets/img/sketch/newyear2022/BackCircleIn.png'),
       require('@/assets/img/sketch/newyear2022/BackCircleOut.png'),
       require('@/assets/img/common/noise.png'),
-      require('@/assets/img/sketch/newyear2022/nebula.jpg'),
     ]
     const objPath = [
       `${base}/obj/sketch/newyear2022/Tiger.obj`,
@@ -89,15 +88,15 @@ export class Sketch {
       textureOut: textures[4],
     })
     textures[5].wrapT = textures[5].wrapS = THREE.RepeatWrapping
+    this.luminous.start(textures[5])
     this.points.start(textures[5])
-    this.background.start(textures[6])
   }
 
   update(time: number, renderer: THREE.WebGLRenderer): void {
     this.tiger.update(time)
     this.backCircle.update(time)
+    this.luminous.update(time)
     this.points.update(time)
-    this.background.update(time)
     renderer.setClearColor(0x770000, 1.0)
     renderer.setRenderTarget(this.target)
     renderer.render(this.scene, this.camera)

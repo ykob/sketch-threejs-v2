@@ -6,7 +6,7 @@ import { MathEx } from '~/assets/js/utils'
 export default class Points extends THREE.Points {
   constructor() {
     const geometry = new THREE.BufferGeometry()
-    const num = 6000
+    const num = 5000
     const baPositions = new THREE.BufferAttribute(new Float32Array(num * 3), 3)
     const baSizes = new THREE.BufferAttribute(new Float32Array(num), 1)
     const baDelays = new THREE.BufferAttribute(new Float32Array(num), 1)
@@ -18,7 +18,7 @@ export default class Points extends THREE.Points {
       const y = Math.sin(radian) * radius
       const z = Math.random() * -30 + 10
       const size = Math.random() * 0.5 + 0.5
-      const delay = Math.random() * 6 + 4
+      const delay = Math.random() * 5 + 6
 
       baPositions.setXYZ(i, x, y, z)
       baSizes.setX(i, size)

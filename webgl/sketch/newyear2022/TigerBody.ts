@@ -35,7 +35,7 @@ export default class TigerBody extends THREE.Mesh {
     const stepShow1 = easing.outCubic(MathEx.clamp((this.timeShow - DELAY) / DURATION1, 0, 1))
     const stepShow2 = easing.outExpo(MathEx.clamp((this.timeShow - DELAY) / DURATION1, 0, 1))
 
-    this.position.y = (1 - stepShow1) * 0.4
+    this.position.y = (1 - stepShow1) * 1.4
     this.scale.set(stepShow2, stepShow2, stepShow2)
   }
 }
