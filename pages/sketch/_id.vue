@@ -44,13 +44,67 @@ export default Vue.extend({
     isLoaded: false,
   }),
   head() {
+    const title = this.page ? `${this.page.title} - ${process.env.sitename}` : ''
+    const description = this.page ? this.page.description : ''
+    const ogImage = this.page ? this.page.ogImage : ''
+
     return {
-      title: this.page ? this.page.title : '',
+      title,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: this.page ? this.page.description : '',
+          content: description,
+        },
+        {
+          hid: 'twitter:card',
+          property: 'twitter:card',
+          content: 'summary_large_image',
+        },
+        {
+          hid: 'twitter:title',
+          property: 'twitter:title',
+          content: title,
+        },
+        {
+          hid: 'twitter:creator',
+          property: 'twitter:creator',
+          content: '@ykob0123',
+        },
+        {
+          hid: 'twitter:description',
+          property: 'twitter:description',
+          content: description,
+        },
+        {
+          hid: 'twitter:image',
+          property: 'twitter:image',
+          content: ogImage,
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: title,
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: description,
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content: 'article',
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: `${this.$route.params.id}`,
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: ogImage,
         },
       ],
     }

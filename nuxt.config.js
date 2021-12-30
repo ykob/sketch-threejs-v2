@@ -1,10 +1,15 @@
 import sass from 'sass'
 
-const TITLE = 'sketch-threejs-v2'
+const TITLE = 'sketch of threejs v2'
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
+
+  // https://nuxtjs.org/docs/configuration-glossary/configuration-env/
+  env: {
+    sitename: TITLE
+  },
 
   server: {
     port: 8000, // default: 3000
