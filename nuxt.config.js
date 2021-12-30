@@ -28,9 +28,10 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
+      { property: 'og:site_name', content: TITLE },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: `${ROUTER_BASE}/favicon.ico` },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Homenaje&display=swap' },
     ],
   },

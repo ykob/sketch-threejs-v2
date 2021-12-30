@@ -46,7 +46,8 @@ export default Vue.extend({
   head() {
     const title = this.page ? `${this.page.title} - ${process.env.sitename}` : ''
     const description = this.page ? this.page.description : ''
-    const ogImage = this.page ? `${process.env.DOMAIN}${this.$router.options.base}/${this.page.ogImage}` : ''
+    const ogImage = this.page ? `${process.env.domain}${this.$router.options.base}${this.page.ogImage}` : ''
+    const ogUrl = this.page ? `${process.env.domain}${this.$router.options.base}sketch/${this.$route.params.id}/` : ''
 
     return {
       title,
@@ -58,27 +59,27 @@ export default Vue.extend({
         },
         {
           hid: 'twitter:card',
-          property: 'twitter:card',
+          name: 'twitter:card',
           content: 'summary_large_image',
         },
         {
           hid: 'twitter:title',
-          property: 'twitter:title',
+          name: 'twitter:title',
           content: title,
         },
         {
           hid: 'twitter:creator',
-          property: 'twitter:creator',
+          name: 'twitter:creator',
           content: '@ykob0123',
         },
         {
           hid: 'twitter:description',
-          property: 'twitter:description',
+          name: 'twitter:description',
           content: description,
         },
         {
           hid: 'twitter:image',
-          property: 'twitter:image',
+          name: 'twitter:image',
           content: ogImage,
         },
         {
@@ -99,7 +100,7 @@ export default Vue.extend({
         {
           hid: 'og:url',
           property: 'og:url',
-          content: `${this.$route.params.id}`,
+          content: ogUrl,
         },
         {
           hid: 'og:image',
