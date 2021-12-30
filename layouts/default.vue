@@ -3,7 +3,6 @@ div
   Header
   Nuxt
   canvas#canvas-webgl
-  Navi
 </template>
 
 <script lang="ts">
