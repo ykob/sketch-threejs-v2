@@ -17,7 +17,7 @@ void main() {
   float stepY = smoothstep(0.0, 0.9, vUv.y) * (1.0 - smoothstep(0.6, 1.0, vUv.y));
   vec3 hsv = vec3(
     0.0 + (texColorB1 + texColorB2) * 0.3,
-    0.4,
+    0.5,
     1.0
   );
   vec3 rgb = convertHsvToRgb(hsv);
