@@ -26,6 +26,7 @@
     "types": [
       "@nuxt/types",
       "@nuxt/content",
+      "@nuxtjs/moment",
       "@types/node",
       "@types/three",
     ]

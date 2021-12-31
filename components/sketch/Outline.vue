@@ -10,7 +10,7 @@
   .sketch-outline__description
     |{{ description }}
   .sketch-outline__created-at
-    |Created at : {{ createdAt }}
+    |Created at : {{ $moment(createdAt) }}
 </template>
 
 <script lang="ts">

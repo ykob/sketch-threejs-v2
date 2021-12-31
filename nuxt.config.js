@@ -84,6 +84,7 @@ export default {
     ['@nuxtjs/eslint-module', {
       fix: true,
     }],
+    '@nuxtjs/moment',
     '@nuxtjs/style-resources',
   ],
 
@@ -135,5 +136,9 @@ export default {
 
   router: {
     base: ROUTER_BASE,
+  },
+
+  moment: {
+    locales: ['ja'],
   },
 }
