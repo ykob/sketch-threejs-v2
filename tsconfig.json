@@ -27,6 +27,7 @@
       "@nuxt/types",
       "@nuxt/content",
       "@nuxtjs/moment",
+      "@types/gtag.js",
       "@types/node",
       "@types/three",
     ]
