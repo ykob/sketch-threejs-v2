@@ -29,6 +29,7 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
       { hid: 'og:site_name', property: 'og:site_name', content: TITLE },
+      { hid: 'apple-mobile-web-app-title', property: 'apple-mobile-web-app-title', content: TITLE },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: `${ROUTER_BASE}/favicon.ico` },
