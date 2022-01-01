@@ -35,6 +35,17 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: `${ROUTER_BASE}/favicon.ico` },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Homenaje&display=swap' },
     ],
+    script: [
+      { hid: 'gtag', src: `https://www.googletagmanager.com/gtag/js?id=${process.env.GA_ID}` },
+      {
+        hid: 'gtag', 
+        innerHTML: `window.dataLayer = window.dataLayer || [];
+function gtag(){window.dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${process.env.GA_ID}');`
+      }
+    ],
+    __dangerouslyDisableSanitizers: ['script'],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
