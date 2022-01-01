@@ -50,7 +50,7 @@ export default Vue.extend({
     const ogUrl = this.page ? `${process.env.domain}${this.$router.options.base}sketch/${this.$route.params.id}/` : ''
 
     return {
-      title,
+      title: this.page ? this.page.title: '',
       meta: [
         {
           hid: 'description',
