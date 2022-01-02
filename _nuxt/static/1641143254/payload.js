@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/", (function(a,b){return {data:[{page:{slug:"home",title:"Home",description:"Interactive sketches made with three.js. Created by Yoichi Kobayashi.",webgl:a,ogImage:"img\u002Fogp.png",dir:"\u002F",path:a,extension:".yml",createdAt:b,updatedAt:b}}],fetch:{},mutations:[]}}("\u002Fhome","2022-01-02T16:52:10.242Z")));

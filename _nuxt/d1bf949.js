@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[46],{396:function(n,e,r){"use strict";r.r(e),e.default="precision highp float;\n#define GLSLIFY 1\n\nuniform float minBright;\nuniform sampler2D texture;\n\nvarying vec2 vUv;\n\nvoid main() {\n  vec4 bright = max(vec4(0.0), (texture2D(texture, vUv) - minBright));\n  gl_FragColor = bright;\n}"}}]);
