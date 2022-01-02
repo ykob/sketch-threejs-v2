@@ -26,14 +26,25 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
-      { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
-      { property: 'og:site_name', content: TITLE },
+      { hid: 'og:site_name', property: 'og:site_name', content: TITLE },
+      { hid: 'apple-mobile-web-app-title', property: 'apple-mobile-web-app-title', content: TITLE },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: `${ROUTER_BASE}/favicon.ico` },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Homenaje&display=swap' },
     ],
+    script: [
+      { hid: 'gtag', src: `https://www.googletagmanager.com/gtag/js?id=${process.env.GA_ID}` },
+      {
+        hid: 'gtag', 
+        innerHTML: `window.dataLayer = window.dataLayer || [];
+function gtag(){window.dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${process.env.GA_ID}');`
+      }
+    ],
+    __dangerouslyDisableSanitizers: ['script'],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

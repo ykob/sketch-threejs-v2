@@ -40,8 +40,70 @@ export default Vue.extend({
     isLoaded: false,
   }),
   head() {
+    const title = this.page ? `${process.env.sitename}` : ''
+    const description = this.page ? this.page.description : ''
+    const ogImage = this.page ? `${process.env.domain}${this.$router.options.base}${this.page.ogImage}` : ''
+    const ogUrl = this.page ? `${process.env.domain}${this.$router.options.base}` : ''
+
     return {
       titleTemplate: '',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: description,
+        },
+        {
+          hid: 'twitter:card',
+          name: 'twitter:card',
+          content: 'summary_large_image',
+        },
+        {
+          hid: 'twitter:title',
+          name: 'twitter:title',
+          content: title,
+        },
+        {
+          hid: 'twitter:creator',
+          name: 'twitter:creator',
+          content: '@ykob0123',
+        },
+        {
+          hid: 'twitter:description',
+          name: 'twitter:description',
+          content: description,
+        },
+        {
+          hid: 'twitter:image',
+          name: 'twitter:image',
+          content: ogImage,
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: title,
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: description,
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content: 'website',
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: ogUrl,
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: ogImage,
+        },
+      ],
     }
   },
   computed: {

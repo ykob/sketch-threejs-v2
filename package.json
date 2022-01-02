@@ -31,6 +31,7 @@
     "@nuxtjs/eslint-module": "^3.0.2",
     "@nuxtjs/moment": "^1.6.1",
     "@nuxtjs/style-resources": "^1.2.0",
+    "@types/gtag.js": "^0.0.8",
     "@types/three": "^0.131.0",
     "@types/ua-parser-js": "^0.7.36",
     "eslint": "^7.29.0",
