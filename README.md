@@ -1,5 +1,8 @@
 # sketch-threejs-v2
 
+Interactive sketches made with three.js. Created by Yoichi Kobayashi.  
+https://ykob.github.io/sketch-threejs-v2/
+
 ## License
 
 Copyright (c) 2021 Yoichi Kobayashi  
