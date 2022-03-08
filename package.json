@@ -19,7 +19,7 @@
     "core-js": "^3.15.1",
     "normalize.css": "^8.0.1",
     "nuxt": "^2.15.7",
-    "three": "^0.137.0",
+    "three": "0.136",
     "ts-easing": "^0.2.0",
     "ua-parser-js": "^1.0.2"
   },
@@ -32,7 +32,7 @@
     "@nuxtjs/moment": "^1.6.1",
     "@nuxtjs/style-resources": "^1.2.0",
     "@types/gtag.js": "^0.0.8",
-    "@types/three": "^0.131.0",
+    "@types/three": "0.136",
     "@types/ua-parser-js": "^0.7.36",
     "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
