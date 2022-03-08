@@ -91,8 +91,6 @@ gtag('config', '${process.env.GA_ID}');`
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build',
-    '@nuxtjs/composition-api/module',
     ['@nuxtjs/eslint-module', {
       fix: true,
     }],
@@ -134,7 +132,6 @@ gtag('config', '${process.env.GA_ID}');`
         ],
       })
     },
-    transpile: ['three']
   },
 
   generate: {
