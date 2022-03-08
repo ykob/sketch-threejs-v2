@@ -133,7 +133,7 @@ gtag('config', '${process.env.GA_ID}');`
         ],
       })
     },
-
+    transpile: ['three']
   },
 
   generate: {
