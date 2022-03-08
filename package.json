@@ -19,7 +19,7 @@
     "core-js": "^3.15.1",
     "normalize.css": "^8.0.1",
     "nuxt": "^2.15.7",
-    "three": "^0.135.0",
+    "three": "^0.137.0",
     "ts-easing": "^0.2.0",
     "ua-parser-js": "^1.0.2"
   },
