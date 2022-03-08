@@ -1,10 +1,11 @@
+import { defineNuxtConfig } from '@nuxt/bridge'
 import sass from 'sass'
 
 const TITLE = 'sketch of threejs v2'
 const DOMAIN = 'https://ykob.github.io'
 const ROUTER_BASE = '/sketch-threejs-v2'
 
-export default {
+export default defineNuxtConfig({
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -152,4 +153,4 @@ gtag('config', '${process.env.GA_ID}');`
   moment: {
     locales: ['ja'],
   },
-}
+})
