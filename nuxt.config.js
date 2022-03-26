@@ -41,8 +41,8 @@ export default {
         innerHTML: `window.dataLayer = window.dataLayer || [];
 function gtag(){window.dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', '${process.env.GA_ID}');`
-      }
+gtag('config', '${process.env.GA_ID}');`,
+      },
     ],
     __dangerouslyDisableSanitizers: ['script'],
   },
@@ -133,7 +133,7 @@ gtag('config', '${process.env.GA_ID}');`
         ],
       })
     },
-    transpile: ['three']
+    transpile: ['three'],
   },
 
   generate: {

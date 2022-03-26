@@ -39,12 +39,12 @@ const MathEx = {
     return Math.floor(Math.random() * (max - min + 1)) + min
   },
   randomNorm: (): number => {
-    var r1 = Math.random()
-    var r2 = Math.random()
-    var value = Math.sqrt(-2 * Math.log(r1)) * Math.sin(2 * Math.PI * r2)
+    const r1 = Math.random()
+    const r2 = Math.random()
+    const value = Math.sqrt(-2 * Math.log(r1)) * Math.sin(2 * Math.PI * r2)
 
-    return (value + 3) / 6;
-  }
+    return (value + 3) / 6
+  },
 }
 
 export {
