@@ -1,36 +1,30 @@
-<template lang="pug">
-transition(
-  name = 'header'
-  duration = '2000'
-  appear
-  )
-  .header(
-    v-show = 'isShown'
-    )
-    .site-title
-      LinkUnderline(
-        to = '/'
-        )
-        |sketch of three.js v2
-    .links
-      .links__item
-        ButtonRound(
-          href = 'https://github.com/ykob/sketch-threejs-v2'
-          target = '_blank'
-          )
-          IconGithub
-      .links__item
-        ButtonRound(
-          href = 'https://twitter.com/ykob0123'
-          target = '_blank'
-          )
-          IconTwitter
-      .links__item
-        ButtonRound(
-          href = 'https://www.tplh.net/'
-          target = '_blank'
-          )
-          IconFaceManProfile
+<template>
+  <transition name="header" duration="2000" appear="appear">
+    <div v-show="isShown" class="header">
+      <div class="site-title">
+        <LinkUnderline to="/">
+          sketch of three.js v2
+        </LinkUnderline>
+      </div>
+      <div class="links">
+        <div class="links__item">
+          <ButtonRound href="https://github.com/ykob/sketch-threejs-v2" target="_blank">
+            <IconGithub />
+          </ButtonRound>
+        </div>
+        <div class="links__item">
+          <ButtonRound href="https://twitter.com/ykob0123" target="_blank">
+            <IconTwitter />
+          </ButtonRound>
+        </div>
+        <div class="links__item">
+          <ButtonRound href="https://www.tplh.net/" target="_blank">
+            <IconFaceManProfile />
+          </ButtonRound>
+        </div>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script lang="ts">
