@@ -1,32 +1,32 @@
-<template lang="pug">
-.home-summary
-  .home-summary__text-row
-    SplitStringContainer(
-      value = 'Interactive sketches made with three.js.'
-      )
-  .home-summary__text-row
-    SplitStringContainer(
-      value = 'Created by Yoichi Kobayashi.'
-      )
-  .home-summary__links
-    .home-summary__link
-      ButtonRound(
-        href = 'https://github.com/ykob/sketch-threejs-v2'
-        target = '_blank'
-        )
-        IconGithub
-    .home-summary__link
-      ButtonRound(
-        href = 'https://twitter.com/ykob0123'
-        target = '_blank'
-        )
-        IconTwitter
-    .home-summary__link
-      ButtonRound(
-        href = 'https://www.tplh.net/'
-        target = '_blank'
-        )
-        IconFaceManProfile
+<template>
+  <div class="home-summary">
+    <div class="home-summary__text-row">
+      <SplitStringContainer value="Interactive sketches made with three.js." />
+    </div>
+    <div class="home-summary__text-row">
+      <SplitStringContainer value="Created by Yoichi Kobayashi." />
+    </div>
+    <div class="home-summary__links">
+      <div class="home-summary__link">
+        <ButtonRound
+          href="https://github.com/ykob/sketch-threejs-v2"
+          target="_blank"
+        >
+          <IconGithub />
+        </ButtonRound>
+      </div>
+      <div class="home-summary__link">
+        <ButtonRound href="https://twitter.com/ykob0123" target="_blank">
+          <IconTwitter />
+        </ButtonRound>
+      </div>
+      <div class="home-summary__link">
+        <ButtonRound href="https://www.tplh.net/" target="_blank">
+          <IconFaceManProfile />
+        </ButtonRound>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

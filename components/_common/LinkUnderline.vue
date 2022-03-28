@@ -1,19 +1,21 @@
-<template lang="pug">
-nuxt-link.link-underline(
-  :to = 'to'
-  )
-  span(
-    @mouseover = 'mouseOver'
-    @mouseleave = 'mouseLeave'
-    )
-    slot
-  .link-underline__line(
-    v-for = 'bool, index in lines'
-    )
-    transition
-      .link-underline__line-in(
-        v-show = 'current === index && isOvered === true'
-        )
+<template>
+  <nuxt-link class="link-underline" :to="to">
+    <span @mouseover="mouseOver" @mouseleave="mouseLeave">
+      <slot />
+    </span>
+    <div
+      v-for="(bool, index) in lines"
+      :key="'link-underline-' + index"
+      class="link-underline__line"
+    >
+      <transition>
+        <div
+          v-show="current === index &amp;&amp; isOvered === true"
+          class="link-underline__line-in"
+        ></div>
+      </transition>
+    </div>
+  </nuxt-link>
 </template>
 
 <script lang="ts">

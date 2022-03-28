@@ -1,13 +1,15 @@
-<template lang="pug">
-.button(
-  :is = 'tag'
-  :to = 'to'
-  :style = 'styles'
-  :class = 'classnames'
-  :disabled = 'disabled'
-  @click = '$emit("click", $event)'
-  )
-  slot
+<template>
+  <div
+    :is="tag"
+    :class="classnames"
+    :disabled="disabled"
+    :style="styles"
+    :to="to"
+    class="button"
+    @click="$emit('click', $event)"
+  >
+    <slot />
+  </div>
 </template>
 
 <script lang="ts">

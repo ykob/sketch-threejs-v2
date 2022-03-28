@@ -1,12 +1,7 @@
-<template lang="pug">
-IconBase(
-  iconName = 'face-man-profile'
-  :size = 'size'
-  :fill = 'fill'
-  )
-  path(
-    :d = 'd'
-    )
+<template>
+  <IconBase :fill="fill" :size="size" icon-name="face-man-profile">
+    <path :d="d"></path>
+  </IconBase>
 </template>
 
 <script lang="ts">
