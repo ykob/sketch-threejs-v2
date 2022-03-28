@@ -1,14 +1,10 @@
 <template>
   <div class="navi">
     <div>
-      <nuxt-link to="/">
-        Home
-      </nuxt-link>
+      <nuxt-link to="/"> Home </nuxt-link>
     </div>
     <div>
-      <nuxt-link to="/sketch/newyear2022">
-        New Year 2022
-      </nuxt-link>
+      <nuxt-link to="/sketch/newyear2022"> New Year 2022 </nuxt-link>
     </div>
   </div>
 </template>

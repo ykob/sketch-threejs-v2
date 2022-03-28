@@ -103,31 +103,71 @@ export default class Plane extends THREE.Mesh {
   }
 
   start(normalMap: THREE.Texture) {
-    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    if (!(this.material instanceof THREE.RawShaderMaterial)) {
+      return
+    }
     const { uniforms } = this.material
 
     uniforms.normalMap.value = normalMap
   }
 
   resize(resolution: THREE.Vector2, camera: THREE.PerspectiveCamera) {
-    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    if (!(this.material instanceof THREE.RawShaderMaterial)) {
+      return
+    }
     const { uniforms } = this.material
     const height = Math.abs(
-      (camera.position.z - this.position.z) * Math.tan(MathEx.radians(camera.fov) / 2) * 2
+      (camera.position.z - this.position.z) *
+        Math.tan(MathEx.radians(camera.fov) / 2) *
+        2
     )
     const width = height * camera.aspect
 
     this.sx = Math.min(resolution.x / resolution.y, 1)
     this.sy = Math.min(resolution.y / resolution.x, 1)
-    uniforms.uvTransform1.value.setUvTransform(0, 0, this.sx, this.sy, 0, 0.5, 0.5)
-    uniforms.uvTransform2.value.setUvTransform(0, 0, this.sx, this.sy, 0, 0.5, 0.5)
-    uniforms.uvTransform3.value.setUvTransform(0, 0, this.sx, this.sy, 0, 0.5, 0.5)
-    uniforms.uvTransform4.value.setUvTransform(0, 0, this.sx, this.sy, 0, 0.5, 0.5)
+    uniforms.uvTransform1.value.setUvTransform(
+      0,
+      0,
+      this.sx,
+      this.sy,
+      0,
+      0.5,
+      0.5
+    )
+    uniforms.uvTransform2.value.setUvTransform(
+      0,
+      0,
+      this.sx,
+      this.sy,
+      0,
+      0.5,
+      0.5
+    )
+    uniforms.uvTransform3.value.setUvTransform(
+      0,
+      0,
+      this.sx,
+      this.sy,
+      0,
+      0.5,
+      0.5
+    )
+    uniforms.uvTransform4.value.setUvTransform(
+      0,
+      0,
+      this.sx,
+      this.sy,
+      0,
+      0.5,
+      0.5
+    )
     this.scale.set(width, height, 1)
   }
 
   changeScene(t: THREE.Texture) {
-    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    if (!(this.material instanceof THREE.RawShaderMaterial)) {
+      return
+    }
 
     const { uniforms } = this.material
     const current = this.sketchStatus[this.current]
@@ -163,8 +203,8 @@ export default class Plane extends THREE.Mesh {
       uvTransform.setUvTransform(
         0,
         0,
-        (randomIndex % 2 === 0) ? this.sx : this.sy,
-        (randomIndex % 2 === 0) ? this.sy : this.sx,
+        randomIndex % 2 === 0 ? this.sx : this.sy,
+        randomIndex % 2 === 0 ? this.sy : this.sx,
         MathEx.radians(randomIndex * 90),
         0.5,
         0.5
@@ -181,7 +221,9 @@ export default class Plane extends THREE.Mesh {
   }
 
   update(time: number) {
-    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    if (!(this.material instanceof THREE.RawShaderMaterial)) {
+      return
+    }
 
     const { uniforms } = this.material
 
@@ -219,8 +261,12 @@ export default class Plane extends THREE.Mesh {
           status.isDestroyed = true
         }
       }
-      stepShow.value = easing.outQuad(Math.max(Math.min(status.timeShow, DURATION), 0) / DURATION)
-      stepHide.value = easing.outQuad(Math.max(Math.min(status.timeHide, DURATION), 0) / DURATION)
+      stepShow.value = easing.outQuad(
+        Math.max(Math.min(status.timeShow, DURATION), 0) / DURATION
+      )
+      stepHide.value = easing.outQuad(
+        Math.max(Math.min(status.timeHide, DURATION), 0) / DURATION
+      )
     }
   }
 }

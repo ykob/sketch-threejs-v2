@@ -64,8 +64,7 @@ export class Sketch {
       ...imgPath.map((o) => {
         return this.imgLoader.loadAsync(o)
       }),
-    ])
-    .then((response: HTMLImageElement[]) => {
+    ]).then((response: HTMLImageElement[]) => {
       imgs = response
     })
     // await Promise.all([
@@ -119,15 +118,21 @@ export class Sketch {
     this.title.update(time)
     this.water.update(time)
     this.points.update(time)
-    if (this.sphere !== null) this.sphere.update(time)
+    if (this.sphere !== null) {
+      this.sphere.update(time)
+    }
     this.title.visible = false
     this.points.visible = false
-    if (this.sphere !== null) this.sphere.visible = false
+    if (this.sphere !== null) {
+      this.sphere.visible = false
+    }
     this.water.render1(renderer, this.scene, this.camera)
     this.water.render2(renderer, this.scene, this.camera)
     this.title.visible = true
     this.points.visible = true
-    if (this.sphere !== null) this.sphere.visible = true
+    if (this.sphere !== null) {
+      this.sphere.visible = true
+    }
     renderer.setRenderTarget(this.target1)
     renderer.render(this.scene, this.camera)
 

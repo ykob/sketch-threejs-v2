@@ -2,13 +2,14 @@
   <transition name="header" duration="2000" appear="appear">
     <div v-show="isShown" class="header">
       <div class="site-title">
-        <LinkUnderline to="/">
-          sketch of three.js v2
-        </LinkUnderline>
+        <LinkUnderline to="/"> sketch of three.js v2 </LinkUnderline>
       </div>
       <div class="links">
         <div class="links__item">
-          <ButtonRound href="https://github.com/ykob/sketch-threejs-v2" target="_blank">
+          <ButtonRound
+            href="https://github.com/ykob/sketch-threejs-v2"
+            target="_blank"
+          >
             <IconGithub />
           </ButtonRound>
         </div>

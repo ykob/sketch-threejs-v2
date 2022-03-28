@@ -20,7 +20,7 @@ export default Vue.extend({
         this.setSize()
       }, 200)
     }
-  
+
     await this.$webgl.start()
     this.setSize()
 

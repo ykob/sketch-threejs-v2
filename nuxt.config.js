@@ -25,19 +25,32 @@ export default {
     titleTemplate: `%s - ${TITLE}`,
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1, user-scalable=no',
+      },
       { name: 'format-detection', content: 'telephone=no' },
       { hid: 'og:site_name', property: 'og:site_name', content: TITLE },
-      { hid: 'apple-mobile-web-app-title', property: 'apple-mobile-web-app-title', content: TITLE },
+      {
+        hid: 'apple-mobile-web-app-title',
+        property: 'apple-mobile-web-app-title',
+        content: TITLE,
+      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: `${ROUTER_BASE}/favicon.ico` },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Homenaje&display=swap' },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Homenaje&display=swap',
+      },
     ],
     script: [
-      { hid: 'gtag', src: `https://www.googletagmanager.com/gtag/js?id=${process.env.GA_ID}` },
       {
-        hid: 'gtag', 
+        hid: 'gtag',
+        src: `https://www.googletagmanager.com/gtag/js?id=${process.env.GA_ID}`,
+      },
+      {
+        hid: 'gtag',
         innerHTML: `window.dataLayer = window.dataLayer || [];
 function gtag(){window.dataLayer.push(arguments);}
 gtag('js', new Date());
@@ -66,10 +79,7 @@ gtag('config', '${process.env.GA_ID}');`,
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    '@/plugins/utils',
-    '@/plugins/webgl',
-  ],
+  plugins: ['@/plugins/utils', '@/plugins/webgl'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
@@ -92,9 +102,12 @@ gtag('config', '${process.env.GA_ID}');`,
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     '@nuxtjs/composition-api/module',
-    ['@nuxtjs/eslint-module', {
-      fix: true,
-    }],
+    [
+      '@nuxtjs/eslint-module',
+      {
+        fix: true,
+      },
+    ],
     '@nuxtjs/moment',
     '@nuxtjs/style-resources',
   ],
@@ -126,11 +139,7 @@ gtag('config', '${process.env.GA_ID}');`,
       config.module.rules.push({
         test: /\.(glsl|fs|vs)$/,
         exclude: /(node_modules)/,
-        use: [
-          'glslify-import-loader',
-          'raw-loader',
-          'glslify-loader',
-        ],
+        use: ['glslify-import-loader', 'raw-loader', 'glslify-loader'],
       })
     },
     transpile: ['three'],
@@ -141,7 +150,7 @@ gtag('config', '${process.env.GA_ID}');`,
     async routes() {
       const { $content } = require('@nuxt/content')
       const files = await $content('sketch').fetch()
-      return files.map(file => file.path === '/index' ? '/' : file.path)
+      return files.map((file) => (file.path === '/index' ? '/' : file.path))
     },
   },
 

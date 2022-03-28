@@ -25,11 +25,16 @@ export default class PostEffectBloom extends THREE.Mesh {
     super(geometry, material)
   }
 
-  start({ texture1, texture2 }: {
+  start({
+    texture1,
+    texture2,
+  }: {
     texture1: THREE.Texture
     texture2: THREE.Texture
   }) {
-    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    if (!(this.material instanceof THREE.RawShaderMaterial)) {
+      return
+    }
     const { uniforms } = this.material
 
     uniforms.texture1.value = texture1

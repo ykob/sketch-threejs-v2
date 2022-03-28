@@ -22,17 +22,23 @@ export default class LoadingCore extends THREE.Mesh {
   }
 
   start(map: THREE.Texture) {
-    if (!(this.material instanceof THREE.MeshPhongMaterial)) return
+    if (!(this.material instanceof THREE.MeshPhongMaterial)) {
+      return
+    }
     this.material.envMap = map
   }
 
   update(time: number) {
-    if (!(this.material instanceof THREE.MeshPhongMaterial)) return
+    if (!(this.material instanceof THREE.MeshPhongMaterial)) {
+      return
+    }
     this.time += time
     this.rotation.x = this.time
     this.rotation.y = this.time
 
-    const scale = easing.elastic(MathEx.clamp((this.time - DELAY) / DURATION, 0, 1))
+    const scale = easing.elastic(
+      MathEx.clamp((this.time - DELAY) / DURATION, 0, 1)
+    )
 
     this.scale.set(scale, scale, scale)
   }

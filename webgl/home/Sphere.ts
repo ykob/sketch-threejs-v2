@@ -33,14 +33,18 @@ export default class Sphere extends THREE.Mesh {
   }
 
   start(texture: THREE.Texture) {
-    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    if (!(this.material instanceof THREE.RawShaderMaterial)) {
+      return
+    }
     const { uniforms } = this.material
 
     uniforms.texture.value = texture
   }
 
   update(time: number) {
-    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    if (!(this.material instanceof THREE.RawShaderMaterial)) {
+      return
+    }
     const { uniforms } = this.material
 
     uniforms.time.value += time
