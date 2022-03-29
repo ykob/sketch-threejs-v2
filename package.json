@@ -43,8 +43,6 @@
     "glslify-import-loader": "^0.1.2",
     "glslify-loader": "^2.0.0",
     "prettier": "^2.3.2",
-    "pug": "^3.0.2",
-    "pug-plain-loader": "^1.1.0",
     "raw-loader": "^4.0.2",
     "sass": "^1.35.2",
     "sass-loader": "10.2.0"
