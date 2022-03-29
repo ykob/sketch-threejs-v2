@@ -1,11 +1,9 @@
-<template lang="pug">
-div
-  transition(
-    duration = '3000'
-    )
-    HomeSummary(
-      v-show = 'isLoaded'
-      )
+<template>
+  <div>
+    <transition duration="3000">
+      <HomeSummary v-show="isLoaded" />
+    </transition>
+  </div>
 </template>
 
 <script lang="ts">

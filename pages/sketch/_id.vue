@@ -1,14 +1,14 @@
-<template lang="pug">
-div
-  transition(
-    duration = '3000'
-    )
-    SketchOutline(
-      v-show = 'isLoaded'
-      :title = 'page.title'
-      :description = 'page.description'
-      :createdAt = 'page.createdAt'
-      )
+<template>
+  <div>
+    <transition duration="3000">
+      <SketchOutline
+        v-show="isLoaded"
+        :created-at="page.createdAt"
+        :description="page.description"
+        :title="page.title"
+      ></SketchOutline>
+    </transition>
+  </div>
 </template>
 
 <script lang="ts">
