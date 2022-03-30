@@ -1,10 +1,9 @@
-<template lang="pug">
-transition
-  .split-string-item(
-    :style = 'styles'
-    :class = 'classnames'
-    )
-    |{{ typo }}
+<template>
+  <transition>
+    <div class="split-string-item" :class="classnames" :style="styles">
+      {{ typo }}
+    </div>
+  </transition>
 </template>
 
 <script lang="ts">

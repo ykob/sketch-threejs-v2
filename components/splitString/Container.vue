@@ -1,11 +1,12 @@
-<template lang="pug">
-.split-string-container
-  div(
-    :is = 'is'
-    v-for = 'item, index in splittedValue'
-    :key = 'keyPrefix + "-" + index'
-    :typo = 'item'
-    )
+<template>
+  <div class="split-string-container">
+    <div
+      :is="is"
+      v-for="(item, index) in splittedValue"
+      :key="keyPrefix + '-' + index"
+      :typo="item"
+    ></div>
+  </div>
 </template>
 
 <script lang="ts">

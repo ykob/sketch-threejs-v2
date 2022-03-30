@@ -1,11 +1,9 @@
-<template lang="pug">
-div
-  transition(
-    duration = '3000'
-    )
-    HomeSummary(
-      v-show = 'isLoaded'
-      )
+<template>
+  <div>
+    <transition duration="3000">
+      <HomeSummary v-show="isLoaded" />
+    </transition>
+  </div>
 </template>
 
 <script lang="ts">
@@ -42,8 +40,12 @@ export default Vue.extend({
   head() {
     const title = this.page ? `${process.env.sitename}` : ''
     const description = this.page ? this.page.description : ''
-    const ogImage = this.page ? `${process.env.domain}${this.$router.options.base}${this.page.ogImage}` : ''
-    const ogUrl = this.page ? `${process.env.domain}${this.$router.options.base}` : ''
+    const ogImage = this.page
+      ? `${process.env.domain}${this.$router.options.base}${this.page.ogImage}`
+      : ''
+    const ogUrl = this.page
+      ? `${process.env.domain}${this.$router.options.base}`
+      : ''
 
     return {
       titleTemplate: '',
@@ -113,7 +115,9 @@ export default Vue.extend({
   },
   watch: {
     async isReady(v: boolean) {
-      if (this.page === null) return
+      if (this.page === null) {
+        return
+      }
       if (v === true) {
         await this.$webgl.changeSketch(this.page.webgl)
         this.isLoaded = true
@@ -121,7 +125,9 @@ export default Vue.extend({
     },
   },
   async mounted() {
-    if (this.page === null) return
+    if (this.page === null) {
+      return
+    }
     if (this.isReady === true) {
       await this.$webgl.changeSketch(this.page.webgl)
       await sleep(1500)

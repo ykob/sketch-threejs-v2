@@ -1,16 +1,13 @@
-<template lang="pug">
-.sketch-outline
-  .sketch-outline__title(
-    :style = 'stylesTitle'
-    )
-    SplitStringContainer(
-      :value = 'title'
-      itemType = 'l'
-      )
-  .sketch-outline__description
-    |{{ description }}
-  .sketch-outline__created-at
-    |Created at : {{ $moment(createdAt) }}
+<template>
+  <div class="sketch-outline">
+    <div class="sketch-outline__title" :style="stylesTitle">
+      <SplitStringContainer :value="title" item-type="l" />
+    </div>
+    <div class="sketch-outline__description">{{ description }}</div>
+    <div class="sketch-outline__created-at">
+      Created at : {{ $moment(createdAt) }}
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

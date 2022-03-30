@@ -22,18 +22,24 @@ export default class TigerHandLeft extends THREE.Mesh {
   }
 
   start(texture: THREE.Texture) {
-    if (!(this.material instanceof THREE.MeshStandardMaterial)) return
+    if (!(this.material instanceof THREE.MeshStandardMaterial)) {
+      return
+    }
     this.material.map = texture
   }
 
   update(time: number) {
-    if (!(this.material instanceof THREE.MeshStandardMaterial)) return
+    if (!(this.material instanceof THREE.MeshStandardMaterial)) {
+      return
+    }
 
     this.time += time
     this.timeShow += time
 
     const sin = Math.sin(this.time) * 0.5 + 0.5
-    const stepShow = easing.elastic(MathEx.clamp((this.timeShow - DELAY) / DURATION, 0, 1))
+    const stepShow = easing.elastic(
+      MathEx.clamp((this.timeShow - DELAY) / DURATION, 0, 1)
+    )
 
     this.position.x = sin * 0.2 + 0.85
     this.rotation.x = MathEx.radians(sin * -33.3)

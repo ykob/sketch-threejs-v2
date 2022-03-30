@@ -58,8 +58,7 @@ export default class WebGLContent {
       ...imgs.map((o) => {
         return this.texLoader.loadAsync(o)
       }),
-    ])
-    .then((response: THREE.Texture[]) => {
+    ]).then((response: THREE.Texture[]) => {
       this.plane.start(response[0])
       this.background.start(response[1])
       this.loadingCore.start(this.cubeRenderTarget.texture)
@@ -68,22 +67,26 @@ export default class WebGLContent {
         alpha: true,
         antialias: true,
       })
-      this.renderer.setPixelRatio((os === 'iOS' || os === 'Android') ? 2 : 1)
+      this.renderer.setPixelRatio(os === 'iOS' || os === 'Android' ? 2 : 1)
       this.clock.start()
       this.update()
     })
   }
 
   update(): void {
-    if (this.renderer === null) return
+    if (this.renderer === null) {
+      return
+    }
     const time = this.clock.running === true ? this.clock.getDelta() : 0
 
     for (let i = 0; i < this.sketches.length; i++) {
       const sketch = this.sketches[i]
       if (
-        sketch === undefined
-        || this.plane.sketchStatus[i].isDestroyed === true
-      ) continue
+        sketch === undefined ||
+        this.plane.sketchStatus[i].isDestroyed === true
+      ) {
+        continue
+      }
       sketch.update(time, this.renderer)
     }
     this.plane.update(time)
@@ -102,7 +105,9 @@ export default class WebGLContent {
   }
 
   resize(width: number, height: number): void {
-    if (this.renderer === null) return
+    if (this.renderer === null) {
+      return
+    }
     this.resolution.set(width, height)
     this.renderer.setSize(this.resolution.x, this.resolution.y)
     this.camera.resize(this.resolution)
@@ -110,7 +115,9 @@ export default class WebGLContent {
 
     for (let i = 0; i < this.sketches.length; i++) {
       const sketch = this.sketches[i]
-      if (sketch === undefined) continue
+      if (sketch === undefined) {
+        continue
+      }
       sketch.resize(this.resolution)
     }
   }
@@ -123,7 +130,7 @@ export default class WebGLContent {
         this.path = path
         const { Sketch } = await import(`.${path}`)
         const sketch = new Sketch()
-  
+
         await sketch.start({
           os,
           base: this.base,

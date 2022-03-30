@@ -13,7 +13,8 @@ export default class Points extends THREE.Points {
 
     for (let i = 0, ul = num; i < ul; i++) {
       const radian = MathEx.radians(Math.random() * 360)
-      const radius = ((Math.random() + Math.random() + Math.random()) / 3 * 8 + 0.7)
+      const radius =
+        ((Math.random() + Math.random() + Math.random()) / 3) * 8 + 0.7
       const x = Math.cos(radian) * radius
       const y = Math.sin(radian) * radius
       const z = Math.random() * -30 + 10
@@ -56,14 +57,18 @@ export default class Points extends THREE.Points {
   }
 
   start(tNoise: THREE.Texture) {
-    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    if (!(this.material instanceof THREE.RawShaderMaterial)) {
+      return
+    }
     const { uniforms } = this.material
 
     uniforms.tNoise.value = tNoise
   }
 
   update(time: number) {
-    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    if (!(this.material instanceof THREE.RawShaderMaterial)) {
+      return
+    }
     const { uniforms } = this.material
 
     uniforms.time.value += time
@@ -71,7 +76,9 @@ export default class Points extends THREE.Points {
   }
 
   resize(resolution: THREE.Vector2) {
-    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    if (!(this.material instanceof THREE.RawShaderMaterial)) {
+      return
+    }
     const { uniforms } = this.material
 
     uniforms.resolution.value.copy(resolution)

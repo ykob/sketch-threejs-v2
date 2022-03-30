@@ -1,12 +1,7 @@
-<template lang="pug">
-IconBase(
-  iconName = 'twitter'
-  :size = 'size'
-  :fill = 'fill'
-  )
-  path(
-    :d = 'd'
-    )
+<template>
+  <IconBase :fill="fill" :size="size" icon-name="twitter">
+    <path :d="d"></path>
+  </IconBase>
 </template>
 
 <script lang="ts">

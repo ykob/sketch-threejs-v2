@@ -7,8 +7,9 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
-    "lint": "yarn lint:js",
+    "lint:eslint": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
+    "lint:prettier": "prettier --write **/*.{js,ts,vue}",
+    "lint": "npm run lint:prettier && npm run lint:eslint",
     "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
@@ -42,8 +43,6 @@
     "glslify-import-loader": "^0.1.2",
     "glslify-loader": "^2.0.0",
     "prettier": "^2.3.2",
-    "pug": "^3.0.2",
-    "pug-plain-loader": "^1.1.0",
     "raw-loader": "^4.0.2",
     "sass": "^1.35.2",
     "sass-loader": "10.2.0"

@@ -1,8 +1,9 @@
-<template lang="pug">
-div
-  Header
-  Nuxt
-  canvas#canvas-webgl
+<template>
+  <div>
+    <Header />
+    <Nuxt />
+    <canvas id="canvas-webgl" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -20,7 +21,7 @@ export default Vue.extend({
         this.setSize()
       }, 200)
     }
-  
+
     await this.$webgl.start()
     this.setSize()
 

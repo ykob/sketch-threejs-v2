@@ -23,17 +23,23 @@ export default class BackCircleOut extends THREE.Mesh {
   }
 
   start(texture: THREE.Texture) {
-    if (!(this.material instanceof THREE.MeshStandardMaterial)) return
+    if (!(this.material instanceof THREE.MeshStandardMaterial)) {
+      return
+    }
     this.material.map = texture
   }
 
   update(time: number) {
-    if (!(this.material instanceof THREE.MeshStandardMaterial)) return
+    if (!(this.material instanceof THREE.MeshStandardMaterial)) {
+      return
+    }
 
     this.time += time
     this.timeShow += time
 
-    const stepShow = easing.outExpo(MathEx.clamp((this.timeShow - DELAY) / DURATION, 0, 1))
+    const stepShow = easing.outExpo(
+      MathEx.clamp((this.timeShow - DELAY) / DURATION, 0, 1)
+    )
 
     this.rotation.z = this.time * -0.05 - stepShow * 2
     this.scale.set(stepShow, stepShow, stepShow)

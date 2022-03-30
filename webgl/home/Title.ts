@@ -21,17 +21,18 @@ export default class Title extends THREE.Group {
     }
   }
 
-  start(
-    { tNoise, tTitleFill, tTitleBorder }
-    : {
-      tNoise: THREE.Texture
-      tTitleFill: THREE.Texture
-      tTitleBorder: THREE.Texture
-    }
-  ) {
+  start({
+    tNoise,
+    tTitleFill,
+    tTitleBorder,
+  }: {
+    tNoise: THREE.Texture
+    tTitleFill: THREE.Texture
+    tTitleBorder: THREE.Texture
+  }) {
     for (let index = 0; index < this.children.length; index++) {
       const obj = this.children[index]
-      
+
       obj.start({ index, tNoise, tTitleFill, tTitleBorder })
     }
   }
@@ -39,14 +40,15 @@ export default class Title extends THREE.Group {
   update(time: number) {
     const dateNow = Date.now()
 
-    if (dateNow - this.datePrev > 1 / 10 * 1000) {
-      this.noiseStrength = MathEx.smoothstep(0.4, 1.0, Math.random() * Math.random()) * 0.98 + 0.02
+    if (dateNow - this.datePrev > (1 / 10) * 1000) {
+      this.noiseStrength =
+        MathEx.smoothstep(0.4, 1.0, Math.random() * Math.random()) * 0.98 + 0.02
       this.datePrev = dateNow
     }
 
     for (let index = 0; index < this.children.length; index++) {
       const obj = this.children[index]
-      
+
       obj.update(time, this.noiseStrength)
     }
   }
