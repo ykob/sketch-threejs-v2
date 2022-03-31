@@ -20,7 +20,7 @@ export default Vue.extend({
     },
   },
   computed: {
-    d() {
+    d(): string {
       return mdiGithub
     },
   },
