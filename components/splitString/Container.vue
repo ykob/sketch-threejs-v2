@@ -14,6 +14,10 @@ import Vue from 'vue'
 
 export default Vue.extend({
   props: {
+    itemType: {
+      type: String,
+      default: 's',
+    },
     keyPrefix: {
       type: String,
       default: '',
@@ -21,10 +25,6 @@ export default Vue.extend({
     value: {
       type: String,
       default: '',
-    },
-    itemType: {
-      type: String,
-      default: 's',
     },
   },
   computed: {

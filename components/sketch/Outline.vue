@@ -15,7 +15,7 @@ import Vue from 'vue'
 
 export default Vue.extend({
   props: {
-    title: {
+    createdAt: {
       type: String,
       default: '',
     },
@@ -23,7 +23,7 @@ export default Vue.extend({
       type: String,
       default: '',
     },
-    createdAt: {
+    title: {
       type: String,
       default: '',
     },

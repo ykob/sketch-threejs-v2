@@ -32,16 +32,16 @@ export default Vue.extend({
   },
   data: () => ({
     current: 0,
-    isOvered: false,
     lines: Array(MAX),
+    isOvered: false,
   }),
   methods: {
-    mouseOver() {
-      this.isOvered = true
-    },
     mouseLeave() {
       this.isOvered = false
       this.current = (this.current + 1) % MAX
+    },
+    mouseOver() {
+      this.isOvered = true
     },
   },
 })

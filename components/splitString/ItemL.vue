@@ -20,17 +20,17 @@ export default Vue.extend({
     delay: 0,
   }),
   computed: {
-    styles(): { [key: string]: string } {
-      return {
-        width: this.typo === ' ' ? '0.1em' : 'auto',
-        transitionDelay: `${this.delay}s`,
-      }
-    },
     classnames(): string[] {
       return [
         `rotate-enter-${Math.ceil(Math.random() * 20)}`,
         `rotate-leave-${Math.ceil(Math.random() * 20)}`,
       ]
+    },
+    styles(): { [key: string]: string } {
+      return {
+        width: this.typo === ' ' ? '0.1em' : 'auto',
+        transitionDelay: `${this.delay}s`,
+      }
     },
   },
   mounted() {
