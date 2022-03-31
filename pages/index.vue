@@ -31,11 +31,11 @@ export default Vue.extend({
     }
   },
   data: (): {
-    page: IContentDocument | null
     isLoaded: boolean
+    page: IContentDocument | null
   } => ({
-    page: null,
     isLoaded: false,
+    page: null,
   }),
   head() {
     const title = this.page ? `${process.env.sitename}` : ''
