@@ -1,10 +1,10 @@
 import { UAParser } from 'ua-parser-js'
 import * as THREE from 'three'
+import Background from './common/Background'
 import Camera from './common/Camera'
 import DirectionalLight from './common/DirectionalLight'
-import Plane from './common/Plane'
-import Background from './common/Background'
 import LoadingCore from './common/LoadingCore'
+import Plane from './common/Plane'
 
 const parser = new UAParser()
 const os = parser.getOS().name

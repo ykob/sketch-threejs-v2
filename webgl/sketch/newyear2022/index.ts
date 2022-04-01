@@ -1,11 +1,11 @@
 import * as THREE from 'three'
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'
-import PerspectiveCamera from './PerspectiveCamera'
-import DirectionalLight from './DirectionalLight'
-import Tiger from './Tiger'
 import BackCircle from './BackCircle'
+import DirectionalLight from './DirectionalLight'
 import Luminous from './Luminous'
+import PerspectiveCamera from './PerspectiveCamera'
 import Points from './Points'
+import Tiger from './Tiger'
 import { sleep } from '~/assets/js/utils'
 
 export class Sketch {

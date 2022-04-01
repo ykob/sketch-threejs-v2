@@ -1,9 +1,9 @@
 import * as THREE from 'three'
-import TigerHead from './TigerHead'
-import TigerEyes from './TigerEyes'
 import TigerBody from './TigerBody'
-import TigerHandRight from './TigerHandRight'
+import TigerEyes from './TigerEyes'
 import TigerHandLeft from './TigerHandLeft'
+import TigerHandRight from './TigerHandRight'
+import TigerHead from './TigerHead'
 
 export default class Tiger extends THREE.Group {
   head: TigerHead | null
