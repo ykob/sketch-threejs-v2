@@ -19,6 +19,10 @@ import Vue from 'vue'
 
 export default Vue.extend({
   props: {
+    fill: {
+      type: String,
+      default: 'currentColor',
+    },
     iconName: {
       type: String,
       default: '',
@@ -26,10 +30,6 @@ export default Vue.extend({
     size: {
       type: [Number, String],
       default: 24,
-    },
-    fill: {
-      type: String,
-      default: 'currentColor',
     },
   },
 })

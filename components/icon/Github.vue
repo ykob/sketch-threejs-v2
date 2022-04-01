@@ -10,17 +10,17 @@ import { mdiGithub } from '@mdi/js'
 
 export default Vue.extend({
   props: {
-    size: {
-      type: [Number, String],
-      default: 24,
-    },
     fill: {
       type: String,
       default: 'currentColor',
     },
+    size: {
+      type: [Number, String],
+      default: 24,
+    },
   },
   computed: {
-    d() {
+    d(): string {
       return mdiGithub
     },
   },

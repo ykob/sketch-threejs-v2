@@ -13,8 +13,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { IContentDocument } from '@nuxt/content/types/content'
 import { sleep } from '@/assets/js/utils'
+import { IContentDocument } from '@nuxt/content/types/content'
 
 export default Vue.extend({
   transition: {
@@ -37,11 +37,11 @@ export default Vue.extend({
     }
   },
   data: (): {
-    page: IContentDocument | null
     isLoaded: boolean
+    page: IContentDocument | null
   } => ({
-    page: null,
     isLoaded: false,
+    page: null,
   }),
   head() {
     const title = this.page

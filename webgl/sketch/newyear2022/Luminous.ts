@@ -1,8 +1,8 @@
 import * as THREE from 'three'
+import { MathEx } from '~/assets/js/utils'
 
 import vs from './glsl/Luminous.vs'
 import fs from './glsl/Luminous.fs'
-import { MathEx } from '~/assets/js/utils'
 
 export default class Luminous extends THREE.Mesh {
   constructor() {

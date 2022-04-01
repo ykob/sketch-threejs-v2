@@ -17,6 +17,22 @@ import Vue from 'vue'
 
 export default Vue.extend({
   props: {
+    buttonType: {
+      type: String,
+      default: 'common',
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+    height: {
+      type: String,
+      default: '44px',
+    },
+    radius: {
+      type: String,
+      default: '4px',
+    },
     tag: {
       type: String,
       default: 'button',
@@ -29,37 +45,21 @@ export default Vue.extend({
       type: String,
       default: '100%',
     },
-    height: {
-      type: String,
-      default: '44px',
-    },
-    buttonType: {
-      type: String,
-      default: 'common',
-    },
-    radius: {
-      type: String,
-      default: '4px',
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
   },
   computed: {
-    styles(): { [key: string]: string } {
-      return {
-        width: this.width,
-        height: this.height,
-        borderRadius: this.radius,
-      }
-    },
     classnames(): string[] {
       const classnames = [`${this.buttonType}`]
       if (this.disabled) {
         classnames.push('disabled')
       }
       return classnames
+    },
+    styles(): { [key: string]: string } {
+      return {
+        width: this.width,
+        height: this.height,
+        borderRadius: this.radius,
+      }
     },
   },
 })
