@@ -5,7 +5,14 @@ https://ykob.github.io/sketch-threejs-v2/
 
 ## License
 
-Copyright (c) 2022 Yoichi Kobayashi  
+Copyright (c) 2022 Yoichi Kobayashi.
+Released under the MIT license  
+http://opensource.org/licenses/mit-license.php
+
+### Excluded files from the MIT License
+
+- [The water surface testure](https://github.com/ykob/sketch-threejs-v2/blob/main/assets/img/common/water.jpg).
+- [The nebula texture](https://github.com/ykob/sketch-threejs-v2/blob/main/assets/img/common/nebula.jpg).
 
 ## Requirements
 
