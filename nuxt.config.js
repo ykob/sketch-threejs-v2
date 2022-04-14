@@ -142,7 +142,7 @@ gtag('config', '${process.env.GA_ID}');`,
         use: ['glslify-import-loader', 'raw-loader', 'glslify-loader'],
       })
     },
-    transpile: ['three'],
+    transpile: ['@ykob/js-util', 'three'],
   },
 
   generate: {
