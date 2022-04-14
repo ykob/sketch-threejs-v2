@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { MathEx } from '~/assets/js/utils'
+import { MathEx } from '@ykob/js-util'
 import vs from './glsl/Points.vs'
 import fs from './glsl/Points.fs'
 

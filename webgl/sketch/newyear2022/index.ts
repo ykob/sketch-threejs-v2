@@ -6,7 +6,7 @@ import Luminous from './Luminous'
 import PerspectiveCamera from './PerspectiveCamera'
 import Points from './Points'
 import Tiger from './Tiger'
-import { sleep } from '~/assets/js/utils'
+import { sleep } from '@ykob/js-util'
 
 export class Sketch {
   target = new THREE.WebGLRenderTarget(1, 1)

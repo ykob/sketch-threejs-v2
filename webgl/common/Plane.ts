@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { easing } from 'ts-easing'
 import vs from './glsl/Plane.vs'
 import fs from './glsl/Plane.fs'
-import { MathEx } from '@/assets/js/utils'
+import { MathEx } from '@ykob/js-util'
 
 interface SketchStatus {
   timeShow: number

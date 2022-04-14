@@ -10,7 +10,7 @@ import Water from './Water'
 import Points from './Points'
 import Sphere from './Sphere'
 import PointLight from './PointLight'
-import { sleep } from '~/assets/js/utils'
+import { sleep } from '@ykob/js-util'
 
 export class Sketch {
   sphere: Sphere | null

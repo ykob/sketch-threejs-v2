@@ -8,8 +8,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { sleep } from '@/assets/js/utils'
 import { IContentDocument } from '@nuxt/content/types/content'
+import { sleep } from '@ykob/js-util'
 
 export default Vue.extend({
   transition: {

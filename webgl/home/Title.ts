@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import TitlePlane from './TitlePlane'
-import { MathEx } from '@/assets/js/utils'
+import { MathEx } from '@ykob/js-util'
 
 export default class Title extends THREE.Group {
   children: TitlePlane[]

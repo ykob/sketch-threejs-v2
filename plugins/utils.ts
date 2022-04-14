@@ -1,5 +1,5 @@
 import { Plugin } from '@nuxt/types'
-import { sleep, MathEx } from '@/assets/js/utils'
+import { sleep, MathEx } from '@ykob/js-util'
 
 declare module 'vue/types/vue' {
   interface Vue {
