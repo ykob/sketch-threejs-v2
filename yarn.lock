@@ -2259,6 +2259,11 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
+"@ykob/js-util@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@ykob/js-util/-/js-util-2.0.0.tgz#8c6613585c6bb96d44671b57fada6d9267a96238"
+  integrity sha512-RrpsFHRNychA+k3luZ8o7zTRxJXcYSK/XPSA/DgqM4KAK5FHCmfU0VZ5eouM+jdZaB06tZcijxPxvXf6LbNlZw==
+
 accepts@^1.3.5, accepts@~1.3.5:
   version "1.3.7"
   resolved "https://registry.yarnpkg.com/accepts/-/accepts-1.3.7.tgz#531bc726517a3b2b41f850021c6cc15eaab507cd"
