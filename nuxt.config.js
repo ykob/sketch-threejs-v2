@@ -79,7 +79,7 @@ gtag('config', '${process.env.GA_ID}');`,
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@/plugins/utils', '@/plugins/webgl'],
+  plugins: ['@/plugins/webgl'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
@@ -142,7 +142,7 @@ gtag('config', '${process.env.GA_ID}');`,
         use: ['glslify-import-loader', 'raw-loader', 'glslify-loader'],
       })
     },
-    transpile: ['three'],
+    transpile: ['@ykob/js-util', 'three'],
   },
 
   generate: {

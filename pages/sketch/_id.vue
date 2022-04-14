@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { sleep } from '@/assets/js/utils'
+import { sleep } from '@ykob/js-util'
 import { IContentDocument } from '@nuxt/content/types/content'
 
 export default Vue.extend({

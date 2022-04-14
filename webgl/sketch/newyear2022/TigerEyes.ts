@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { easing } from 'ts-easing'
-import { MathEx } from '~/assets/js/utils'
+import { MathEx } from '@ykob/js-util'
 
 const DURATION = 2
 const DELAY = 1.5
