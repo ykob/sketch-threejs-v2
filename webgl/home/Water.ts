@@ -104,16 +104,24 @@ export default class Water extends THREE.Mesh {
     })
     this.reflector.matrixAutoUpdate = false
     this.refractor.matrixAutoUpdate = false
-    material.uniforms.tReflectionMap.value = this.reflector.getRenderTarget().texture
-    material.uniforms.tRefractionMap.value = this.refractor.getRenderTarget().texture
+    material.uniforms.tReflectionMap.value =
+      this.reflector.getRenderTarget().texture
+    material.uniforms.tRefractionMap.value =
+      this.refractor.getRenderTarget().texture
 
     const dummyGeometry = new THREE.BufferGeometry()
     const dummyMaterial = new THREE.Material()
     const dummyGroup = new THREE.Group()
-    this.onBeforeRender = (renderer: THREE.WebGLRenderer, scene: THREE.Scene, camera: THREE.Camera) => {
-      if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    this.onBeforeRender = (
+      renderer: THREE.WebGLRenderer,
+      scene: THREE.Scene,
+      camera: THREE.Camera
+    ) => {
+      if (!(this.material instanceof THREE.RawShaderMaterial)) {
+        return
+      }
       const { uniforms } = this.material
-  
+
       // prettier-ignore
       uniforms.textureMatrix.value.set(
         0.5, 0.0, 0.0, 0.5,
@@ -127,14 +135,30 @@ export default class Water extends THREE.Mesh {
       this.visible = false
       this.reflector.matrixWorld.copy(this.matrixWorld)
       this.refractor.matrixWorld.copy(this.matrixWorld)
-      this.reflector.onBeforeRender(renderer, scene, camera, dummyGeometry, dummyMaterial, dummyGroup)
-      this.refractor.onBeforeRender(renderer, scene, camera, dummyGeometry, dummyMaterial, dummyGroup)
+      this.reflector.onBeforeRender(
+        renderer,
+        scene,
+        camera,
+        dummyGeometry,
+        dummyMaterial,
+        dummyGroup
+      )
+      this.refractor.onBeforeRender(
+        renderer,
+        scene,
+        camera,
+        dummyGeometry,
+        dummyMaterial,
+        dummyGroup
+      )
       this.visible = true
     }
   }
 
   start(normalMap: THREE.Texture) {
-    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    if (!(this.material instanceof THREE.RawShaderMaterial)) {
+      return
+    }
     const { uniforms } = this.material
 
     uniforms.normalMap.value = normalMap
@@ -143,20 +167,32 @@ export default class Water extends THREE.Mesh {
   }
 
   update(time: number) {
-    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    if (!(this.material instanceof THREE.RawShaderMaterial)) {
+      return
+    }
     const { uniforms } = this.material
 
     uniforms.time.value += time
   }
 
-  render1(renderer: THREE.WebGLRenderer, scene: THREE.Scene, camera: THREE.Camera) {
+  render1(
+    renderer: THREE.WebGLRenderer,
+    scene: THREE.Scene,
+    camera: THREE.Camera
+  ) {
     this.visible = false
     renderer.setRenderTarget(this.target1)
     renderer.render(scene, camera)
   }
 
-  render2(renderer: THREE.WebGLRenderer, scene: THREE.Scene, camera: THREE.Camera) {
-    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+  render2(
+    renderer: THREE.WebGLRenderer,
+    scene: THREE.Scene,
+    camera: THREE.Camera
+  ) {
+    if (!(this.material instanceof THREE.RawShaderMaterial)) {
+      return
+    }
 
     this.visible = true
     this.material.uniforms.tDepth2.value = null
@@ -166,7 +202,9 @@ export default class Water extends THREE.Mesh {
   }
 
   resize(resolution: THREE.Vector2) {
-    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    if (!(this.material instanceof THREE.RawShaderMaterial)) {
+      return
+    }
     const { uniforms } = this.material
 
     uniforms.resolution.value.copy(resolution)

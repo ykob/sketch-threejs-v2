@@ -1,20 +1,20 @@
-<template lang="pug">
-div
-  transition(
-    duration = '3000'
-    )
-    SketchOutline(
-      v-show = 'isLoaded'
-      :title = 'page.title'
-      :description = 'page.description'
-      :createdAt = 'page.createdAt'
-      )
+<template>
+  <div>
+    <transition duration="3000">
+      <SketchOutline
+        v-show="isLoaded"
+        :created-at="page.createdAt"
+        :description="page.description"
+        :title="page.title"
+      ></SketchOutline>
+    </transition>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import { sleep } from '@ykob/js-util'
 import { IContentDocument } from '@nuxt/content/types/content'
-import { sleep } from '@/assets/js/utils'
 
 export default Vue.extend({
   transition: {
@@ -37,20 +37,26 @@ export default Vue.extend({
     }
   },
   data: (): {
-    page: IContentDocument | null
     isLoaded: boolean
+    page: IContentDocument | null
   } => ({
-    page: null,
     isLoaded: false,
+    page: null,
   }),
   head() {
-    const title = this.page ? `${this.page.title} - ${process.env.sitename}` : ''
+    const title = this.page
+      ? `${this.page.title} - ${process.env.sitename}`
+      : ''
     const description = this.page ? this.page.description : ''
-    const ogImage = this.page ? `${process.env.domain}${this.$router.options.base}${this.page.ogImage}` : ''
-    const ogUrl = this.page ? `${process.env.domain}${this.$router.options.base}sketch/${this.$route.params.id}/` : ''
+    const ogImage = this.page
+      ? `${process.env.domain}${this.$router.options.base}${this.page.ogImage}`
+      : ''
+    const ogUrl = this.page
+      ? `${process.env.domain}${this.$router.options.base}sketch/${this.$route.params.id}/`
+      : ''
 
     return {
-      title: this.page ? this.page.title: '',
+      title: this.page ? this.page.title : '',
       meta: [
         {
           hid: 'description',
@@ -117,7 +123,9 @@ export default Vue.extend({
   },
   watch: {
     async isReady(v: boolean) {
-      if (this.page === null) return
+      if (this.page === null) {
+        return
+      }
       if (v === true) {
         await this.$webgl.changeSketch(this.page.webgl)
         this.isLoaded = true
@@ -125,7 +133,9 @@ export default Vue.extend({
     },
   },
   async mounted() {
-    if (this.page === null) return
+    if (this.page === null) {
+      return
+    }
     if (this.isReady) {
       await this.$webgl.changeSketch(this.page.webgl)
       await sleep(1000)

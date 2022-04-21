@@ -1,12 +1,7 @@
-<template lang="pug">
-IconBase(
-  iconName = 'github'
-  :size = 'size'
-  :fill = 'fill'
-  )
-  path(
-    :d = 'd'
-    )
+<template>
+  <IconBase :fill="fill" :size="size" icon-name="github">
+    <path :d="d"></path>
+  </IconBase>
 </template>
 
 <script lang="ts">
@@ -15,17 +10,17 @@ import { mdiGithub } from '@mdi/js'
 
 export default Vue.extend({
   props: {
-    size: {
-      type: [Number, String],
-      default: 24,
-    },
     fill: {
       type: String,
       default: 'currentColor',
     },
+    size: {
+      type: [Number, String],
+      default: 24,
+    },
   },
   computed: {
-    d() {
+    d(): string {
       return mdiGithub
     },
   },

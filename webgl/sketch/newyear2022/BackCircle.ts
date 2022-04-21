@@ -15,8 +15,12 @@ export default class Tiger extends THREE.Group {
   }
 
   start(group: THREE.Group) {
-    const backCircleInMesh = group.children.find(o => o.name === 'BackCircleIn_Mesh06')
-    const backCircleOutMesh = group.children.find(o => o.name === 'BackCircleOut_Mesh07')
+    const backCircleInMesh = group.children.find(
+      (o) => o.name === 'BackCircleIn_Mesh06'
+    )
+    const backCircleOutMesh = group.children.find(
+      (o) => o.name === 'BackCircleOut_Mesh07'
+    )
 
     if (backCircleInMesh instanceof THREE.Mesh) {
       this.backCircleIn = new BackCircleIn(backCircleInMesh.geometry)
@@ -37,6 +41,5 @@ export default class Tiger extends THREE.Group {
     this.time += time
     this.backCircleIn?.update(time)
     this.backCircleOut?.update(time)
-    
   }
 }

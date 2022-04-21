@@ -1,13 +1,15 @@
-<template lang="pug">
-ButtonBase.button(
-  v-bind = '$attrs'
-  tag = 'a'
-  buttonType = 'transparent'
-  width = '32px'
-  height = '32px'
-  radius = '50%'
-  )
-  slot
+<template>
+  <ButtonBase
+    v-bind="$attrs"
+    button-type="transparent"
+    class="button"
+    height="32px"
+    radius="50%"
+    tag="a"
+    width="32px"
+  >
+    <slot />
+  </ButtonBase>
 </template>
 
 <script lang="ts">

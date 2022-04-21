@@ -1,8 +1,8 @@
 import * as THREE from 'three'
+import { MathEx } from '@ykob/js-util'
 
 import vs from './glsl/Luminous.vs'
 import fs from './glsl/Luminous.fs'
-import { MathEx } from '~/assets/js/utils'
 
 export default class Luminous extends THREE.Mesh {
   constructor() {
@@ -31,14 +31,18 @@ export default class Luminous extends THREE.Mesh {
   }
 
   start(tNoise: THREE.Texture) {
-    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    if (!(this.material instanceof THREE.RawShaderMaterial)) {
+      return
+    }
     const { uniforms } = this.material
 
     uniforms.tNoise.value = tNoise
   }
 
   update(time: number) {
-    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    if (!(this.material instanceof THREE.RawShaderMaterial)) {
+      return
+    }
     const { uniforms } = this.material
 
     uniforms.time.value += time

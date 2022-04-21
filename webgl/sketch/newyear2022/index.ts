@@ -1,12 +1,12 @@
 import * as THREE from 'three'
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'
-import PerspectiveCamera from './PerspectiveCamera'
-import DirectionalLight from './DirectionalLight'
-import Tiger from './Tiger'
 import BackCircle from './BackCircle'
+import DirectionalLight from './DirectionalLight'
 import Luminous from './Luminous'
+import PerspectiveCamera from './PerspectiveCamera'
 import Points from './Points'
-import { sleep } from '~/assets/js/utils'
+import Tiger from './Tiger'
+import { sleep } from '@ykob/js-util'
 
 export class Sketch {
   target = new THREE.WebGLRenderTarget(1, 1)
@@ -47,9 +47,7 @@ export class Sketch {
       require('@/assets/img/sketch/newyear2022/BackCircleOut.png'),
       require('@/assets/img/common/noise.png'),
     ]
-    const objPath = [
-      `${base}/obj/sketch/newyear2022/Tiger.obj`,
-    ]
+    const objPath = [`${base}/obj/sketch/newyear2022/Tiger.obj`]
     const textures: THREE.Texture[] = []
     let imgs: HTMLImageElement[] = []
 
@@ -57,16 +55,14 @@ export class Sketch {
       ...imgPath.map((o) => {
         return this.imgLoader.loadAsync(o)
       }),
-    ])
-    .then((response: HTMLImageElement[]) => {
+    ]).then((response: HTMLImageElement[]) => {
       imgs = response
     })
     await Promise.all([
       ...objPath.map((o) => {
         return this.objLoader.loadAsync(o)
       }),
-    ])
-    .then((response: THREE.Group[]) => {
+    ]).then((response: THREE.Group[]) => {
       this.tiger.start(response[0])
       this.backCircle.start(response[0])
     })

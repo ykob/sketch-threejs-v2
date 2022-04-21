@@ -37,16 +37,20 @@ export default class TitlePlane extends THREE.Mesh {
     super(geometry, material)
   }
 
-  start(
-    { index, tNoise, tTitleFill, tTitleBorder }
-    : {
-      index: number
-      tNoise: THREE.Texture
-      tTitleFill: THREE.Texture
-      tTitleBorder: THREE.Texture
+  start({
+    index,
+    tNoise,
+    tTitleFill,
+    tTitleBorder,
+  }: {
+    index: number
+    tNoise: THREE.Texture
+    tTitleFill: THREE.Texture
+    tTitleBorder: THREE.Texture
+  }) {
+    if (!(this.material instanceof THREE.RawShaderMaterial)) {
+      return
     }
-  ) {
-    if (!(this.material instanceof THREE.RawShaderMaterial)) return
     const { uniforms } = this.material
 
     uniforms.alphaIndex.value = index
@@ -56,7 +60,9 @@ export default class TitlePlane extends THREE.Mesh {
   }
 
   update(time: number, noiseStrength: number) {
-    if (!(this.material instanceof THREE.RawShaderMaterial)) return
+    if (!(this.material instanceof THREE.RawShaderMaterial)) {
+      return
+    }
     const { uniforms } = this.material
 
     uniforms.time.value += time

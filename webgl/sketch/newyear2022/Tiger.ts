@@ -1,9 +1,9 @@
 import * as THREE from 'three'
-import TigerHead from './TigerHead'
-import TigerEyes from './TigerEyes'
 import TigerBody from './TigerBody'
-import TigerHandRight from './TigerHandRight'
+import TigerEyes from './TigerEyes'
 import TigerHandLeft from './TigerHandLeft'
+import TigerHandRight from './TigerHandRight'
+import TigerHead from './TigerHead'
 
 export default class Tiger extends THREE.Group {
   head: TigerHead | null
@@ -24,11 +24,15 @@ export default class Tiger extends THREE.Group {
   }
 
   start(group: THREE.Group) {
-    const headMesh = group.children.find(o => o.name === 'TigerHead_Mesh01')
-    const eyesMesh = group.children.find(o => o.name === 'TigerEyes_Mesh02')
-    const bodyMesh = group.children.find(o => o.name === 'TigerBody_Mesh03')
-    const handRightMesh = group.children.find(o => o.name === 'TigerHandRight_Mesh04')
-    const handLeftMesh = group.children.find(o => o.name === 'TigerHandLeft_Mesh05')
+    const headMesh = group.children.find((o) => o.name === 'TigerHead_Mesh01')
+    const eyesMesh = group.children.find((o) => o.name === 'TigerEyes_Mesh02')
+    const bodyMesh = group.children.find((o) => o.name === 'TigerBody_Mesh03')
+    const handRightMesh = group.children.find(
+      (o) => o.name === 'TigerHandRight_Mesh04'
+    )
+    const handLeftMesh = group.children.find(
+      (o) => o.name === 'TigerHandLeft_Mesh05'
+    )
 
     if (headMesh instanceof THREE.Mesh) {
       this.head = new TigerHead(headMesh.geometry)
@@ -52,7 +56,13 @@ export default class Tiger extends THREE.Group {
     }
   }
 
-  setTexture({ textureHead, textureBody, textureHand }: { [key: string]: THREE.Texture }) {
+  setTexture({
+    textureHead,
+    textureBody,
+    textureHand,
+  }: {
+    [key: string]: THREE.Texture
+  }) {
     this.head?.start(textureHead)
     this.body?.start(textureBody)
     this.handRight?.start(textureHand)
