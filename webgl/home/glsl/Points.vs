@@ -14,7 +14,7 @@ varying vec3 vColor;
 // Fog
 varying float fogDepth;
 
-#pragma glslify: convertHsvToRgb = require(../../modules/convertHsvToRgb)
+#pragma glslify: convertHsvToRgb = require(@ykob/glsl-util/src/convertHsvToRgb)
 
 void main() {
   vec2 transformedUV = position.xz / 100.0 + vec2(time * -0.02);

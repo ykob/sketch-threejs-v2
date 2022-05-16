@@ -26,7 +26,7 @@ const float duration1 = 0.18;
 const float duration2 = duration1 * 3.0;
 
 #pragma glslify: ease = require(glsl-easings/quadratic-in-out)
-#pragma glslify: convertHsvToRgb = require(../../modules/convertHsvToRgb)
+#pragma glslify: convertHsvToRgb = require(@ykob/glsl-util/src/convertHsvToRgb)
 
 float calcStep(float s, float a, float d) {
   return ease(clamp((s - a * (1.0 - d)) / d, 0.0, 1.0));
