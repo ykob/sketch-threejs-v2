@@ -6,7 +6,7 @@ uniform sampler2D tNoise;
 varying vec2 vUv;
 
 #pragma glslify: ease = require(glsl-easings/quadratic-out)
-#pragma glslify: convertHsvToRgb = require(../../../modules/convertHsvToRgb)
+#pragma glslify: convertHsvToRgb = require(@ykob/glsl-util/src/convertHsvToRgb)
 
 void main() {
   float showStep = ease(clamp((time - 6.0) / 3.0, 0.0, 1.0));

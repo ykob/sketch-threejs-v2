@@ -10,7 +10,7 @@ uniform sampler2D tTitleBorder;
 varying vec2 vUv;
 varying float vDistortStrength;
 
-#pragma glslify: convertHsvToRgb = require(../../modules/convertHsvToRgb)
+#pragma glslify: convertHsvToRgb = require(@ykob/glsl-util/src/convertHsvToRgb)
 #pragma glslify: randomNoise = require(../../modules/randomNoise)
 
 void main() {
