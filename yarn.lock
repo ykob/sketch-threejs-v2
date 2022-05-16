@@ -2259,6 +2259,11 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
+"@ykob/glsl-util@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@ykob/glsl-util/-/glsl-util-1.1.0.tgz#5a85dd49040a4c7f3fd378e6a7920a9319a47433"
+  integrity sha512-ryEw6AJnoTDJoTV9dzfqA+ZpKmcsKLHGEwaYiVT94KmcsmFSOrMtM8HK+WZPDEvZnVAFFfmxs2PTrL6iVW/S7Q==
+
 "@ykob/js-util@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@ykob/js-util/-/js-util-2.0.0.tgz#8c6613585c6bb96d44671b57fada6d9267a96238"
