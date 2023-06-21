@@ -20,7 +20,7 @@
     "@ykob/js-util": "^2.0.0",
     "core-js": "^3.15.1",
     "normalize.css": "^8.0.1",
-    "nuxt": "^2.15.7",
+    "nuxt": "^3.4.3",
     "three": "^0.138.3",
     "ts-easing": "^0.2.0",
     "ua-parser-js": "^1.0.2"
