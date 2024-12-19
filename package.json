@@ -1,0 +1,19 @@
+{
+  "name": "sketch-threejs-v2",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/three": "^0.171.0",
+    "typescript": "~5.6.2",
+    "vite": "^6.0.3"
+  },
+  "dependencies": {
+    "three": "^0.171.0"
+  }
+}
