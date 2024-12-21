@@ -1,0 +1,5 @@
+.env
+.turbo
+build/
+node_modules/
+styled-system/
