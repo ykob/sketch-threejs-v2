@@ -3,11 +3,12 @@ import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  root: resolve(__dirname, 'src'),
   build: {
     rollupOptions: {
       input: {
-        sample1: resolve(__dirname, 'src/sample1/index.ts'),
-        sample2: resolve(__dirname, 'src/sample2/index.ts'),
+        sample1: resolve(__dirname, 'src/sample1/index.html'),
+        sample2: resolve(__dirname, 'src/sample2/index.html'),
       },
     },
     outDir: resolve(__dirname, 'dist'),
