@@ -7,8 +7,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        sample1: resolve(__dirname, 'src/sample1/index.html'),
-        sample2: resolve(__dirname, 'src/sample2/index.html'),
+        bubble: resolve(__dirname, 'src/bubble/index.html'),
       },
     },
     outDir: resolve(__dirname, 'dist'),
