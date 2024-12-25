@@ -1,0 +1,20 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+canvas {
+  position: absolute;
+  inset: 0;
+}
+.sketch-summary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  padding: 32px;
+  color: white;
+  font-family: sans-serif;
+}
+.sketch-title {
+  font-weight: 400;
+}
