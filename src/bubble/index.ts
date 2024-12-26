@@ -1,5 +1,6 @@
-import { PerspectiveCamera, Scene, WebGLRenderer } from 'three';
+import { Scene, WebGLRenderer } from 'three';
 import { Bubble } from './bubble';
+import { Camera } from './camera';
 
 const app = document.getElementById('app');
 const canvas = document.createElement('canvas');
@@ -9,16 +10,15 @@ const renderer = new WebGLRenderer({
   alpha: true,
 });
 const scene = new Scene();
-const camera = new PerspectiveCamera();
+const camera = new Camera();
 const bubble = new Bubble();
 
 const resize = () => {
   const w = window.innerWidth;
   const h = window.innerHeight;
 
-  camera.aspect = w / h;
-  camera.updateProjectionMatrix();
   renderer.setSize(w, h);
+  camera.resize(w, h);
 };
 
 const update = () => {
@@ -31,14 +31,10 @@ const update = () => {
 const start = () => {
   if (!app || !canvas) return;
 
-  camera.position.z = 10;
-  camera.far = 100;
-  camera.setFocalLength(50);
-  camera.lookAt(scene.position);
-
   app.appendChild(canvas);
   renderer.setClearColor(0x000000, 1.0);
   scene.add(bubble);
+  camera.lookAt(scene.position);
 
   resize();
   update();
