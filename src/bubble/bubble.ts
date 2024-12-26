@@ -5,7 +5,7 @@ import vertexShader from './glsl/bubble.vs?raw';
 export class Bubble extends Mesh {
   constructor() {
     super(
-      new OctahedronGeometry(1, 6),
+      new OctahedronGeometry(1, 8),
       new RawShaderMaterial({
         uniforms: {
           time: { value: 0 },

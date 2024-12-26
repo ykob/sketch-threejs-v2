@@ -31,7 +31,7 @@ const update = () => {
 const start = () => {
   if (!app || !canvas) return;
 
-  camera.position.z = 5;
+  camera.position.z = 10;
   camera.far = 100;
   camera.setFocalLength(50);
   camera.lookAt(scene.position);
