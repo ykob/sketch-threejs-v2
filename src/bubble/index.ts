@@ -1,4 +1,4 @@
-import { Scene, TextureLoader, WebGLRenderer } from 'three';
+import { Clock, Scene, TextureLoader, WebGLRenderer } from 'three';
 import { Bubble } from './bubble';
 import { Camera } from './camera';
 
@@ -13,6 +13,7 @@ const scene = new Scene();
 const camera = new Camera();
 const bubble = new Bubble();
 const textureLoader = new TextureLoader();
+const clock = new Clock(false);
 
 const resize = () => {
   const w = window.innerWidth;
@@ -23,7 +24,9 @@ const resize = () => {
 };
 
 const update = () => {
-  bubble.update(performance.now() / 1000);
+  const delta = clock.getDelta();
+
+  bubble.update(delta);
   renderer.render(scene, camera);
   requestAnimationFrame(update);
 };
@@ -45,6 +48,7 @@ const start = async () => {
 
   resize();
   update();
+  clock.start();
 
   window.addEventListener('resize', resize);
 };

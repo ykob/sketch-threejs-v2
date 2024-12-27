@@ -9,6 +9,8 @@ import fragmentShader from './glsl/bubble.fs?raw';
 import vertexShader from './glsl/bubble.vs?raw';
 
 export class Bubble extends Mesh<OctahedronGeometry, RawShaderMaterial> {
+  time: number;
+
   constructor() {
     super(
       new OctahedronGeometry(1, 8),
@@ -22,6 +24,8 @@ export class Bubble extends Mesh<OctahedronGeometry, RawShaderMaterial> {
         transparent: true,
       }),
     );
+
+    this.time = 0;
   }
   start(texture: Texture) {
     texture.wrapS = RepeatWrapping;
@@ -29,6 +33,8 @@ export class Bubble extends Mesh<OctahedronGeometry, RawShaderMaterial> {
     this.material.uniforms.uNoiseTexture.value = texture;
   }
   update(time: number) {
-    this.material.uniforms.uTime.value = time;
+    this.time += time;
+    this.scale.setScalar(1 + Math.sin(this.time) * 0.05);
+    this.material.uniforms.uTime.value = this.time;
   }
 }
