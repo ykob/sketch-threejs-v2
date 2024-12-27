@@ -19,6 +19,7 @@ export class Bubble extends Mesh<OctahedronGeometry, RawShaderMaterial> {
         },
         vertexShader,
         fragmentShader,
+        transparent: true,
       }),
     );
   }

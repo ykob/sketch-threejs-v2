@@ -7,7 +7,10 @@ varying vec2 vUv;
 varying float vEdge;
 
 void main() {
-  vec4 noise = texture2D(uNoiseTexture, vUv + uTime * vec2(0.0, 0.1));
+  float noiseR = texture2D(uNoiseTexture, vUv + uTime * vec2(0.0, -0.04)).r;
+  float noiseB = texture2D(uNoiseTexture, vUv + uTime * vec2(0.04, 0.04)).g;
+  float noiseG = texture2D(uNoiseTexture, vUv + uTime * vec2(-0.04, 0.04)).b;
+  vec3 color = vec3(noiseR, noiseG, noiseB);
 
-  gl_FragColor = vec4(vec3(vEdge * noise), 1.0);
+  gl_FragColor = vec4(color, vEdge);
 }
