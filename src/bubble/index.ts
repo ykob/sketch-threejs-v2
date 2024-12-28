@@ -1,5 +1,5 @@
 import { Clock, Scene, TextureLoader, WebGLRenderer } from 'three';
-import { Bubble } from './bubble';
+import { Bubbles } from './bubbles';
 import { Camera } from './camera';
 
 const app = document.getElementById('app');
@@ -11,7 +11,7 @@ const renderer = new WebGLRenderer({
 });
 const scene = new Scene();
 const camera = new Camera();
-const bubble = new Bubble();
+const bubbles = new Bubbles();
 const textureLoader = new TextureLoader();
 const clock = new Clock(false);
 
@@ -26,7 +26,7 @@ const resize = () => {
 const update = () => {
   const delta = clock.getDelta();
 
-  bubble.update(delta);
+  bubbles.update(delta, camera.position);
   renderer.render(scene, camera);
   requestAnimationFrame(update);
 };
@@ -36,13 +36,13 @@ const start = async () => {
 
   app.appendChild(canvas);
   renderer.setClearColor(0x000000, 1.0);
-  scene.add(bubble);
+  scene.add(bubbles);
   camera.lookAt(scene.position);
 
   await textureLoader
     .loadAsync('/img/noise.jpg')
     .then((texture) => {
-      bubble.start(texture);
+      bubbles.start(texture);
     })
     .catch((error) => console.error(error));
 

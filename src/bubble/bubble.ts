@@ -1,6 +1,6 @@
 import {
+  IcosahedronGeometry,
   Mesh,
-  OctahedronGeometry,
   RawShaderMaterial,
   RepeatWrapping,
   Texture,
@@ -8,12 +8,12 @@ import {
 import fragmentShader from './glsl/bubble.fs?raw';
 import vertexShader from './glsl/bubble.vs?raw';
 
-export class Bubble extends Mesh<OctahedronGeometry, RawShaderMaterial> {
+export class Bubble extends Mesh<IcosahedronGeometry, RawShaderMaterial> {
   time: number;
 
   constructor() {
     super(
-      new OctahedronGeometry(1, 8),
+      new IcosahedronGeometry(1, 5),
       new RawShaderMaterial({
         uniforms: {
           uTime: { value: 0 },
