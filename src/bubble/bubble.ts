@@ -5,13 +5,15 @@ import {
   RepeatWrapping,
   Texture,
 } from 'three';
+import { radians } from '../utils';
 import fragmentShader from './glsl/bubble.fs?raw';
 import vertexShader from './glsl/bubble.vs?raw';
 
 export class Bubble extends Mesh<IcosahedronGeometry, RawShaderMaterial> {
   time: number;
+  diff: number;
 
-  constructor() {
+  constructor(diff: number) {
     super(
       new IcosahedronGeometry(1, 5),
       new RawShaderMaterial({
@@ -25,6 +27,7 @@ export class Bubble extends Mesh<IcosahedronGeometry, RawShaderMaterial> {
       }),
     );
 
+    this.diff = diff;
     this.time = 0;
   }
   start(texture: Texture) {
@@ -34,7 +37,9 @@ export class Bubble extends Mesh<IcosahedronGeometry, RawShaderMaterial> {
   }
   update(time: number) {
     this.time += time;
-    this.scale.setScalar(1 + Math.sin(this.time) * 0.05);
+    this.scale.setScalar(
+      1 + Math.sin(radians(this.time * 90 + this.diff * 180)) * 0.1,
+    );
     this.material.uniforms.uTime.value = this.time;
   }
 }

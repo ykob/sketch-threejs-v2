@@ -7,7 +7,7 @@ export class Bubbles extends Group {
   constructor() {
     super();
 
-    this.bubbles = [new Bubble(), new Bubble(), new Bubble()];
+    this.bubbles = [new Bubble(0 / 3), new Bubble(1 / 3), new Bubble(2 / 3)];
   }
   start(texture: Texture) {
     for (let i = 0; i < this.bubbles.length; i++) {
@@ -20,7 +20,6 @@ export class Bubbles extends Group {
         Math.sin((Math.PI / 180) * 90 * i) * 1.5,
       );
       this.add(bubble);
-      console.log(bubble);
     }
   }
   update(delta: number, cameraPosition: Vector3) {
