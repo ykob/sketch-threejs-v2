@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "lint",
+    "format": "prettier --write ."
   },
   "devDependencies": {
     "@types/three": "^0.171.0",
