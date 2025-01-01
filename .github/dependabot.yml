@@ -17,3 +17,7 @@ updates:
       prettier:
         patterns:
           - 'prettier*'
+      three:
+        patterns:
+          - 'three'
+          - '@types/three'
