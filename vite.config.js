@@ -13,15 +13,6 @@ const pageData = {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  root: resolve(__dirname, 'src'),
-  plugins: [
-    handlebars({
-      context(pagePath) {
-        console.log(pagePath);
-        return pageData[pagePath];
-      },
-    }),
-  ],
   build: {
     rollupOptions: {
       input: {
@@ -33,6 +24,19 @@ export default defineConfig({
     modulePreload: false,
     copyPublicDir: true,
   },
+  plugins: [
+    handlebars({
+      context(pagePath) {
+        return pageData[pagePath];
+      },
+    }),
+  ],
+  resolve: {
+    alias: {
+      '~': resolve(__dirname, 'src'),
+    },
+  },
+  root: resolve(__dirname, 'src'),
   server: {
     host: true,
     port: 3000,

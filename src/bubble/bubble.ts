@@ -5,7 +5,7 @@ import {
   RepeatWrapping,
   Texture,
 } from 'three';
-import { radians } from '../utils';
+import { radians } from '~/utils';
 import fragmentShader from './glsl/bubble.fs?raw';
 import vertexShader from './glsl/bubble.vs?raw';
 
@@ -15,7 +15,7 @@ export class Bubble extends Mesh<IcosahedronGeometry, RawShaderMaterial> {
 
   constructor(diff: number) {
     super(
-      new IcosahedronGeometry(1, 5),
+      new IcosahedronGeometry(1, 8),
       new RawShaderMaterial({
         uniforms: {
           uTime: { value: 0 },
