@@ -1,37 +1,11 @@
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import handlebars from 'vite-plugin-handlebars';
-
-const pageData = [
-  {
-    key: 'home',
-    path: '/index.html',
-    title: 'Sketch of three.js v2',
-  },
-  {
-    key: 'bubble',
-    path: '/bubble/index.html',
-    title: 'Bubble',
-  },
-];
+import { pageData } from './src/consts/';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  build: {
-    rollupOptions: {
-      input: Object.fromEntries(
-        pageData.map((page) => [
-          page.key,
-          resolve(__dirname, `src${page.path}`),
-        ]),
-      ),
-      output: {
-        dir: resolve(__dirname, 'dist'),
-      },
-    },
-    modulePreload: false,
-    copyPublicDir: true,
-  },
+  root: resolve(__dirname, 'src'),
   plugins: [
     handlebars({
       context(pagePath) {
@@ -44,9 +18,21 @@ export default defineConfig({
       '~': resolve(__dirname, 'src'),
     },
   },
-  root: resolve(__dirname, 'src'),
   server: {
     host: true,
     port: 3000,
+  },
+  build: {
+    rollupOptions: {
+      input: Object.fromEntries(
+        pageData.map((page) => [
+          page.key,
+          resolve(__dirname, `src${page.path}`),
+        ]),
+      ),
+      output: {
+        dir: resolve(__dirname, 'dist'),
+      },
+    },
   },
 });
