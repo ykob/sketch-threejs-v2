@@ -16,7 +16,7 @@ void main() {
   float angleToCamera = acos(dot(normalize(cameraPosition), normalMatrix * normal));
 
   vUv = uv;
-  vEdge = pow(abs(sin(angleToCamera)), 2.0);
+  vEdge = pow(abs(sin(angleToCamera)), 3.0);
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
