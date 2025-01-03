@@ -13,7 +13,7 @@ export class Background extends Mesh<IcosahedronGeometry, RawShaderMaterial> {
 
   constructor() {
     super(
-      new IcosahedronGeometry(10, 8),
+      new IcosahedronGeometry(50, 8),
       new RawShaderMaterial({
         uniforms: {
           uTime: { value: 0 },

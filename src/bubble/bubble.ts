@@ -19,6 +19,7 @@ export class Bubble extends Mesh<IcosahedronGeometry, RawShaderMaterial> {
       new RawShaderMaterial({
         uniforms: {
           uTime: { value: 0 },
+          uDiff: { value: diff },
           uNoiseTexture: { value: null },
         },
         vertexShader,

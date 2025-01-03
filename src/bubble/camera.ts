@@ -8,6 +8,7 @@ export class Camera extends PerspectiveCamera {
     this.setFocalLength(50);
   }
   resize(w: number, h: number) {
+    this.position.z = w / h < 1 ? 15 : 10;
     this.aspect = w / h;
     this.updateProjectionMatrix();
   }
