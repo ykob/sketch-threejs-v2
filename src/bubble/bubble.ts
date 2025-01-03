@@ -6,8 +6,8 @@ import {
   Texture,
 } from 'three';
 import { radians } from '~/utils';
-import fragmentShader from './glsl/bubble.fs?raw';
-import vertexShader from './glsl/bubble.vs?raw';
+import fragmentShader from './glsl/bubble.fs';
+import vertexShader from './glsl/bubble.vs';
 
 export class Bubble extends Mesh<IcosahedronGeometry, RawShaderMaterial> {
   time: number;

@@ -6,11 +6,7 @@ uniform sampler2D uNoiseTexture;
 varying vec2 vUv;
 varying float vEdge;
 
-vec3 convertHsvToRgb(vec3 c) {
-  vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
-  vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
-  return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
-}
+#include ../../utils/glsl/convert-hsv-to-rgb;
 
 void main() {
   float noiseR = texture2D(uNoiseTexture, vUv * vec2(2.0, 1.0) + uTime * vec2(0.0, -0.02)).r;

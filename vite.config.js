@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
+import glsl from 'vite-plugin-glsl';
 import handlebars from 'vite-plugin-handlebars';
 import { pageData } from './src/consts/';
 
@@ -7,6 +8,7 @@ import { pageData } from './src/consts/';
 export default defineConfig({
   root: resolve(__dirname, 'src'),
   plugins: [
+    glsl(),
     handlebars({
       context(pagePath) {
         return pageData.find((page) => page.path === pagePath);

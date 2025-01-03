@@ -5,8 +5,8 @@ import {
   RepeatWrapping,
   Texture,
 } from 'three';
-import fragmentShader from './glsl/background.fs?raw';
-import vertexShader from './glsl/background.vs?raw';
+import fragmentShader from './glsl/background.fs';
+import vertexShader from './glsl/background.vs';
 
 export class Background extends Mesh<IcosahedronGeometry, RawShaderMaterial> {
   time: number;
