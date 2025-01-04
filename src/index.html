@@ -10,6 +10,13 @@
   <body>
     <div id="app">
       <h1>{{title}}</h1>
+      <ul class="people_list">
+        {{#each sketches}}
+        <li>
+          <a href="/{{this.key}}/">{{this.title}}</a>
+        </li>
+        {{/each}}
+      </ul>
     </div>
     <script type="module" src="./index.ts"></script>
   </body>

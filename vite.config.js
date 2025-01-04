@@ -11,7 +11,15 @@ export default defineConfig({
     glsl(),
     handlebars({
       context(pagePath) {
-        return pageData.find((page) => page.path === pagePath);
+        const page = pageData.find((page) => page.path === pagePath);
+
+        if (pagePath === '/index.html') {
+          return {
+            ...page,
+            sketches: pageData.filter((page) => page.path !== '/index.html'),
+          };
+        }
+        return page;
       },
     }),
   ],
