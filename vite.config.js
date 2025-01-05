@@ -10,6 +10,7 @@ export default defineConfig({
   plugins: [
     glsl(),
     handlebars({
+      partialDirectory: resolve(__dirname, 'src/templates'),
       context(pagePath) {
         const page = pageData.find((page) => page.path === pagePath);
 

@@ -16,5 +16,27 @@ canvas {
   font-family: sans-serif;
 }
 .sketch-title {
+  margin: 0;
   font-weight: 400;
+}
+.back-home {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  padding: 32px;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 16px;
+}
+.back-home a {
+  height: 2.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 1em;
+  border: 1px solid #fff;
+  border-radius: 9999px;
+  color: white;
+  text-decoration: none;
 }

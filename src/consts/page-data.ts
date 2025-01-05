@@ -8,5 +8,6 @@ export const pageData = [
     key: 'bubble',
     path: '/sketches/bubble/index.html',
     title: 'Bubble',
+    description: 'render the bubble balls with noize texture.',
   },
 ];
