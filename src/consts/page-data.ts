@@ -6,7 +6,7 @@ export const pageData = [
   },
   {
     key: 'bubble',
-    path: '/bubble/index.html',
+    path: '/bubble/sketches/index.html',
     title: 'Bubble',
   },
 ];

@@ -6,7 +6,7 @@ uniform sampler2D uNoiseTexture;
 varying vec2 vUv;
 varying float vEdge;
 
-#include ../../utils/glsl/convert-hsv-to-rgb;
+#include ../../../utils/glsl/convert-hsv-to-rgb;
 
 void main() {
   float noiseR = texture2D(uNoiseTexture, vUv * vec2(2.0, 1.0) + uTime * vec2(0.0, -0.02)).r;
