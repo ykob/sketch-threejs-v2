@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  letter-spacing: 0.06em;
 }
 canvas {
   position: absolute;
@@ -15,8 +16,22 @@ canvas {
   color: white;
   font-family: sans-serif;
 }
+.sketch-title-wrap {
+  margin: 0 0 1em;
+  font-size: 1em;
+  font-weight: 400;
+}
+.site-title {
+  display: block;
+}
 .sketch-title {
+  display: block;
+  font-size: 2em;
+  font-weight: 700;
+}
+.sketch-description {
   margin: 0;
+  font-size: 0.875em;
   font-weight: 400;
 }
 .back-home {
