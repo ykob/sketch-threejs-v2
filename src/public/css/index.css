@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: 'Ubuntu', serif;
   letter-spacing: 0.06em;
 }
 canvas {
@@ -14,7 +15,6 @@ canvas {
   z-index: 2;
   padding: 32px;
   color: white;
-  font-family: sans-serif;
 }
 .sketch-title-wrap {
   margin: 0 0 1em;
