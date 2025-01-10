@@ -1,4 +1,5 @@
 import { Clock, Scene, TextureLoader, WebGLRenderer } from 'three';
+import { debounce } from '~/utils';
 import { Background } from './background';
 import { Bubbles } from './bubbles';
 import { Camera } from './camera';
@@ -17,7 +18,9 @@ const background = new Background();
 const textureLoader = new TextureLoader();
 const clock = new Clock(false);
 
-const resize = () => {
+const resize = async () => {
+  renderer.setSize(0, 0);
+
   const w = window.innerWidth;
   const h = window.innerHeight;
 
@@ -55,7 +58,7 @@ const start = async () => {
   update();
   clock.start();
 
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', debounce(resize, 100));
 };
 
 start();
