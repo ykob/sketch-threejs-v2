@@ -1,37 +1,46 @@
 body {
+  overflow: hidden;
   margin: 0;
   padding: 0;
+  font-size: clamp(0.875rem, 1vw, 1rem);
   font-family: 'Ubuntu', serif;
   letter-spacing: 0.06em;
 }
 canvas {
+  width: 0;
+  height: 0;
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
 }
 .sketch-summary {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 2;
-  padding: 32px;
+  padding: clamp(24px, 2vw, 48px);
   color: white;
 }
 .sketch-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   margin: 0 0 1em;
   font-size: 1em;
   font-weight: 400;
 }
 .site-title {
   display: block;
+  font-weight: 700;
+  font-size: 1.2em;
 }
 .sketch-title {
   display: block;
-  font-size: 2em;
-  font-weight: 700;
+  font-size: 3em;
+  font-weight: 400;
 }
 .sketch-description {
   margin: 0;
-  font-size: 0.875em;
   font-weight: 400;
 }
 .back-home {
@@ -39,10 +48,9 @@ canvas {
   top: 0;
   right: 0;
   z-index: 2;
-  padding: 32px;
+  padding: clamp(24px, 2vw, 48px);
   text-decoration: none;
   font-family: sans-serif;
-  font-size: 16px;
 }
 .back-home a {
   height: 2.4em;
@@ -53,5 +61,6 @@ canvas {
   border: 1px solid #fff;
   border-radius: 9999px;
   color: white;
+  font-size: 0.875em;
   text-decoration: none;
 }
