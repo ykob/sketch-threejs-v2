@@ -2,7 +2,7 @@ body {
   overflow: hidden;
   margin: 0;
   padding: 0;
-  font-size: clamp(0.875rem, 1vw, 1rem);
+  font-size: clamp(0.75rem, 3vw, 1rem);
   font-family: 'Ubuntu', serif;
   letter-spacing: 0.06em;
 }
