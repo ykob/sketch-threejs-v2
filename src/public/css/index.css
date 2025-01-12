@@ -64,3 +64,23 @@ canvas {
   font-size: 0.875em;
   text-decoration: none;
 }
+.social-links {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  padding: clamp(24px, 2vw, 48px);
+}
+.social-links a {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.social-links svg {
+  fill: currentColor;
+}
