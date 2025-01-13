@@ -1,4 +1,5 @@
 import {
+  GLSL3,
   IcosahedronGeometry,
   Mesh,
   RawShaderMaterial,
@@ -25,7 +26,7 @@ export class Bubble extends Mesh<IcosahedronGeometry, RawShaderMaterial> {
         vertexShader,
         fragmentShader,
         transparent: true,
-        glslVersion: '300 es',
+        glslVersion: GLSL3,
       }),
     );
 

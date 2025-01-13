@@ -1,4 +1,5 @@
 import {
+  GLSL3,
   IcosahedronGeometry,
   Mesh,
   RawShaderMaterial,
@@ -22,7 +23,7 @@ export class Background extends Mesh<IcosahedronGeometry, RawShaderMaterial> {
         vertexShader,
         fragmentShader,
         side: 2,
-        glslVersion: '300 es',
+        glslVersion: GLSL3,
       }),
     );
 
