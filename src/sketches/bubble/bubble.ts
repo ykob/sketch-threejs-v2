@@ -25,6 +25,7 @@ export class Bubble extends Mesh<IcosahedronGeometry, RawShaderMaterial> {
         vertexShader,
         fragmentShader,
         transparent: true,
+        glslVersion: '300 es',
       }),
     );
 
