@@ -16,7 +16,7 @@ void main() {
   vec4 noise3 = texture(uNoiseTexture, vUv + uTime * vec2(-0.01, 0.01));
   vec3 color = convertHsvToRgb(
     vec3(
-      (noise1.x * noise2.y * noise3.z) * 0.6 + 0.3,
+      (noise1.x * noise2.y * noise3.z) * 1.2 + 0.24,
       0.48,
       (noise1.x * noise2.y * noise3.z) * 0.3 + 0.3 * vEdge
     )
