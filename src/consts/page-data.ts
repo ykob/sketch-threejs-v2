@@ -10,4 +10,10 @@ export const pageData = [
     title: 'Bubble',
     description: 'render the bubble balls with noize texture.',
   },
+  {
+    key: 'light-ball',
+    path: '/sketches/light-ball/index.html',
+    title: 'Light Ball',
+    description: 'render the light ball with noize texture.',
+  },
 ];
