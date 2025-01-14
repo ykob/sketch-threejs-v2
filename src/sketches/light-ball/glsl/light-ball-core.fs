@@ -1,7 +1,6 @@
 precision highp float;
 
 uniform float uTime;
-uniform float uDiff;
 uniform sampler2D uNoiseTexture;
 
 in vec2 vUv;
@@ -12,9 +11,9 @@ out vec4 fragColor;
 #include ../../../utils/glsl/convert-hsv-to-rgb;
 
 void main() {
-  vec4 noise1 = texture(uNoiseTexture, vUv + uDiff + uTime * vec2(0.0, -0.03));
-  vec4 noise2 = texture(uNoiseTexture, vUv + uDiff + uTime * vec2(0.03, 0.03));
-  vec4 noise3 = texture(uNoiseTexture, vUv + uDiff + uTime * vec2(-0.03, 0.03));
+  vec4 noise1 = texture(uNoiseTexture, vUv + uTime * vec2(0.0, -0.03));
+  vec4 noise2 = texture(uNoiseTexture, vUv + uTime * vec2(0.03, 0.03));
+  vec4 noise3 = texture(uNoiseTexture, vUv + uTime * vec2(-0.03, 0.03));
   vec3 color = convertHsvToRgb(
     vec3(
       (noise1.x * noise2.y * noise3.z) * 0.58 + 0.1,
