@@ -12,14 +12,14 @@ out vec4 fragColor;
 
 void main() {
   vec2 uv = (vUv * 2.0 - vec2(1.0));
-  vec4 noise1 = texture(uNoiseTexture, normalize(uv) + uTime * vec2(0.0, -0.06));
-  vec4 noise2 = texture(uNoiseTexture, normalize(uv) + uTime * vec2(0.06, 0.06));
-  vec4 noise3 = texture(uNoiseTexture, normalize(uv) + uTime * vec2(-0.06, 0.06));
+  vec4 noise1 = texture(uNoiseTexture, normalize(uv) + uTime * vec2(0.0, -0.12));
+  vec4 noise2 = texture(uNoiseTexture, normalize(uv) + uTime * vec2(0.12, 0.12));
+  vec4 noise3 = texture(uNoiseTexture, normalize(uv) + uTime * vec2(-0.12, 0.12));
   float edge = smoothstep(
     0.2,
     0.8,
     (1.0 - smoothstep(0.4, 0.7, length(uv)))
-      + (noise1.x * noise2.y * noise3.z)) * (1.0 - smoothstep(0.5, 1.0, length(uv))
+      + (noise1.x * noise2.y * noise3.z))* (1.0 - smoothstep(0.5, 1.0, length(uv))
   );
   vec3 color = convertHsvToRgb(
     vec3(
