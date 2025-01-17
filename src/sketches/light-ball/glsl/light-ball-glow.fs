@@ -23,7 +23,7 @@ void main() {
   );
   vec3 color = convertHsvToRgb(
     vec3(
-      0.1,
+      0.04,
       1.0 - edge * 0.6,
       0.8 + edge
     )
