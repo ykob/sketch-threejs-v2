@@ -33,8 +33,8 @@ export class LightBallCore extends Mesh<
   start(texture: Texture) {
     this.material.uniforms.uNoiseTexture.value = texture;
   }
-  update(time: number) {
-    this.time += time;
+  update(delta: number) {
+    this.time += delta;
     this.material.uniforms.uTime.value = this.time;
   }
 }
