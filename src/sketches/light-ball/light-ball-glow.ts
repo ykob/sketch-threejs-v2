@@ -28,5 +28,6 @@ export class LightBallGlow extends Mesh<PlaneGeometry, RawShaderMaterial> {
   update(delta: number) {
     this.time += delta;
     this.material.uniforms.uTime.value = this.time;
+    this.position.y = Math.sin(this.time) * 0.2;
   }
 }
