@@ -1,6 +1,6 @@
 import { IcosahedronGeometry, Points, PointsMaterial, Vector3 } from 'three';
 
-export class LightBallParticle extends Points {
+export class LightBallParticles extends Points {
   time: number;
 
   constructor() {
