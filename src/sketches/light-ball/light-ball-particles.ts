@@ -1,4 +1,12 @@
-import { IcosahedronGeometry, Points, PointsMaterial, Vector3 } from 'three';
+import {
+  GLSL3,
+  IcosahedronGeometry,
+  Points,
+  RawShaderMaterial,
+  Vector3,
+} from 'three';
+import fragmentShader from './glsl/light-ball-particles.fs';
+import vertexShader from './glsl/light-ball-particles.vs';
 
 export class LightBallParticles extends Points {
   time: number;
@@ -6,9 +14,11 @@ export class LightBallParticles extends Points {
   constructor() {
     super(
       new IcosahedronGeometry(2, 4),
-      new PointsMaterial({
-        color: 0xffffff,
-        size: 0.08,
+      new RawShaderMaterial({
+        vertexShader,
+        fragmentShader,
+        transparent: true,
+        glslVersion: GLSL3,
       }),
     );
     this.time = 0;
