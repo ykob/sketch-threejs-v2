@@ -20,6 +20,7 @@ export class LightBall extends Group {
   start(texture: Texture) {
     this.core.start(texture);
     this.glow.start(texture);
+    this.particles.start(texture);
     this.add(this.core);
     this.add(this.glow);
     this.add(this.particles);
