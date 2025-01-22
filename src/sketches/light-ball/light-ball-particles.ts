@@ -3,6 +3,7 @@ import {
   IcosahedronGeometry,
   Points,
   RawShaderMaterial,
+  Vector2,
   Vector3,
 } from 'three';
 import fragmentShader from './glsl/light-ball-particles.fs';
@@ -11,10 +12,13 @@ import vertexShader from './glsl/light-ball-particles.vs';
 export class LightBallParticles extends Points {
   time: number;
 
-  constructor() {
+  constructor(resolution: Vector2) {
     super(
       new IcosahedronGeometry(2, 4),
       new RawShaderMaterial({
+        uniforms: {
+          uResolution: { value: resolution },
+        },
         vertexShader,
         fragmentShader,
         transparent: true,

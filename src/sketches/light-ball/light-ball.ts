@@ -1,4 +1,4 @@
-import { Group, Texture } from 'three';
+import { Group, Texture, Vector2 } from 'three';
 import { LightBallCore } from './light-ball-core';
 import { LightBallGlow } from './light-ball-glow';
 import { LightBallParticles } from './light-ball-particles';
@@ -9,12 +9,12 @@ export class LightBall extends Group {
   particles: LightBallParticles;
   time: number;
 
-  constructor() {
+  constructor(resolution: Vector2) {
     super();
 
     this.core = new LightBallCore();
     this.glow = new LightBallGlow();
-    this.particles = new LightBallParticles();
+    this.particles = new LightBallParticles(resolution);
     this.time = 0;
   }
   start(texture: Texture) {
@@ -23,6 +23,7 @@ export class LightBall extends Group {
     this.add(this.core);
     this.add(this.glow);
     this.add(this.particles);
+    this.particles.renderOrder = 1;
   }
   update(delta: number) {
     this.core.update(delta);

@@ -3,6 +3,7 @@ import {
   RepeatWrapping,
   Scene,
   TextureLoader,
+  Vector2,
   WebGLRenderer,
 } from 'three';
 import { debounce } from '~/utils';
@@ -19,8 +20,9 @@ const renderer = new WebGLRenderer({
 });
 const scene = new Scene();
 const camera = new Camera();
+const resolution = new Vector2();
 const background = new Background();
-const lightBall = new LightBall();
+const lightBall = new LightBall(resolution);
 const textureLoader = new TextureLoader();
 const clock = new Clock(false);
 
@@ -32,6 +34,7 @@ const resize = async () => {
 
   renderer.setSize(w, h);
   camera.resize(w, h);
+  resolution.set(w, h);
 };
 
 const update = () => {
