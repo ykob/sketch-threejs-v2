@@ -54,7 +54,7 @@ export class LightBallParticles extends Points<
       );
 
       updatePosition.multiplyScalar(
-        Math.sin(this.time * 0.6 + i * 0.4) * 0.8 + 2.4,
+        Math.sin(this.time * 0.6 + i * 0.4) * 0.6 + 2.2,
       );
 
       position.setXYZ(i, updatePosition.x, updatePosition.y, updatePosition.z);
