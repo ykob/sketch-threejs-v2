@@ -1,4 +1,5 @@
 import {
+  AdditiveBlending,
   GLSL3,
   IcosahedronGeometry,
   Points,
@@ -6,6 +7,7 @@ import {
   Vector2,
   Vector3,
 } from 'three';
+import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js';
 import fragmentShader from './glsl/light-ball-particles.fs';
 import vertexShader from './glsl/light-ball-particles.vs';
 
@@ -14,13 +16,15 @@ export class LightBallParticles extends Points {
 
   constructor(resolution: Vector2) {
     super(
-      new IcosahedronGeometry(2, 4),
+      BufferGeometryUtils.mergeVertices(new IcosahedronGeometry(2, 3)),
       new RawShaderMaterial({
         uniforms: {
           uResolution: { value: resolution },
         },
         vertexShader,
         fragmentShader,
+        blending: AdditiveBlending,
+        depthWrite: false,
         transparent: true,
         glslVersion: GLSL3,
       }),
@@ -38,7 +42,9 @@ export class LightBallParticles extends Points {
         normal.getZ(i),
       );
 
-      updatePosition.multiplyScalar(Math.sin(this.time + i * 0.1) * 1.8 + 1);
+      updatePosition.multiplyScalar(
+        Math.sin(this.time * 0.6 + i * 40.1) * 0.8 + 2.4,
+      );
 
       position.setXYZ(i, updatePosition.x, updatePosition.y, updatePosition.z);
     }

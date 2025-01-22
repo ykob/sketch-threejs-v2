@@ -15,6 +15,7 @@ export class LightBallGlow extends Mesh<PlaneGeometry, RawShaderMaterial> {
         },
         vertexShader,
         fragmentShader,
+        depthWrite: false,
         transparent: true,
         glslVersion: GLSL3,
       }),

@@ -23,7 +23,6 @@ export class LightBall extends Group {
     this.add(this.core);
     this.add(this.glow);
     this.add(this.particles);
-    this.particles.renderOrder = 1;
   }
   update(delta: number) {
     this.core.update(delta);
