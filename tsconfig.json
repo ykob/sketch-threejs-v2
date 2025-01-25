@@ -21,9 +21,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    "types": [
-      "vite-plugin-glsl/ext"
-    ],
     "typeRoots": [
       "node_modules/@types",
       "src/types"
