@@ -7,6 +7,7 @@ import { pageData } from './src/consts/';
 // https://vitejs.dev/config/
 export default defineConfig({
   root: resolve(__dirname, 'src'),
+  base: '/sketch-threejs-v2/',
   plugins: [
     glsl(),
     handlebars({
