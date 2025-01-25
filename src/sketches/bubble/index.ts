@@ -47,7 +47,7 @@ const start = async () => {
   camera.lookAt(scene.position);
 
   await textureLoader
-    .loadAsync('/img/noise.jpg')
+    .loadAsync('/sketch-threejs-v2/img/noise.jpg')
     .then((texture) => {
       bubbles.start(texture);
       background.start(texture);
