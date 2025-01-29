@@ -13,7 +13,9 @@ out vec2 vUv;
 out float vEdge;
 
 void main() {
-  float angleToCamera = acos(dot(normalize(cameraPosition), normalMatrix * normal));
+  float angleToCamera = acos(
+    dot(normalize(cameraPosition), normalMatrix * normal)
+  );
 
   vUv = uv;
   vEdge = abs(sin(angleToCamera));
