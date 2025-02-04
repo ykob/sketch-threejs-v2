@@ -35,6 +35,7 @@ export default defineConfig({
     port: 3000,
   },
   build: {
+    emptyOutDir: true,
     rollupOptions: {
       input: Object.fromEntries(
         pageData.map((page) => [
