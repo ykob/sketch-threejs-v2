@@ -5,11 +5,11 @@ export const pageData = [
     title: 'Sketch of three.js v2',
   },
   {
-    key: 'bubble',
-    path: '/sketches/bubble/index.html',
-    title: 'Bubble',
-    description: 'render the bubble balls with noize texture.',
-    updated: '2025-01-10T10:00:00+09:00',
+    key: 'gallery',
+    path: '/sketches/gallery/index.html',
+    title: 'Galley',
+    description: '',
+    updated: '2025-02-xxT10:00:00+09:00',
   },
   {
     key: 'light-ball',
@@ -17,5 +17,12 @@ export const pageData = [
     title: 'Light Ball',
     description: 'render the light ball with noize texture.',
     updated: '2025-01-24T10:00:00+09:00',
+  },
+  {
+    key: 'bubble',
+    path: '/sketches/bubble/index.html',
+    title: 'Bubble',
+    description: 'render the bubble balls with noize texture.',
+    updated: '2025-01-10T10:00:00+09:00',
   },
 ];
