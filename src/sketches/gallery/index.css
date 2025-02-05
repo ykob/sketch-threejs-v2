@@ -1,0 +1,8 @@
+.layer {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  background: #0f0;
+}
