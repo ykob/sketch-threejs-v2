@@ -17,7 +17,7 @@ canvas {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 100;
   padding: clamp(24px, 2vw, 48px);
   color: white;
 }
@@ -48,7 +48,7 @@ canvas {
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 2;
+  z-index: 100;
   padding: clamp(24px, 2vw, 48px);
   text-decoration: none;
   font-family: sans-serif;
@@ -71,7 +71,7 @@ canvas {
   position: absolute;
   bottom: 0;
   left: 0;
-  z-index: 2;
+  z-index: 100;
   padding: clamp(24px, 2vw, 48px);
 }
 .social-links a {

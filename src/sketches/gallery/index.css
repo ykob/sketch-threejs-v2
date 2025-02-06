@@ -1,8 +1,8 @@
-.layer {
-  max-width: 1200px;
+.content {
+  overflow-y: auto;
   margin: 0 auto;
   position: absolute;
   inset: 0;
-  opacity: 0.2;
+  z-index: 10;
   background: #0f0;
 }
