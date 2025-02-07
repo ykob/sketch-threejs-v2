@@ -1,8 +1,24 @@
 .content {
-  overflow-y: auto;
-  margin: 0 auto;
-  position: absolute;
-  inset: 0;
+  height: 100dvh;
+  position: relative;
   z-index: 10;
-  background: #0f0;
+}
+.content-inner {
+  max-width: 1200px;
+  margin-inline: auto;
+  container-type: inline-size;
+}
+.images {
+  display: flex;
+  flex-direction: column;
+  gap: 25cqw;
+  padding-block: 25cqw;
+}
+.image {
+  width: 80%;
+  display: block;
+  opacity: 0.5;
+}
+.image:nth-child(2n) {
+  margin-left: auto;
 }
