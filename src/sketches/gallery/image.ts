@@ -31,8 +31,8 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
         2,
     );
     const winW = winH * camera.aspect * Math.min(1200 / window.innerWidth, 1);
-    const width = winW * 0.333;
-    const height = (width * 3) / 2;
+    const width = winW * 0.8;
+    const height = (width * 9) / 16;
 
     this.scale.set(width, height, 1);
     this.position.set(winW * -0.5 + width * 0.5, winH * 0.5 - height * 0.5, 0);
