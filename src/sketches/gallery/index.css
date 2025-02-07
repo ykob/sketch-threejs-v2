@@ -17,12 +17,12 @@
   padding-block: 20cqw;
 }
 .image {
-  width: 80%;
+  width: 80cqw;
   display: block;
   opacity: 0.5;
 }
 .paragraph {
-  width: min(960px, 80cqw);
+  width: 60cqw;
   margin-inline: auto;
   color: #fff;
   font-size: max(1rem, 1.2cqw);
@@ -31,4 +31,12 @@
 }
 .image:nth-of-type(2n) {
   margin-left: auto;
+}
+@container (width < 1280px) {
+  .image {
+    width: 90cqw;
+  }
+  .paragraph {
+    width: 80cqw;
+  }
 }
