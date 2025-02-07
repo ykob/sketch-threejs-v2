@@ -1,5 +1,4 @@
 import { Clock, Scene, WebGLRenderer } from 'three';
-import { debounce } from '~/utils';
 import { Camera } from './camera';
 import { Image } from './image';
 
@@ -52,7 +51,7 @@ const start = async () => {
   update();
   clock.start();
 
-  window.addEventListener('resize', debounce(resize, 100));
+  window.addEventListener('resize', resize);
 };
 
 start();

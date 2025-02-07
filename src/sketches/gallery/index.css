@@ -1,25 +1,34 @@
-.content {
+.content-wrapper {
   height: 100dvh;
   overflow-y: auto;
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 10;
 }
-.content-inner {
+.content {
   max-width: 1600px;
   margin-inline: auto;
   container-type: inline-size;
 }
-.images {
+.content-inner {
   display: flex;
   flex-direction: column;
-  gap: 25cqw;
-  padding-block: 25cqw;
+  gap: 5cqw;
+  padding-block: 20cqw;
 }
 .image {
   width: 80%;
   display: block;
   opacity: 0.5;
 }
-.image:nth-child(2n) {
+.paragraph {
+  width: min(960px, 80cqw);
+  margin-inline: auto;
+  color: #fff;
+  font-size: max(1rem, 1.2cqw);
+  line-height: 1.75;
+  text-align: justify;
+}
+.image:nth-of-type(2n) {
   margin-left: auto;
 }
