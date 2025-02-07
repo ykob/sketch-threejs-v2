@@ -11,7 +11,9 @@ import fragmentShader from './glsl/image.fs';
 import vertexShader from './glsl/image.vs';
 
 export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
-  constructor(_texture?: Texture) {
+  element: Element;
+
+  constructor(element: Element, _texture?: Texture) {
     super(
       new PlaneGeometry(1, 1, 24, 36),
       new RawShaderMaterial({
@@ -23,18 +25,26 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
         glslVersion: GLSL3,
       }),
     );
+
+    this.element = element;
   }
-  resize(camera: PerspectiveCamera) {
+  update(camera: PerspectiveCamera) {
+    const windowIW = window.innerWidth;
+    const windowIH = window.innerHeight;
     const winH = Math.abs(
       (camera.position.z - this.position.z) *
         Math.tan(radians(camera.fov) / 2) *
         2,
     );
-    const winW = winH * camera.aspect * Math.min(1200 / window.innerWidth, 1);
-    const width = winW * 0.8;
-    const height = (width * 9) / 16;
+    const winW = winH * camera.aspect;
+    const rect = this.element.getBoundingClientRect();
+    const width = (rect.width / windowIW) * winW;
+    const height = (rect.height / windowIH) * winH;
 
     this.scale.set(width, height, 1);
-    this.position.set(winW * -0.5 + width * 0.5, winH * 0.5 - height * 0.5, 0);
+    this.position.x =
+      ((rect.x + rect.width * 0.5 - windowIW * 0.5) / windowIW) * winW;
+    this.position.y =
+      ((rect.y + rect.height * 0.5 - windowIH * 0.5) / windowIH) * -winH;
   }
 }

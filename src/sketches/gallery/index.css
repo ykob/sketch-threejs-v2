@@ -1,10 +1,11 @@
 .content {
   height: 100dvh;
+  overflow-y: auto;
   position: relative;
   z-index: 10;
 }
 .content-inner {
-  max-width: 1200px;
+  max-width: 1600px;
   margin-inline: auto;
   container-type: inline-size;
 }

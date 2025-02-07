@@ -12,7 +12,8 @@ const renderer = new WebGLRenderer({
 });
 const scene = new Scene();
 const camera = new Camera();
-const image = new Image();
+const imageElements = document.querySelectorAll('.image');
+const images: Image[] = [];
 const clock = new Clock(false);
 
 const resize = async () => {
@@ -23,11 +24,12 @@ const resize = async () => {
 
   renderer.setSize(w, h);
   camera.resize(w, h);
-  image.resize(camera);
 };
 
 const update = () => {
   // const delta = clock.getDelta();
+
+  images.forEach((image) => image.update(camera));
 
   renderer.render(scene, camera);
   requestAnimationFrame(update);
@@ -38,8 +40,13 @@ const start = async () => {
 
   app.appendChild(canvas);
   renderer.setClearColor(0x000000, 1.0);
-  scene.add(image);
   camera.lookAt(scene.position);
+
+  imageElements.forEach((element) => {
+    const image = new Image(element);
+    images.push(image);
+    scene.add(image);
+  });
 
   resize();
   update();

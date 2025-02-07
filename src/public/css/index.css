@@ -1,3 +1,7 @@
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #fff #000;
+}
 body {
   overflow: hidden;
   margin: 0;
