@@ -13,13 +13,14 @@ import vertexShader from './glsl/image.vs';
 export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
   element: Element;
 
-  constructor(element: Element, _texture?: Texture) {
+  constructor(element: Element) {
     super(
       new PlaneGeometry(1, 1, 24, 36),
       new RawShaderMaterial({
-        // uniforms: {
-        //   uTexture: { value: texture },
-        // },
+        uniforms: {
+          uNoiseTexture: { value: null },
+          uImageTexture: { value: null },
+        },
         vertexShader,
         fragmentShader,
         glslVersion: GLSL3,
@@ -27,6 +28,10 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
     );
 
     this.element = element;
+  }
+  start(noiseTexture: Texture, imageTexture: Texture) {
+    this.material.uniforms.uNoiseTexture.value = noiseTexture;
+    this.material.uniforms.uImageTexture.value = imageTexture;
   }
   update(camera: PerspectiveCamera) {
     const windowIW = window.innerWidth;

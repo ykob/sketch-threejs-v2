@@ -1,4 +1,4 @@
-import { Clock, Scene, WebGLRenderer } from 'three';
+import { Clock, Scene, TextureLoader, WebGLRenderer } from 'three';
 import { Camera } from './camera';
 import { Image } from './image';
 
@@ -13,6 +13,7 @@ const scene = new Scene();
 const camera = new Camera();
 const imageElements = document.querySelectorAll('.image');
 const images: Image[] = [];
+const textureLoader = new TextureLoader();
 const clock = new Clock(false);
 
 const resize = async () => {
@@ -41,10 +42,21 @@ const start = async () => {
   renderer.setClearColor(0x000000, 1.0);
   camera.lookAt(scene.position);
 
+  const noiseTexture = await textureLoader.loadAsync(
+    '/sketch-threejs-v2/img/noise.jpg',
+  );
+
   imageElements.forEach((element) => {
     const image = new Image(element);
+
     images.push(image);
     scene.add(image);
+
+    textureLoader
+      .loadAsync(element.getAttribute('src') || '')
+      .then((texture) => {
+        image.start(noiseTexture, texture);
+      });
   });
 
   resize();
