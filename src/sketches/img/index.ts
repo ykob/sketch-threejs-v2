@@ -24,6 +24,7 @@ const clock = new Clock(false);
 
 const resize = async () => {
   renderer.setSize(0, 0);
+  renderer.setPixelRatio(window.devicePixelRatio);
 
   const w = window.innerWidth;
   const h = window.innerHeight;
