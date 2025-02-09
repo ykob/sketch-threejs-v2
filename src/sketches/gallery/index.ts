@@ -1,4 +1,10 @@
-import { Clock, Scene, TextureLoader, WebGLRenderer } from 'three';
+import {
+  Clock,
+  RepeatWrapping,
+  Scene,
+  TextureLoader,
+  WebGLRenderer,
+} from 'three';
 import { Camera } from './camera';
 import { Image } from './image';
 
@@ -27,10 +33,9 @@ const resize = async () => {
 };
 
 const update = () => {
-  // const delta = clock.getDelta();
+  const delta = clock.getDelta();
 
-  images.forEach((image) => image.update(camera));
-
+  images.forEach((image) => image.update(camera, delta));
   renderer.render(scene, camera);
   requestAnimationFrame(update);
 };
@@ -46,6 +51,8 @@ const start = async () => {
     '/sketch-threejs-v2/img/noise.jpg',
   );
 
+  noiseTexture.wrapS = RepeatWrapping;
+  noiseTexture.wrapT = RepeatWrapping;
   imageElements.forEach((element) => {
     const image = new Image(element);
 

@@ -12,12 +12,14 @@ import vertexShader from './glsl/image.vs';
 
 export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
   element: Element;
+  time: number;
 
   constructor(element: Element) {
     super(
       new PlaneGeometry(1, 1, 24, 36),
       new RawShaderMaterial({
         uniforms: {
+          uTime: { value: 0 },
           uNoiseTexture: { value: null },
           uImageTexture: { value: null },
         },
@@ -28,12 +30,13 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
     );
 
     this.element = element;
+    this.time = 0;
   }
   start(noiseTexture: Texture, imageTexture: Texture) {
     this.material.uniforms.uNoiseTexture.value = noiseTexture;
     this.material.uniforms.uImageTexture.value = imageTexture;
   }
-  update(camera: PerspectiveCamera) {
+  update(camera: PerspectiveCamera, time: number) {
     const windowIW = window.innerWidth;
     const windowIH = window.innerHeight;
     const winH = Math.abs(
@@ -46,10 +49,12 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
     const width = (rect.width / windowIW) * winW;
     const height = (rect.height / windowIH) * winH;
 
+    this.time += time;
     this.scale.set(width, height, 1);
     this.position.x =
       ((rect.x + rect.width * 0.5 - windowIW * 0.5) / windowIW) * winW;
     this.position.y =
       ((rect.y + rect.height * 0.5 - windowIH * 0.5) / windowIH) * -winH;
+    this.material.uniforms.uTime.value = this.time;
   }
 }
