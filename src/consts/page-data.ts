@@ -5,10 +5,10 @@ export const pageData = [
     title: 'Sketch of three.js v2',
   },
   {
-    key: 'gallery',
-    path: '/sketches/gallery/index.html',
-    title: 'Galley',
-    description: '',
+    key: 'img',
+    path: '/sketches/img/index.html',
+    title: 'Img',
+    description: 'Make a WebGL plane object look like an HTML img element.',
     updated: '2025-02-xxT10:00:00+09:00',
   },
   {
