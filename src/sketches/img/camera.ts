@@ -1,4 +1,4 @@
-import { PerspectiveCamera } from 'three';
+import { PerspectiveCamera, Vector2 } from 'three';
 
 export class Camera extends PerspectiveCamera {
   constructor() {
@@ -7,9 +7,9 @@ export class Camera extends PerspectiveCamera {
     this.far = 100;
     this.setFocalLength(50);
   }
-  resize(w: number, h: number) {
-    this.position.z = w / h < 1 ? 15 : 10;
-    this.aspect = w / h;
+  resize(resolution: Vector2) {
+    this.position.z = resolution.x / resolution.y < 1 ? 15 : 10;
+    this.aspect = resolution.x / resolution.y;
     this.updateProjectionMatrix();
   }
 }

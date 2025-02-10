@@ -3,6 +3,7 @@ import {
   RepeatWrapping,
   Scene,
   TextureLoader,
+  Vector2,
   WebGLRenderer,
 } from 'three';
 import { Camera } from './camera';
@@ -17,6 +18,7 @@ const renderer = new WebGLRenderer({
 });
 const scene = new Scene();
 const camera = new Camera();
+const resolution = new Vector2();
 const imageElements = document.querySelectorAll('.image');
 const images: Image[] = [];
 const textureLoader = new TextureLoader();
@@ -25,18 +27,15 @@ const clock = new Clock(false);
 const resize = async () => {
   renderer.setSize(0, 0);
   renderer.setPixelRatio(window.devicePixelRatio);
-
-  const w = window.innerWidth;
-  const h = window.innerHeight;
-
-  renderer.setSize(w, h);
-  camera.resize(w, h);
+  resolution.set(window.innerWidth, window.innerHeight);
+  renderer.setSize(resolution.x, resolution.y);
+  camera.resize(resolution);
 };
 
 const update = () => {
   const delta = clock.getDelta();
 
-  images.forEach((image) => image.update(camera, delta));
+  images.forEach((image) => image.update(resolution, camera, delta));
   renderer.render(scene, camera);
   requestAnimationFrame(update);
 };

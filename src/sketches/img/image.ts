@@ -5,8 +5,9 @@ import {
   PlaneGeometry,
   RawShaderMaterial,
   Texture,
+  Vector2,
 } from 'three';
-import { radians } from '~/utils';
+import { getCoordAsPixel } from '~/utils';
 import fragmentShader from './glsl/image.fs';
 import vertexShader from './glsl/image.vs';
 
@@ -36,25 +37,20 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
     this.material.uniforms.uNoiseTexture.value = noiseTexture;
     this.material.uniforms.uImageTexture.value = imageTexture;
   }
-  update(camera: PerspectiveCamera, time: number) {
-    const windowIW = window.innerWidth;
-    const windowIH = window.innerHeight;
-    const winH = Math.abs(
-      (camera.position.z - this.position.z) *
-        Math.tan(radians(camera.fov) / 2) *
-        2,
-    );
-    const winW = winH * camera.aspect;
+  update(resolution: Vector2, camera: PerspectiveCamera, time: number) {
+    const coordAsPixel = getCoordAsPixel(camera, this.position);
     const rect = this.element.getBoundingClientRect();
-    const width = (rect.width / windowIW) * winW;
-    const height = (rect.height / windowIH) * winH;
+    const width = (rect.width / resolution.x) * coordAsPixel.x;
+    const height = (rect.height / resolution.y) * coordAsPixel.y;
 
     this.time += time;
     this.scale.set(width, height, 1);
     this.position.x =
-      ((rect.x + rect.width * 0.5 - windowIW * 0.5) / windowIW) * winW;
+      ((rect.x + rect.width * 0.5 - resolution.x * 0.5) / resolution.x) *
+      coordAsPixel.x;
     this.position.y =
-      ((rect.y + rect.height * 0.5 - windowIH * 0.5) / windowIH) * -winH;
+      ((rect.y + rect.height * 0.5 - resolution.y * 0.5) / resolution.y) *
+      -coordAsPixel.y;
     this.material.uniforms.uTime.value = this.time;
   }
 }
