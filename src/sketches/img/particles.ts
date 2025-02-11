@@ -22,6 +22,7 @@ export class Particles extends Points<BufferGeometry, RawShaderMaterial> {
       new RawShaderMaterial({
         uniforms: {
           uTime: { value: 0 },
+          uPixelRatio: { value: window.devicePixelRatio },
           uResolution: { value: resolution },
           uNoiseTexture: { value: null },
         },

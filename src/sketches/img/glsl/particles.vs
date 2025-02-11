@@ -1,6 +1,7 @@
 uniform vec3 cameraPosition;
 uniform mat4 modelViewMatrix;
 uniform mat4 projectionMatrix;
+uniform float uPixelRatio;
 uniform vec2 uResolution;
 
 in vec3 position;
@@ -15,5 +16,5 @@ void main() {
   vUv = uv;
 
   gl_Position = projectionMatrix * mvPosition;
-  gl_PointSize = distanceFromCamera * uResolution.y / 200.0;
+  gl_PointSize = distanceFromCamera * uResolution.y / 200.0 * uPixelRatio;
 }
