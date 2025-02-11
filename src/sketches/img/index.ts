@@ -6,6 +6,7 @@ import {
   Vector2,
   WebGLRenderer,
 } from 'three';
+import { Background } from './background';
 import { Camera } from './camera';
 import { Image } from './image';
 
@@ -21,6 +22,7 @@ const camera = new Camera();
 const resolution = new Vector2();
 const imageElements = document.querySelectorAll('.image');
 const images: Image[] = [];
+const background = new Background();
 const textureLoader = new TextureLoader();
 const clock = new Clock(false);
 
@@ -36,6 +38,7 @@ const update = () => {
   const delta = clock.getDelta();
 
   images.forEach((image) => image.update(resolution, camera, delta));
+  background.update(delta);
   renderer.render(scene, camera);
   requestAnimationFrame(update);
 };
@@ -46,7 +49,14 @@ const start = async () => {
   app.appendChild(canvas);
   renderer.setClearColor(0x000000, 1.0);
   camera.lookAt(scene.position);
+  scene.add(background);
 
+  textureLoader
+    .loadAsync('/sketch-threejs-v2/img/noise_2x1.jpg')
+    .then((texture) => {
+      background.start(texture);
+    })
+    .catch((error) => console.error(error));
   const noiseTexture = await textureLoader.loadAsync(
     '/sketch-threejs-v2/img/noise.jpg',
   );

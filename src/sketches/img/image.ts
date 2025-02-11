@@ -36,6 +36,7 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
   start(noiseTexture: Texture, imageTexture: Texture) {
     this.material.uniforms.uNoiseTexture.value = noiseTexture;
     this.material.uniforms.uImageTexture.value = imageTexture;
+    this.position.z = -10;
   }
   update(resolution: Vector2, camera: PerspectiveCamera, time: number) {
     const coordAsPixel = getCoordAsPixel(camera, this.position);
