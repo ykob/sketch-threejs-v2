@@ -9,7 +9,7 @@ export const pageData = [
     path: '/sketches/img/index.html',
     title: 'Img',
     description: 'Make a WebGL plane object look like an HTML img element.',
-    updated: '2025-02-xxT10:00:00+09:00',
+    updated: '2025-02-12T10:00:00+09:00',
   },
   {
     key: 'light-ball',
