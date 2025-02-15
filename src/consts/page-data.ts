@@ -5,6 +5,13 @@ export const pageData = [
     title: 'Sketch of three.js v2',
   },
   {
+    key: 'confetti',
+    path: '/sketches/confetti/index.html',
+    title: 'Confetti',
+    description: '',
+    updated: '2025-02-DDT10:00:00+09:00',
+  },
+  {
     key: 'img',
     path: '/sketches/img/index.html',
     title: 'Img',
