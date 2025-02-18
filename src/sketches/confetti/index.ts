@@ -1,5 +1,6 @@
 import { Clock, Scene, TextureLoader, Vector2, WebGLRenderer } from 'three';
 import { Camera } from './camera';
+import { Confetti } from './confetti';
 
 const app = document.getElementById('app');
 const canvas = document.createElement('canvas');
@@ -13,6 +14,7 @@ const camera = new Camera();
 const resolution = new Vector2();
 const textureLoader = new TextureLoader();
 const clock = new Clock(false);
+const confetti = new Confetti();
 
 const resize = async () => {
   renderer.setSize(0, 0);
@@ -26,6 +28,7 @@ const update = () => {
   // const delta = clock.getDelta();
 
   renderer.render(scene, camera);
+  confetti.update();
   requestAnimationFrame(update);
 };
 
@@ -35,6 +38,10 @@ const start = async () => {
   app.appendChild(canvas);
   renderer.setClearColor(0x000000, 1.0);
   camera.lookAt(scene.position);
+
+  confetti.start();
+
+  scene.add(confetti);
 
   resize();
   update();
