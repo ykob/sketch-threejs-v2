@@ -25,10 +25,10 @@ const resize = async () => {
 };
 
 const update = () => {
-  // const delta = clock.getDelta();
+  const delta = clock.getDelta();
 
   renderer.render(scene, camera);
-  confetti.update();
+  confetti.update(delta);
   requestAnimationFrame(update);
 };
 
