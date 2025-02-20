@@ -1,4 +1,5 @@
 import {
+  DoubleSide,
   Euler,
   GLSL3,
   InstancedBufferGeometry,
@@ -33,8 +34,12 @@ export class Confetti extends InstancedMesh<
       (Math.random() - 0.5) * 20,
     ),
     speed: Math.random() * 2 + 1,
-    euler: new Euler(),
-    eulerSpeed: new Euler(),
+    euler: new Euler(
+      Math.random() * Math.PI,
+      Math.random() * Math.PI,
+      Math.random() * Math.PI,
+    ),
+    eulerSpeed: new Euler(1, 1, 1),
     scale: new Vector3(1, 1, 1),
   }));
   matrix: Matrix4 = new Matrix4();
@@ -60,6 +65,7 @@ export class Confetti extends InstancedMesh<
         fragmentShader,
         transparent: true,
         glslVersion: GLSL3,
+        side: DoubleSide,
       }),
       count,
     );
