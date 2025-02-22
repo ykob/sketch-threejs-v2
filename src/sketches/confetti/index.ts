@@ -1,4 +1,5 @@
 import { Clock, Scene, TextureLoader, Vector2, WebGLRenderer } from 'three';
+import { Background } from './background';
 import { Camera } from './camera';
 import { Confetti } from './confetti';
 
@@ -15,6 +16,7 @@ const resolution = new Vector2();
 const textureLoader = new TextureLoader();
 const clock = new Clock(false);
 const confetti = new Confetti();
+const background = new Background();
 
 const resize = async () => {
   renderer.setSize(0, 0);
@@ -29,6 +31,7 @@ const update = () => {
 
   renderer.render(scene, camera);
   confetti.update(delta);
+  background.update(delta);
   requestAnimationFrame(update);
 };
 
@@ -39,8 +42,15 @@ const start = async () => {
   renderer.setClearColor(0x000000, 1.0);
   camera.lookAt(scene.position);
 
+  await textureLoader
+    .loadAsync('/sketch-threejs-v2/img/noise_2x1.jpg')
+    .then((texture) => {
+      background.start(texture);
+    });
+
   confetti.start();
 
+  scene.add(background);
   scene.add(confetti);
 
   resize();
