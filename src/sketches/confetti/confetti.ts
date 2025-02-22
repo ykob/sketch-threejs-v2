@@ -55,26 +55,31 @@ export class Confetti extends InstancedMesh<
     );
   }
   start() {
-    const scale = Math.random() * 0.5 + 0.5;
-    this.params = Array.from({ length: count }, () => ({
-      position: new Vector3(
-        (Math.random() * 2 - 1) * 5,
-        (Math.random() * 2 - 1) * 5,
-        (Math.random() * 2 - 1) * 20,
-      ),
-      speed: Math.random() * 2 + 1,
-      euler: new Euler(
-        Math.random() * Math.PI,
-        Math.random() * Math.PI,
-        Math.random() * Math.PI,
-      ),
-      eulerSpeed: new Euler(
-        (Math.random() * 0.4 + 0.1) * Math.PI,
-        (Math.random() * 0.4 + 0.1) * Math.PI,
-        (Math.random() * 0.4 + 0.1) * Math.PI,
-      ),
-      scale: new Vector3(scale, scale, scale),
-    }));
+    this.params = Array.from({ length: count }, () => {
+      const radians = Math.random() * Math.PI * 2;
+      const radius = Math.random() * 8 + 0.5;
+      const scale = Math.random() * 0.5 + 0.5;
+
+      return {
+        position: new Vector3(
+          Math.cos(radians) * radius,
+          Math.sin(radians) * radius,
+          (Math.random() * 2 - 1) * 20,
+        ),
+        speed: Math.random() * 3 + 1,
+        euler: new Euler(
+          Math.random() * Math.PI,
+          Math.random() * Math.PI,
+          Math.random() * Math.PI,
+        ),
+        eulerSpeed: new Euler(
+          (Math.random() * 0.4 + 0.1) * Math.PI,
+          (Math.random() * 0.4 + 0.1) * Math.PI,
+          (Math.random() * 0.4 + 0.1) * Math.PI,
+        ),
+        scale: new Vector3(scale, scale, scale),
+      };
+    });
   }
   update(delta: number) {
     for (let i = 0; i < this.params.length; i++) {
