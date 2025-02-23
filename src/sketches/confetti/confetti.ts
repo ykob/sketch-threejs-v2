@@ -51,7 +51,6 @@ export class Confetti extends InstancedMesh<
         uniforms: {
           uTime: { value: 0 },
           uImageTexture: { value: null },
-          uNoiseTexture: { value: null },
         },
         vertexShader,
         fragmentShader,
