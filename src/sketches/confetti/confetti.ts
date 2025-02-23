@@ -2,6 +2,7 @@ import {
   DoubleSide,
   Euler,
   GLSL3,
+  InstancedBufferAttribute,
   InstancedBufferGeometry,
   InstancedMesh,
   Matrix4,
@@ -14,7 +15,7 @@ import {
 import fragmentShader from './glsl/confetti.fs';
 import vertexShader from './glsl/confetti.vs';
 
-const count = 1000;
+const count = 500;
 
 export class Confetti extends InstancedMesh<
   InstancedBufferGeometry,
@@ -31,12 +32,17 @@ export class Confetti extends InstancedMesh<
   quaternion: Quaternion = new Quaternion();
 
   constructor() {
-    const baseGeometry = new PlaneGeometry(0.4, 0.4);
+    const baseGeometry = new PlaneGeometry(0.5, 0.5);
     const geometry = new InstancedBufferGeometry();
+    const texutreIndex = new InstancedBufferAttribute(
+      new Float32Array(count * 2),
+      2,
+    );
 
     geometry.setAttribute('position', baseGeometry.attributes.position);
     geometry.setAttribute('normal', baseGeometry.attributes.normal);
     geometry.setAttribute('uv', baseGeometry.attributes.uv);
+    geometry.setAttribute('textureIndex', texutreIndex);
     geometry.setIndex(baseGeometry.index);
 
     super(
@@ -62,8 +68,8 @@ export class Confetti extends InstancedMesh<
 
     this.params = Array.from({ length: count }, () => {
       const radians = Math.random() * Math.PI * 2;
-      const radius = Math.random() * 8 + 0.5;
-      const scale = Math.random() * 0.5 + 0.5;
+      const radius = Math.random() * 4 + 1;
+      const scale = Math.random() * 0.75 + 0.25;
 
       return {
         position: new Vector3(
@@ -85,6 +91,20 @@ export class Confetti extends InstancedMesh<
         scale: new Vector3(scale, scale, scale),
       };
     });
+
+    for (let i = 0; i < this.params.length; i++) {
+      const textureIndex = [
+        Math.round(Math.random()),
+        Math.round(Math.random()),
+      ];
+
+      this.geometry.attributes.textureIndex.setXY(
+        i,
+        textureIndex[0],
+        textureIndex[1],
+      );
+      this.geometry.attributes.textureIndex.needsUpdate = true;
+    }
   }
   update(delta: number) {
     for (let i = 0; i < this.params.length; i++) {
