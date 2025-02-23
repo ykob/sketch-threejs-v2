@@ -8,8 +8,9 @@ export const pageData = [
     key: 'confetti',
     path: '/sketches/confetti/index.html',
     title: 'Confetti',
-    description: '',
-    updated: '2025-02-DDT10:00:00+09:00',
+    description:
+      'Simple geometry instancing using a single planar object and a single texture.',
+    updated: '2025-02-23T10:00:00+09:00',
   },
   {
     key: 'img',
