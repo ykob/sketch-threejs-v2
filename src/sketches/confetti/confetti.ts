@@ -8,6 +8,7 @@ import {
   PlaneGeometry,
   Quaternion,
   RawShaderMaterial,
+  Texture,
   Vector3,
 } from 'three';
 import fragmentShader from './glsl/confetti.fs';
@@ -30,7 +31,7 @@ export class Confetti extends InstancedMesh<
   quaternion: Quaternion = new Quaternion();
 
   constructor() {
-    const baseGeometry = new PlaneGeometry(0.25, 0.25);
+    const baseGeometry = new PlaneGeometry(0.4, 0.4);
     const geometry = new InstancedBufferGeometry();
 
     geometry.setAttribute('position', baseGeometry.attributes.position);
@@ -43,18 +44,22 @@ export class Confetti extends InstancedMesh<
       new RawShaderMaterial({
         uniforms: {
           uTime: { value: 0 },
+          uImageTexture: { value: null },
           uNoiseTexture: { value: null },
         },
         vertexShader,
         fragmentShader,
         transparent: true,
         glslVersion: GLSL3,
+        depthWrite: false,
         side: DoubleSide,
       }),
       count,
     );
   }
-  start() {
+  start(imageTexture: Texture) {
+    this.material.uniforms.uImageTexture.value = imageTexture;
+
     this.params = Array.from({ length: count }, () => {
       const radians = Math.random() * Math.PI * 2;
       const radius = Math.random() * 8 + 0.5;

@@ -5,14 +5,17 @@ uniform vec3 cameraPosition;
 
 in vec3 position;
 in vec3 normal;
+in vec2 uv;
 in mat4 instanceMatrix;
 
-out float distanceToCamera;
+out float vDistanceToCamera;
+out vec2 vUv;
 
 void main() {
   vec4 worldPosition = instanceMatrix * modelMatrix * vec4(position, 1.0);
 
-  distanceToCamera = length(cameraPosition - worldPosition.xyz);
+  vDistanceToCamera = length(cameraPosition - worldPosition.xyz);
+  vUv = uv * 0.5;
 
   gl_Position = projectionMatrix * viewMatrix * worldPosition;
 }
