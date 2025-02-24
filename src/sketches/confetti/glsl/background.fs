@@ -16,8 +16,8 @@ void main() {
   float noiseB = texture(uNoiseTexture, vUv + uTime * vec2(0.006, 0.006)).b;
   vec3 color = convertHsvToRgb(
     vec3((noiseR + noiseG + noiseB) * 0.24 + vUv.x + uTime * 0.04,
-    0.16,
-    0.8 - smoothstep(-20.0, 20.0, vPosition.y) * 0.4
+    0.18,
+    0.72
   ));
 
   fragColor = vec4(color, 1.0);
