@@ -68,6 +68,13 @@ canvas {
   color: white;
   font-size: 0.875em;
   text-decoration: none;
+  transition:
+    color 0.2s,
+    background-color 0.2s;
+}
+.back-home a:hover {
+  color: #333;
+  background-color: #fff;
 }
 .social-links {
   display: flex;
