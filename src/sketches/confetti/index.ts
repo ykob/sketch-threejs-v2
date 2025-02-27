@@ -1,4 +1,5 @@
 import { Clock, Scene, TextureLoader, Vector2, WebGLRenderer } from 'three';
+import { toggleSketchUI } from '~/utils/';
 import { Background } from './background';
 import { Camera } from './camera';
 import { Confetti } from './confetti';
@@ -60,6 +61,7 @@ const start = async () => {
   clock.start();
 
   window.addEventListener('resize', resize);
+  toggleSketchUI();
 };
 
 start();

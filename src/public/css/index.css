@@ -25,6 +25,9 @@ canvas {
   padding: clamp(24px, 2vw, 48px);
   color: white;
 }
+.sketch-summary.hidden {
+  display: none;
+}
 .sketch-title-wrap {
   display: flex;
   flex-direction: column;
@@ -57,6 +60,9 @@ canvas {
   text-decoration: none;
   font-family: sans-serif;
 }
+.back-home.hidden {
+  display: none;
+}
 .back-home a {
   height: 2.4em;
   display: flex;
@@ -84,6 +90,9 @@ canvas {
   left: 0;
   z-index: 100;
   padding: clamp(24px, 2vw, 48px);
+}
+.social-links.hidden {
+  display: none;
 }
 .social-links a {
   width: 32px;
