@@ -7,6 +7,7 @@ import {
   WebGLRenderer,
 } from 'three';
 import { debounce } from '~/utils';
+import { toggleSketchUI } from '~/utils/';
 import { Background } from './background';
 import { Camera } from './camera';
 import { LightBall } from './light-ball';
@@ -70,6 +71,7 @@ const start = async () => {
   clock.start();
 
   window.addEventListener('resize', debounce(resize, 100));
+  toggleSketchUI();
 };
 
 start();

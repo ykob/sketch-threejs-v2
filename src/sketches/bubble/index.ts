@@ -1,5 +1,6 @@
 import { Clock, Scene, TextureLoader, WebGLRenderer } from 'three';
 import { debounce } from '~/utils';
+import { toggleSketchUI } from '~/utils/';
 import { Background } from './background';
 import { Bubbles } from './bubbles';
 import { Camera } from './camera';
@@ -59,6 +60,7 @@ const start = async () => {
   clock.start();
 
   window.addEventListener('resize', debounce(resize, 100));
+  toggleSketchUI();
 };
 
 start();

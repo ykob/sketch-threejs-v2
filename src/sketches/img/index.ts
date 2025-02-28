@@ -6,6 +6,7 @@ import {
   Vector2,
   WebGLRenderer,
 } from 'three';
+import { toggleSketchUI } from '~/utils/';
 import { Background } from './background';
 import { Camera } from './camera';
 import { Image } from './image';
@@ -86,6 +87,7 @@ const start = async () => {
   clock.start();
 
   window.addEventListener('resize', resize);
+  toggleSketchUI();
 };
 
 start();
