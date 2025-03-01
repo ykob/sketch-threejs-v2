@@ -5,6 +5,13 @@ export const pageData = [
     title: 'Sketch of three.js v2',
   },
   {
+    key: 'mouse-move',
+    path: '/sketches/mouse-move/index.html',
+    title: 'Mouse Move',
+    description: '',
+    updated: '2025-03-DDT10:00:00+09:00',
+  },
+  {
     key: 'confetti',
     path: '/sketches/confetti/index.html',
     title: 'Confetti',
