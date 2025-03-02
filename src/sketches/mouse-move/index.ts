@@ -14,6 +14,7 @@ const renderer = new WebGLRenderer({
 const scene = new Scene();
 const camera = new Camera();
 const resolution = new Vector2();
+const pointer = new Vector2();
 const textureLoader = new TextureLoader();
 const clock = new Clock(false);
 const confetti = new Confetti();
@@ -25,6 +26,11 @@ const resize = async () => {
   resolution.set(window.innerWidth, window.innerHeight);
   renderer.setSize(resolution.x, resolution.y);
   camera.resize(resolution);
+};
+
+const pointerMove = (x: number, y: number) => {
+  pointer.x = (x / resolution.x) * 2 - 1;
+  pointer.y = -(y / resolution.y) * 2 + 1;
 };
 
 const update = () => {
@@ -61,6 +67,12 @@ const start = async () => {
   clock.start();
 
   window.addEventListener('resize', resize);
+  window.addEventListener('mousemove', (e) => {
+    pointerMove(e.clientX, e.clientY);
+  });
+  window.addEventListener('touchmove', (e) => {
+    pointerMove(e.touches[0].clientX, e.touches[0].clientY);
+  });
   toggleSketchUI();
 };
 
