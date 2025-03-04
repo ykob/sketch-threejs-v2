@@ -1,7 +1,15 @@
-import { Clock, Scene, TextureLoader, Vector2, WebGLRenderer } from 'three';
+import {
+  Clock,
+  Raycaster,
+  Scene,
+  TextureLoader,
+  Vector2,
+  WebGLRenderer,
+} from 'three';
 import { toggleSketchUI } from '~/utils/';
 import { Background } from './background';
 import { Camera } from './camera';
+import { CollisionTarget } from './collision-target';
 import { Confetti } from './confetti';
 
 const app = document.getElementById('app');
@@ -15,10 +23,12 @@ const scene = new Scene();
 const camera = new Camera();
 const resolution = new Vector2();
 const pointer = new Vector2();
+const raycaster = new Raycaster();
 const textureLoader = new TextureLoader();
 const clock = new Clock(false);
 const confetti = new Confetti();
 const background = new Background();
+const collisionTarget = new CollisionTarget();
 
 const resize = async () => {
   renderer.setSize(0, 0);
@@ -26,6 +36,7 @@ const resize = async () => {
   resolution.set(window.innerWidth, window.innerHeight);
   renderer.setSize(resolution.x, resolution.y);
   camera.resize(resolution);
+  collisionTarget.resize(camera);
 };
 
 const pointerMove = (x: number, y: number) => {
@@ -35,6 +46,13 @@ const pointerMove = (x: number, y: number) => {
 
 const update = () => {
   const delta = clock.getDelta();
+
+  raycaster.setFromCamera(pointer, camera);
+  const intersects = raycaster.intersectObject(collisionTarget);
+  if (intersects.length > 0) {
+    const { x, y } = intersects[0].point;
+    confetti.setTarget(x, y);
+  }
 
   renderer.render(scene, camera);
   confetti.update(delta);
@@ -61,6 +79,7 @@ const start = async () => {
 
   scene.add(background);
   scene.add(confetti);
+  scene.add(collisionTarget);
 
   resize();
   update();

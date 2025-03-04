@@ -30,6 +30,7 @@ export class Confetti extends InstancedMesh<
   }[] = [];
   matrix: Matrix4 = new Matrix4();
   quaternion: Quaternion = new Quaternion();
+  targetPosition: Vector3 = new Vector3();
 
   constructor() {
     const baseGeometry = new PlaneGeometry(0.5, 0.5);
@@ -117,5 +118,8 @@ export class Confetti extends InstancedMesh<
       this.setMatrixAt(i, this.matrix);
     }
     this.instanceMatrix.needsUpdate = true;
+  }
+  setTarget(x: number, y: number) {
+    this.targetPosition.set(x, y, 0);
   }
 }
