@@ -12,6 +12,7 @@ import {
   Texture,
   Vector3,
 } from 'three';
+import { radians } from '~/utils';
 import fragmentShader from './glsl/confetti.fs';
 import vertexShader from './glsl/confetti.vs';
 
@@ -66,14 +67,14 @@ export class Confetti extends InstancedMesh<
     this.material.uniforms.uImageTexture.value = imageTexture;
 
     this.params = Array.from({ length: count }, () => {
-      const radians = Math.random() * Math.PI * 2;
+      const radian = radians(Math.random() * 360);
       const radius = Math.random() * 4 + 1;
       const scale = Math.random() * 0.75 + 0.25;
 
       return {
         position: new Vector3(
-          Math.cos(radians) * radius,
-          Math.sin(radians) * radius,
+          Math.cos(radian) * radius,
+          Math.sin(radian) * radius,
           (Math.random() * 2 - 1) * 20,
         ),
         speed: Math.random() * 3 + 1,
