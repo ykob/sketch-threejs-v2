@@ -12,21 +12,23 @@ import {
   Texture,
   Vector3,
 } from 'three';
+import { radians, spherical } from '~/utils';
 import fragmentShader from './glsl/confetti.fs';
 import vertexShader from './glsl/confetti.vs';
 
-const count = 500;
+const count = 100;
 
 export class Confetti extends InstancedMesh<
   InstancedBufferGeometry,
   RawShaderMaterial
 > {
   params: {
+    direction: Vector3;
     position: Vector3;
-    speed: number;
     euler: Euler;
     eulerSpeed: Euler;
     scale: Vector3;
+    time: number;
   }[] = [];
   matrix: Matrix4 = new Matrix4();
   quaternion: Quaternion = new Quaternion();
@@ -67,17 +69,16 @@ export class Confetti extends InstancedMesh<
     this.material.uniforms.uImageTexture.value = imageTexture;
 
     this.params = Array.from({ length: count }, () => {
-      const radians = Math.random() * Math.PI * 2;
-      const radius = Math.random() * 4 + 1;
       const scale = Math.random() * 0.75 + 0.25;
+      const direction = spherical(
+        radians(Math.random() * 360),
+        radians(Math.random() * 360),
+        1,
+      );
 
       return {
-        position: new Vector3(
-          Math.cos(radians) * radius,
-          Math.sin(radians) * radius,
-          (Math.random() * 2 - 1) * 20,
-        ),
-        speed: Math.random() * 3 + 1,
+        direction: new Vector3(direction.x, direction.y, direction.z),
+        position: new Vector3(),
         euler: new Euler(
           Math.random() * Math.PI,
           Math.random() * Math.PI,
@@ -89,6 +90,7 @@ export class Confetti extends InstancedMesh<
           (Math.random() * 0.4 + 0.1) * Math.PI,
         ),
         scale: new Vector3(scale, scale, scale),
+        time: 0,
       };
     });
 
@@ -108,8 +110,15 @@ export class Confetti extends InstancedMesh<
   }
   update(delta: number) {
     for (let i = 0; i < this.params.length; i++) {
-      const { position, speed, euler, eulerSpeed, scale } = this.params[i];
-      position.z = ((position.z + delta * speed + 20) % 40) - 20;
+      const { position, direction, euler, eulerSpeed, scale } = this.params[i];
+
+      this.params[i].time += delta;
+
+      const updatePosition = direction
+        .clone()
+        .multiplyScalar(this.params[i].time);
+
+      position.copy(updatePosition);
       euler.x += delta * eulerSpeed.x;
       euler.y += delta * eulerSpeed.y;
       euler.z += delta * eulerSpeed.z;
