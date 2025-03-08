@@ -12,11 +12,12 @@ import {
   Texture,
   Vector3,
 } from 'three';
+import { smoothstep } from 'three/src/math/MathUtils.js';
 import { radians, spherical } from '~/utils';
 import fragmentShader from './glsl/confetti.fs';
 import vertexShader from './glsl/confetti.vs';
 
-const count = 100;
+const count = 50;
 
 export class Confetti extends InstancedMesh<
   InstancedBufferGeometry,
@@ -41,11 +42,13 @@ export class Confetti extends InstancedMesh<
       new Float32Array(count * 2),
       2,
     );
+    const opacity = new InstancedBufferAttribute(new Float32Array(count), 1);
 
     geometry.setAttribute('position', baseGeometry.attributes.position);
     geometry.setAttribute('normal', baseGeometry.attributes.normal);
     geometry.setAttribute('uv', baseGeometry.attributes.uv);
     geometry.setAttribute('textureIndex', texutreIndex);
+    geometry.setAttribute('opacity', opacity);
     geometry.setIndex(baseGeometry.index);
 
     super(
@@ -106,17 +109,19 @@ export class Confetti extends InstancedMesh<
         textureIndex[1],
       );
       this.geometry.attributes.textureIndex.needsUpdate = true;
+      this.params[i].time = i * -0.1;
     }
   }
   update(delta: number) {
     for (let i = 0; i < this.params.length; i++) {
-      const { position, direction, euler, eulerSpeed, scale } = this.params[i];
-
       this.params[i].time += delta;
 
+      const { position, direction, euler, eulerSpeed, scale, time } =
+        this.params[i];
+      const step = (time % 2) / 2;
       const updatePosition = direction
         .clone()
-        .multiplyScalar(this.params[i].time);
+        .multiplyScalar(2.0 * step * Math.max(0, time / Math.abs(time)) + 0.1);
 
       position.copy(updatePosition);
       euler.x += delta * eulerSpeed.x;
@@ -125,8 +130,13 @@ export class Confetti extends InstancedMesh<
       this.quaternion.setFromEuler(euler);
       this.matrix.compose(position, this.quaternion, scale);
       this.setMatrixAt(i, this.matrix);
+      this.geometry.attributes.opacity.setX(
+        i,
+        smoothstep(step, 0, 0.2) * (1 - smoothstep(step, 0.6, 1)),
+      );
     }
     this.instanceMatrix.needsUpdate = true;
+    this.geometry.attributes.opacity.needsUpdate = true;
   }
   setTarget(x: number, y: number) {
     this.targetPosition.set(x, y, 0);
