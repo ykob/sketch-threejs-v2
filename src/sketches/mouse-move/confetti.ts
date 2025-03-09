@@ -17,7 +17,8 @@ import { radians, spherical } from '~/utils';
 import fragmentShader from './glsl/confetti.fs';
 import vertexShader from './glsl/confetti.vs';
 
-const count = 50;
+const count = 100;
+const interval = 0.03;
 
 export class Confetti extends InstancedMesh<
   InstancedBufferGeometry,
@@ -35,6 +36,7 @@ export class Confetti extends InstancedMesh<
   matrix: Matrix4 = new Matrix4();
   quaternion: Quaternion = new Quaternion();
   targetPosition: Vector3 = new Vector3();
+  intervalTime: number = 0;
 
   constructor() {
     const baseGeometry = new PlaneGeometry(0.5, 0.5);
@@ -111,10 +113,11 @@ export class Confetti extends InstancedMesh<
         textureIndex[1],
       );
       this.geometry.attributes.textureIndex.needsUpdate = true;
-      this.params[i].time = i * -0.05;
+      this.params[i].time = i * -interval;
     }
   }
   update(delta: number) {
+    this.intervalTime += delta;
     for (let i = 0; i < this.params.length; i++) {
       this.params[i].time += delta;
 
@@ -129,14 +132,17 @@ export class Confetti extends InstancedMesh<
       } = this.params[i];
       const step = time / 1.4;
 
-      if (step > 1) {
+      if (step > 1 && this.intervalTime >= interval) {
         this.params[i].time = 0;
         startPosition.copy(this.targetPosition);
+        this.intervalTime = 0;
       }
 
       const updatePosition = direction
         .clone()
-        .multiplyScalar(1.5 * step * Math.max(0, time / Math.abs(time)) + 0.05)
+        .multiplyScalar(
+          1.5 * step * Math.max(0, time / Math.abs(time)) + interval,
+        )
         .add(startPosition);
 
       position.copy(updatePosition);
