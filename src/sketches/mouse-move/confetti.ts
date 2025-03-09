@@ -24,6 +24,7 @@ export class Confetti extends InstancedMesh<
   RawShaderMaterial
 > {
   params: {
+    startPosition: Vector3;
     direction: Vector3;
     position: Vector3;
     euler: Euler;
@@ -80,6 +81,7 @@ export class Confetti extends InstancedMesh<
       );
 
       return {
+        startPosition: new Vector3(),
         direction: new Vector3(direction.x, direction.y, direction.z),
         position: new Vector3(),
         euler: new Euler(
@@ -109,19 +111,33 @@ export class Confetti extends InstancedMesh<
         textureIndex[1],
       );
       this.geometry.attributes.textureIndex.needsUpdate = true;
-      this.params[i].time = i * -0.1;
+      this.params[i].time = i * -0.05;
     }
   }
   update(delta: number) {
     for (let i = 0; i < this.params.length; i++) {
       this.params[i].time += delta;
 
-      const { position, direction, euler, eulerSpeed, scale, time } =
-        this.params[i];
-      const step = (time % 2) / 2;
+      const {
+        startPosition,
+        position,
+        direction,
+        euler,
+        eulerSpeed,
+        scale,
+        time,
+      } = this.params[i];
+      const step = time / 1.4;
+
+      if (step > 1) {
+        this.params[i].time = 0;
+        startPosition.copy(this.targetPosition);
+      }
+
       const updatePosition = direction
         .clone()
-        .multiplyScalar(2.0 * step * Math.max(0, time / Math.abs(time)) + 0.1);
+        .multiplyScalar(1.5 * step * Math.max(0, time / Math.abs(time)) + 0.05)
+        .add(startPosition);
 
       position.copy(updatePosition);
       euler.x += delta * eulerSpeed.x;
@@ -132,7 +148,7 @@ export class Confetti extends InstancedMesh<
       this.setMatrixAt(i, this.matrix);
       this.geometry.attributes.opacity.setX(
         i,
-        smoothstep(step, 0, 0.2) * (1 - smoothstep(step, 0.6, 1)),
+        smoothstep(step, 0, 0.1) * (1 - smoothstep(step, 0.6, 1)),
       );
     }
     this.instanceMatrix.needsUpdate = true;
