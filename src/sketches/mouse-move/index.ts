@@ -30,6 +30,8 @@ const confetti = new Confetti();
 const background = new Background();
 const collisionTarget = new CollisionTarget();
 
+let isDragging = false;
+
 const resize = async () => {
   renderer.setSize(0, 0);
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -39,7 +41,16 @@ const resize = async () => {
   collisionTarget.resize(camera);
 };
 
-const pointerMove = (x: number, y: number) => {
+const startDragging = () => {
+  isDragging = true;
+};
+
+const stopDragging = () => {
+  isDragging = false;
+};
+
+const drag = (x: number, y: number) => {
+  if (!isDragging) return;
   pointer.x = (x / resolution.x) * 2 - 1;
   pointer.y = -(y / resolution.y) * 2 + 1;
 };
@@ -86,12 +97,16 @@ const start = async () => {
   clock.start();
 
   window.addEventListener('resize', resize);
+  window.addEventListener('mousedown', startDragging);
   window.addEventListener('mousemove', (e) => {
-    pointerMove(e.clientX, e.clientY);
+    drag(e.clientX, e.clientY);
   });
+  window.addEventListener('mouseup', stopDragging);
+  window.addEventListener('touchstart', startDragging);
   window.addEventListener('touchmove', (e) => {
-    pointerMove(e.touches[0].clientX, e.touches[0].clientY);
+    drag(e.touches[0].clientX, e.touches[0].clientY);
   });
+  window.addEventListener('touchend', stopDragging);
   toggleSketchUI();
 };
 
