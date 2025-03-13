@@ -38,6 +38,7 @@ export class Confetti extends InstancedMesh<
   quaternion: Quaternion = new Quaternion();
   targetPosition: Vector3 = new Vector3();
   intervalTime: number = 0;
+  isShown: boolean = false;
 
   constructor() {
     const baseGeometry = new PlaneGeometry(0.5, 0.5);
@@ -133,7 +134,7 @@ export class Confetti extends InstancedMesh<
       } = this.params[i];
       const step = time / duration;
 
-      if (step > 1 && this.intervalTime >= interval) {
+      if (step > 1 && this.intervalTime >= interval && this.isShown) {
         this.params[i].time = 0;
         startPosition.copy(this.targetPosition);
         this.intervalTime = 0;
@@ -163,5 +164,11 @@ export class Confetti extends InstancedMesh<
   }
   setTarget(x: number, y: number) {
     this.targetPosition.set(x, y, 0);
+  }
+  show() {
+    this.isShown = true;
+  }
+  hide() {
+    this.isShown = false;
   }
 }

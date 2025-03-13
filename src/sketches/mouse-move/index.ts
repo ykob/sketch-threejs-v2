@@ -43,10 +43,12 @@ const resize = async () => {
 
 const startDragging = () => {
   isDragging = true;
+  confetti.show();
 };
 
 const stopDragging = () => {
   isDragging = false;
+  confetti.hide();
 };
 
 const drag = (x: number, y: number) => {
@@ -97,12 +99,18 @@ const start = async () => {
   clock.start();
 
   window.addEventListener('resize', resize);
-  window.addEventListener('mousedown', startDragging);
+  window.addEventListener('mousedown', (e) => {
+    startDragging();
+    drag(e.clientX, e.clientY);
+  });
   window.addEventListener('mousemove', (e) => {
     drag(e.clientX, e.clientY);
   });
   window.addEventListener('mouseup', stopDragging);
-  window.addEventListener('touchstart', startDragging);
+  window.addEventListener('touchstart', (e) => {
+    startDragging();
+    drag(e.touches[0].clientX, e.touches[0].clientY);
+  });
   window.addEventListener('touchmove', (e) => {
     drag(e.touches[0].clientX, e.touches[0].clientY);
   });
