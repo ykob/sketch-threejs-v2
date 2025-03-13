@@ -18,7 +18,8 @@ import fragmentShader from './glsl/confetti.fs';
 import vertexShader from './glsl/confetti.vs';
 
 const count = 100;
-const interval = 0.03;
+const interval = 0.01;
+const duration = 1.4;
 
 export class Confetti extends InstancedMesh<
   InstancedBufferGeometry,
@@ -75,7 +76,7 @@ export class Confetti extends InstancedMesh<
     this.material.uniforms.uImageTexture.value = imageTexture;
 
     this.params = Array.from({ length: count }, () => {
-      const scale = Math.random() * 0.75 + 0.25;
+      const scale = Math.random() * 0.8 + 0.2;
       const direction = spherical(
         radians(Math.random() * 360),
         radians(Math.random() * 360),
@@ -97,7 +98,7 @@ export class Confetti extends InstancedMesh<
           (Math.random() * 0.4 + 0.1) * Math.PI,
         ),
         scale: new Vector3(scale, scale, scale),
-        time: 0,
+        time: duration,
       };
     });
 
@@ -130,7 +131,7 @@ export class Confetti extends InstancedMesh<
         scale,
         time,
       } = this.params[i];
-      const step = time / 1.4;
+      const step = time / duration;
 
       if (step > 1 && this.intervalTime >= interval) {
         this.params[i].time = 0;
