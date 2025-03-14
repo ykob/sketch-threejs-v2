@@ -9,7 +9,7 @@ export const pageData = [
     path: '/sketches/mouse-move/index.html',
     title: 'Mouse Move',
     description: 'Emit particles following mouse or touch events.',
-    updated: '2025-03-DDT10:00:00+09:00',
+    updated: '2025-03-15T10:00:00+09:00',
   },
   {
     key: 'confetti',
