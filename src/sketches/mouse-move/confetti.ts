@@ -13,13 +13,13 @@ import {
   Vector3,
 } from 'three';
 import { smoothstep } from 'three/src/math/MathUtils.js';
-import { radians, spherical } from '~/utils';
+import { easeOutCubic as ease, radians, spherical } from '~/utils';
 import fragmentShader from './glsl/confetti.fs';
 import vertexShader from './glsl/confetti.vs';
 
-const count = 100;
+const count = 200;
 const interval = 0.01;
-const duration = 1.4;
+const duration = 2.4;
 
 export class Confetti extends InstancedMesh<
   InstancedBufferGeometry,
@@ -115,7 +115,6 @@ export class Confetti extends InstancedMesh<
         textureIndex[1],
       );
       this.geometry.attributes.textureIndex.needsUpdate = true;
-      this.params[i].time = i * -interval;
     }
   }
   update(delta: number) {
@@ -143,7 +142,7 @@ export class Confetti extends InstancedMesh<
       const updatePosition = direction
         .clone()
         .multiplyScalar(
-          1.5 * step * Math.max(0, time / Math.abs(time)) + interval,
+          1.5 * ease(step) * Math.max(0, time / Math.abs(time)) + interval,
         )
         .add(startPosition);
 
@@ -152,11 +151,15 @@ export class Confetti extends InstancedMesh<
       euler.y += delta * eulerSpeed.y;
       euler.z += delta * eulerSpeed.z;
       this.quaternion.setFromEuler(euler);
-      this.matrix.compose(position, this.quaternion, scale);
+      this.matrix.compose(
+        position,
+        this.quaternion,
+        scale.clone().multiplyScalar(step * 0.5 + 0.5),
+      );
       this.setMatrixAt(i, this.matrix);
       this.geometry.attributes.opacity.setX(
         i,
-        smoothstep(step, 0, 0.1) * (1 - smoothstep(step, 0.6, 1)),
+        smoothstep(step, 0, 0.04) * (1 - smoothstep(step, 0.6, 1)),
       );
     }
     this.instanceMatrix.needsUpdate = true;
