@@ -2,9 +2,13 @@
 <html lang="en">
   <head>
     {{> head}}
+    <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <div id="app">{{> sketch-header}}</div>
+    <div id="app">
+      {{> sketch-header}}
+      <div id="message" class="message">Drag on the window.</div>
+    </div>
     <script type="module" src="./index.ts"></script>
   </body>
 </html>

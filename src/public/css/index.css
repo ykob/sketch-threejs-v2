@@ -9,6 +9,11 @@ body {
   font-size: clamp(0.75rem, 3vw, 1rem);
   font-family: 'Ubuntu', serif;
   letter-spacing: 0.06em;
+  color: white;
+  background-color: #000;
+}
+a {
+  color: white;
 }
 canvas {
   width: 0;
@@ -23,7 +28,6 @@ canvas {
   left: 0;
   z-index: 100;
   padding: clamp(24px, 2vw, 48px);
-  color: white;
 }
 .sketch-summary.hidden {
   display: none;
