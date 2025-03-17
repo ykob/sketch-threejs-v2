@@ -61,12 +61,14 @@ const update = () => {
   const delta = clock.getDelta();
 
   raycaster.setFromCamera(pointer, camera);
+
   const intersects = raycaster.intersectObject(collisionTarget);
+
   if (intersects.length > 0) {
     const { x, y } = intersects[0].point;
+
     confetti.setTarget(x, y);
   }
-
   renderer.render(scene, camera);
   confetti.update(delta);
   background.update(delta);
@@ -79,8 +81,6 @@ const start = async () => {
   app.appendChild(canvas);
   renderer.setClearColor(0x000000, 1.0);
   camera.lookAt(scene.position);
-
-  await textureLoader.loadAsync('/sketch-threejs-v2/img/noise_2x1.jpg');
 
   await Promise.all([
     textureLoader.loadAsync('/sketch-threejs-v2/img/noise_2x1.jpg'),
