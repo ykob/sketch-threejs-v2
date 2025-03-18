@@ -1,0 +1,15 @@
+.home-social-links {
+  display: flex;
+  gap: 8px;
+}
+.home-social-links a {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.home-social-links svg {
+  fill: currentColor;
+}
