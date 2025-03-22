@@ -40,13 +40,15 @@
           </svg>
         </a>
       </div>
-      <ul class="people_list">
+      <div class="people_list">
         {{#each sketches}}
-        <li>
-          <a href="/sketch-threejs-v2/sketches/{{this.key}}/">{{this.title}}</a>
-        </li>
+        <a href="/sketch-threejs-v2/sketches/{{this.key}}/">
+          <h2>{{this.title}}</h2>
+          <p>{{this.description}}</p>
+          <p>{{this.updated}}</p>
+        </a>
         {{/each}}
-      </ul>
+      </div>
     </div>
     <script type="module" src="./index.ts"></script>
   </body>
