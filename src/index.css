@@ -24,19 +24,80 @@
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 16px;
 }
+:root {
+  --sketch-list-item-s: 100%;
+  --sketch-list-item-l: 70%;
+}
+@keyframes sketh-list-item {
+  0% {
+    background-color: hsl(
+      0,
+      var(--sketch-list-item-s),
+      var(--sketch-list-item-l)
+    );
+  }
+  25% {
+    background-color: hsl(
+      90,
+      var(--sketch-list-item-s),
+      var(--sketch-list-item-l)
+    );
+  }
+  50% {
+    background-color: hsl(
+      180,
+      var(--sketch-list-item-s),
+      var(--sketch-list-item-l)
+    );
+  }
+  75% {
+    background-color: hsl(
+      270,
+      var(--sketch-list-item-s),
+      var(--sketch-list-item-l)
+    );
+  }
+  100% {
+    background-color: hsl(
+      360,
+      var(--sketch-list-item-s),
+      var(--sketch-list-item-l)
+    );
+  }
+}
 .sketch-list-item {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  position: relative;
+  overflow: hidden;
   padding: 24px;
   border-radius: 8px;
   color: #000;
   text-decoration: none;
   background-color: #fff;
 }
+.sketch-list-item:after {
+  content: '';
+  display: block;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
+  animation: sketh-list-item 1.6s infinite;
+  animation-timing-function: linear;
+}
+.sketch-list-item:hover:after {
+  opacity: 1;
+}
+.sketch-list-item-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  z-index: 10;
+}
 .sketch-list-item h2 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
 }
 .sketch-list-item p {
   margin: 0;

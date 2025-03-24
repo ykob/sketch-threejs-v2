@@ -48,9 +48,11 @@
           href="/sketch-threejs-v2/sketches/{{this.key}}/"
           class="sketch-list-item"
         >
-          <h2>{{this.title}}</h2>
-          <p>{{this.description}}</p>
-          <p>{{this.updated}}</p>
+          <div class="sketch-list-item-inner">
+            <h2>{{this.title}}</h2>
+            <p>{{this.description}}</p>
+            <p>{{this.updated}}</p>
+          </div>
         </a>
         {{/each}}
       </div>
