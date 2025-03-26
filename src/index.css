@@ -68,7 +68,6 @@
 .sketch-list-item {
   position: relative;
   overflow: hidden;
-  padding: 24px;
   border-radius: 8px;
   color: #000;
   text-decoration: none;
@@ -89,17 +88,27 @@
   opacity: 1;
 }
 .sketch-list-item-inner {
+  height: 100%;
+  box-sizing: border-box;
   display: flex;
+  padding: 24px;
   flex-direction: column;
-  gap: 12px;
   position: relative;
   z-index: 10;
 }
-.sketch-list-item h2 {
-  margin: 0;
+.sketch-list-item-title {
+  line-height: 1;
+  margin-top: 0;
+  margin-bottom: 8px;
   font-size: 1.75rem;
 }
-.sketch-list-item p {
-  margin: 0;
+.sketch-list-item-description {
+  margin-top: 0;
+  margin-bottom: 24px;
   font-size: 1rem;
+}
+.sketch-list-item-updated {
+  margin-top: auto;
+  margin-bottom: 0;
+  font-size: 0.75rem;
 }
