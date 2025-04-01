@@ -1,4 +1,6 @@
 .home-content {
+  max-width: calc(320px * 5 + 16px * 4);
+  margin: 0 auto;
   padding: 32px;
   display: flex;
   flex-direction: column;
