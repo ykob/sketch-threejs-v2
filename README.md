@@ -1,4 +1,4 @@
-# Sketch of three.js v2
+# Experiments with three.js
 
 https://ykob.github.io/sketch-threejs-v2/
 
