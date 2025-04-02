@@ -2,7 +2,7 @@ export const pageData = [
   {
     key: 'home',
     path: '/index.html',
-    title: 'Sketch of three.js v2',
+    title: 'three.js Experiments',
     description: 'Interactive sketches made with three.js.',
   },
   {

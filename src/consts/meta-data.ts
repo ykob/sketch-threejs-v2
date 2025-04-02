@@ -1,5 +1,5 @@
 export const metaData = {
-  title: 'Sketch of three.js v2',
+  title: 'three.js Experiments',
   description: 'Interactive sketches made with three.js.',
   keywords: 'three.js, TypeScirpt, Vite',
 };
