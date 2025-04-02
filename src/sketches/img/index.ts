@@ -57,14 +57,14 @@ const start = async () => {
   scene.add(background);
 
   textureLoader
-    .loadAsync('/sketch-threejs-v2/img/noise_2x1.jpg')
+    .loadAsync('/threejs-experiments/img/noise_2x1.jpg')
     .then((texture) => {
       particles.start(texture);
       background.start(texture);
     })
     .catch((error) => console.error(error));
   const noiseTexture = await textureLoader.loadAsync(
-    '/sketch-threejs-v2/img/noise.jpg',
+    '/threejs-experiments/img/noise.jpg',
   );
 
   noiseTexture.wrapS = RepeatWrapping;

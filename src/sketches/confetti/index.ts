@@ -43,11 +43,11 @@ const start = async () => {
   renderer.setClearColor(0x000000, 1.0);
   camera.lookAt(scene.position);
 
-  await textureLoader.loadAsync('/sketch-threejs-v2/img/noise_2x1.jpg');
+  await textureLoader.loadAsync('/threejs-experiments/img/noise_2x1.jpg');
 
   await Promise.all([
-    textureLoader.loadAsync('/sketch-threejs-v2/img/noise_2x1.jpg'),
-    textureLoader.loadAsync('/sketch-threejs-v2/img/confetti.png'),
+    textureLoader.loadAsync('/threejs-experiments/img/noise_2x1.jpg'),
+    textureLoader.loadAsync('/threejs-experiments/img/confetti.png'),
   ]).then(([noiseTexture, imageTexture]) => {
     confetti.start(imageTexture);
     background.start(noiseTexture);

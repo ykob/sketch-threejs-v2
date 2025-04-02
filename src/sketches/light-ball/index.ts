@@ -57,7 +57,7 @@ const start = async () => {
   camera.lookAt(scene.position);
 
   await textureLoader
-    .loadAsync('/sketch-threejs-v2/img/noise_2x1.jpg')
+    .loadAsync('/threejs-experiments/img/noise_2x1.jpg')
     .then((texture) => {
       texture.wrapS = RepeatWrapping;
       texture.wrapT = RepeatWrapping;
