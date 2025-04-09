@@ -18,7 +18,7 @@ export class Particles extends Points<BufferGeometry, RawShaderMaterial> {
 
   constructor(resolution: Vector2) {
     super(
-      BufferGeometryUtils.mergeVertices(new IcosahedronGeometry(1, 2)),
+      BufferGeometryUtils.mergeVertices(new IcosahedronGeometry(1, 3)),
       new RawShaderMaterial({
         uniforms: {
           uTime: { value: 0 },
