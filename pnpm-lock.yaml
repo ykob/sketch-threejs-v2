@@ -20,16 +20,16 @@ importers:
         version: 3.5.3
       prettier-plugin-organize-imports:
         specifier: ^4.1.0
-        version: 4.1.0(prettier@3.5.3)(typescript@5.8.2)
+        version: 4.1.0(prettier@3.5.3)(typescript@5.8.3)
       typescript:
-        specifier: ~5.8.2
-        version: 5.8.2
+        specifier: ~5.8.3
+        version: 5.8.3
       vite:
         specifier: ^6.2.5
         version: 6.2.5
       vite-plugin-glsl:
-        specifier: ^1.3.3
-        version: 1.3.3(rollup@4.39.0)(vite@6.2.5)
+        specifier: ^1.4.0
+        version: 1.4.0(rollup@4.39.0)(vite@6.2.5)
       vite-plugin-handlebars:
         specifier: ^2.0.0
         version: 2.0.0
@@ -636,8 +636,8 @@ packages:
   three@0.175.0:
     resolution: {integrity: sha512-nNE3pnTHxXN/Phw768u0Grr7W4+rumGg/H6PgeseNJojkJtmeHJfZWi41Gp2mpXl1pg1pf1zjwR4McM1jTqkpg==}
 
-  typescript@5.8.2:
-    resolution: {integrity: sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ==}
+  typescript@5.8.3:
+    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -646,8 +646,8 @@ packages:
     engines: {node: '>=0.8.0'}
     hasBin: true
 
-  vite-plugin-glsl@1.3.3:
-    resolution: {integrity: sha512-ZN1PjwPN9MTqt75SAZHcNr9A4IFtxFxZsPwApVuhhnSSeDPk6ezD8LUmcoTQtZwerNT3vWiwv3+zSspT+8yInQ==}
+  vite-plugin-glsl@1.4.0:
+    resolution: {integrity: sha512-mjT4AaU4qRmlpawgd0M2Qz72tvK4WF0ii2p0WbVRpr7ga6+cRScJUT3oIMv5coT8u/lqUe9u9T5+0zJLZ1uhug==}
     engines: {node: '>= 20.17.0', npm: '>= 10.8.3'}
     peerDependencies:
       vite: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
@@ -877,7 +877,7 @@ snapshots:
 
   '@rollup/pluginutils@5.1.4(rollup@4.39.0)':
     dependencies:
-      '@types/estree': 1.0.6
+      '@types/estree': 1.0.7
       estree-walker: 2.0.2
       picomatch: 4.0.2
     optionalDependencies:
@@ -1109,10 +1109,10 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  prettier-plugin-organize-imports@4.1.0(prettier@3.5.3)(typescript@5.8.2):
+  prettier-plugin-organize-imports@4.1.0(prettier@3.5.3)(typescript@5.8.3):
     dependencies:
       prettier: 3.5.3
-      typescript: 5.8.2
+      typescript: 5.8.3
 
   prettier@3.5.3: {}
 
@@ -1173,12 +1173,12 @@ snapshots:
 
   three@0.175.0: {}
 
-  typescript@5.8.2: {}
+  typescript@5.8.3: {}
 
   uglify-js@3.19.3:
     optional: true
 
-  vite-plugin-glsl@1.3.3(rollup@4.39.0)(vite@6.2.5):
+  vite-plugin-glsl@1.4.0(rollup@4.39.0)(vite@6.2.5):
     dependencies:
       '@rollup/pluginutils': 5.1.4(rollup@4.39.0)
       vite: 6.2.5
