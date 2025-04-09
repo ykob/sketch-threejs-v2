@@ -1,0 +1,42 @@
+.content-wrapper {
+  height: 100dvh;
+  overflow-y: auto;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+.content {
+  max-width: 1600px;
+  margin-inline: auto;
+  container-type: inline-size;
+}
+.content-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 5cqw;
+  padding-block: 20cqw;
+}
+.image {
+  width: 80cqw;
+  display: block;
+  opacity: 0;
+}
+.paragraph {
+  width: 60cqw;
+  margin-inline: auto;
+  color: #fff;
+  font-size: max(1rem, 1.2cqw);
+  line-height: 1.75;
+  text-align: justify;
+}
+.image:nth-of-type(2n) {
+  margin-left: auto;
+}
+@container (width < 1280px) {
+  .image {
+    width: 90cqw;
+  }
+  .paragraph {
+    width: 80cqw;
+  }
+}
