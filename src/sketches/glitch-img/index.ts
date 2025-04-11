@@ -78,6 +78,8 @@ const start = async () => {
     textureLoader
       .loadAsync(element.getAttribute('src') || '')
       .then((texture) => {
+        texture.wrapS = RepeatWrapping;
+        texture.wrapT = RepeatWrapping;
         image.start(noiseTexture, texture);
       });
   });
