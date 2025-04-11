@@ -15,9 +15,9 @@ float whiteNoise(vec2 uv) {
 }
 
 void main() {
-  float time = floor(uTime * 20.0) / 20.0;
+  float time = mod(floor(uTime * 20.0) / 20.0, 120.0);
   float noisePower = smoothstep(
-    0.7,
+    0.5,
     1.0,
     sin(time) * 0.5 + 0.5
   );
@@ -28,18 +28,18 @@ void main() {
   float glitch = whiteNoise(
     floor(
       noiseUv * vec2(
-        0.5 + whiteNoise(vec2(time)) * 1.5,
-        1.0 - whiteNoise(vec2(time * 5.0)) * 8.0
+        0.2 + whiteNoise(vec2(time)) * 2.0,
+        2.0 + whiteNoise(vec2(time * 5.0)) * 8.0
       ) * 10.0
     ) / 10.0
   );
-  float glitchMask = step(glitch, 0.005 + noisePower * 0.04);
+  float glitchMask = step(glitch, 0.002 + noisePower * 0.04);
   vec3 color = texture(uImageTexture, vUv).rgb;
-  vec3 glitchColor = texture(uImageTexture, vUv + noisePower + 0.1).rgb;
+  vec3 glitchColor = texture(uImageTexture, vUv + 0.01).rgb;
 
   fragColor = vec4(
     color * (1.0 - glitchMask)
-      + (glitchColor) * glitchMask
+      + (glitchColor) * glitchMask * 1.05
       - (whiteNoise(vUv + time) * 2.0 - 1.0) * 0.1,
   1.0);
 }
