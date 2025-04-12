@@ -9,8 +9,9 @@ export const pageData = [
     key: 'glitch-img',
     path: '/sketches/glitch-img/index.html',
     title: 'Glitch Img',
-    description: '',
-    updated: '2025-04-DD',
+    description:
+      'To apply a glitch effect to a planar object that mimics an HTML img element.',
+    updated: '2025-04-12',
   },
   {
     key: 'drag',
@@ -31,7 +32,7 @@ export const pageData = [
     key: 'img',
     path: '/sketches/img/index.html',
     title: 'Img',
-    description: 'Make a WebGL plane object look like an HTML img element.',
+    description: 'Make a WebGL planar object look like an HTML img element.',
     updated: '2025-02-12',
   },
   {
