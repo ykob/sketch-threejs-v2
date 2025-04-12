@@ -25,21 +25,31 @@ void main() {
     vUv.x + time * 100.0,
     vUv.y * 9.0 / 16.0 + (1.0 - 9.0 / 16.0) / 2.0
   );
-  float glitch = whiteNoise(
+  float glitchSmall = whiteNoise(
     floor(
       noiseUv * vec2(
-        0.2 + whiteNoise(vec2(time)) * 2.0,
-        2.0 + whiteNoise(vec2(time * 5.0)) * 8.0
+        0.05 + whiteNoise(vec2(time)) * 2.0,
+        3.0 + whiteNoise(vec2(time * 5.0)) * 8.0
       ) * 10.0
     ) / 10.0
   );
-  float glitchMask = step(glitch, 0.002 + noisePower * 0.04);
+  float glitchMaskSmall = step(glitchSmall, 0.002 + noisePower * 0.02);
+    float glitchBig = whiteNoise(
+    floor(
+      noiseUv * vec2(
+        0.2 + whiteNoise(vec2(time * 2.0)) * 0.8,
+        0.1 + whiteNoise(vec2(time * 4.0)) * 0.4
+      ) * 10.0
+    ) / 10.0
+  );
+  float glitchMaskBig = step(glitchBig, 0.002 + noisePower * 0.02);
   vec3 color = texture(uImageTexture, vUv).rgb;
   vec3 glitchColor = texture(uImageTexture, vUv + 0.01).rgb;
 
   fragColor = vec4(
-    color * (1.0 - glitchMask)
-      + (glitchColor) * glitchMask * 1.05
+    color * (1.0 - glitchMaskSmall) * (1.0 - glitchMaskBig)
+      + (glitchColor) * glitchMaskSmall * 1.05
+      + (glitchColor) * glitchMaskBig * 1.05
       - (whiteNoise(vUv + time) * 2.0 - 1.0) * 0.1,
   1.0);
 }
