@@ -1,0 +1,12 @@
+.content-wrapper {
+  height: 100dvh;
+  overflow-y: auto;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+.content {
+  max-width: 1600px;
+  margin-inline: auto;
+  container-type: inline-size;
+}

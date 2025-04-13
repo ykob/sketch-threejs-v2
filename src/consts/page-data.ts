@@ -6,6 +6,13 @@ export const pageData = [
     description: 'Interactive sketches made with three.js.',
   },
   {
+    key: 'dissolve',
+    path: '/sketches/dissolve/index.html',
+    title: 'Dissolve',
+    description: '',
+    updated: '2025-04-DD',
+  },
+  {
     key: 'glitch-img',
     path: '/sketches/glitch-img/index.html',
     title: 'Glitch Img',
