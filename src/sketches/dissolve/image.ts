@@ -26,6 +26,7 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
         },
         vertexShader,
         fragmentShader,
+        transparent: true,
         glslVersion: GLSL3,
       }),
     );
