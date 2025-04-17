@@ -28,10 +28,9 @@ void main() {
   
   float glowNoise1 = texture(uNoiseTexture, noiseUv * 0.5 + vec2(uTime * 0.04, 0.0)).r;
   float glowNoise2 = texture(uNoiseTexture, noiseUv * 0.5 + vec2(uTime * -0.04, 0.5)).g;
-  float glowAmount = (glowNoise1 + glowNoise2);
   vec3 glowColor = convertHsvToRgb(
     vec3(
-      glowAmount,
+      glowNoise1 + glowNoise2,
       smoothstep(0.5, 0.55, dissolve) * 0.5,
       1.0 - smoothstep(0.5, 0.7, dissolve)
       )
