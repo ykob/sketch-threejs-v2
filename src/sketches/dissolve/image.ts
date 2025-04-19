@@ -14,6 +14,8 @@ import vertexShader from './glsl/image.vs';
 export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
   element: Element;
   time: number;
+  isShowing: boolean;
+  isHiding: boolean;
 
   constructor(element: Element) {
     super(
@@ -21,6 +23,8 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
       new RawShaderMaterial({
         uniforms: {
           uTime: { value: 0 },
+          uTimeShow: { value: 0 },
+          uTimeHide: { value: 0 },
           uNoiseTexture: { value: null },
           uImageTexture: { value: null },
         },
@@ -33,6 +37,8 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
 
     this.element = element;
     this.time = 0;
+    this.isShowing = false;
+    this.isHiding = false;
   }
   start(noiseTexture: Texture, imageTexture: Texture) {
     this.material.uniforms.uNoiseTexture.value = noiseTexture;
@@ -43,6 +49,7 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
     const rect = this.element.getBoundingClientRect();
     const width = (rect.width / resolution.x) * coordAsPixel.x;
     const height = (rect.height / resolution.y) * coordAsPixel.y;
+    const { uTime, uTimeShow, uTimeHide } = this.material.uniforms;
 
     this.time += time;
     this.scale.set(width, height, 1);
@@ -52,6 +59,21 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
     this.position.y =
       ((rect.y + rect.height * 0.5 - resolution.y * 0.5) / resolution.y) *
       -coordAsPixel.y;
-    this.material.uniforms.uTime.value = this.time;
+    uTime.value = this.time;
+    uTimeShow.value = this.isShowing ? uTimeShow.value + time : 0;
+    uTimeHide.value = this.isHiding ? uTimeHide.value + time : 0;
+  }
+  show() {
+    const { uTimeShow } = this.material.uniforms;
+
+    uTimeShow.value = 0;
+    this.isShowing = true;
+    this.isHiding = false;
+  }
+  hide() {
+    const { uTimeHide } = this.material.uniforms;
+
+    uTimeHide.value = 0;
+    this.isHiding = true;
   }
 }

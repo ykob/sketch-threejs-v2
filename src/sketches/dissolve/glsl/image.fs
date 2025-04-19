@@ -3,6 +3,8 @@ precision highp float;
 uniform sampler2D uNoiseTexture;
 uniform sampler2D uImageTexture;
 uniform float uTime;
+uniform float uTimeShow;
+uniform float uTimeHide;
 
 in vec2 vUv;
 
@@ -14,13 +16,13 @@ void main() {
   vec2 noiseUv = vec2(vUv.x, vUv.y * 9.0 / 16.0 + (1.0 - 9.0 / 16.0) / 2.0);
 
   float dissolveMaskShow = 1.0 - smoothstep(
-    -1.0 + uTime,
-    0.0 + uTime,
+    -1.0 + uTimeShow,
+    0.0 + uTimeShow,
     length(noiseUv * 2.0 - 1.0)
     );
   float dissolveMaskHide = 1.0 - smoothstep(
-    -2.0 + uTime,
-    -1.0 + uTime,
+    -2.0 + uTimeHide,
+    -1.0 + uTimeHide,
     length(noiseUv * 2.0 - 1.0)
     );
   float dissolveNoise1 = texture(uNoiseTexture, noiseUv + vec2(uTime * 0.04, 0.0)).r;

@@ -25,6 +25,7 @@ const resolution = new Vector2();
 const textureLoader = new TextureLoader();
 const clock = new Clock(false);
 const imageElements = document.querySelectorAll('.slideshow-large-image');
+const buttonElements = document.querySelectorAll('.slideshow-navi-button');
 const images: Image[] = [];
 const particles = new Particles(resolution);
 const background = new Background();
@@ -84,12 +85,28 @@ const start = async () => {
       });
   });
 
+  buttonElements.forEach((element) => {
+    element.addEventListener('click', (event) => {
+      const target = event.currentTarget as HTMLButtonElement;
+      const index = Number(target.getAttribute('value'));
+
+      for (let i = 0; i < images.length; i++) {
+        if (i === index) {
+          images[i].show();
+        } else {
+          images[i].hide();
+        }
+      }
+    });
+  });
+
   resize();
   update();
   clock.start();
 
   window.addEventListener('resize', resize);
   toggleSketchUI();
+  images[0].show();
 };
 
 start();
