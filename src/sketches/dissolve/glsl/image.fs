@@ -21,8 +21,8 @@ void main() {
     length(noiseUv * 2.0 - 1.0)
     );
   float dissolveMaskHide = 1.0 - smoothstep(
-    -2.0 + uTimeHide,
     -1.0 + uTimeHide,
+    0.0 + uTimeHide,
     length(noiseUv * 2.0 - 1.0)
     );
   float dissolveNoise1 = texture(uNoiseTexture, noiseUv + vec2(uTime * 0.04, 0.0)).r;

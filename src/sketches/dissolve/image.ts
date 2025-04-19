@@ -64,16 +64,14 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
     uTimeHide.value = this.isHiding ? uTimeHide.value + time : 0;
   }
   show() {
-    const { uTimeShow } = this.material.uniforms;
+    const { uTimeShow, uTimeHide } = this.material.uniforms;
 
-    uTimeShow.value = 0;
+    uTimeShow.value = -0.3;
+    uTimeHide.value = 0;
     this.isShowing = true;
     this.isHiding = false;
   }
   hide() {
-    const { uTimeHide } = this.material.uniforms;
-
-    uTimeHide.value = 0;
     this.isHiding = true;
   }
 }
