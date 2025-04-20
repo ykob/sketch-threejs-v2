@@ -11,9 +11,13 @@ import { getCoordAsPixel } from '~/utils';
 import fragmentShader from './glsl/image.fs';
 import vertexShader from './glsl/image.vs';
 
+const DURATION = 0.5;
+
 export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
   element: Element;
   time: number;
+  timeShow: number;
+  timeHide: number;
   isShowing: boolean;
   isHiding: boolean;
 
@@ -23,8 +27,8 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
       new RawShaderMaterial({
         uniforms: {
           uTime: { value: 0 },
-          uTimeShow: { value: 0 },
-          uTimeHide: { value: 0 },
+          uStepShow: { value: 0 },
+          uStepHide: { value: 0 },
           uNoiseTexture: { value: null },
           uImageTexture: { value: null },
         },
@@ -37,6 +41,8 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
 
     this.element = element;
     this.time = 0;
+    this.timeShow = 0;
+    this.timeHide = 0;
     this.isShowing = false;
     this.isHiding = false;
   }
@@ -49,7 +55,7 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
     const rect = this.element.getBoundingClientRect();
     const width = (rect.width / resolution.x) * coordAsPixel.x;
     const height = (rect.height / resolution.y) * coordAsPixel.y;
-    const { uTime, uTimeShow, uTimeHide } = this.material.uniforms;
+    const { uTime, uStepShow, uStepHide } = this.material.uniforms;
 
     this.time += time;
     this.scale.set(width, height, 1);
@@ -60,14 +66,14 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
       ((rect.y + rect.height * 0.5 - resolution.y * 0.5) / resolution.y) *
       -coordAsPixel.y;
     uTime.value = this.time;
-    uTimeShow.value = this.isShowing ? uTimeShow.value + time : 0;
-    uTimeHide.value = this.isHiding ? uTimeHide.value + time : 0;
+    this.timeShow = this.isShowing ? this.timeShow + time : 0;
+    this.timeHide = this.isHiding ? this.timeHide + time : 0;
+    uStepShow.value = this.timeShow / DURATION;
+    uStepHide.value = this.timeHide / DURATION;
   }
   show() {
-    const { uTimeShow, uTimeHide } = this.material.uniforms;
-
-    uTimeShow.value = 0;
-    uTimeHide.value = 0;
+    this.timeShow = 0;
+    this.timeHide = 0;
     this.isShowing = true;
     this.isHiding = false;
   }
