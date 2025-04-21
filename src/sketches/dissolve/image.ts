@@ -71,7 +71,6 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
     this.timeHide = this.isHiding ? this.timeHide + time : 0;
     uStepShow.value = easeOutQuart(Math.min(this.timeShow / DURATION, 1));
     uStepHide.value = easeOutQuart(Math.min(this.timeHide / DURATION, 1));
-    console.log(uStepShow.value, uStepHide.value);
   }
   show() {
     this.timeShow = 0;
