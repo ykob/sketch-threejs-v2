@@ -8,10 +8,11 @@ import {
   Vector2,
 } from 'three';
 import { getCoordAsPixel } from '~/utils';
+import { easeOutQuart } from '~/utils/easings';
 import fragmentShader from './glsl/image.fs';
 import vertexShader from './glsl/image.vs';
 
-const DURATION = 0.5;
+const DURATION = 3;
 
 export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
   element: Element;
@@ -68,8 +69,9 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
     uTime.value = this.time;
     this.timeShow = this.isShowing ? this.timeShow + time : 0;
     this.timeHide = this.isHiding ? this.timeHide + time : 0;
-    uStepShow.value = this.timeShow / DURATION;
-    uStepHide.value = this.timeHide / DURATION;
+    uStepShow.value = easeOutQuart(Math.min(this.timeShow / DURATION, 1));
+    uStepHide.value = easeOutQuart(Math.min(this.timeHide / DURATION, 1));
+    console.log(uStepShow.value, uStepHide.value);
   }
   show() {
     this.timeShow = 0;

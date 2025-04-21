@@ -15,17 +15,17 @@ out vec4 fragColor;
 void main() {
   vec2 noiseUv = vec2(vUv.x, vUv.y * 9.0 / 16.0 + (1.0 - 9.0 / 16.0) / 2.0);
 
-  float dissolveNoise1 = texture(uNoiseTexture, noiseUv + vec2(uTime * 0.04, 0.0)).r;
-  float dissolveNoise2 = texture(uNoiseTexture, noiseUv + vec2(uTime * -0.04, 0.5)).g;
+  vec4 dissolveNoise1 = texture(uNoiseTexture, noiseUv + vec2(uTime * 0.04, 0.0));
+  vec4 dissolveNoise2 = texture(uNoiseTexture, noiseUv + vec2(uTime * -0.04, 0.5));
   float dissolveMaskShow = 1.0 - smoothstep(
-    -1.0 + uStepShow,
-    0.0 + uStepShow,
-    ((dissolveNoise1 + dissolveNoise2) - 1.0) * 0.5 + length(noiseUv * 2.0 - 1.0)
+    uStepShow * 3.0 - 1.5,
+    uStepShow * 3.0,
+    ((dissolveNoise1.r + dissolveNoise2.g) - 1.0) * 0.5 + length(noiseUv * 2.0 - 1.0)
     );
   float dissolveMaskHide = 1.0 - smoothstep(
-    -1.0 + uStepHide,
-    0.0 + uStepHide,
-    ((dissolveNoise1 + dissolveNoise2) - 1.0) * 0.5 + length(noiseUv * 2.0 - 1.0)
+    uStepHide * 3.0 - 1.5,
+    uStepHide * 3.0,
+    ((dissolveNoise1.r + dissolveNoise2.g) - 1.0) * 0.5 + length(noiseUv * 2.0 - 1.0)
     );
   float dissolve = smoothstep(
     0.0,
@@ -42,7 +42,8 @@ void main() {
       )
     );
 
-  vec3 color = texture(uImageTexture, vUv).rgb * dissolve - glowColor;
+  vec2 uv = vUv + (vec2(dissolveNoise1.gb + dissolveNoise2.rb) - 1.0) * (1.0 - dissolve) * 2.0;
+  vec3 color = texture(uImageTexture, uv).rgb * dissolve - glowColor;
 
   if (dissolve < 0.5) {
     discard;
