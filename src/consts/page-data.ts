@@ -9,8 +9,8 @@ export const pageData = [
     key: 'dissolve',
     path: '/sketches/dissolve/index.html',
     title: 'Dissolve',
-    description: '',
-    updated: '2025-04-DD',
+    description: 'A slideshow with a dissolve effect.',
+    updated: '2025-04-22',
   },
   {
     key: 'glitch-img',
