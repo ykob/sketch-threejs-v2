@@ -30,6 +30,8 @@ const images: Image[] = [];
 const particles = new Particles(resolution);
 const background = new Background();
 
+let currentImageIndex = 0;
+
 const resize = async () => {
   renderer.setSize(0, 0);
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -87,9 +89,10 @@ const start = async () => {
 
   buttonElements.forEach((element) => {
     element.addEventListener('click', () => {
-      const valueAttr = element.getAttribute('value');
-      const index = Number(valueAttr);
+      const index = Number(element.getAttribute('value') || 0);
 
+      if (index === currentImageIndex) return;
+      currentImageIndex = index;
       for (let i = 0; i < images.length; i++) {
         if (i === index) {
           images[i].show();
