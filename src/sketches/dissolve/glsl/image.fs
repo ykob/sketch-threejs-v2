@@ -5,6 +5,7 @@ uniform sampler2D uImageTexture;
 uniform float uTime;
 uniform float uStepShow;
 uniform float uStepHide;
+uniform vec2 uAspectRatio;
 
 in vec2 vUv;
 
@@ -13,7 +14,10 @@ out vec4 fragColor;
 #include ../../../utils/glsl/convert-hsv-to-rgb;
 
 void main() {
-  vec2 noiseUv = vec2(vUv.x, vUv.y * 9.0 / 16.0 + (1.0 - 9.0 / 16.0) / 2.0);
+  vec2 noiseUv = vec2(
+    vUv.x * min(uAspectRatio.x, 1.0) + (1.0 - min(uAspectRatio.x, 1.0)) * 0.5,
+    vUv.y * min(uAspectRatio.y, 1.0) + (1.0 - min(uAspectRatio.y, 1.0)) * 0.5
+  );
 
   vec4 dissolveNoise1 = texture(uNoiseTexture, noiseUv + vec2(uTime * 0.04, 0.0));
   vec4 dissolveNoise2 = texture(uNoiseTexture, noiseUv + vec2(uTime * -0.04, 0.5));
@@ -42,8 +46,11 @@ void main() {
       )
     );
 
-  vec2 uv = vUv + (vec2(dissolveNoise1.gb + dissolveNoise2.rb) - 1.0) * (1.0 - dissolve) * 2.0;
-  vec3 color = texture(uImageTexture, uv).rgb * dissolve - glowColor;
+  vec2 colorUv = vec2(
+    vUv.x / (16.0 / 9.0) * uAspectRatio.x + (1.0 - (1.0 / (16.0 / 9.0) * uAspectRatio.x)) * 0.5,
+    vUv.y
+  ) + (vec2(dissolveNoise1.gb + dissolveNoise2.rb) - 1.0) * (1.0 - dissolve) * 2.0;
+  vec3 color = texture(uImageTexture, colorUv).rgb * dissolve - glowColor;
 
   if (dissolve < 0.5) {
     discard;

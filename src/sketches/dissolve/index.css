@@ -64,7 +64,7 @@
 }
 @container (width < 728px) {
   .slideshow-large-images {
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 4 / 3;
   }
   .slideshow-navi {
     gap: 8px;

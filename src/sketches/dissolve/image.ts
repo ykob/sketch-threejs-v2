@@ -32,6 +32,7 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
           uStepHide: { value: 0 },
           uNoiseTexture: { value: null },
           uImageTexture: { value: null },
+          uAspectRatio: { value: new Vector2(1, 1) },
         },
         vertexShader,
         fragmentShader,
@@ -71,6 +72,12 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
     this.timeHide = this.isHiding ? this.timeHide + time : 0;
     uStepShow.value = easeOutQuart(Math.min(this.timeShow / DURATION, 1));
     uStepHide.value = easeOutQuart(Math.min(this.timeHide / DURATION, 1));
+  }
+  resize(width: number, height: number) {
+    this.material.uniforms.uAspectRatio.value.set(
+      width / height,
+      height / width,
+    );
   }
   show() {
     this.timeShow = 0;

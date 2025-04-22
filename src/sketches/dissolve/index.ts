@@ -38,6 +38,12 @@ const resize = async () => {
   resolution.set(window.innerWidth, window.innerHeight);
   renderer.setSize(resolution.x, resolution.y);
   camera.resize(resolution);
+  for (let i = 0; i < imageElements.length; i++) {
+    const image = images[i];
+    const rect = imageElements[i].getBoundingClientRect();
+
+    image.resize(rect.width, rect.height);
+  }
 };
 
 const update = () => {
