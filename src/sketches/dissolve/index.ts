@@ -86,9 +86,9 @@ const start = async () => {
   });
 
   buttonElements.forEach((element) => {
-    element.addEventListener('click', (event) => {
-      const target = event.currentTarget as HTMLButtonElement;
-      const index = Number(target.getAttribute('value'));
+    element.addEventListener('click', () => {
+      const valueAttr = element.getAttribute('value');
+      const index = Number(valueAttr);
 
       for (let i = 0; i < images.length; i++) {
         if (i === index) {
