@@ -19,8 +19,8 @@ void main() {
     vUv.y * min(uAspectRatio.y, 1.0) + (1.0 - min(uAspectRatio.y, 1.0)) * 0.5
   );
 
-  vec4 dissolveNoise1 = texture(uNoiseTexture, noiseUv + vec2(uTime * 0.04, 0.0));
-  vec4 dissolveNoise2 = texture(uNoiseTexture, noiseUv + vec2(uTime * -0.04, 0.5));
+  vec4 dissolveNoise1 = texture(uNoiseTexture, noiseUv + vec2(uTime * 0.4, 0.0));
+  vec4 dissolveNoise2 = texture(uNoiseTexture, noiseUv + vec2(uTime * -0.4, 0.5));
   float dissolveMaskShow = 1.0 - smoothstep(
     uStepShow * 3.0 - 1.5,
     uStepShow * 3.0,
@@ -36,13 +36,13 @@ void main() {
     1.0,
     dissolveMaskShow * (1.0 - dissolveMaskHide)
     );
-  float glowNoise1 = texture(uNoiseTexture, noiseUv * 0.5 + vec2(uTime * 0.04, 0.0)).r;
-  float glowNoise2 = texture(uNoiseTexture, noiseUv * 0.5 + vec2(uTime * -0.04, 0.5)).g;
+  float glowNoise1 = texture(uNoiseTexture, noiseUv * 0.5 + vec2(uTime * 0.4, 0.0)).r;
+  float glowNoise2 = texture(uNoiseTexture, noiseUv * 0.5 + vec2(uTime * -0.4, 0.5)).g;
   vec3 glowColor = convertHsvToRgb(
     vec3(
       glowNoise1 + glowNoise2,
       smoothstep(0.5, 0.55, dissolve) * 0.8,
-      1.0 - smoothstep(0.2, 1.0, dissolve)
+      1.0 - smoothstep(0.6, 1.0, dissolve)
       )
     );
 
