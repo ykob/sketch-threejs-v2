@@ -101,8 +101,10 @@ const start = async () => {
       currentImageIndex = index;
       for (let i = 0; i < images.length; i++) {
         if (i === index) {
+          buttonElements[i].classList.add('active');
           images[i].show();
         } else {
+          buttonElements[i].classList.remove('active');
           images[i].hide();
         }
       }
