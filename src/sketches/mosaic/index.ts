@@ -1,5 +1,6 @@
 import {
   Clock,
+  NearestFilter,
   RepeatWrapping,
   Scene,
   TextureLoader,
@@ -66,8 +67,12 @@ const start = async () => {
   scene.add(background);
 
   textureLoader
-    .loadAsync('/threejs-experiments/img/noise_2x1.jpg')
+    .loadAsync('/threejs-experiments/img/mosaic_noise_2x1.png')
     .then((texture) => {
+      texture.wrapS = RepeatWrapping;
+      texture.wrapT = RepeatWrapping;
+      texture.magFilter = NearestFilter;
+      texture.minFilter = NearestFilter;
       particles.start(texture);
       background.start(texture);
     })
