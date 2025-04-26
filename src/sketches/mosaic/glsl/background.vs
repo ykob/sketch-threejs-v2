@@ -9,11 +9,11 @@ in vec3 position;
 in vec3 normal;
 in vec2 uv;
 
-out vec3 vPosition;
 out vec2 vUv;
 
+#include ../../../utils/glsl/convert-hsv-to-rgb;
+
 void main() {
-  vPosition = position;
   vUv = uv;
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
