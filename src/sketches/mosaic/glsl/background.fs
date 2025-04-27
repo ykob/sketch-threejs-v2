@@ -10,7 +10,7 @@ out vec4 fragColor;
 #include ../../../utils/glsl/convert-hsv-to-rgb;
 
 void main() {
-  float noise = texture(uNoiseTexture, vUv * vec2(0.5, 2.0) + vec2(0.0, uTime * 0.01)).r;
+  float noise = texture(uNoiseTexture, vUv * vec2(0.5, 2.0) + vec2(0.0, uTime * 0.02)).r;
   vec3 color = convertHsvToRgb(
     vec3(
       noise * 4.0 + uTime * 0.2,
