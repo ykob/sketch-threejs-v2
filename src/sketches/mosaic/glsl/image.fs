@@ -46,7 +46,12 @@ void main() {
     vUv.x / (16.0 / 9.0) * uAspectRatio.x + (1.0 - (1.0 / (16.0 / 9.0) * uAspectRatio.x)) * 0.5,
     vUv.y
   );
-  vec3 color = texture(uImageTexture, colorUv).rgb + glowColor;
+  vec3 color = texture(
+    uImageTexture,
+    colorUv
+      - vec2(0.0,dissolveNoise.g) * (1.0 - dissolveMaskShow) * 0.25
+      + vec2(0.0,dissolveNoise.r) * dissolveMaskHide * 0.25
+  ).rgb + glowColor;
 
   if (dissolve < 0.5) {
     discard;
