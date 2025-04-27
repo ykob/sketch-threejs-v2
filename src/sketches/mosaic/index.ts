@@ -78,11 +78,13 @@ const start = async () => {
     })
     .catch((error) => console.error(error));
   const noiseTexture = await textureLoader.loadAsync(
-    '/threejs-experiments/img/noise.jpg',
+    '/threejs-experiments/img/mosaic_noise.png',
   );
 
   noiseTexture.wrapS = RepeatWrapping;
   noiseTexture.wrapT = RepeatWrapping;
+  noiseTexture.magFilter = NearestFilter;
+  noiseTexture.minFilter = NearestFilter;
   imageElements.forEach((element) => {
     const image = new Image(element);
 
