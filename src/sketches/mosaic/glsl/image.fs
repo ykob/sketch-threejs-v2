@@ -21,14 +21,14 @@ void main() {
 
   vec4 dissolveNoise = texture(uNoiseTexture, noiseUv);
   float dissolveMaskShow = smoothstep(
-    0.5,
     1.0,
-    (1.0 - dissolveNoise.r) + uStepShow
+    1.5,
+    uStepShow + dissolveNoise.r
     );
   float dissolveMaskHide = smoothstep(
-    0.5,
     1.0,
-    (1.0 - dissolveNoise.r) + uStepHide
+    1.5,
+    uStepHide + dissolveNoise.r
     );
   float dissolve = smoothstep(
     0.0,
@@ -37,9 +37,9 @@ void main() {
     );
   vec3 glowColor = convertHsvToRgb(
     vec3(
-      dissolveNoise.r * 6.0 + uTime,
-      0.6,
-      1.0 - smoothstep(0.5, 0.9, dissolve) - (1.0 - smoothstep(0.5, 0.7, dissolve)) * 2.5
+      dissolveNoise.r * 6.0 + uTime * 120.0,
+      0.8,
+      1.0 - smoothstep(0.5, 1.0, dissolve) - (1.0 - smoothstep(0.5, 0.7, dissolve)) * 2.5
       )
   );
   vec2 colorUv = vec2(

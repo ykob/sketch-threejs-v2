@@ -12,7 +12,7 @@ import { easeOutCirc } from '~/utils/easings';
 import fragmentShader from './glsl/image.fs';
 import vertexShader from './glsl/image.vs';
 
-const DURATION = 2;
+const DURATION = 4;
 
 export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
   element: Element;
