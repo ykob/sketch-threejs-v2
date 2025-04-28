@@ -9,8 +9,9 @@ export const pageData = [
     key: 'mosaic',
     path: '/sketches/mosaic/index.html',
     title: 'Mosaic',
-    description: '',
-    updated: '2025-05-DD',
+    description:
+      'Use a noisy image with a mosaic filter applied for a dissolve effect.',
+    updated: '2025-04-28',
   },
   {
     key: 'dissolve',
