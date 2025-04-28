@@ -35,11 +35,18 @@ void main() {
     1.0,
     dissolveMaskShow * (1.0 - dissolveMaskHide)
     );
-  vec3 glowColor = convertHsvToRgb(
+  vec3 edgeGlowColor = convertHsvToRgb(
     vec3(
       dissolveNoise.r * 6.0 + uTime * 120.0,
       0.8,
       1.0 - smoothstep(0.5, 1.0, dissolve) - (1.0 - smoothstep(0.5, 0.7, dissolve)) * 2.5
+      )
+  );
+  vec3 glowColor = convertHsvToRgb(
+    vec3(
+      dissolveNoise.b * 6.0 + uTime * 0.8,
+      0.8,
+      0.5 - dissolveNoise.b * 0.5
       )
   );
   vec2 colorUv = vec2(
@@ -51,7 +58,7 @@ void main() {
     colorUv
       - vec2(0.0,dissolveNoise.g) * (1.0 - dissolveMaskShow) * 0.25
       + vec2(0.0,dissolveNoise.r) * dissolveMaskHide * 0.25
-  ).rgb + glowColor;
+  ).rgb + edgeGlowColor + glowColor;
 
   if (dissolve < 0.5) {
     discard;
