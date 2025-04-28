@@ -66,25 +66,24 @@ const start = async () => {
   scene.add(particles);
   scene.add(background);
 
-  textureLoader
-    .loadAsync('/threejs-experiments/img/mosaic_noise_2x1.png')
-    .then((texture) => {
-      texture.wrapS = RepeatWrapping;
-      texture.wrapT = RepeatWrapping;
-      texture.magFilter = NearestFilter;
-      texture.minFilter = NearestFilter;
-      particles.start(texture);
-      background.start(texture);
-    })
-    .catch((error) => console.error(error));
-  const noiseTexture = await textureLoader.loadAsync(
-    '/threejs-experiments/img/mosaic_noise.png',
-  );
+  const noiseTextures = await Promise.all([
+    textureLoader.loadAsync('/threejs-experiments/img/mosaic_noise_2x1.png'),
+    textureLoader.loadAsync('/threejs-experiments/img/mosaic_noise.png'),
+    textureLoader.loadAsync('/threejs-experiments/img/noise.jpg'),
+  ]);
 
-  noiseTexture.wrapS = RepeatWrapping;
-  noiseTexture.wrapT = RepeatWrapping;
-  noiseTexture.magFilter = NearestFilter;
-  noiseTexture.minFilter = NearestFilter;
+  noiseTextures[0].wrapS = RepeatWrapping;
+  noiseTextures[0].wrapT = RepeatWrapping;
+  noiseTextures[0].magFilter = NearestFilter;
+  noiseTextures[0].minFilter = NearestFilter;
+  noiseTextures[1].wrapS = RepeatWrapping;
+  noiseTextures[1].wrapT = RepeatWrapping;
+  noiseTextures[1].magFilter = NearestFilter;
+  noiseTextures[1].minFilter = NearestFilter;
+  noiseTextures[2].wrapS = RepeatWrapping;
+  noiseTextures[2].wrapT = RepeatWrapping;
+  background.start(noiseTextures[0]);
+  particles.start(noiseTextures[2]);
   imageElements.forEach((element) => {
     const image = new Image(element);
 
@@ -96,7 +95,7 @@ const start = async () => {
       .then((texture) => {
         texture.wrapS = RepeatWrapping;
         texture.wrapT = RepeatWrapping;
-        image.start(noiseTexture, texture);
+        image.start(noiseTextures[1], texture);
       });
   });
 
