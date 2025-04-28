@@ -28,8 +28,8 @@ importers:
         specifier: ^6.3.3
         version: 6.3.3
       vite-plugin-glsl:
-        specifier: ^1.4.0
-        version: 1.4.0(rollup@4.40.0)(vite@6.3.3)
+        specifier: ^1.4.1
+        version: 1.4.1(rollup@4.40.0)(vite@6.3.3)
       vite-plugin-handlebars:
         specifier: ^2.0.0
         version: 2.0.0
@@ -558,8 +558,8 @@ packages:
     engines: {node: '>=0.8.0'}
     hasBin: true
 
-  vite-plugin-glsl@1.4.0:
-    resolution: {integrity: sha512-mjT4AaU4qRmlpawgd0M2Qz72tvK4WF0ii2p0WbVRpr7ga6+cRScJUT3oIMv5coT8u/lqUe9u9T5+0zJLZ1uhug==}
+  vite-plugin-glsl@1.4.1:
+    resolution: {integrity: sha512-LkfLZeHdyl0drA71GmCCfcTeLuXyn/DYwDfjzQrupvNYVwdFRvb7nkCnCm0o9LZRKxS4/8r7E3KNM7KQjWrWWQ==}
     engines: {node: '>= 20.17.0', npm: '>= 10.8.3'}
     peerDependencies:
       vite: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
@@ -1018,7 +1018,7 @@ snapshots:
   uglify-js@3.19.3:
     optional: true
 
-  vite-plugin-glsl@1.4.0(rollup@4.40.0)(vite@6.3.3):
+  vite-plugin-glsl@1.4.1(rollup@4.40.0)(vite@6.3.3):
     dependencies:
       '@rollup/pluginutils': 5.1.4(rollup@4.40.0)
       vite: 6.3.3
