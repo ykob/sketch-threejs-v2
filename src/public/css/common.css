@@ -15,6 +15,9 @@ body {
 a {
   color: white;
 }
+a:hover {
+  text-decoration: none;
+}
 canvas {
   width: 0;
   height: 0;
