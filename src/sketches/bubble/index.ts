@@ -47,13 +47,12 @@ const start = async () => {
   scene.add(background);
   camera.lookAt(scene.position);
 
-  await textureLoader
-    .loadAsync('/threejs-experiments/img/noise.jpg')
-    .then((texture) => {
-      bubbles.start(texture);
-      background.start(texture);
-    })
-    .catch((error) => console.error(error));
+  const texture = await textureLoader.loadAsync(
+    '/threejs-experiments/img/noise.jpg',
+  );
+
+  bubbles.start(texture);
+  background.start(texture);
 
   resize();
   update();
