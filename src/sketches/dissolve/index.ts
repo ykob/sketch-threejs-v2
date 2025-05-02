@@ -65,19 +65,16 @@ const start = async () => {
   scene.add(particles);
   scene.add(background);
 
-  textureLoader
-    .loadAsync('/threejs-experiments/img/noise_2x1.jpg')
-    .then((texture) => {
-      particles.start(texture);
-      background.start(texture);
-    })
-    .catch((error) => console.error(error));
-  const noiseTexture = await textureLoader.loadAsync(
-    '/threejs-experiments/img/noise.jpg',
-  );
+  const textures = await Promise.all([
+    textureLoader.loadAsync('/threejs-experiments/img/noise.jpg'),
+    textureLoader.loadAsync('/threejs-experiments/img/noise_2x1.jpg'),
+  ]);
 
-  noiseTexture.wrapS = RepeatWrapping;
-  noiseTexture.wrapT = RepeatWrapping;
+  particles.start(textures[1]);
+  background.start(textures[1]);
+  textures[0].wrapS = RepeatWrapping;
+  textures[0].wrapT = RepeatWrapping;
+
   imageElements.forEach((element) => {
     const image = new Image(element);
 
@@ -89,7 +86,7 @@ const start = async () => {
       .then((texture) => {
         texture.wrapS = RepeatWrapping;
         texture.wrapT = RepeatWrapping;
-        image.start(noiseTexture, texture);
+        image.start(textures[0], texture);
       });
   });
 
