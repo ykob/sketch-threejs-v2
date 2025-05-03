@@ -6,6 +6,13 @@ export const pageData = [
     description: 'Interactive sketches made with three.js.',
   },
   {
+    key: 'intersection',
+    path: '/sketches/intersection/index.html',
+    title: 'Intersection',
+    description: '',
+    updated: '2025-05-DD',
+  },
+  {
     key: 'mosaic',
     path: '/sketches/mosaic/index.html',
     title: 'Mosaic',
