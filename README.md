@@ -1,7 +1,6 @@
 # three.js Experiments
 
-Interactive sketches made with three.js.
-
+Interactive sketches made with three.js.  
 https://ykob.github.io/threejs-experiments/
 
 This site is created by [Yoichi Kobayashi](https://www.tplh.net/).  
