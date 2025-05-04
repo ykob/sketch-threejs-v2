@@ -8,12 +8,19 @@ import {
   Vector2,
 } from 'three';
 import { getCoordAsPixel } from '~/utils';
+import { easeOutQuart } from '~/utils/easings';
 import fragmentShader from './glsl/image.fs';
 import vertexShader from './glsl/image.vs';
+
+const DURATION = 3;
 
 export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
   element: Element;
   time: number;
+  timeShow: number;
+  timeHide: number;
+  isShowing: boolean;
+  isHiding: boolean;
 
   constructor(element: Element) {
     super(
@@ -21,17 +28,25 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
       new RawShaderMaterial({
         uniforms: {
           uTime: { value: 0 },
+          uStepShow: { value: 0 },
+          uStepHide: { value: 0 },
           uNoiseTexture: { value: null },
           uImageTexture: { value: null },
+          uAspectRatio: { value: new Vector2(1, 1) },
         },
         vertexShader,
         fragmentShader,
+        transparent: true,
         glslVersion: GLSL3,
       }),
     );
 
     this.element = element;
     this.time = 0;
+    this.timeShow = 0;
+    this.timeHide = 0;
+    this.isShowing = false;
+    this.isHiding = false;
   }
   start(noiseTexture: Texture, imageTexture: Texture) {
     this.material.uniforms.uNoiseTexture.value = noiseTexture;
@@ -42,6 +57,7 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
     const rect = this.element.getBoundingClientRect();
     const width = (rect.width / resolution.x) * coordAsPixel.x;
     const height = (rect.height / resolution.y) * coordAsPixel.y;
+    const { uTime, uStepShow, uStepHide } = this.material.uniforms;
 
     this.time += time;
     this.scale.set(width, height, 1);
@@ -51,6 +67,25 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
     this.position.y =
       ((rect.y + rect.height * 0.5 - resolution.y * 0.5) / resolution.y) *
       -coordAsPixel.y;
-    this.material.uniforms.uTime.value = this.time;
+    uTime.value = this.time;
+    this.timeShow = this.isShowing ? this.timeShow + time : 0;
+    this.timeHide = this.isHiding ? this.timeHide + time : 0;
+    uStepShow.value = easeOutQuart(Math.min(this.timeShow / DURATION, 1));
+    uStepHide.value = easeOutQuart(Math.min(this.timeHide / DURATION, 1));
+  }
+  resize(width: number, height: number) {
+    this.material.uniforms.uAspectRatio.value.set(
+      width / height,
+      height / width,
+    );
+  }
+  show() {
+    this.timeShow = 0;
+    this.timeHide = 0;
+    this.isShowing = true;
+    this.isHiding = false;
+  }
+  hide() {
+    this.isHiding = true;
   }
 }

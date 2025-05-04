@@ -13,6 +13,7 @@ import { Image } from './image';
 import { Particles } from './particles';
 
 const app = document.getElementById('app');
+const content = document.getElementById('content');
 const canvas = document.createElement('canvas');
 const renderer = new WebGLRenderer({
   canvas,
@@ -35,6 +36,12 @@ const resize = async () => {
   resolution.set(window.innerWidth, window.innerHeight);
   renderer.setSize(resolution.x, resolution.y);
   camera.resize(resolution);
+  for (let i = 0; i < imageElements.length; i++) {
+    const image = images[i];
+    const rect = imageElements[i].getBoundingClientRect();
+
+    image.resize(rect.width, rect.height);
+  }
 };
 
 const update = () => {
@@ -46,6 +53,27 @@ const update = () => {
   renderer.render(scene, camera);
   requestAnimationFrame(update);
 };
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.target instanceof HTMLElement) {
+        const targetElement = entry.target;
+        const index = parseInt(targetElement.dataset.index || '-1');
+
+        if (isNaN(index) || index < 0 || index >= images.length) return;
+        images[index].show();
+        observer.unobserve(targetElement);
+        return;
+      }
+    });
+  },
+  {
+    root: content,
+    rootMargin: '0px',
+    threshold: 0.5,
+  },
+);
 
 const start = async () => {
   if (!app || !canvas) return;
@@ -66,11 +94,12 @@ const start = async () => {
   textures[0].wrapS = RepeatWrapping;
   textures[0].wrapT = RepeatWrapping;
 
-  imageElements.forEach((element) => {
+  imageElements.forEach((element, index) => {
     const image = new Image(element);
 
-    images.push(image);
+    images[index] = image;
     scene.add(image);
+    observer.observe(element);
 
     textureLoader
       .loadAsync(element.getAttribute('src') || '')
