@@ -61,7 +61,7 @@ const observer = new IntersectionObserver(
         const targetElement = entry.target;
         const index = parseInt(targetElement.dataset.index || '-1');
 
-        if (isNaN(index) || index < 0 || index >= images.length) return;
+        if (isNaN(index) || index < 0 || index >= imageElements.length) return;
         images[index].show();
         observer.unobserve(targetElement);
         return;
@@ -94,9 +94,13 @@ const start = async () => {
   textures[0].wrapS = RepeatWrapping;
   textures[0].wrapT = RepeatWrapping;
 
-  imageElements.forEach((element, index) => {
-    const image = new Image(element);
+  imageElements.forEach((element) => {
+    if (!(element instanceof HTMLImageElement)) return;
 
+    const image = new Image(element);
+    const index = parseInt(element.dataset.index || '-1');
+
+    if (isNaN(index) || index < 0 || index >= imageElements.length) return;
     images[index] = image;
     scene.add(image);
     observer.observe(element);
