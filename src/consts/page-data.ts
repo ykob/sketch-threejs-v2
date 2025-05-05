@@ -9,8 +9,9 @@ export const pageData = [
     key: 'intersection',
     path: '/sketches/intersection/index.html',
     title: 'Intersection',
-    description: '',
-    updated: '2025-05-DD',
+    description:
+      'Use IntersectionObserver to display images in 3D space with a visual effect.',
+    updated: '2025-05-05',
   },
   {
     key: 'mosaic',
