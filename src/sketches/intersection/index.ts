@@ -57,21 +57,28 @@ const update = () => {
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting && entry.target instanceof HTMLElement) {
-        const targetElement = entry.target;
-        const index = parseInt(targetElement.dataset.index || '-1');
+      if (!(entry.target instanceof HTMLElement)) return;
 
-        if (isNaN(index) || index < 0 || index >= imageElements.length) return;
-        images[index].show();
-        observer.unobserve(targetElement);
+      const targetElement = entry.target;
+      const index = parseInt(targetElement.dataset.index || '-1');
+      const image = images[index];
+
+      if (isNaN(index) || index < 0 || index >= imageElements.length) {
         return;
+      }
+      if (entry.isIntersecting && (!image.isShowing || image.isHiding)) {
+        image.show();
+        return;
+      }
+      if (!entry.isIntersecting && image.isShowing) {
+        image.hide();
       }
     });
   },
   {
     root: content,
     rootMargin: '0px',
-    threshold: 0.5,
+    threshold: [0, 0.5],
   },
 );
 
