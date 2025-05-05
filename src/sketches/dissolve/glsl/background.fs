@@ -17,7 +17,7 @@ void main() {
   vec3 color = convertHsvToRgb(
     vec3((noiseR + noiseG + noiseB) * 0.24 + vUv.x + uTime * 0.04,
     0.56,
-    0.0 + smoothstep(-20.0, 20.0, vPosition.y) * 0.2
+    0.07 + smoothstep(-20.0, 20.0, vPosition.y) * 0.24
   ));
 
   fragColor = vec4(color, 1.0);
