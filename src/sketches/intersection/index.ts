@@ -57,12 +57,12 @@ const update = () => {
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
-      if (!(entry.target instanceof HTMLElement)) return;
+      const { target, isIntersecting, intersectionRatio } = entry;
 
-      const targetElement = entry.target;
-      const index = parseInt(targetElement.dataset.index || '-1');
+      if (!(target instanceof HTMLElement)) return;
+
+      const index = parseInt(target.dataset.index || '-1');
       const image = images[index];
-      const { isIntersecting, intersectionRatio } = entry;
       const { isShowing, isHiding } = image;
 
       if (isNaN(index) || index < 0 || index >= imageElements.length) {
@@ -102,12 +102,12 @@ const start = async () => {
     textureLoader.loadAsync('/threejs-experiments/img/noise_2x1.jpg'),
   ]);
 
-  particles.start(textures[1]);
-  background.start(textures[1]);
   textures[0].wrapS = RepeatWrapping;
   textures[0].wrapT = RepeatWrapping;
+  particles.start(textures[1]);
+  background.start(textures[1]);
 
-  imageElements.forEach((element) => {
+  imageElements.forEach(async (element) => {
     if (!(element instanceof HTMLImageElement)) return;
 
     const image = new Image(element);
@@ -118,13 +118,13 @@ const start = async () => {
     scene.add(image);
     observer.observe(element);
 
-    textureLoader
-      .loadAsync(element.getAttribute('src') || '')
-      .then((texture) => {
-        texture.wrapS = RepeatWrapping;
-        texture.wrapT = RepeatWrapping;
-        image.start(textures[0], texture);
-      });
+    const imageTexture = await textureLoader.loadAsync(
+      element.getAttribute('src') || '',
+    );
+
+    imageTexture.wrapS = RepeatWrapping;
+    imageTexture.wrapT = RepeatWrapping;
+    image.start(textures[0], imageTexture);
   });
 
   resize();
