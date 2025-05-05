@@ -62,15 +62,21 @@ const observer = new IntersectionObserver(
       const targetElement = entry.target;
       const index = parseInt(targetElement.dataset.index || '-1');
       const image = images[index];
+      const { isIntersecting, intersectionRatio } = entry;
+      const { isShowing, isHiding } = image;
 
       if (isNaN(index) || index < 0 || index >= imageElements.length) {
         return;
       }
-      if (entry.isIntersecting && (!image.isShowing || image.isHiding)) {
+      if (
+        isIntersecting &&
+        intersectionRatio >= 0.5 &&
+        (!isShowing || isHiding)
+      ) {
         image.show();
         return;
       }
-      if (!entry.isIntersecting && image.isShowing) {
+      if (!isIntersecting && intersectionRatio < 0.5 && isShowing) {
         image.hide();
       }
     });
