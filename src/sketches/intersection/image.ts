@@ -8,7 +8,7 @@ import {
   Vector2,
 } from 'three';
 import { getCoordAsPixel } from '~/utils';
-import { easeOutQuart } from '~/utils/easings';
+import { easeOutCirc } from '~/utils/easings';
 import fragmentShader from './glsl/image.fs';
 import vertexShader from './glsl/image.vs';
 
@@ -70,8 +70,8 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
     uTime.value = this.time;
     this.timeShow = this.isShowing ? this.timeShow + time : 0;
     this.timeHide = this.isHiding ? this.timeHide + time : 0;
-    uStepShow.value = easeOutQuart(Math.min(this.timeShow / DURATION, 1));
-    uStepHide.value = easeOutQuart(Math.min(this.timeHide / DURATION, 1));
+    uStepShow.value = easeOutCirc(Math.min(this.timeShow / DURATION, 1));
+    uStepHide.value = easeOutCirc(Math.min(this.timeHide / DURATION, 1));
   }
   resize(width: number, height: number) {
     this.material.uniforms.uAspectRatio.value.set(
