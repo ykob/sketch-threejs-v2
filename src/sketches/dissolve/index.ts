@@ -49,7 +49,9 @@ const resize = async () => {
 const update = () => {
   const delta = clock.getDelta();
 
-  images.forEach((image) => image.update(resolution, camera, delta));
+  for (let i = 0; i < images.length; i++) {
+    images[i].update(resolution, camera, delta);
+  }
   particles.update(delta);
   background.update(delta);
   renderer.render(scene, camera);
