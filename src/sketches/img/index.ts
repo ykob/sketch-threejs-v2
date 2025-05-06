@@ -3,7 +3,6 @@ import {
   ImageLoader,
   RepeatWrapping,
   Scene,
-  Texture,
   TextureLoader,
   Vector2,
   WebGLRenderer,
@@ -73,15 +72,10 @@ const start = async () => {
 
   imageElements.forEach(async (element) => {
     const image = new Image(element);
-    const imageTexture = new Texture(element);
-
-    imageTexture.wrapS = RepeatWrapping;
-    imageTexture.wrapT = RepeatWrapping;
-    imageTexture.needsUpdate = true;
 
     images.push(image);
     scene.add(image);
-    image.start(textures[0], imageTexture);
+    image.start(textures[0]);
   });
 
   resize();
