@@ -1,7 +1,9 @@
 import {
   Clock,
+  ImageLoader,
   RepeatWrapping,
   Scene,
+  Texture,
   TextureLoader,
   Vector2,
   WebGLRenderer,
@@ -22,6 +24,7 @@ const renderer = new WebGLRenderer({
 const scene = new Scene();
 const camera = new Camera();
 const resolution = new Vector2();
+const imageLoader = new ImageLoader();
 const textureLoader = new TextureLoader();
 const clock = new Clock(false);
 const imageElements = document.querySelectorAll('.image');
@@ -68,17 +71,17 @@ const start = async () => {
   textures[0].wrapS = RepeatWrapping;
   textures[0].wrapT = RepeatWrapping;
 
-  imageElements.forEach((element) => {
+  imageElements.forEach(async (element) => {
     const image = new Image(element);
+    const imageTexture = new Texture(element);
+
+    imageTexture.wrapS = RepeatWrapping;
+    imageTexture.wrapT = RepeatWrapping;
+    imageTexture.needsUpdate = true;
 
     images.push(image);
     scene.add(image);
-
-    textureLoader
-      .loadAsync(element.getAttribute('src') || '')
-      .then((texture) => {
-        image.start(textures[0], texture);
-      });
+    image.start(textures[0], imageTexture);
   });
 
   resize();
@@ -87,6 +90,11 @@ const start = async () => {
 
   window.addEventListener('resize', resize);
   toggleSketchUI();
+
+  // HACK: Avoid lag the first time an image Plane object becomes visible in the viewport.
+  for (let i = 0; i < images.length; i++) {
+    images[i].activate();
+  }
 };
 
 start();
