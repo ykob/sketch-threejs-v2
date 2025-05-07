@@ -90,14 +90,7 @@ const start = async () => {
 
     images.push(image);
     scene.add(image);
-
-    textureLoader
-      .loadAsync(element.getAttribute('src') || '')
-      .then((texture) => {
-        texture.wrapS = RepeatWrapping;
-        texture.wrapT = RepeatWrapping;
-        image.start(textures[1], texture);
-      });
+    image.start(textures[1]);
   });
 
   buttonElements.forEach((element) => {

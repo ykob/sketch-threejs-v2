@@ -82,14 +82,7 @@ const start = async () => {
 
     images.push(image);
     scene.add(image);
-
-    textureLoader
-      .loadAsync(element.getAttribute('src') || '')
-      .then((texture) => {
-        texture.wrapS = RepeatWrapping;
-        texture.wrapT = RepeatWrapping;
-        image.start(textures[0], texture);
-      });
+    image.start(textures[0]);
   });
 
   buttonElements.forEach((element) => {

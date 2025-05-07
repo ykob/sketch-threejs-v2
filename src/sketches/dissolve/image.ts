@@ -4,6 +4,7 @@ import {
   PerspectiveCamera,
   PlaneGeometry,
   RawShaderMaterial,
+  RepeatWrapping,
   Texture,
   Vector2,
 } from 'three';
@@ -48,7 +49,12 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
     this.isShowing = false;
     this.isHiding = false;
   }
-  start(noiseTexture: Texture, imageTexture: Texture) {
+  start(noiseTexture: Texture) {
+    const imageTexture = new Texture(this.element);
+
+    imageTexture.wrapS = RepeatWrapping;
+    imageTexture.wrapT = RepeatWrapping;
+    imageTexture.needsUpdate = true;
     this.material.uniforms.uNoiseTexture.value = noiseTexture;
     this.material.uniforms.uImageTexture.value = imageTexture;
   }
