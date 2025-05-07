@@ -4,6 +4,7 @@ import {
   PerspectiveCamera,
   PlaneGeometry,
   RawShaderMaterial,
+  RepeatWrapping,
   Texture,
   Vector2,
 } from 'three';
@@ -13,6 +14,7 @@ import vertexShader from './glsl/image.vs';
 
 export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
   element: Element;
+  isActivated: boolean;
   time: number;
 
   constructor(element: Element) {
@@ -31,13 +33,25 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
     );
 
     this.element = element;
+    this.isActivated = false;
     this.time = 0;
+    this.scale.set(0, 0, 1);
   }
-  start(noiseTexture: Texture, imageTexture: Texture) {
+  start(noiseTexture: Texture) {
+    const imageTexture = new Texture(this.element);
+
+    imageTexture.wrapS = RepeatWrapping;
+    imageTexture.wrapT = RepeatWrapping;
+    imageTexture.needsUpdate = true;
     this.material.uniforms.uNoiseTexture.value = noiseTexture;
     this.material.uniforms.uImageTexture.value = imageTexture;
   }
+  activate() {
+    this.isActivated = true;
+  }
   update(resolution: Vector2, camera: PerspectiveCamera, time: number) {
+    if (!this.isActivated) return;
+
     const coordAsPixel = getCoordAsPixel(camera, this.position);
     const rect = this.element.getBoundingClientRect();
     const width = (rect.width / resolution.x) * coordAsPixel.x;
