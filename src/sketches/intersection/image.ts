@@ -4,6 +4,7 @@ import {
   PerspectiveCamera,
   PlaneGeometry,
   RawShaderMaterial,
+  RepeatWrapping,
   Texture,
   Vector2,
 } from 'three';
@@ -21,6 +22,7 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
   timeHide: number;
   isShowing: boolean;
   isHiding: boolean;
+  isActivated: boolean;
 
   constructor(element: Element) {
     super(
@@ -47,12 +49,23 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
     this.timeHide = 0;
     this.isShowing = false;
     this.isHiding = false;
+    this.isActivated = false;
   }
-  start(noiseTexture: Texture, imageTexture: Texture) {
+  start(noiseTexture: Texture) {
+    const imageTexture = new Texture(this.element);
+
+    imageTexture.wrapS = RepeatWrapping;
+    imageTexture.wrapT = RepeatWrapping;
+    imageTexture.needsUpdate = true;
     this.material.uniforms.uNoiseTexture.value = noiseTexture;
     this.material.uniforms.uImageTexture.value = imageTexture;
   }
+  activate() {
+    this.isActivated = true;
+  }
   update(resolution: Vector2, camera: PerspectiveCamera, time: number) {
+    if (!this.isActivated) return;
+
     const coordAsPixel = getCoordAsPixel(camera, this.position);
     const rect = this.element.getBoundingClientRect();
     const width = (rect.width / resolution.x) * coordAsPixel.x;

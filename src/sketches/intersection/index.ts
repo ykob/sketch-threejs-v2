@@ -116,17 +116,11 @@ const start = async () => {
     const index = parseInt(element.dataset.index || '-1');
 
     if (isNaN(index) || index < 0 || index >= imageElements.length) return;
+
     images[index] = image;
     scene.add(image);
     observer.observe(element);
-
-    const imageTexture = await textureLoader.loadAsync(
-      element.getAttribute('src') || '',
-    );
-
-    imageTexture.wrapS = RepeatWrapping;
-    imageTexture.wrapT = RepeatWrapping;
-    image.start(textures[0], imageTexture);
+    image.start(textures[0]);
   });
 
   resize();
@@ -135,6 +129,11 @@ const start = async () => {
 
   window.addEventListener('resize', resize);
   toggleSketchUI();
+
+  // HACK: Avoid lag the first time an image Plane object becomes visible in the viewport.
+  for (let i = 0; i < images.length; i++) {
+    images[i].activate();
+  }
 };
 
 start();
