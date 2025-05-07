@@ -50,6 +50,7 @@ export class Image extends Mesh<PlaneGeometry, RawShaderMaterial> {
     this.isShowing = false;
     this.isHiding = false;
     this.isActivated = false;
+    this.scale.set(0, 0, 1);
   }
   start(noiseTexture: Texture) {
     const imageTexture = new Texture(this.element);
