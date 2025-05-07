@@ -1,6 +1,5 @@
 import {
   Clock,
-  ImageLoader,
   RepeatWrapping,
   Scene,
   TextureLoader,
@@ -23,7 +22,6 @@ const renderer = new WebGLRenderer({
 const scene = new Scene();
 const camera = new Camera();
 const resolution = new Vector2();
-const imageLoader = new ImageLoader();
 const textureLoader = new TextureLoader();
 const clock = new Clock(false);
 const imageElements = document.querySelectorAll('.image');
