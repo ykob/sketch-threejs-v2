@@ -23,6 +23,9 @@ export default defineConfig({
         }
         return page;
       },
+      helpers: {
+        eq: (a, b) => a === b,
+      },
     }),
   ],
   resolve: {
