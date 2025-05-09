@@ -56,15 +56,14 @@ const start = async () => {
   scene.add(lightBall);
   camera.lookAt(scene.position);
 
-  await textureLoader
-    .loadAsync('/threejs-experiments/img/noise_2x1.jpg')
-    .then((texture) => {
-      texture.wrapS = RepeatWrapping;
-      texture.wrapT = RepeatWrapping;
-      background.start(texture);
-      lightBall.start(texture);
-    })
-    .catch((error) => console.error(error));
+  const texture = await textureLoader.loadAsync(
+    '/threejs-experiments/img/noise_2x1.jpg',
+  );
+
+  texture.wrapS = RepeatWrapping;
+  texture.wrapT = RepeatWrapping;
+  background.start(texture);
+  lightBall.start(texture);
 
   resize();
   update();
