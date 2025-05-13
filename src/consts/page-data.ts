@@ -6,9 +6,9 @@ export const pageData = [
     description: 'Interactive sketches made with three.js.',
   },
   {
-    key: 'confetti2',
-    path: '/sketches/confetti2/index.html',
-    title: 'Confetti 2',
+    key: 'splash',
+    path: '/sketches/splash/index.html',
+    title: 'Splash',
     description: '',
     updated: '2025-05-DD',
   },
