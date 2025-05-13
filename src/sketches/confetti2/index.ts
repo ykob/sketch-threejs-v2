@@ -58,6 +58,9 @@ const start = async () => {
   clock.start();
 
   window.addEventListener('resize', resize);
+  window.addEventListener('click', () => {
+    confetti.splash();
+  });
   toggleSketchUI();
 };
 

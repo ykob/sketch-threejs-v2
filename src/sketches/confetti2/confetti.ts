@@ -12,22 +12,22 @@ import {
   Texture,
   Vector3,
 } from 'three';
-import { radians } from '~/utils';
+import { radians, spherical } from '~/utils';
 import fragmentShader from './glsl/confetti.fs';
 import vertexShader from './glsl/confetti.vs';
 
-const count = 500;
+const count = 300;
 
 export class Confetti extends InstancedMesh<
   InstancedBufferGeometry,
   RawShaderMaterial
 > {
   params: {
-    position: Vector3;
-    speed: number;
     euler: Euler;
     eulerSpeed: Euler;
     scale: Vector3;
+    velocity: Vector3;
+    acceleration: Vector3;
   }[] = [];
   matrix: Matrix4 = new Matrix4();
   quaternion: Quaternion = new Quaternion();
@@ -67,17 +67,9 @@ export class Confetti extends InstancedMesh<
     this.material.uniforms.uImageTexture.value = imageTexture;
 
     this.params = Array.from({ length: count }, () => {
-      const radian = radians(Math.random() * 360);
-      const radius = Math.random() * 4 + 1;
       const scale = Math.random() * 0.75 + 0.25;
 
       return {
-        position: new Vector3(
-          Math.cos(radian) * radius,
-          Math.sin(radian) * radius,
-          (Math.random() * 2 - 1) * 20,
-        ),
-        speed: Math.random() * 3 + 1,
         euler: new Euler(
           Math.random() * Math.PI,
           Math.random() * Math.PI,
@@ -89,6 +81,8 @@ export class Confetti extends InstancedMesh<
           (Math.random() * 0.4 + 0.1) * Math.PI,
         ),
         scale: new Vector3(scale, scale, scale),
+        velocity: new Vector3(),
+        acceleration: new Vector3(),
       };
     });
 
@@ -106,15 +100,31 @@ export class Confetti extends InstancedMesh<
       this.geometry.attributes.textureIndex.needsUpdate = true;
     }
   }
+  splash() {
+    this.params.forEach((param) => {
+      const radian1 = radians(Math.random() * 360);
+      const radian2 = radians(Math.random() * 360);
+      const radius = Math.random() * 0.24 + 0.12;
+      const acceleration = spherical(radian1, radian2, radius);
+
+      param.velocity.set(0, 0, 0);
+      param.acceleration.set(acceleration.x, acceleration.y, acceleration.z);
+    });
+  }
   update(delta: number) {
     for (let i = 0; i < this.params.length; i++) {
-      const { position, speed, euler, eulerSpeed, scale } = this.params[i];
-      position.z = ((position.z + delta * speed + 20) % 40) - 20;
+      const { velocity, acceleration, euler, eulerSpeed, scale } =
+        this.params[i];
+      const drug = 0.96;
+
+      acceleration.multiplyScalar(drug);
+      acceleration.add(new Vector3(0, -0.001, 0));
+      velocity.add(acceleration);
       euler.x += delta * eulerSpeed.x;
       euler.y += delta * eulerSpeed.y;
       euler.z += delta * eulerSpeed.z;
       this.quaternion.setFromEuler(euler);
-      this.matrix.compose(position, this.quaternion, scale);
+      this.matrix.compose(velocity, this.quaternion, scale);
       this.setMatrixAt(i, this.matrix);
     }
     this.instanceMatrix.needsUpdate = true;
