@@ -51,9 +51,9 @@ export const pageData = [
     updated: '2025-03-15',
   },
   {
-    key: 'confetti',
-    path: '/sketches/confetti/index.html',
-    title: 'Confetti',
+    key: 'instancing',
+    path: '/sketches/instancing/index.html',
+    title: 'Instancing',
     description:
       'Simple geometry instancing using a single planar object and a single texture.',
     updated: '2025-02-23',
