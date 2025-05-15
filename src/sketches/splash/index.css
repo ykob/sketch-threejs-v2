@@ -1,0 +1,10 @@
+.message {
+  z-index: 100;
+  position: fixed;
+  inset: 0;
+  color: current-color;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  font-size: 2.4em;
+}
