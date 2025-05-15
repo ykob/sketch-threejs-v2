@@ -53,7 +53,6 @@ export class Confetti extends InstancedMesh<
         uniforms: {
           uTime: { value: 0 },
           uImageTexture: { value: null },
-          uIsAnimated: { value: 0 },
         },
         vertexShader,
         fragmentShader,
@@ -104,7 +103,6 @@ export class Confetti extends InstancedMesh<
   }
   splash() {
     this.isAnimated = true;
-    this.material.uniforms.uIsAnimated.value = 1;
     this.params.forEach((param) => {
       const radian1 = radians(Math.random() * 360);
       const radian2 = radians(Math.random() * 360);
@@ -132,6 +130,7 @@ export class Confetti extends InstancedMesh<
       this.matrix.compose(velocity, this.quaternion, scale);
       this.setMatrixAt(i, this.matrix);
     }
+    this.material.uniforms.uTime.value += delta;
     this.instanceMatrix.needsUpdate = true;
   }
 }
