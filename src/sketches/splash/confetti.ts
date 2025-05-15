@@ -31,6 +31,7 @@ export class Confetti extends InstancedMesh<
   }[] = [];
   matrix: Matrix4 = new Matrix4();
   quaternion: Quaternion = new Quaternion();
+  isAnimated: boolean = false;
 
   constructor() {
     const baseGeometry = new PlaneGeometry(0.5, 0.5);
@@ -52,6 +53,7 @@ export class Confetti extends InstancedMesh<
         uniforms: {
           uTime: { value: 0 },
           uImageTexture: { value: null },
+          uIsAnimated: { value: 0 },
         },
         vertexShader,
         fragmentShader,
@@ -101,10 +103,12 @@ export class Confetti extends InstancedMesh<
     }
   }
   splash() {
+    this.isAnimated = true;
+    this.material.uniforms.uIsAnimated.value = 1;
     this.params.forEach((param) => {
       const radian1 = radians(Math.random() * 360);
       const radian2 = radians(Math.random() * 360);
-      const radius = Math.random() * 0.24 + 0.12;
+      const radius = Math.random() * 0.32 + 0.12;
       const acceleration = spherical(radian1, radian2, radius);
 
       param.velocity.set(0, 0, 0);
@@ -112,6 +116,7 @@ export class Confetti extends InstancedMesh<
     });
   }
   update(delta: number) {
+    if (!this.isAnimated) return;
     for (let i = 0; i < this.params.length; i++) {
       const { velocity, acceleration, euler, eulerSpeed, scale } =
         this.params[i];

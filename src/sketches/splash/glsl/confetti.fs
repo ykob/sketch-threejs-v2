@@ -1,6 +1,7 @@
 precision highp float;
 
 uniform sampler2D uImageTexture;
+uniform float uIsAnimated;
 
 in float vDistanceToCamera;
 in vec2 vUv;
@@ -11,5 +12,5 @@ void main() {
   vec4 color = texture(uImageTexture, vUv);
   float opacity = 1.0 - smoothstep(10.0, 20.0, vDistanceToCamera);
 
-  fragColor = vec4(vec3(1.0), opacity * color.r);
+  fragColor = vec4(vec3(1.0), opacity * color.r * uIsAnimated);
 }
