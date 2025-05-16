@@ -16,7 +16,7 @@ import { radians, spherical } from '~/utils';
 import fragmentShader from './glsl/confetti.fs';
 import vertexShader from './glsl/confetti.vs';
 
-const count = 300;
+const count = 150;
 
 export class Confetti extends InstancedMesh<
   InstancedBufferGeometry,
@@ -107,9 +107,10 @@ export class Confetti extends InstancedMesh<
       const radian1 = radians(Math.random() * 360);
       const radian2 = radians(Math.random() * 360);
       const radius = Math.random() * 0.32 + 0.12;
+      const velocity = spherical(radian1, radian2, 0.5);
       const acceleration = spherical(radian1, radian2, radius);
 
-      param.velocity.set(0, 0, 0);
+      param.velocity.set(velocity.x, velocity.y, velocity.z);
       param.acceleration.set(acceleration.x, acceleration.y, acceleration.z);
     });
   }

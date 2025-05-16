@@ -16,8 +16,10 @@ const camera = new Camera();
 const resolution = new Vector2();
 const textureLoader = new TextureLoader();
 const clock = new Clock(false);
-const confetti = new Confetti();
+const confetties = Array.from({ length: 20 }, () => new Confetti());
 const background = new Background();
+
+let index = 0;
 
 const resize = async () => {
   renderer.setSize(0, 0);
@@ -31,8 +33,10 @@ const update = () => {
   const delta = clock.getDelta();
 
   renderer.render(scene, camera);
-  confetti.update(delta);
   background.update(delta);
+  for (let i = 0; i < confetties.length; i++) {
+    confetties[i].update(delta);
+  }
   requestAnimationFrame(update);
 };
 
@@ -49,9 +53,11 @@ const start = async () => {
   ]);
 
   background.start(textures[0]);
-  confetti.start(textures[1]);
   scene.add(background);
-  scene.add(confetti);
+  for (let i = 0; i < confetties.length; i++) {
+    confetties[i].start(textures[1]);
+    scene.add(confetties[i]);
+  }
 
   resize();
   update();
@@ -59,7 +65,8 @@ const start = async () => {
 
   window.addEventListener('resize', resize);
   window.addEventListener('click', () => {
-    confetti.splash();
+    index = (index + 1) % confetties.length;
+    confetties[index].splash();
   });
   toggleSketchUI();
 };
