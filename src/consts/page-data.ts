@@ -9,8 +9,9 @@ export const pageData = [
     key: 'splash',
     path: '/sketches/splash/index.html',
     title: 'Splash',
-    description: '',
-    updated: '2025-05-DD',
+    description:
+      'Confetti, drawn with geometry instancing, animated to scatter in every direction.',
+    updated: '2025-05-17',
   },
   {
     key: 'intersection',
