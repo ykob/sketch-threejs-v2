@@ -28,8 +28,6 @@ const clock = new Clock(false);
 const background = new Background();
 const collisionTarget = new CollisionTarget();
 
-let isDragging = false;
-
 const resize = async () => {
   renderer.setSize(0, 0);
   renderer.setPixelRatio(window.devicePixelRatio);

@@ -6,6 +6,13 @@ export const pageData = [
     description: 'Interactive sketches made with three.js.',
   },
   {
+    key: 'cursor',
+    path: '/sketches/cursor/index.html',
+    title: 'Cursor',
+    description: '',
+    updated: '2025-05-DD',
+  },
+  {
     key: 'splash',
     path: '/sketches/splash/index.html',
     title: 'Splash',
