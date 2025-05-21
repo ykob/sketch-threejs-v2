@@ -5,6 +5,7 @@ import {
   PlaneGeometry,
   RawShaderMaterial,
   Vector2,
+  Vector3,
 } from 'three';
 import { getCoordAsPixel } from '~/utils';
 import fragmentShader from './glsl/cursor.fs';
@@ -12,6 +13,7 @@ import vertexShader from './glsl/cursor.vs';
 
 export class Cursor extends Mesh<PlaneGeometry, RawShaderMaterial> {
   element: Element;
+  targetPosition: Vector3 = new Vector3();
 
   constructor(element: Element) {
     super(
@@ -33,11 +35,10 @@ export class Cursor extends Mesh<PlaneGeometry, RawShaderMaterial> {
     const height = (rect.height / resolution.y) * coordAsPixel.y;
 
     this.scale.set(width, height, 1);
-    this.position.x =
-      ((rect.x + rect.width * 0.5 - resolution.x * 0.5) / resolution.x) *
-      coordAsPixel.x;
-    this.position.y =
-      ((rect.y + rect.height * 0.5 - resolution.y * 0.5) / resolution.y) *
-      -coordAsPixel.y;
+    this.position.x = this.targetPosition.x;
+    this.position.y = this.targetPosition.y;
+  }
+  setTarget(x: number, y: number) {
+    this.targetPosition.set(x, y, 0);
   }
 }

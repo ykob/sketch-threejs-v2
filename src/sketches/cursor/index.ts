@@ -10,9 +10,11 @@ import { toggleSketchUI } from '~/utils/';
 import { Background } from './background';
 import { Camera } from './camera';
 import { CollisionTarget } from './collision-target';
+import { Cursor } from './cursor';
 
 const app = document.getElementById('app');
 const canvas = document.createElement('canvas');
+const cursorElement = document.getElementById('cursor');
 const renderer = new WebGLRenderer({
   canvas,
   antialias: true,
@@ -25,6 +27,7 @@ const pointer = new Vector2();
 const raycaster = new Raycaster();
 const textureLoader = new TextureLoader();
 const clock = new Clock(false);
+const cursor = new Cursor(cursorElement!);
 const background = new Background();
 const collisionTarget = new CollisionTarget();
 
@@ -37,6 +40,11 @@ const resize = async () => {
   collisionTarget.resize(camera);
 };
 
+const mouseMove = (x: number, y: number) => {
+  pointer.x = (x / resolution.x) * 2 - 1;
+  pointer.y = -(y / resolution.y) * 2 + 1;
+};
+
 const update = () => {
   const delta = clock.getDelta();
 
@@ -46,8 +54,11 @@ const update = () => {
 
   if (intersects.length > 0) {
     const { x, y } = intersects[0].point;
+
+    cursor.setTarget(x, y);
   }
   renderer.render(scene, camera);
+  cursor.update(resolution, camera);
   background.update(delta);
   requestAnimationFrame(update);
 };
@@ -65,6 +76,7 @@ const start = async () => {
   ]);
 
   background.start(textures[0]);
+  scene.add(cursor);
   scene.add(background);
   scene.add(collisionTarget);
 
@@ -73,6 +85,9 @@ const start = async () => {
   clock.start();
 
   window.addEventListener('resize', resize);
+  window.addEventListener('mousemove', (e) => {
+    mouseMove(e.clientX, e.clientY);
+  });
   toggleSketchUI();
 };
 
