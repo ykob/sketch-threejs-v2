@@ -19,6 +19,7 @@ export class Cursor extends Mesh<PlaneGeometry, RawShaderMaterial> {
     super(
       new PlaneGeometry(1, 1, 24, 24),
       new RawShaderMaterial({
+        transparent: true,
         vertexShader,
         fragmentShader,
         glslVersion: GLSL3,
